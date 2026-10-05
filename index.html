@@ -14,7 +14,7 @@
     <label>Category
       <select id="category"><option>History</option><option>Biography</option><option>War</option><option>Politics</option><option>Comedy</option><option>Education</option><option>Custom</option></select>
     </label>
-    <button id="quickStart" class="primary">Quick Start</button><button id="loadHaitiDemo">Haiti Demo</button><button id="newProject">New</button><button id="aiDirector">✦ AI Director</button><button id="saveProject">Save Local</button><button id="saveCloud">☁ Save Cloud</button><button id="loadCloud">☁ Projects</button><button id="exportProject">Export JSON</button>
+    <button id="quickStart" class="primary">Quick Start</button><button id="loadHaitiDemo">Haiti Demo</button><a class="fileButton" href="presets/haiti-vertieres-30s.mep.json" download>Download Haiti JSON</a><button id="newProject">New</button><button id="aiDirector">✦ AI Director</button><button id="saveProject">Save Local</button><button id="saveCloud">☁ Save Cloud</button><button id="loadCloud">☁ Projects</button><button id="exportProject">Export JSON</button>
     <label class="fileButton">Import JSON<input id="importProject" type="file" accept=".json,application/json"></label>
 <button id="importInspectorButton">Import / Project Info</button>
   </header>
@@ -54,7 +54,7 @@
     <aside class="panel pose">
       <h2>Character State</h2><label>State <span class="cycle"><button id="prevState">◀</button><select id="characterState"></select><button id="nextState">▶</button></span></label><label>Expression <select id="expression"><option>neutral</option><option>happy</option><option>sad</option><option>angry</option></select></label><label>Prop / Weapon <span class="cycle"><button id="prevProp">◀</button><select id="characterProp"></select><button id="nextProp">▶</button></span></label><button id="applyState" class="primary">Apply State</button><h2>Animation</h2>
 <label>Pose <select id="posePreset"></select></label>
-<button id="applyPose">Apply Pose</button>
+<button id="applyPose">Apply Pose</button><button id="saveCustomPose">Save Current Pose</button>
 <label>Clip <select id="animationClip"></select></label>
 <label>Clip Duration <input id="clipDuration" type="number" min=".5" max="20" step=".1" value="2"></label>
 <button id="generateClip" class="primary">Generate Clip at Playhead</button>
