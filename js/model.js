@@ -65,10 +65,10 @@ function scene(name="Scene 1"){
  return{id:id(),name,duration:8,background:{preset:"parchment",tags:["history","map"],customFill:null},transition:{type:"cut",duration:.35},camera:{x:640,y:360,zoom:1,keyframes:[]},markers:[],notes:"",tags:["history"],characters:[character()],bubbles:[]};
 }
 function project(){
- const s=scene();return{schema:"mep-video-project",version:4,id:id(),name:"Untitled History",category:"History",era:"Custom",tags:["history"],sync:{provider:"firebase",status:"unconfigured",revision:0,ownerUid:null,lastSyncedAt:null},assets:[],width:1280,height:720,fps:30,activeSceneId:s.id,scenes:[s],createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()};
+ const s=scene();return{schema:"mep-video-project",version:4,id:id(),name:"Untitled History",category:"History",era:"Custom",tags:["history"],sync:{provider:"firebase",status:"unconfigured",revision:0,ownerUid:null,lastSyncedAt:null},assets:[],customPoses:{},width:1280,height:720,fps:30,activeSceneId:s.id,scenes:[s],createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()};
 }
 function migrate(p){
- if(p?.version>=2&&Array.isArray(p.scenes)){p.version=4;p.sync=p.sync||{provider:"firebase",status:"unconfigured",revision:0,ownerUid:null,lastSyncedAt:null};p.assets=p.assets||[];p.scenes.forEach(s=>{s.bubbles=s.bubbles||[];s.transition=s.transition||{type:"cut",duration:.35};s.camera=s.camera||{x:640,y:360,zoom:1,keyframes:[]};s.markers=s.markers||[];s.notes=s.notes||"";(s.characters||[]).forEach(c=>{c.rig=c.rig||{};c.rig.bodyStyle=c.rig.bodyStyle||"historyCutout"})});return p;}
+ if(p?.version>=2&&Array.isArray(p.scenes)){p.version=4;p.sync=p.sync||{provider:"firebase",status:"unconfigured",revision:0,ownerUid:null,lastSyncedAt:null};p.assets=p.assets||[];p.customPoses=p.customPoses||{};p.scenes.forEach(s=>{s.bubbles=s.bubbles||[];s.transition=s.transition||{type:"cut",duration:.35};s.camera=s.camera||{x:640,y:360,zoom:1,keyframes:[]};s.markers=s.markers||[];s.notes=s.notes||"";(s.characters||[]).forEach(c=>{c.rig=c.rig||{};c.rig.bodyStyle=c.rig.bodyStyle||"historyCutout"})});return p;}
  if(p?.characters){const s=scene();s.duration=p.duration||8;s.characters=p.characters;s.background={preset:"parchment",tags:["history"],customFill:p.background||null};return{...project(),name:p.name||"Imported Project",category:p.category||"History",fps:p.fps||30,activeSceneId:s.id,scenes:[s]};}
  return project();
 }
@@ -77,6 +77,25 @@ function ease(t,type="linear"){if(type==="hold")return 0;if(type==="easeIn")retu
 function poseAt(c,time){const ks=(c.keyframes||[]).slice().sort((a,b)=>a.time-b.time);if(!ks.length)return{x:c.x,y:c.y,scale:c.scale,facing:c.facing,pose:{...c.pose}};if(time<=ks[0].time)return structuredClone(ks[0].state);if(time>=ks.at(-1).time)return structuredClone(ks.at(-1).state);let a=ks[0],b=ks[1];for(let i=0;i<ks.length-1;i++)if(time>=ks[i].time&&time<=ks[i+1].time){a=ks[i];b=ks[i+1];break}const raw=(time-a.time)/(b.time-a.time),q=ease(raw,b.easing||"linear"),o={x:lerp(a.state.x,b.state.x,q),y:lerp(a.state.y,b.state.y,q),scale:lerp(a.state.scale,b.state.scale,q),facing:q<.5?a.state.facing:b.state.facing,pose:{}};Object.keys(DEFAULT_POSE).forEach(k=>o.pose[k]=lerp(a.state.pose[k],b.state.pose[k],q));return o}
 const capture=c=>({x:c.x,y:c.y,scale:c.scale,facing:c.facing,pose:{...c.pose}});
 function applyPose(c,name){if(POSES[name])c.pose={...POSES[name]}}
+function validateProject(p){
+ const errors=[],warnings=[];
+ if(!p||p.schema!=="mep-video-project")errors.push("schema must be mep-video-project");
+ if(!Array.isArray(p?.scenes)||!p.scenes.length)errors.push("project needs at least one scene");
+ (p?.scenes||[]).forEach((s,si)=>{
+  if(!(s.duration>0&&s.duration<=300))errors.push("scene "+(si+1)+" has invalid duration");
+  if(!BACKGROUNDS[s.background?.preset])warnings.push("scene "+(si+1)+" uses unknown background "+(s.background?.preset||"(none)"));
+  (s.characters||[]).forEach((ch,ci)=>{
+   if(!ch.id)errors.push("scene "+(si+1)+" character "+(ci+1)+" has no id");
+   Object.keys(DEFAULT_POSE).forEach(j=>{if(!Number.isFinite(ch.pose?.[j]))warnings.push("scene "+(si+1)+" "+(ch.name||"character")+" missing joint "+j)});
+   (ch.keyframes||[]).forEach((kf,ki)=>{
+    if(!Number.isFinite(kf.time)||kf.time<0||kf.time>s.duration)errors.push("scene "+(si+1)+" "+(ch.name||"character")+" keyframe "+(ki+1)+" is outside scene duration");
+    if(kf.easing&&!EASINGS[kf.easing])warnings.push("unknown easing "+kf.easing);
+   });
+  });
+  (s.bubbles||[]).forEach((b,bi)=>{if((b.startTime??0)>(b.endTime??s.duration))errors.push("scene "+(si+1)+" bubble "+(bi+1)+" has start after end")});
+ });
+ return{ok:errors.length===0,errors,warnings};
+}
 function activeScene(p){return p.scenes.find(s=>s.id===p.activeSceneId)||p.scenes[0]}
-return{DEFAULT_POSE,BODY_STYLES,STATES,PROPS,POSES,EASINGS,ANIMATION_CLIPS,BUBBLE_STYLES,HISTORY_ERAS,ERA_CHARACTER_PRESETS,CHARACTER_PRESETS,BACKGROUNDS,id,character,scene,project,migrate,poseAt,capture,applyPose,activeScene};
+return{DEFAULT_POSE,BODY_STYLES,STATES,PROPS,POSES,EASINGS,ANIMATION_CLIPS,BUBBLE_STYLES,HISTORY_ERAS,ERA_CHARACTER_PRESETS,CHARACTER_PRESETS,BACKGROUNDS,id,character,scene,project,migrate,poseAt,capture,applyPose,validateProject,activeScene};
 })();
