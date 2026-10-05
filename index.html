@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>MEP Video Maker</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -14,7 +14,7 @@
     <label>Category
       <select id="category"><option>History</option><option>Biography</option><option>War</option><option>Politics</option><option>Comedy</option><option>Education</option><option>Custom</option></select>
     </label>
-    <button id="accountButton">Account</button><span id="accountStatus">Offline</span><button id="newProject">New</button><button id="aiDirector">✦ AI Director</button><button id="saveProject">Save Local</button><button id="saveCloud">☁ Save Cloud</button><button id="loadCloud">☁ Projects</button><button id="exportProject">Export JSON</button>
+    <button id="accountButton">Account</button><button id="quickStart" class="primary">Quick Start</button><span id="accountStatus">Offline</span><button id="newProject">New</button><button id="aiDirector">✦ AI Director</button><button id="saveProject">Save Local</button><button id="saveCloud">☁ Save Cloud</button><button id="loadCloud">☁ Projects</button><button id="exportProject">Export JSON</button>
     <label class="fileButton">Import JSON<input id="importProject" type="file" accept=".json,application/json"></label>
   </header>
 
@@ -66,7 +66,7 @@
     <div class="timelineHeader"><strong>Timeline</strong><input id="scrubber" type="range" min="0" max="8" value="0" step=".01"></div>
     <div id="timeline"></div>
   </section>
-</div>
+</div><nav id="mobileDock" class="mobileDock"><button data-mobile-target=".stageArea">Canvas</button><button data-mobile-target=".library">Scene</button><button data-mobile-target=".pose">Animate</button><button data-mobile-target=".timelinePanel">Timeline</button><button id="mobileVideo">Video</button></nav>
 <script src="js/firebase-config.js"></script>\n<script src="js/model.js"></script>\n<script src="js/ai-config.js"></script>\n<script src="js/ai-director.js"></script>
 <script src="js/renderer.js"></script>\n<script src="js/character-studio.js"></script>
 <script src="js/storage.js"></script>
