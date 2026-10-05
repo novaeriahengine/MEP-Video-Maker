@@ -20,8 +20,8 @@
 
   <main class="workspace">
     <aside class="panel library">
-      <h2>Scene</h2><label>Scene <select id="sceneSelect"></select></label><button id="addScene">+ Add Scene</button><label>Era <select id="era"></select></label><label>Background <select id="backgroundPreset"></select></label><label>Tags <input id="sceneTags" placeholder="war, france, 1800s"></label><h2>Characters</h2>
-      <label>Preset <select id="characterPreset"></select></label><button id="addPresetCharacter">+ Add Preset</button><button id="addCharacter">+ Blank Character</button><button id="openStudio">✎ Character Studio</button>
+      <h2>Scene</h2><label>Scene <select id="sceneSelect"></select></label><button id="addScene">+ Add Scene</button><label>Era <select id="era"></select></label><label>Background <span class="cycle"><button id="prevBackground">◀</button><select id="backgroundPreset"></select><button id="nextBackground">▶</button></span></label><label>Tags <input id="sceneTags" placeholder="war, france, 1800s"></label><label class="fileButton wide">Use Local Background<input id="backgroundUpload" type="file" accept="image/*"></label><button id="clearBackgroundImage">Use Drawn Background</button><h2>Characters</h2>
+      <label>Preset <span class="cycle"><button id="prevCharacterPreset">◀</button><select id="characterPreset"></select><button id="nextCharacterPreset">▶</button></span></label><button id="addPresetCharacter">+ Add Preset</button><button id="addCharacter">+ Blank Character</button><button id="openStudio">✎ Character Studio</button>
       <div id="characterList"></div>
       <h2>Selected</h2>
       <label>Name <input id="charName" value=""></label>
@@ -44,7 +44,7 @@
     </section>
 
     <aside class="panel pose">
-      <h2>Animation Presets</h2><label>Pose <select id="posePreset"></select></label><button id="applyPose">Apply Pose</button><button id="makeMarch">Generate 2s March</button><h2>Pose</h2>
+      <h2>Character State</h2><label>State <span class="cycle"><button id="prevState">◀</button><select id="characterState"></select><button id="nextState">▶</button></span></label><label>Expression <select id="expression"><option>neutral</option><option>happy</option><option>sad</option><option>angry</option></select></label><label>Prop / Weapon <span class="cycle"><button id="prevProp">◀</button><select id="characterProp"></select><button id="nextProp">▶</button></span></label><button id="applyState" class="primary">Apply State</button><h2>Animation Presets</h2><label>Pose <select id="posePreset"></select></label><button id="applyPose">Apply Pose</button><button id="makeMarch">Generate 2s March</button><h2>Pose</h2>
       <div id="jointControls"></div>
       <button id="resetPose">Reset Pose</button>
       <button id="addKeyframe" class="primary">◆ Add / Update Keyframe</button>
