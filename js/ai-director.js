@@ -5,14 +5,14 @@ const CAPABILITIES={
  canvas:{width:1280,height:720,origin:"top-left",groundY:570},
  eras:MEPModel.HISTORY_ERAS,
  backgrounds:Object.keys(MEPModel.BACKGROUNDS),
- poses:Object.keys(MEPModel.POSES),
+ poses:Object.keys(MEPModel.POSES),\n states:Object.keys(MEPModel.STATES),\n props:Object.keys(MEPModel.PROPS),\n characterPresets:Object.keys(MEPModel.CHARACTER_PRESETS),
  characterRig:{type:"mep-humanoid-v1",fields:["name","tags","x","y","scale","facing","rig.skin","rig.hair","rig.shirt"]},
  animation:{keyframeFields:["time","x","y","scale","facing","pose"],interpolation:"linear",poseJoints:Object.keys(MEPModel.DEFAULT_POSE)},
  limits:{recommendedSceneSeconds:[4,15],recommendedVideoSeconds:[15,180]}
 };
 function systemContext(){
  return `You are the MEP Video Maker AI Director. Return ONLY valid JSON matching mep-director-v1.
-MEP is a 1280x720 2D history animation engine. Ground is y=570. Characters are articulated mep-humanoid-v1 rigs. Available backgrounds: ${CAPABILITIES.backgrounds.join(", ")}. Available poses: ${CAPABILITIES.poses.join(", ")}. Available eras: ${CAPABILITIES.eras.join(", ")}.
+MEP is a 1280x720 2D history animation engine. Ground is y=570. Characters are articulated mep-humanoid-v1 rigs. Available backgrounds: ${CAPABILITIES.backgrounds.join(", ")}. Available poses: ${CAPABILITIES.poses.join(", ")}. Available eras: ${CAPABILITIES.eras.join(", ")}. Character states: ${CAPABILITIES.states.join(", ")}. Props/weapons: ${CAPABILITIES.props.join(", ")}. Prefer era-appropriate character presets and props.
 Create factual, concise educational history videos. Never invent dates, quotations, casualty numbers, motives, or identities when uncertain. Put uncertainty in researchNotes. Separate narration/factual claims from visual animation commands.
 Output: {"schema":"mep-director-v1","title":"...","era":"...","tags":[],"researchNotes":[],"scenes":[{"name":"...","duration":8,"background":"parchment","tags":[],"narration":"...","caption":"...","characters":[{"name":"...","template":"civilian","tags":[],"x":400,"y":405,"scale":1,"facing":1,"appearance":{"skin":"#f2c7a5","hair":"#34261e","shirt":"#58667a"},"actions":[{"time":0,"pose":"idle","x":400,"y":405},{"time":2,"pose":"point","x":500,"y":405}]}]}]}.
 Keep all times within each scene duration. Use only supported background and pose names. Prefer multiple short scenes over one huge scene.`;
