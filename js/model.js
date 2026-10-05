@@ -23,6 +23,15 @@ const POSES={
  dig:{...DEFAULT_POSE,torso:-25,leftUpperArm:-72,leftLowerArm:35,rightUpperArm:48,rightLowerArm:-35,leftUpperLeg:18,rightUpperLeg:-10},
  spearWalk:{...DEFAULT_POSE,torso:-5,leftUpperArm:-48,leftLowerArm:-18,rightUpperArm:35,rightLowerArm:12,leftUpperLeg:28,leftLowerLeg:12,rightUpperLeg:-24,rightLowerLeg:20}
 };
+const EASINGS={linear:"Linear",easeIn:"Ease In",easeOut:"Ease Out",easeInOut:"Ease In/Out",hold:"Hold"};
+const ANIMATION_CLIPS={
+ walk:{name:"Walk",duration:2,poses:["marchA","marchB","marchA","marchB","marchA"],move:150},
+ talkLoop:{name:"Talk / Explain",duration:2.4,poses:["idle","talk","explainLeft","talk","explainRight","idle"],move:0},
+ attack:{name:"Attack",duration:1.6,poses:["attention","fight","fight","attention"],move:55},
+ celebrate:{name:"Celebrate",duration:2,poses:["idle","armsWide","victory","armsWide"],move:0},
+ crouchRise:{name:"Crouch → Stand",duration:1.8,poses:["idle","crouch","kneel","idle"],move:0},
+ spearAdvance:{name:"Spear Advance",duration:2.4,poses:["spearWalk","marchB","spearWalk","fight"],move:180}
+};
 const BUBBLE_STYLES={
  speech:{name:"Speech Bubble",fill:"#ffffff",stroke:"#222222",text:"#171717",tail:"speech",radius:22},
  thought:{name:"Thought Bubble",fill:"#ffffff",stroke:"#222222",text:"#171717",tail:"thought",radius:28},
@@ -53,20 +62,21 @@ function character(name="Historian",x=640,y=405,template="civilian"){
  const preset=CHARACTER_PRESETS[template]||CHARACTER_PRESETS.civilian; return{id:id(),type:"character",name,tags:["character",template],x,y,scale:1,facing:1,rig:{type:"mep-humanoid-v3",body:"adult",bodyStyle:"historyCutout",skin:"#f2c7a5",line:"#242424",shirt:preset.shirt,hair:"#34261e",pants:preset.pants,hairStyle:preset.hairStyle,hat:preset.hat,accessory:preset.accessory,prop:preset.prop||"none",expression:"neutral",state:"standing",era:preset.era||"Custom",headScale:1,limbScale:1},pose:{...DEFAULT_POSE},keyframes:[]};
 }
 function scene(name="Scene 1"){
- return{id:id(),name,duration:8,background:{preset:"parchment",tags:["history","map"],customFill:null},tags:["history"],characters:[character()],bubbles:[]};
+ return{id:id(),name,duration:8,background:{preset:"parchment",tags:["history","map"],customFill:null},transition:{type:"cut",duration:.35},camera:{x:640,y:360,zoom:1,keyframes:[]},markers:[],notes:"",tags:["history"],characters:[character()],bubbles:[]};
 }
 function project(){
- const s=scene();return{schema:"mep-video-project",version:3,id:id(),name:"Untitled History",category:"History",era:"Custom",tags:["history"],sync:{provider:"firebase",status:"unconfigured",revision:0,ownerUid:null,lastSyncedAt:null},assets:[],width:1280,height:720,fps:30,activeSceneId:s.id,scenes:[s],createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()};
+ const s=scene();return{schema:"mep-video-project",version:4,id:id(),name:"Untitled History",category:"History",era:"Custom",tags:["history"],sync:{provider:"firebase",status:"unconfigured",revision:0,ownerUid:null,lastSyncedAt:null},assets:[],width:1280,height:720,fps:30,activeSceneId:s.id,scenes:[s],createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()};
 }
 function migrate(p){
- if(p?.version>=2&&Array.isArray(p.scenes)){p.version=3;p.sync=p.sync||{provider:"firebase",status:"unconfigured",revision:0,ownerUid:null,lastSyncedAt:null};p.assets=p.assets||[];p.scenes.forEach(s=>{s.bubbles=s.bubbles||[];(s.characters||[]).forEach(c=>{c.rig=c.rig||{};c.rig.bodyStyle=c.rig.bodyStyle||"historyCutout"})});return p;}
+ if(p?.version>=2&&Array.isArray(p.scenes)){p.version=4;p.sync=p.sync||{provider:"firebase",status:"unconfigured",revision:0,ownerUid:null,lastSyncedAt:null};p.assets=p.assets||[];p.scenes.forEach(s=>{s.bubbles=s.bubbles||[];s.transition=s.transition||{type:"cut",duration:.35};s.camera=s.camera||{x:640,y:360,zoom:1,keyframes:[]};s.markers=s.markers||[];s.notes=s.notes||"";(s.characters||[]).forEach(c=>{c.rig=c.rig||{};c.rig.bodyStyle=c.rig.bodyStyle||"historyCutout"})});return p;}
  if(p?.characters){const s=scene();s.duration=p.duration||8;s.characters=p.characters;s.background={preset:"parchment",tags:["history"],customFill:p.background||null};return{...project(),name:p.name||"Imported Project",category:p.category||"History",fps:p.fps||30,activeSceneId:s.id,scenes:[s]};}
  return project();
 }
 const lerp=(a,b,t)=>a+(b-a)*t;
-function poseAt(c,time){const ks=(c.keyframes||[]).slice().sort((a,b)=>a.time-b.time);if(!ks.length)return{x:c.x,y:c.y,scale:c.scale,facing:c.facing,pose:{...c.pose}};if(time<=ks[0].time)return structuredClone(ks[0].state);if(time>=ks.at(-1).time)return structuredClone(ks.at(-1).state);let a=ks[0],b=ks[1];for(let i=0;i<ks.length-1;i++)if(time>=ks[i].time&&time<=ks[i+1].time){a=ks[i];b=ks[i+1];break}const q=(time-a.time)/(b.time-a.time),o={x:lerp(a.state.x,b.state.x,q),y:lerp(a.state.y,b.state.y,q),scale:lerp(a.state.scale,b.state.scale,q),facing:q<.5?a.state.facing:b.state.facing,pose:{}};Object.keys(DEFAULT_POSE).forEach(k=>o.pose[k]=lerp(a.state.pose[k],b.state.pose[k],q));return o}
+function ease(t,type="linear"){if(type==="hold")return 0;if(type==="easeIn")return t*t;if(type==="easeOut")return 1-(1-t)*(1-t);if(type==="easeInOut")return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;return t}
+function poseAt(c,time){const ks=(c.keyframes||[]).slice().sort((a,b)=>a.time-b.time);if(!ks.length)return{x:c.x,y:c.y,scale:c.scale,facing:c.facing,pose:{...c.pose}};if(time<=ks[0].time)return structuredClone(ks[0].state);if(time>=ks.at(-1).time)return structuredClone(ks.at(-1).state);let a=ks[0],b=ks[1];for(let i=0;i<ks.length-1;i++)if(time>=ks[i].time&&time<=ks[i+1].time){a=ks[i];b=ks[i+1];break}const raw=(time-a.time)/(b.time-a.time),q=ease(raw,b.easing||"linear"),o={x:lerp(a.state.x,b.state.x,q),y:lerp(a.state.y,b.state.y,q),scale:lerp(a.state.scale,b.state.scale,q),facing:q<.5?a.state.facing:b.state.facing,pose:{}};Object.keys(DEFAULT_POSE).forEach(k=>o.pose[k]=lerp(a.state.pose[k],b.state.pose[k],q));return o}
 const capture=c=>({x:c.x,y:c.y,scale:c.scale,facing:c.facing,pose:{...c.pose}});
 function applyPose(c,name){if(POSES[name])c.pose={...POSES[name]}}
 function activeScene(p){return p.scenes.find(s=>s.id===p.activeSceneId)||p.scenes[0]}
-return{DEFAULT_POSE,BODY_STYLES,STATES,PROPS,POSES,BUBBLE_STYLES,HISTORY_ERAS,ERA_CHARACTER_PRESETS,CHARACTER_PRESETS,BACKGROUNDS,id,character,scene,project,migrate,poseAt,capture,applyPose,activeScene};
+return{DEFAULT_POSE,BODY_STYLES,STATES,PROPS,POSES,EASINGS,ANIMATION_CLIPS,BUBBLE_STYLES,HISTORY_ERAS,ERA_CHARACTER_PRESETS,CHARACTER_PRESETS,BACKGROUNDS,id,character,scene,project,migrate,poseAt,capture,applyPose,activeScene};
 })();
