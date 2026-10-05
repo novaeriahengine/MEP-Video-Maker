@@ -12,3 +12,33 @@ dialog{border:1px solid var(--line);border-radius:12px;background:var(--panel);c
 #accountStatus{font-size:12px;color:var(--muted);max-width:150px;overflow:hidden;text-overflow:ellipsis}.accountPanel{padding:18px;display:grid;gap:10px;min-width:min(420px,88vw)}.accountPanel h2,.accountPanel p{margin:0}.accountPanel input{width:100%}
 
 .bubbleGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.bubbleGrid label{min-width:0}.bubbleItem{display:block;width:100%;margin:5px 0;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bubbleItem.active{outline:2px solid var(--accent,#ffb020)}#bubbleText{min-height:62px;resize:vertical}
+
+html,body{min-width:0;max-width:100%;overflow-x:hidden}.mobileDock{display:none}
+@media(max-width:760px){
+ body{padding-bottom:calc(62px + env(safe-area-inset-bottom));font-size:14px}
+ button,.fileButton,input,select,textarea{min-height:44px;font-size:16px}
+ .topbar{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:8px}
+ .brand{grid-column:1/-1;font-size:20px;padding:3px 0}.modeTabs{grid-column:1/-1;order:0}
+ .topbar>label{grid-column:1/-1;display:grid;grid-template-columns:70px 1fr}.topbar>label input,.topbar>label select{width:100%}
+ #accountStatus{align-self:center;justify-self:start}
+ .workspace{display:flex;flex-direction:column;min-height:0}.stageArea{order:1}.library{order:2}.pose{order:3;display:block}.videoDeck{order:1}
+ .panel{width:100%;max-height:none;border:0;border-top:1px solid var(--line);padding:12px}
+ .stageToolbar{position:sticky;top:0;z-index:8;background:#11151d;padding:6px;gap:5px}
+ .stageToolbar button{flex:1 1 90px}.stageToolbar label{flex:1 1 125px}.stageToolbar input{width:60px}
+ .canvasWrap{padding:0;background:#05070a;overflow:hidden}.canvasWrap canvas{width:100%;max-width:none;border:0;box-shadow:none}
+ .hint{font-size:12px;padding:7px 10px;margin:0;background:#0f1218}
+ .panel label{grid-template-columns:92px minmax(0,1fr);gap:7px}.cycle{grid-template-columns:44px minmax(0,1fr) 44px}.cycle button{min-height:44px}
+ .timelinePanel{order:4;overflow-x:auto;padding:10px 8px;padding-bottom:16px}.timelineHeader,#timeline{min-width:680px}
+ .track{grid-template-columns:115px 1fr}.trackLane{min-width:545px}
+ .mobileDock{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:100;background:#141820ee;border-top:1px solid var(--line);padding:5px 5px calc(5px + env(safe-area-inset-bottom));backdrop-filter:blur(10px)}
+ .mobileDock button{border:0;background:transparent;padding:7px 2px;min-height:48px;font-size:12px;border-radius:8px}.mobileDock button:active{background:#303746}
+ dialog{width:96vw;max-height:88dvh;overflow:auto;margin:auto}.accountPanel{min-width:0;width:100%}.aiPanel{padding:12px}
+ #characterStudioDialog{width:98vw;max-height:92dvh}.studioShell{padding:9px}.studioTools{gap:5px}.studioWork{grid-template-columns:1fr}.studioWork canvas{max-height:58dvh;object-fit:contain}
+ .transport{position:sticky;bottom:62px;background:#11151de8;padding:7px;z-index:8}.transport button{flex:1 1 110px}.videoDeck{padding:4px}.videoStage{margin:0}.videoCaption{font-size:15px;left:4%;right:4%;bottom:3%}
+ .sceneStrip{scroll-snap-type:x proximity}.sceneStrip button{scroll-snap-align:start}
+ .bubbleGrid{grid-template-columns:1fr}.jointRow{grid-template-columns:86px minmax(0,1fr) 44px}
+}
+@media(max-width:420px){
+ .topbar{grid-template-columns:1fr 1fr}.topbar button,.topbar .fileButton{padding:7px 5px}
+ .brand span{font-size:16px}.panel{padding:10px}.stageToolbar #timeLabel{width:100%;text-align:center}
+}
