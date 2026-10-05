@@ -26,8 +26,7 @@ function validate(plan){
  (plan?.scenes||[]).forEach((s,i)=>{if(!(s.duration>0&&s.duration<=300))errors.push("scene "+(i+1)+" has invalid duration");if(!MEPModel.BACKGROUNDS[s.background])errors.push("scene "+(i+1)+" has unsupported background");(s.characters||[]).forEach((c,j)=>(c.actions||[]).forEach((a,k)=>{if(a.time<0||a.time>s.duration)errors.push("scene "+(i+1)+" character "+(j+1)+" action "+(k+1)+" time is outside scene");if(a.pose&&!MEPModel.POSES[a.pose])errors.push("unsupported pose: "+a.pose)}))});return{ok:errors.length===0,errors};
 }
 function apply(plan){
- const check=validate(plan);if(!check.ok)throw new Error(check.errors.join("
-"));
+ const check=validate(plan);if(!check.ok)throw new Error(check.errors.join(String.fromCharCode(10)));
  const p=MEPModel.project();p.name=plan.title||"AI History Video";p.era=plan.era||"Custom";p.tags=plan.tags||["history"];p.scenes=[];
  plan.scenes.forEach((src,si)=>{const s=MEPModel.scene(src.name||("Scene "+(si+1)));s.duration=src.duration;s.background.preset=src.background;s.tags=src.tags||[];s.narration=src.narration||"";s.caption=src.caption||"";s.characters=[];
  (src.characters||[]).forEach((spec,ci)=>{const c=MEPModel.character(spec.name||("Character "+(ci+1)),Number(spec.x??400),Number(spec.y??405),spec.template||"civilian");c.tags=spec.tags||[];c.scale=Number(spec.scale??1);c.facing=Number(spec.facing??1)>=0?1:-1;if(spec.appearance)c.rig={...c.rig,...spec.appearance};c.keyframes=[];
