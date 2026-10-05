@@ -5,7 +5,10 @@ const CAPABILITIES={
  canvas:{width:1280,height:720,origin:"top-left",groundY:570},
  eras:MEPModel.HISTORY_ERAS,
  backgrounds:Object.keys(MEPModel.BACKGROUNDS),
- poses:Object.keys(MEPModel.POSES),\n states:Object.keys(MEPModel.STATES),\n props:Object.keys(MEPModel.PROPS),\n characterPresets:Object.keys(MEPModel.CHARACTER_PRESETS),
+ poses:Object.keys(MEPModel.POSES),
+ states:Object.keys(MEPModel.STATES),
+ props:Object.keys(MEPModel.PROPS),
+ characterPresets:Object.keys(MEPModel.CHARACTER_PRESETS),
  characterRig:{type:"mep-humanoid-v1",fields:["name","tags","x","y","scale","facing","rig.skin","rig.hair","rig.shirt"]},
  animation:{keyframeFields:["time","x","y","scale","facing","pose"],interpolation:"linear",poseJoints:Object.keys(MEPModel.DEFAULT_POSE)},
  limits:{recommendedSceneSeconds:[4,15],recommendedVideoSeconds:[15,180]}
@@ -23,7 +26,8 @@ function validate(plan){
  (plan?.scenes||[]).forEach((s,i)=>{if(!(s.duration>0&&s.duration<=300))errors.push("scene "+(i+1)+" has invalid duration");if(!MEPModel.BACKGROUNDS[s.background])errors.push("scene "+(i+1)+" has unsupported background");(s.characters||[]).forEach((c,j)=>(c.actions||[]).forEach((a,k)=>{if(a.time<0||a.time>s.duration)errors.push("scene "+(i+1)+" character "+(j+1)+" action "+(k+1)+" time is outside scene");if(a.pose&&!MEPModel.POSES[a.pose])errors.push("unsupported pose: "+a.pose)}))});return{ok:errors.length===0,errors};
 }
 function apply(plan){
- const check=validate(plan);if(!check.ok)throw new Error(check.errors.join("\n"));
+ const check=validate(plan);if(!check.ok)throw new Error(check.errors.join("
+"));
  const p=MEPModel.project();p.name=plan.title||"AI History Video";p.era=plan.era||"Custom";p.tags=plan.tags||["history"];p.scenes=[];
  plan.scenes.forEach((src,si)=>{const s=MEPModel.scene(src.name||("Scene "+(si+1)));s.duration=src.duration;s.background.preset=src.background;s.tags=src.tags||[];s.narration=src.narration||"";s.caption=src.caption||"";s.characters=[];
  (src.characters||[]).forEach((spec,ci)=>{const c=MEPModel.character(spec.name||("Character "+(ci+1)),Number(spec.x??400),Number(spec.y??405),spec.template||"civilian");c.tags=spec.tags||[];c.scale=Number(spec.scale??1);c.facing=Number(spec.facing??1)>=0?1:-1;if(spec.appearance)c.rig={...c.rig,...spec.appearance};c.keyframes=[];
