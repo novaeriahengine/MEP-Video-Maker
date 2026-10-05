@@ -10,17 +10,17 @@ const POSES={
  marchB:{...DEFAULT_POSE,leftUpperArm:55,rightUpperArm:-55,leftUpperLeg:-24,rightUpperLeg:24,leftLowerLeg:-10,rightLowerLeg:20}
 };
 const HISTORY_ERAS=["Ancient","Medieval","Early Modern","Industrial","World Wars","Cold War","Modern","Custom"];
-const BACKGROUNDS={
+const CHARACTER_PRESETS={civilian:{name:"Civilian",shirt:"#58667a",pants:"#343a46",hairStyle:"side",hat:"none",accessory:"none"},monarch:{name:"Monarch",shirt:"#7a315c",pants:"#392b48",hairStyle:"wave",hat:"crown",accessory:"sash"},soldier:{name:"Infantry Soldier",shirt:"#59654c",pants:"#41483b",hairStyle:"short",hat:"helmet",accessory:"belt"},officer:{name:"Military Officer",shirt:"#35455a",pants:"#27313e",hairStyle:"short",hat:"officer",accessory:"sash"},revolutionary:{name:"Revolutionary",shirt:"#79513d",pants:"#4b3b32",hairStyle:"messy",hat:"tricorn",accessory:"belt"},presenter:{name:"Modern Presenter",shirt:"#315f86",pants:"#30343b",hairStyle:"side",hat:"none",accessory:"tie"}};\nconst BACKGROUNDS={
  parchment:{name:"Parchment / Map",fill:"#eee2c5",ground:"#c7b58d",tags:["map","parchment","history"]},
  battlefield:{name:"Battlefield",fill:"#c9d1bd",ground:"#72755f",tags:["war","field","battle"]},
  palace:{name:"Palace Hall",fill:"#eadfcf",ground:"#9b795d",tags:["royal","palace","politics"]},
  city:{name:"City",fill:"#d9e0e5",ground:"#858b90",tags:["city","modern","street"]},
  countryside:{name:"Countryside",fill:"#d9e7d0",ground:"#769064",tags:["farm","country","village"]},
- archive:{name:"Archive / Document",fill:"#f0eadc",ground:"#b9ad96",tags:["document","archive","biography"]}
+ archive:{name:"Archive / Document",fill:"#f0eadc",ground:"#b9ad96",tags:["document","archive","biography"]},\n worldMap:{name:"World Map",fill:"#a9c8dc",ground:"#d9d0ae",tags:["world","map","geography"],kind:"map"},\n europeMap:{name:"Europe Map",fill:"#b7cddd",ground:"#d9cfad",tags:["europe","map","war"],kind:"map"},\n americasMap:{name:"Americas Map",fill:"#a9c8dc",ground:"#c9c59d",tags:["americas","map","geography"],kind:"map"},\n asiaMap:{name:"Asia Map",fill:"#b7cddd",ground:"#d4c89e",tags:["asia","map","geography"],kind:"map"},\n africaMap:{name:"Africa Map",fill:"#b7cddd",ground:"#d7c79d",tags:["africa","map","geography"],kind:"map"}
 };
 let uid=0;const id=()=>Date.now().toString(36)+(uid++).toString(36);
 function character(name="Historian",x=640,y=405,template="civilian"){
- return{id:id(),type:"character",name,tags:["character",template],x,y,scale:1,facing:1,rig:{type:"mep-humanoid-v1",body:"adult",skin:"#f2c7a5",line:"#242424",shirt:"#58667a",hair:"#34261e",headScale:1,limbScale:1},pose:{...DEFAULT_POSE},keyframes:[]};
+ const preset=CHARACTER_PRESETS[template]||CHARACTER_PRESETS.civilian; return{id:id(),type:"character",name,tags:["character",template],x,y,scale:1,facing:1,rig:{type:"mep-humanoid-v2",body:"adult",skin:"#f2c7a5",line:"#242424",shirt:preset.shirt,hair:"#34261e",pants:preset.pants,hairStyle:preset.hairStyle,hat:preset.hat,accessory:preset.accessory,headScale:1,limbScale:1},pose:{...DEFAULT_POSE},keyframes:[]};
 }
 function scene(name="Scene 1"){
  return{id:id(),name,duration:8,background:{preset:"parchment",tags:["history","map"],customFill:null},tags:["history"],characters:[character()]};
@@ -38,5 +38,5 @@ function poseAt(c,time){const ks=(c.keyframes||[]).slice().sort((a,b)=>a.time-b.
 const capture=c=>({x:c.x,y:c.y,scale:c.scale,facing:c.facing,pose:{...c.pose}});
 function applyPose(c,name){if(POSES[name])c.pose={...POSES[name]}}
 function activeScene(p){return p.scenes.find(s=>s.id===p.activeSceneId)||p.scenes[0]}
-return{DEFAULT_POSE,POSES,HISTORY_ERAS,BACKGROUNDS,id,character,scene,project,migrate,poseAt,capture,applyPose,activeScene};
+return{DEFAULT_POSE,POSES,HISTORY_ERAS,CHARACTER_PRESETS,BACKGROUNDS,id,character,scene,project,migrate,poseAt,capture,applyPose,activeScene};
 })();
