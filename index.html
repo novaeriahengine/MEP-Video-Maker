@@ -16,11 +16,17 @@
     </label>
     <button id="quickStart" class="primary">Quick Start</button><button id="loadHaitiDemo">Haiti Demo</button><button id="newProject">New</button><button id="aiDirector">✦ AI Director</button><button id="saveProject">Save Local</button><button id="saveCloud">☁ Save Cloud</button><button id="loadCloud">☁ Projects</button><button id="exportProject">Export JSON</button>
     <label class="fileButton">Import JSON<input id="importProject" type="file" accept=".json,application/json"></label>
+<button id="importInspectorButton">Import / Project Info</button>
   </header>
 
   <main class="workspace">
     <aside class="panel library">
-      <h2>Scene</h2><label>Scene <select id="sceneSelect"></select></label><button id="addScene">+ Add Scene</button><label>Era <select id="era"></select></label><label>Background <span class="cycle"><button id="prevBackground">◀</button><select id="backgroundPreset"></select><button id="nextBackground">▶</button></span></label><label>Tags <input id="sceneTags" placeholder="war, france, 1800s"></label><label class="fileButton wide">Use Local Background<input id="backgroundUpload" type="file" accept="image/*"></label><button id="clearBackgroundImage">Use Drawn Background</button><h2>Characters</h2>
+      <h2>Scene</h2>
+<label>Scene <select id="sceneSelect"></select></label>
+<div class="sceneActions"><button id="prevScene">◀</button><button id="addScene">+ Scene</button><button id="duplicateScene">Duplicate</button><button id="deleteScene">Delete</button><button id="nextScene">▶</button></div>
+<label>Transition <select id="sceneTransition"><option value="cut">Cut</option><option value="fade">Fade</option><option value="crossfade">Crossfade</option></select></label>
+<label>Scene Notes <textarea id="sceneNotes" placeholder="Director notes, shot idea, historical note..."></textarea></label>
+<div id="sceneBoard" class="sceneBoard"></div><label>Era <select id="era"></select></label><label>Background <span class="cycle"><button id="prevBackground">◀</button><select id="backgroundPreset"></select><button id="nextBackground">▶</button></span></label><label>Tags <input id="sceneTags" placeholder="war, france, 1800s"></label><label class="fileButton wide">Use Local Background<input id="backgroundUpload" type="file" accept="image/*"></label><button id="clearBackgroundImage">Use Drawn Background</button><h2>Characters</h2>
       <label>Preset <span class="cycle"><button id="prevCharacterPreset">◀</button><select id="characterPreset"></select><button id="nextCharacterPreset">▶</button></span></label><button id="openCharacterGallery" class="primary">+ Character Gallery</button><button id="addPresetCharacter">+ Add Selected Preset</button><button id="addCharacter">+ Blank Character</button><button id="openStudio">✎ Character Studio</button>
       <div id="characterList"></div>
       <h2>Selected</h2>
@@ -45,7 +51,14 @@
 
 <section id="videoDeck" class="videoDeck hidden"><div class="videoStage"><canvas id="videoStage" width="1280" height="720"></canvas><div id="videoCaption" class="videoCaption"></div></div><div class="transport"><button id="videoPrevScene">Prev Scene</button><button id="videoPlayPause" class="primary">Play / Pause</button><button id="videoStop">Stop</button><button id="videoNextScene">Next Scene</button><span id="videoClock">00:00 / 00:00</span><button id="recordVideo">Record WebM</button></div><input id="videoScrubber" class="videoScrubber" type="range" min="0" max="1" value="0" step=".01"><div id="sceneStrip" class="sceneStrip"></div><div class="narrationPanel"><strong>Scene narration / caption</strong><textarea id="sceneNarration" placeholder="Narration notes for this scene"></textarea><input id="sceneCaption" placeholder="On-screen caption"></div></section>
     <aside class="panel pose">
-      <h2>Character State</h2><label>State <span class="cycle"><button id="prevState">◀</button><select id="characterState"></select><button id="nextState">▶</button></span></label><label>Expression <select id="expression"><option>neutral</option><option>happy</option><option>sad</option><option>angry</option></select></label><label>Prop / Weapon <span class="cycle"><button id="prevProp">◀</button><select id="characterProp"></select><button id="nextProp">▶</button></span></label><button id="applyState" class="primary">Apply State</button><h2>Animation Presets</h2><label>Pose <select id="posePreset"></select></label><button id="applyPose">Apply Pose</button><button id="makeMarch">Generate 2s March</button><button id="saveAnimationCloud">☁ Save Animation JSON</button><h2>Dialogue / Bubbles</h2>
+      <h2>Character State</h2><label>State <span class="cycle"><button id="prevState">◀</button><select id="characterState"></select><button id="nextState">▶</button></span></label><label>Expression <select id="expression"><option>neutral</option><option>happy</option><option>sad</option><option>angry</option></select></label><label>Prop / Weapon <span class="cycle"><button id="prevProp">◀</button><select id="characterProp"></select><button id="nextProp">▶</button></span></label><button id="applyState" class="primary">Apply State</button><h2>Animation</h2>
+<label>Pose <select id="posePreset"></select></label>
+<button id="applyPose">Apply Pose</button>
+<label>Clip <select id="animationClip"></select></label>
+<label>Clip Duration <input id="clipDuration" type="number" min=".5" max="20" step=".1" value="2"></label>
+<button id="generateClip" class="primary">Generate Clip at Playhead</button>
+<label>Keyframe Easing <select id="keyframeEasing"></select></label>
+<button id="makeMarch">Quick March</button><button id="saveAnimationCloud">☁ Save Animation JSON</button><h2>Dialogue / Bubbles</h2>
 <label>Text <textarea id="bubbleText" placeholder="What should the character say?"></textarea></label>
 <label>Style <select id="bubbleStyle"></select></label>
 <div class="bubbleGrid"><label>Font <input id="bubbleFontSize" type="number" min="12" max="72" value="28"></label><label>Width <input id="bubbleWidth" type="number" min="100" max="800" value="300"></label></div>
@@ -69,6 +82,7 @@
   </section>
 </div>
 
+<dialog id="importInspectorDialog"><div class="importInspector"><header><div><h2>Project Import / Inspector</h2><p>Inspect the current project structure or import a MEP JSON file.</p></div><button id="closeImportInspector">Close</button></header><div id="importSummary"></div><textarea id="rawProjectJson" rows="14" spellcheck="false"></textarea><div class="aiActions"><button id="refreshProjectJson">Refresh JSON</button><button id="applyRawProjectJson" class="primary">Apply JSON</button><button id="downloadProjectJson">Download JSON</button></div></div></dialog>
 <dialog id="characterGalleryDialog">
   <div class="galleryShell">
     <header><div><h2>Character Gallery</h2><p>Tap a preset to add it to the current scene.</p></div><button id="closeCharacterGallery">Close</button></header>
