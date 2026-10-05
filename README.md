@@ -41,3 +41,10 @@ Cloud projects are stored in the `mepProjects` collection with the MEP project I
 
 ## Next
 Direct joint-handle dragging, richer character body/face/hair/clothing construction, reusable named character templates, walk/talk gesture clips, scene duplication/reordering, props and images, text/captions, camera keyframes, audio/narration tracks, Firebase Auth, asset storage, undo/redo and video export.
+
+## AI Director
+MEP now exposes a provider-neutral `mep-director-v1` protocol. The AI Director knows the editor canvas, backgrounds, history eras, character rig, joints, poses, animation/keyframe format and timing constraints. A model can return structured scenes containing narration, captions, characters and timed actions; MEP validates the response and converts it into native scenes and keyframes.
+
+Use the **AI Director** button to generate through a configured backend, inspect the full engine-context package, or paste Director JSON for offline testing. Configure the backend URL in `js/ai-config.js`. Keep OpenAI/model API keys on that backend and never in the browser repository. See `docs/AI-DIRECTOR.md` for the contract.
+
+For factual history videos, the intended production pipeline is: user topic → research/fact-check → script/narration → Director scene plan → MEP validation → animation project. This keeps historical claims separate from visual animation commands.
