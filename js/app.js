@@ -54,6 +54,16 @@ $("#exportProject").onclick=()=>MEPStorage.download(project);$("#importProject")
 function pos(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*canvas.width/r.width,y:(e.clientY-r.top)*canvas.height/r.height}}
 canvas.addEventListener("pointerdown",e=>{const p=pos(e);let best=null,dist=1e9;scene.characters.forEach(c=>{const s=stateFor(c),d=Math.hypot(p.x-s.x,p.y-s.y);if(d<dist&&d<110*s.scale){best=c;dist=d}});if(best){selectedId=best.id;const s=stateFor(best);if(time>0){best.x=s.x;best.y=s.y;best.scale=s.scale;best.facing=s.facing;best.pose={...s.pose};time=0}drag={dx:p.x-best.x,dy:p.y-best.y};canvas.setPointerCapture(e.pointerId);syncUI()}});
 canvas.addEventListener("pointermove",e=>{if(!drag)return;const c=selected(),p=pos(e);c.x=p.x-drag.dx;c.y=p.y-drag.dy;$("#charX").value=Math.round(c.x);$("#charY").value=Math.round(c.y);render()});canvas.addEventListener("pointerup",()=>{if(drag){drag=null;changed()}});
+
+let studioReady=false;
+$("#openStudio").onclick=()=>{if(!studioReady){MEPCharacterStudio.init($("#characterStudioCanvas"));studioReady=true}$("#characterStudioDialog").showModal()};
+$("#closeStudio").onclick=()=>$("#characterStudioDialog").close();
+document.querySelectorAll("[data-studio-tool]").forEach(b=>b.onclick=()=>MEPCharacterStudio.setTool(b.dataset.studioTool));
+$("#studioImport").onchange=async e=>{if(e.target.files[0])await MEPCharacterStudio.loadFile(e.target.files[0]);e.target.value=""};
+$("#studioClear").onclick=()=>MEPCharacterStudio.clear();
+$("#studioExport").onclick=()=>MEPCharacterStudio.exportPNG();
+document.querySelectorAll("[data-rig-slot]").forEach(b=>b.onclick=()=>{const sticker=MEPCharacterStudio.getSticker(),ch=selected();if(!sticker)return $("#studioStatus").textContent="Create a lasso sticker first.";if(!ch)return $("#studioStatus").textContent="Select a character in the main editor first.";ch.customSprites=ch.customSprites||{};ch.customSprites[b.dataset.rigSlot]=sticker;changed();$("#studioStatus").textContent="Sticker assigned to "+b.dataset.rigSlot+". Saved with this character/project."});
+
 $("#aiDirector").onclick=()=>$("#aiDialog").showModal();
 $("#aiShowContext").onclick=()=>{$("#aiJson").value=JSON.stringify(MEPAIDirector.promptPackage($("#aiPrompt").value||"Describe a history video",project),null,2);$("#aiStatus").textContent="Engine context package shown below. Send this contract to your backend/model."};
 $("#aiGenerate").onclick=async()=>{const q=$("#aiPrompt").value.trim();if(!q)return $("#aiStatus").textContent="Enter a video request first.";try{$("#aiStatus").textContent="Generating structured production plan…";const plan=await MEPAIDirector.generate(q,project);$("#aiJson").value=JSON.stringify(plan,null,2);const v=MEPAIDirector.validate(plan);$("#aiStatus").textContent=v.ok?"Plan valid — ready to apply.":"Plan needs fixes:\n"+v.errors.join("\n")}catch(e){$("#aiStatus").textContent=e.message}};
