@@ -48,3 +48,10 @@ MEP now exposes a provider-neutral `mep-director-v1` protocol. The AI Director k
 Use the **AI Director** button to generate through a configured backend, inspect the full engine-context package, or paste Director JSON for offline testing. Configure the backend URL in `js/ai-config.js`. Keep OpenAI/model API keys on that backend and never in the browser repository. See `docs/AI-DIRECTOR.md` for the contract.
 
 For factual history videos, the intended production pipeline is: user topic → research/fact-check → script/narration → Director scene plan → MEP validation → animation project. This keeps historical claims separate from visual animation commands.
+
+## Animator / Character Studio upgrade
+The main renderer now uses original illustrated history-cartoon characters rather than bare stick figures. Built-in presets include Civilian, Monarch, Infantry Soldier, Military Officer, Revolutionary and Modern Presenter, with clothes, hair, hats/accessories, hands, shoes, faces and articulated joints.
+
+Character Studio provides its own 800×600 drawing canvas with brush, eraser, image import and a freeform lasso. Closing a lasso masks pixels outside the selected polygon and creates a transparent PNG sticker cutout. A cutout can be assigned to head, torso, arm and leg custom-rig slots and is stored with the character project data. Full rendering/deformation of those custom sprite slots is a following renderer milestone; the cutout creation and rig-slot data pipeline are already present.
+
+Background presets now include World, Europe, Americas, Asia and Africa map modes. The current maps are intentionally schematic visual presets; accurate country borders and country-level map presets should use geographic vector/GeoJSON assets in the next map-system pass rather than fabricated boundaries.
