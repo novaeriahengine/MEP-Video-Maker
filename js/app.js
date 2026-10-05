@@ -53,6 +53,15 @@ $("#clearBackgroundImage").onclick=()=>{delete scene.background.imageData;delete
 $("#sceneSelect").onchange=e=>{project.activeSceneId=e.target.value;scene=MEPModel.activeScene(project);selectedId=scene.characters[0]?.id||null;time=0;changed();syncUI()};
 $("#addScene").onclick=()=>{const s=MEPModel.scene("Scene "+(project.scenes.length+1));project.scenes.push(s);project.activeSceneId=s.id;scene=s;selectedId=s.characters[0].id;time=0;changed();syncUI()};
 $("#era").onchange=e=>{project.era=e.target.value;changed()};$("#backgroundPreset").onchange=e=>{scene.background.preset=e.target.value;scene.background.tags=[...MEPModel.BACKGROUNDS[e.target.value].tags];changed()};$("#sceneTags").onchange=e=>{scene.tags=e.target.value.split(",").map(x=>x.trim()).filter(Boolean);changed()};
+
+function renderCharacterGallery(){
+ const entries=Object.entries(MEPModel.CHARACTER_PRESETS);
+ $("#characterGalleryList").innerHTML=entries.map(([key,p])=>`<button class="characterCard" data-gallery-character="${key}"><strong>${esc(p.name)}</strong><span>${esc(p.era||"General")}</span><small>${esc((p.prop&&p.prop!=="none")?("Prop: "+p.prop):"No default prop")}</small></button>`).join("");
+ document.querySelectorAll("[data-gallery-character]").forEach(btn=>btn.onclick=()=>{const type=btn.dataset.galleryCharacter,p=MEPModel.CHARACTER_PRESETS[type],ch=MEPModel.character(p.name,520+scene.characters.length*70,405,type);scene.characters.push(ch);selectedId=ch.id;time=0;changed();syncUI();$("#characterGalleryDialog").close()});
+}
+$("#openCharacterGallery").onclick=()=>{renderCharacterGallery();$("#characterGalleryDialog").showModal()};
+$("#closeCharacterGallery").onclick=()=>$("#characterGalleryDialog").close();
+
 $("#addCharacter").onclick=()=>{const c=MEPModel.character("Character "+(scene.characters.length+1),520+scene.characters.length*80,405);scene.characters.push(c);selectedId=c.id;time=0;changed();syncUI()};
 $("#addPresetCharacter").onclick=()=>{const type=$("#characterPreset").value,c=MEPModel.character(MEPModel.CHARACTER_PRESETS[type].name,520+scene.characters.length*70,405,type);scene.characters.push(c);selectedId=c.id;time=0;changed();syncUI()};
 $("#saveCharacterCloud").onclick=async()=>{const ch=selected();if(!ch)return alert("Select a character first.");try{$("#saveStatus").textContent="Saving character…";await MEPStorage.saveCharacter(ch);$("#saveStatus").textContent="Character cloud ✓"}catch(e){alert(e.message);$("#saveStatus").textContent="Cloud error"}};
