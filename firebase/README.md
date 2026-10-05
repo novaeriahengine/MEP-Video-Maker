@@ -1,16 +1,22 @@
-# Firebase setup
+# Firebase setup for MEP Video Maker
 
-MEP uses Firebase Email/Password Authentication, Firestore and Cloud Storage.
+MEP currently uses **Cloud Firestore without a login screen** as a JSON-style cloud database.
 
-## Console switches
-1. Authentication > Sign-in method > enable Email/Password.
-2. Firestore Database > create database, then paste firebase/firestore.rules.
-3. Storage > create the default bucket, then paste firebase/storage.rules.
-4. Authentication > Settings > Authorized domains: make sure localhost and novaeriahengine.github.io are allowed.
+## Collections
+- `mepProjects/{projectId}` — complete project documents: scenes, characters, rigs, poses, bubbles, keyframes and metadata.
+- `mepCharacters/{characterId}` — reusable selected-character JSON.
+- `mepAnimations/{animationId}` — reusable keyframe animation JSON.
 
-## Data layout
-- Firestore: users/{uid}/projects/{projectId}
-- Storage: users/{uid}/projects/{projectId}/assets/*
-- The project JSON contains a revision and owner UID so the future Python desktop client can sync the same account/project.
+## Setup
+1. Create Cloud Firestore in production mode.
+2. Open Firestore > Rules.
+3. Paste the contents of `firebase/firestore.rules`.
+4. Publish the rules.
+5. Refresh the MEP site. The Project panel should show **Firestore ready**.
 
-Do not put a Firebase Admin service-account JSON file in this public repository. The web config in js/firebase-config.js is client configuration; security comes from Authentication and Rules.
+No Firebase Authentication is required by the current web editor.
+
+## Important security note
+Because there is no authentication, these three MEP collections are intentionally readable/writable from the public web app. Anyone who knows the Firebase project configuration could potentially read or modify them. Use this only for development/testing. Before storing private or valuable work, add Auth or another access layer.
+
+Large images are not stored inside Firestore project documents. Local image backgrounds remain local until a separate asset-storage workflow is enabled.
