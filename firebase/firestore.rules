@@ -1,13 +1,23 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
-      match /projects/{projectId} {
-        allow read, create, update, delete: if request.auth != null
-          && request.auth.uid == userId
-          && (request.resource == null || request.resource.data.ownerUid == userId);
-      }
+    match /mepProjects/{projectId} {
+      allow read: if true;
+      allow create, update: if request.resource.data.schema == "mep-video-project";
+      allow delete: if true;
+    }
+    match /mepCharacters/{characterId} {
+      allow read: if true;
+      allow create, update: if request.resource.data.schema == "mep-character-v1";
+      allow delete: if true;
+    }
+    match /mepAnimations/{animationId} {
+      allow read: if true;
+      allow create, update: if request.resource.data.schema == "mep-animation-v1";
+      allow delete: if true;
+    }
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }
