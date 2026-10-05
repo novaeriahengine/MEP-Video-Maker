@@ -27,7 +27,7 @@
   "fps": 30,
   "activeSceneId": "haiti-scene-1",
   "createdAt": "2026-10-05T00:00:00.000Z",
-  "updatedAt": "2026-10-05T20:25:14.556Z",
+  "updatedAt": "2026-10-05T20:26:18.815Z",
   "scenes": [
     {
       "id": "haiti-scene-1",
@@ -352,6 +352,11 @@
           "id": "m1c",
           "time": 7.5,
           "label": "Scene end"
+        },
+        {
+          "id": "m1d",
+          "time": 5.8,
+          "label": "Capois enters"
         }
       ]
     },
@@ -828,6 +833,11 @@
           "id": "m2c",
           "time": 7.5,
           "label": "Scene end"
+        },
+        {
+          "id": "m2d",
+          "time": 2.5,
+          "label": "First assault beat"
         }
       ]
     },
@@ -1200,6 +1210,11 @@
           "id": "m3c",
           "time": 7.5,
           "label": "Scene end"
+        },
+        {
+          "id": "m3d",
+          "time": 4,
+          "label": "Capois continues on foot"
         }
       ]
     },
@@ -1523,6 +1538,11 @@
           "id": "m4c",
           "time": 7.5,
           "label": "Scene end"
+        },
+        {
+          "id": "m4d",
+          "time": 5.5,
+          "label": "Independence title"
         }
       ]
     }
@@ -1532,5 +1552,43 @@
     "targetDuration": 30,
     "aspectRatio": "16:9",
     "notes": "Four-scene educational short built to demonstrate MEP scene, pose, bubble, camera, easing and clip data."
+  },
+  "customPoses": {
+    "Capois Charge": {
+      "head": -4,
+      "torso": -10,
+      "leftUpperArm": -52,
+      "leftLowerArm": -20,
+      "rightUpperArm": 92,
+      "rightLowerArm": -34,
+      "leftUpperLeg": 30,
+      "leftLowerLeg": 14,
+      "rightUpperLeg": -26,
+      "rightLowerLeg": 22
+    },
+    "Dessalines Address": {
+      "head": 0,
+      "torso": 0,
+      "leftUpperArm": -72,
+      "leftLowerArm": -42,
+      "rightUpperArm": 68,
+      "rightLowerArm": 38,
+      "leftUpperLeg": -4,
+      "leftLowerLeg": 4,
+      "rightUpperLeg": 4,
+      "rightLowerLeg": 4
+    },
+    "Victory Salute": {
+      "head": -6,
+      "torso": -2,
+      "leftUpperArm": -118,
+      "leftLowerArm": -12,
+      "rightUpperArm": 138,
+      "rightLowerArm": -6,
+      "leftUpperLeg": -8,
+      "leftLowerLeg": 5,
+      "rightUpperLeg": 8,
+      "rightLowerLeg": 5
+    }
   }
 }
