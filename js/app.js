@@ -22,7 +22,7 @@ function syncUI(){
  $("#sceneSelect").innerHTML=project.scenes.map(s=>'<option value="'+s.id+'">'+esc(s.name)+'</option>').join("");$("#sceneSelect").value=scene.id;
  $("#era").innerHTML=MEPModel.HISTORY_ERAS.map(x=>'<option>'+x+'</option>').join("");$("#era").value=project.era||"Custom";
  $("#backgroundPreset").innerHTML=Object.entries(MEPModel.BACKGROUNDS).map(([k,v])=>'<option value="'+k+'">'+v.name+'</option>').join("");$("#backgroundPreset").value=scene.background.preset;
- $("#sceneTags").value=(scene.tags||[]).join(", ");
+ $("#sceneTags").value=(scene.tags||[]).join(", ");\n $("#characterPreset").innerHTML=Object.entries(MEPModel.CHARACTER_PRESETS).map(([k,v])=>"<option value=\""+k+"\">"+v.name+"</option>").join("");
  $("#posePreset").innerHTML=Object.keys(MEPModel.POSES).map(x=>'<option value="'+x+'">'+x.replace(/([A-Z])/g," $1")+'</option>').join("");
  $("#characterList").innerHTML=scene.characters.map(x=>'<div class="characterItem '+(x.id===selectedId?'active':'')+'" data-id="'+x.id+'">'+esc(x.name)+'<small>'+esc((x.tags||[]).join(" · "))+'</small></div>').join("");
  document.querySelectorAll(".characterItem").forEach(el=>el.onclick=()=>{selectedId=el.dataset.id;time=0;syncUI()});
@@ -38,7 +38,7 @@ $("#sceneSelect").onchange=e=>{project.activeSceneId=e.target.value;scene=MEPMod
 $("#addScene").onclick=()=>{const s=MEPModel.scene("Scene "+(project.scenes.length+1));project.scenes.push(s);project.activeSceneId=s.id;scene=s;selectedId=s.characters[0].id;time=0;changed();syncUI()};
 $("#era").onchange=e=>{project.era=e.target.value;changed()};$("#backgroundPreset").onchange=e=>{scene.background.preset=e.target.value;scene.background.tags=[...MEPModel.BACKGROUNDS[e.target.value].tags];changed()};$("#sceneTags").onchange=e=>{scene.tags=e.target.value.split(",").map(x=>x.trim()).filter(Boolean);changed()};
 $("#addCharacter").onclick=()=>{const c=MEPModel.character("Character "+(scene.characters.length+1),520+scene.characters.length*80,405);scene.characters.push(c);selectedId=c.id;time=0;changed();syncUI()};
-$("#deleteCharacter").onclick=()=>{scene.characters=scene.characters.filter(c=>c.id!==selectedId);selectedId=scene.characters[0]?.id||null;changed();syncUI()};
+$("#addPresetCharacter").onclick=()=>{const type=$("#characterPreset").value,c=MEPModel.character(MEPModel.CHARACTER_PRESETS[type].name,520+scene.characters.length*70,405,type);scene.characters.push(c);selectedId=c.id;time=0;changed();syncUI()};\n$("#deleteCharacter").onclick=()=>{scene.characters=scene.characters.filter(c=>c.id!==selectedId);selectedId=scene.characters[0]?.id||null;changed();syncUI()};
 $("#charName").oninput=e=>{selected().name=e.target.value;changed()};$("#charX").oninput=e=>{selected().x=+e.target.value;changed()};$("#charY").oninput=e=>{selected().y=+e.target.value;changed()};$("#charScale").oninput=e=>{selected().scale=Math.max(.2,+e.target.value||1);changed()};$("#charFacing").onchange=e=>{selected().facing=+e.target.value;changed()};
 $("#skinColor").oninput=e=>{selected().rig.skin=e.target.value;changed()};$("#hairColor").oninput=e=>{selected().rig.hair=e.target.value;changed()};$("#shirtColor").oninput=e=>{selected().rig.shirt=e.target.value;changed()};$("#charTags").onchange=e=>{selected().tags=e.target.value.split(",").map(x=>x.trim()).filter(Boolean);changed();syncUI()};
 $("#applyPose").onclick=()=>{const c=selected();if(c){MEPModel.applyPose(c,$("#posePreset").value);time=0;changed();syncUI()}};
