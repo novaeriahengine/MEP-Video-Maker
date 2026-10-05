@@ -7,9 +7,7 @@ const stateFor=c=>(playing||time>0)?MEPModel.poseAt(c,time):{x:c.x,y:c.y,scale:c
 const esc=s=>String(s??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 function render(){
  const bg=MEPModel.BACKGROUNDS[scene.background.preset]||MEPModel.BACKGROUNDS.parchment;
- ctx.fillStyle=scene.background.customFill||bg.fill;ctx.fillRect(0,0,canvas.width,canvas.height);
- ctx.fillStyle=bg.ground;ctx.fillRect(0,570,canvas.width,150);
- ctx.strokeStyle="#6f685b55";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,570);ctx.lineTo(canvas.width,570);ctx.stroke();
+ MEPRenderer.drawBackground(ctx,scene.background.preset,canvas.width,canvas.height);if(scene.background.imageData){let im=imageCache.get(scene.background.imageData);if(!im){im=new Image();im.src=scene.background.imageData;imageCache.set(scene.background.imageData,im);im.onload=render}if(im.complete)ctx.drawImage(im,0,0,canvas.width,canvas.height)}
  scene.characters.forEach(c=>MEPRenderer.draw(ctx,stateFor(c),c.id===selectedId,c.rig));(scene.bubbles||[]).forEach(b=>MEPRenderer.drawBubble(ctx,b));
  $("#timeLabel").textContent=time.toFixed(2)+" / "+scene.duration.toFixed(2)+"s";$("#scrubber").value=time;
 }
@@ -103,6 +101,17 @@ $("#videoPrevScene").onclick=()=>{const a=sceneAtGlobal(videoGlobalTime);videoGl
 $("#sceneNarration").onchange=e=>{sceneAtGlobal(videoGlobalTime).scene.narration=e.target.value;changed()};$("#sceneCaption").onchange=e=>{sceneAtGlobal(videoGlobalTime).scene.caption=e.target.value;changed();renderVideo()};
 $("#recordVideo").onclick=()=>{if(recorder&&recorder.state==="recording"){recorder.stop();return}if(!videoCanvas.captureStream||!window.MediaRecorder)return alert("This browser does not support canvas recording.");recordChunks=[];const stream=videoCanvas.captureStream(project.fps||30);recorder=new MediaRecorder(stream,{mimeType:MediaRecorder.isTypeSupported("video/webm;codecs=vp9")?"video/webm;codecs=vp9":"video/webm"});recorder.ondataavailable=e=>{if(e.data.size)recordChunks.push(e.data)};recorder.onstop=()=>{const blob=new Blob(recordChunks,{type:"video/webm"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=(project.name||"mep-video")+".webm";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);$("#recordVideo").textContent="Record WebM"};recorder.start();$("#recordVideo").textContent="Stop Recording";videoGlobalTime=0;videoPlaying=true;videoLast=performance.now();requestAnimationFrame(videoTick)};
 
+
+
+$("#quickStart").onclick=()=>{
+ project=MEPModel.project();project.name="My First MEP Video";project.era="Prehistory";
+ scene=MEPModel.activeScene(project);scene.name="Opening Scene";scene.duration=12;scene.background.preset="countryside";scene.characters=[];
+ const hunter=MEPModel.character("Hunter",410,430,"hunter");hunter.rig.bodyStyle="historyCutout";hunter.rig.prop="spear";MEPModel.applyPose(hunter,"spearWalk");
+ const gatherer=MEPModel.character("Gatherer",760,430,"gatherer");gatherer.rig.bodyStyle="humanCartoon";MEPModel.applyPose(gatherer,"carry");
+ scene.characters.push(hunter,gatherer);selectedId=hunter.id;selectedBubbleId=null;time=0;changed();syncUI();document.querySelector(".stageArea")?.scrollIntoView({behavior:"smooth",block:"start"});
+};
+document.querySelectorAll("[data-mobile-target]").forEach(b=>b.onclick=()=>document.querySelector(b.dataset.mobileTarget)?.scrollIntoView({behavior:"smooth",block:"start"}));
+$("#mobileVideo").onclick=()=>$("#videoMode").click();
 
 MEPStorage.initCloud().then(r=>{if(!r.ok)$("#accountStatus").textContent="Firebase error";});
 MEPStorage.onUser(u=>{$("#accountStatus").textContent=u?u.email:"Signed out";$("#signOutButton").disabled=!u;});
