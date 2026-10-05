@@ -47,7 +47,7 @@ $("#prevProp").onclick=()=>cycleSelect("#characterProp",-1,false);$("#nextProp")
 $("#applyState").onclick=()=>{const ch=selected();if(!ch)return;const state=$("#characterState").value;ch.rig.state=state;ch.rig.prop=$("#characterProp").value;ch.rig.expression=$("#expression").value;MEPModel.applyPose(ch,MEPModel.STATES[state]||"idle");changed();syncUI()};
 $("#expression").onchange=e=>{const ch=selected();if(ch){ch.rig.expression=e.target.value;changed()}};
 $("#characterProp").onchange=e=>{const ch=selected();if(ch){ch.rig.prop=e.target.value;changed()}};
-$("#backgroundUpload").onchange=async e=>{const file=e.target.files[0];if(!file)return;$("#saveStatus").textContent="Uploading…";try{if(MEPStorage.currentUser()){const asset=await MEPStorage.uploadAsset(project.id,file);project.assets=project.assets||[];project.assets.push(asset);scene.background.imageUrl=asset.url;scene.background.assetId=asset.id;delete scene.background.imageData;$("#saveStatus").textContent="Storage ✓"}else{const data=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)});scene.background.imageData=data;delete scene.background.imageUrl;$("#saveStatus").textContent="Local image"}changed();render()}catch(err){alert("Storage upload failed; keeping a local copy. "+err.message);const r=new FileReader();r.onload=()=>{scene.background.imageData=r.result;delete scene.background.imageUrl;changed();render()};r.readAsDataURL(file)}e.target.value=""};
+$("#backgroundUpload").onchange=async e=>{const file=e.target.files[0];if(!file)return;const data=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)});scene.background.imageData=data;delete scene.background.imageUrl;delete scene.background.assetId;$("#saveStatus").textContent="Local image";changed();render();e.target.value=""};
 $("#clearBackgroundImage").onclick=()=>{delete scene.background.imageData;delete scene.background.imageUrl;delete scene.background.assetId;changed()};
 
 $("#sceneSelect").onchange=e=>{project.activeSceneId=e.target.value;scene=MEPModel.activeScene(project);selectedId=scene.characters[0]?.id||null;time=0;changed();syncUI()};
@@ -55,6 +55,7 @@ $("#addScene").onclick=()=>{const s=MEPModel.scene("Scene "+(project.scenes.leng
 $("#era").onchange=e=>{project.era=e.target.value;changed()};$("#backgroundPreset").onchange=e=>{scene.background.preset=e.target.value;scene.background.tags=[...MEPModel.BACKGROUNDS[e.target.value].tags];changed()};$("#sceneTags").onchange=e=>{scene.tags=e.target.value.split(",").map(x=>x.trim()).filter(Boolean);changed()};
 $("#addCharacter").onclick=()=>{const c=MEPModel.character("Character "+(scene.characters.length+1),520+scene.characters.length*80,405);scene.characters.push(c);selectedId=c.id;time=0;changed();syncUI()};
 $("#addPresetCharacter").onclick=()=>{const type=$("#characterPreset").value,c=MEPModel.character(MEPModel.CHARACTER_PRESETS[type].name,520+scene.characters.length*70,405,type);scene.characters.push(c);selectedId=c.id;time=0;changed();syncUI()};
+$("#saveCharacterCloud").onclick=async()=>{const ch=selected();if(!ch)return alert("Select a character first.");try{$("#saveStatus").textContent="Saving character…";await MEPStorage.saveCharacter(ch);$("#saveStatus").textContent="Character cloud ✓"}catch(e){alert(e.message);$("#saveStatus").textContent="Cloud error"}};
 $("#deleteCharacter").onclick=()=>{scene.characters=scene.characters.filter(c=>c.id!==selectedId);selectedId=scene.characters[0]?.id||null;changed();syncUI()};
 $("#charName").oninput=e=>{selected().name=e.target.value;changed()};$("#charX").oninput=e=>{selected().x=+e.target.value;changed()};$("#charY").oninput=e=>{selected().y=+e.target.value;changed()};$("#charScale").oninput=e=>{selected().scale=Math.max(.2,+e.target.value||1);changed()};$("#charFacing").onchange=e=>{selected().facing=+e.target.value;changed()};
 $("#skinColor").oninput=e=>{selected().rig.skin=e.target.value;changed()};$("#hairColor").oninput=e=>{selected().rig.hair=e.target.value;changed()};$("#shirtColor").oninput=e=>{selected().rig.shirt=e.target.value;changed()};$("#charTags").onchange=e=>{selected().tags=e.target.value.split(",").map(x=>x.trim()).filter(Boolean);changed();syncUI()};
@@ -65,6 +66,7 @@ function editBubble(fn){const b=(scene.bubbles||[]).find(x=>x.id===selectedBubbl
 $("#bubbleText").oninput=e=>editBubble(b=>b.text=e.target.value);$("#bubbleStyle").onchange=e=>editBubble(b=>b.style=e.target.value);$("#bubbleFontSize").oninput=e=>editBubble(b=>b.fontSize=+e.target.value);$("#bubbleWidth").oninput=e=>editBubble(b=>b.width=+e.target.value);$("#bubbleFill").oninput=e=>editBubble(b=>b.fill=e.target.value);$("#bubbleTextColor").oninput=e=>editBubble(b=>b.textColor=e.target.value);
 
 $("#applyPose").onclick=()=>{const c=selected();if(c){MEPModel.applyPose(c,$("#posePreset").value);time=0;changed();syncUI()}};
+$("#saveAnimationCloud").onclick=async()=>{const ch=selected();if(!ch)return alert("Select a character first.");const name=prompt("Animation name:",(ch.name||"Character")+" Animation")||"Animation";try{$("#saveStatus").textContent="Saving animation…";await MEPStorage.saveAnimation(ch,name);$("#saveStatus").textContent="Animation cloud ✓"}catch(e){alert(e.message);$("#saveStatus").textContent="Cloud error"}};
 $("#makeMarch").onclick=()=>{const c=selected();if(!c)return;const start=time,end=Math.min(scene.duration,start+2),step=(end-start)/4,baseX=c.x;["marchA","marchB","marchA","marchB","marchA"].forEach((name,i)=>{c.x=baseX+i*35*c.facing;addKey(start+i*step,MEPModel.POSES[name])});time=start;c.x=baseX;c.pose={...MEPModel.POSES.marchA};changed();syncUI()};
 $("#resetPose").onclick=()=>{const c=selected();if(c){c.pose={...MEPModel.DEFAULT_POSE};time=0;changed();syncUI()}};$("#addKeyframe").onclick=()=>addKey();$("#deleteKeyframe").onclick=()=>{const c=selected();if(c){c.keyframes=c.keyframes.filter(k=>Math.abs(k.time-time)>.011);changed();syncUI()}};
 $("#scrubber").oninput=e=>{playing=false;time=+e.target.value;render()};$("#duration").onchange=e=>{scene.duration=Math.max(1,Math.min(300,+e.target.value||8));time=Math.min(time,scene.duration);changed();syncUI()};$("#fps").onchange=e=>{project.fps=+e.target.value;changed()};
@@ -109,6 +111,7 @@ $("#recordVideo").onclick=()=>{if(recorder&&recorder.state==="recording"){record
 
 
 
+$("#loadHaitiDemo").onclick=async()=>{try{const res=await fetch("presets/haiti-vertieres-30s.mep.json",{cache:"no-store"});if(!res.ok)throw new Error("Demo file not found.");project=MEPModel.migrate(await res.json());scene=MEPModel.activeScene(project);selectedId=scene.characters[0]?.id||null;selectedBubbleId=null;time=0;MEPStorage.save(project);syncUI();document.querySelector(".stageArea")?.scrollIntoView({behavior:"smooth",block:"start"})}catch(e){alert("Could not load Haiti demo: "+e.message)}};
 $("#quickStart").onclick=()=>{
  project=MEPModel.project();project.name="My First MEP Video";project.era="Prehistory";
  scene=MEPModel.activeScene(project);scene.name="Opening Scene";scene.duration=12;scene.background.preset="countryside";scene.characters=[];
@@ -119,12 +122,7 @@ $("#quickStart").onclick=()=>{
 document.querySelectorAll("[data-mobile-target]").forEach(b=>b.onclick=()=>document.querySelector(b.dataset.mobileTarget)?.scrollIntoView({behavior:"smooth",block:"start"}));
 $("#mobileVideo").onclick=()=>$("#videoMode").click();
 
-MEPStorage.initCloud().then(r=>{if(!r.ok)$("#accountStatus").textContent="Firebase error";});
-MEPStorage.onUser(u=>{$("#accountStatus").textContent=u?u.email:"Signed out";$("#signOutButton").disabled=!u;});
-$("#accountButton").onclick=()=>$("#accountDialog").showModal();$("#closeAccount").onclick=()=>$("#accountDialog").close();
-$("#signInButton").onclick=async()=>{try{await MEPStorage.signIn($("#authEmail").value.trim(),$("#authPassword").value);$("#authMessage").textContent="Signed in. Cloud sync is ready.";$("#accountDialog").close()}catch(e){$("#authMessage").textContent=e.message}};
-$("#signUpButton").onclick=async()=>{try{await MEPStorage.signUp($("#authEmail").value.trim(),$("#authPassword").value);$("#authMessage").textContent="Account created. Cloud sync is ready.";$("#accountDialog").close()}catch(e){$("#authMessage").textContent=e.message}};
-$("#signOutButton").onclick=async()=>{await MEPStorage.signOut();$("#authMessage").textContent="Signed out."};
+MEPStorage.initCloud().then(r=>{$("#saveStatus").textContent=r.ok?"Firestore ready":"Local only";if(!r.ok)console.warn(r.reason)});
 
 syncUI();
 })();
