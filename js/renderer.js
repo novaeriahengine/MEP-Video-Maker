@@ -1,6 +1,6 @@
 window.MEPRenderer=(()=>{
 const rad=d=>d*Math.PI/180;
-function end(p,len,ang,face=1){return{x:p.x+Math.sin(rad(ang))*face,y:p.y+Math.cos(rad(ang))}}
+function end(p,len,ang,face=1){return{x:p.x+Math.sin(rad(ang))*len*face,y:p.y+Math.cos(rad(ang))*len}}
 function geometry(s){const sc=s.scale,face=s.facing,p=s.pose,style=MEPModel.BODY_STYLES?.[s.bodyStyle]||MEPModel.BODY_STYLES?.historyCutout||{length:1},len=style.length||1,hip={x:s.x,y:s.y},shoulder=end(hip,-100*sc,p.torso,face),neck=end(shoulder,-22*sc,p.torso,face),head=end(neck,-38*sc,p.head+p.torso,face),la1=end(shoulder,70*sc,p.leftUpperArm-110,face),la2=end(la1,65*sc,p.leftUpperArm+p.leftLowerArm-110,face),ra1=end(shoulder,70*sc,p.rightUpperArm+110,face),ra2=end(ra1,65*sc,p.rightUpperArm+p.rightLowerArm+110,face),ll1=end(hip,82*sc,p.leftUpperLeg-15,face),ll2=end(ll1,78*sc,p.leftUpperLeg+p.leftLowerLeg-8,face),rl1=end(hip,82*sc,p.rightUpperLeg+15,face),rl2=end(rl1,78*sc,p.rightUpperLeg+p.rightLowerLeg+8,face);return{hip,shoulder,neck,head,leftElbow:la1,leftHand:la2,rightElbow:ra1,rightHand:ra2,leftKnee:ll1,leftFoot:ll2,rightKnee:rl1,rightFoot:rl2}}
 function limb(ctx,a,b,w,color){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=color;ctx.lineWidth=w;ctx.lineCap="round";ctx.stroke()}
 function circle(ctx,p,r,fill,stroke="#242424",sw=3){ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2);ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=stroke;ctx.lineWidth=sw;ctx.stroke()}
