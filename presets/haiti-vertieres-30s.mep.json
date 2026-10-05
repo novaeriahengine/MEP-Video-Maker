@@ -1,6 +1,6 @@
 {
   "schema": "mep-video-project",
-  "version": 3,
+  "version": 4,
   "id": "demo-haiti-vertieres-30s",
   "name": "Haiti 1803 — Capois-la-Mort at Vertières",
   "category": "History",
@@ -10,7 +10,10 @@
     "haitian-revolution",
     "vertieres",
     "capois-la-mort",
-    "1803"
+    "1803",
+    "demo",
+    "short-form",
+    "mep-v4"
   ],
   "sync": {
     "provider": "firestore",
@@ -24,7 +27,7 @@
   "fps": 30,
   "activeSceneId": "haiti-scene-1",
   "createdAt": "2026-10-05T00:00:00.000Z",
-  "updatedAt": "2026-10-05T00:00:00.000Z",
+  "updatedAt": "2026-10-05T20:25:14.556Z",
   "scenes": [
     {
       "id": "haiti-scene-1",
@@ -111,7 +114,9 @@
                   "rightUpperLeg": 8,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "linear",
+              "label": "Start"
             },
             {
               "id": "d2",
@@ -133,7 +138,9 @@
                   "rightUpperLeg": 8,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "easeInOut",
+              "label": "Action"
             },
             {
               "id": "d3",
@@ -155,7 +162,18 @@
                   "rightUpperLeg": 8,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "easeOut",
+              "label": "End"
+            }
+          ],
+          "layer": 5,
+          "clips": [
+            {
+              "id": "clip-1-dessalines",
+              "type": "talkLoop",
+              "start": 0,
+              "duration": 7.5
             }
           ]
         },
@@ -224,7 +242,9 @@
                   "rightUpperLeg": 8,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "linear",
+              "label": "Start"
             },
             {
               "id": "c2",
@@ -246,7 +266,9 @@
                   "rightUpperLeg": -24,
                   "rightLowerLeg": 20
                 }
-              }
+              },
+              "easing": "easeInOut",
+              "label": "Action"
             },
             {
               "id": "c3",
@@ -268,7 +290,18 @@
                   "rightUpperLeg": 18,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "easeOut",
+              "label": "End"
+            }
+          ],
+          "layer": 6,
+          "clips": [
+            {
+              "id": "clip-1-capois",
+              "type": "talkLoop",
+              "start": 0,
+              "duration": 7.5
             }
           ]
         }
@@ -277,7 +310,7 @@
         {
           "id": "b1",
           "type": "bubble",
-          "text": "The final push.",
+          "text": "The final campaign begins.",
           "style": "history",
           "x": 420,
           "y": 95,
@@ -287,7 +320,38 @@
           "fill": "#f3e4bd",
           "textColor": "#302419",
           "tailX": 520,
-          "tailY": 235
+          "tailY": 235,
+          "startTime": 0.6,
+          "endTime": 3.8000000000000003,
+          "layer": 20
+        }
+      ],
+      "transition": {
+        "type": "fade",
+        "duration": 0.6
+      },
+      "camera": {
+        "x": 640,
+        "y": 360,
+        "zoom": 0.92,
+        "keyframes": []
+      },
+      "notes": "Introduce the final 1803 campaign and leaders.",
+      "markers": [
+        {
+          "id": "m1a",
+          "time": 0,
+          "label": "Scene start"
+        },
+        {
+          "id": "m1b",
+          "time": 3.8,
+          "label": "Beat"
+        },
+        {
+          "id": "m1c",
+          "time": 7.5,
+          "label": "Scene end"
         }
       ]
     },
@@ -374,7 +438,9 @@
                   "rightUpperLeg": -24,
                   "rightLowerLeg": 20
                 }
-              }
+              },
+              "easing": "linear",
+              "label": "Start"
             },
             {
               "id": "c22",
@@ -396,7 +462,9 @@
                   "rightUpperLeg": 18,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "easeInOut",
+              "label": "Action"
             },
             {
               "id": "c23",
@@ -418,7 +486,9 @@
                   "rightUpperLeg": -24,
                   "rightLowerLeg": -10
                 }
-              }
+              },
+              "easing": "easeInOut",
+              "label": "Action"
             },
             {
               "id": "c24",
@@ -440,7 +510,18 @@
                   "rightUpperLeg": 18,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "easeOut",
+              "label": "End"
+            }
+          ],
+          "layer": 5,
+          "clips": [
+            {
+              "id": "clip-2-capois",
+              "type": "attack",
+              "start": 0,
+              "duration": 7.5
             }
           ]
         },
@@ -509,7 +590,9 @@
                   "rightUpperLeg": 8,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "linear",
+              "label": "Start"
             },
             {
               "id": "f12",
@@ -531,7 +614,9 @@
                   "rightUpperLeg": 18,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "easeInOut",
+              "label": "Action"
             },
             {
               "id": "f13",
@@ -553,7 +638,18 @@
                   "rightUpperLeg": 18,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "easeOut",
+              "label": "End"
+            }
+          ],
+          "layer": 6,
+          "clips": [
+            {
+              "id": "clip-2-1",
+              "type": "attack",
+              "start": 0,
+              "duration": 7.5
             }
           ]
         },
@@ -622,7 +718,9 @@
                   "rightUpperLeg": 8,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "linear",
+              "label": "Start"
             },
             {
               "id": "f22",
@@ -644,7 +742,9 @@
                   "rightUpperLeg": 18,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "easeInOut",
+              "label": "Action"
             },
             {
               "id": "f23",
@@ -666,7 +766,18 @@
                   "rightUpperLeg": 18,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "easeOut",
+              "label": "End"
+            }
+          ],
+          "layer": 7,
+          "clips": [
+            {
+              "id": "clip-2-2",
+              "type": "attack",
+              "start": 0,
+              "duration": 7.5
             }
           ]
         }
@@ -685,7 +796,38 @@
           "fill": "#fff8cf",
           "textColor": "#111111",
           "tailX": 380,
-          "tailY": 250
+          "tailY": 250,
+          "startTime": 0.6,
+          "endTime": 3.8000000000000003,
+          "layer": 20
+        }
+      ],
+      "transition": {
+        "type": "crossfade",
+        "duration": 0.45
+      },
+      "camera": {
+        "x": 660,
+        "y": 360,
+        "zoom": 1.03,
+        "keyframes": []
+      },
+      "notes": "Stage Capois advancing from left to right while French defenders hold the right side.",
+      "markers": [
+        {
+          "id": "m2a",
+          "time": 0,
+          "label": "Scene start"
+        },
+        {
+          "id": "m2b",
+          "time": 3.8,
+          "label": "Beat"
+        },
+        {
+          "id": "m2c",
+          "time": 7.5,
+          "label": "Scene end"
         }
       ]
     },
@@ -772,7 +914,9 @@
                   "rightUpperLeg": -24,
                   "rightLowerLeg": -10
                 }
-              }
+              },
+              "easing": "linear",
+              "label": "Start"
             },
             {
               "id": "c32",
@@ -794,7 +938,9 @@
                   "rightUpperLeg": 24,
                   "rightLowerLeg": 20
                 }
-              }
+              },
+              "easing": "easeInOut",
+              "label": "Action"
             },
             {
               "id": "c33",
@@ -816,7 +962,9 @@
                   "rightUpperLeg": 18,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "easeInOut",
+              "label": "Action"
             },
             {
               "id": "c34",
@@ -838,7 +986,9 @@
                   "rightUpperLeg": -24,
                   "rightLowerLeg": -10
                 }
-              }
+              },
+              "easing": "easeInOut",
+              "label": "Action"
             },
             {
               "id": "c35",
@@ -860,7 +1010,18 @@
                   "rightUpperLeg": 8,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "easeOut",
+              "label": "End"
+            }
+          ],
+          "layer": 5,
+          "clips": [
+            {
+              "id": "clip-3-capois",
+              "type": "spearAdvance",
+              "start": 0,
+              "duration": 7.5
             }
           ]
         },
@@ -929,7 +1090,9 @@
                   "rightUpperLeg": 18,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "linear",
+              "label": "Start"
             },
             {
               "id": "f32",
@@ -951,7 +1114,9 @@
                   "rightUpperLeg": 18,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "easeInOut",
+              "label": "Action"
             },
             {
               "id": "f33",
@@ -973,7 +1138,18 @@
                   "rightUpperLeg": 8,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "easeOut",
+              "label": "End"
+            }
+          ],
+          "layer": 6,
+          "clips": [
+            {
+              "id": "clip-3-1",
+              "type": "attack",
+              "start": 0,
+              "duration": 7.5
             }
           ]
         }
@@ -992,7 +1168,38 @@
           "fill": "#ffffff",
           "textColor": "#171717",
           "tailX": 600,
-          "tailY": 245
+          "tailY": 245,
+          "startTime": 0.6,
+          "endTime": 3.8000000000000003,
+          "layer": 20
+        }
+      ],
+      "transition": {
+        "type": "fade",
+        "duration": 0.45
+      },
+      "camera": {
+        "x": 650,
+        "y": 370,
+        "zoom": 1.12,
+        "keyframes": []
+      },
+      "notes": "Use a tighter camera and faster motion to emphasize Capois continuing the advance.",
+      "markers": [
+        {
+          "id": "m3a",
+          "time": 0,
+          "label": "Scene start"
+        },
+        {
+          "id": "m3b",
+          "time": 3.8,
+          "label": "Beat"
+        },
+        {
+          "id": "m3c",
+          "time": 7.5,
+          "label": "Scene end"
         }
       ]
     },
@@ -1079,7 +1286,9 @@
                   "rightUpperLeg": 8,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "linear",
+              "label": "Start"
             },
             {
               "id": "c42",
@@ -1101,7 +1310,9 @@
                   "rightUpperLeg": 8,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "easeInOut",
+              "label": "Action"
             },
             {
               "id": "c43",
@@ -1123,7 +1334,18 @@
                   "rightUpperLeg": 8,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "easeOut",
+              "label": "End"
+            }
+          ],
+          "layer": 5,
+          "clips": [
+            {
+              "id": "clip-4-capois",
+              "type": "celebrate",
+              "start": 0,
+              "duration": 7.5
             }
           ]
         },
@@ -1191,7 +1413,9 @@
                   "rightUpperLeg": 8,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "linear",
+              "label": "Start"
             },
             {
               "id": "d42",
@@ -1213,7 +1437,9 @@
                   "rightUpperLeg": 8,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "easeInOut",
+              "label": "Action"
             },
             {
               "id": "d43",
@@ -1235,7 +1461,18 @@
                   "rightUpperLeg": 8,
                   "rightLowerLeg": 5
                 }
-              }
+              },
+              "easing": "easeOut",
+              "label": "End"
+            }
+          ],
+          "layer": 6,
+          "clips": [
+            {
+              "id": "clip-4-dessalines",
+              "type": "celebrate",
+              "start": 0,
+              "duration": 7.5
             }
           ]
         }
@@ -1254,9 +1491,46 @@
           "fill": "#f3e4bd",
           "textColor": "#302419",
           "tailX": 650,
-          "tailY": 245
+          "tailY": 245,
+          "startTime": 0.6,
+          "endTime": 3.8000000000000003,
+          "layer": 20
+        }
+      ],
+      "transition": {
+        "type": "fade",
+        "duration": 0.45
+      },
+      "camera": {
+        "x": 640,
+        "y": 350,
+        "zoom": 0.96,
+        "keyframes": []
+      },
+      "notes": "Open the shot back up for victory and independence.",
+      "markers": [
+        {
+          "id": "m4a",
+          "time": 0,
+          "label": "Scene start"
+        },
+        {
+          "id": "m4b",
+          "time": 3.8,
+          "label": "Beat"
+        },
+        {
+          "id": "m4c",
+          "time": 7.5,
+          "label": "Scene end"
         }
       ]
     }
-  ]
+  ],
+  "storyboard": {
+    "format": "history-short",
+    "targetDuration": 30,
+    "aspectRatio": "16:9",
+    "notes": "Four-scene educational short built to demonstrate MEP scene, pose, bubble, camera, easing and clip data."
+  }
 }
