@@ -9,7 +9,7 @@
 <body>
 <div id="app">
   <header class="topbar">
-    <div class="brand"><strong>MEP</strong><span>Video Maker</span></div>
+    <div class="brand"><strong>MEP</strong><span>Video Maker</span></div><nav class="modeTabs"><button id="editorMode" class="active">Editor</button><button id="videoMode">Video / Playback</button></nav>
     <label>Project <input id="projectName" value="Untitled History"></label>
     <label>Category
       <select id="category"><option>History</option><option>Biography</option><option>War</option><option>Politics</option><option>Comedy</option><option>Education</option><option>Custom</option></select>
@@ -29,7 +29,7 @@
       <label>Y <input id="charY" type="number"></label>
       <label>Scale <input id="charScale" type="number" min=".2" max="3" step=".1"></label>
       <label>Facing <select id="charFacing"><option value="1">Right</option><option value="-1">Left</option></select></label>
-      <h2>Character Maker</h2><label>Skin <input id="skinColor" type="color"></label><label>Hair <input id="hairColor" type="color"></label><label>Shirt <input id="shirtColor" type="color"></label><label>Tags <input id="charTags" placeholder="king, soldier"></label><button id="deleteCharacter" class="danger">Delete Character</button>
+      <h2>Character Maker</h2><label>Body Type <span class="cycle"><button id="prevBody">◀</button><select id="bodyStyle"></select><button id="nextBody">▶</button></span></label><label>Skin <input id="skinColor" type="color"></label><label>Hair <input id="hairColor" type="color"></label><label>Shirt <input id="shirtColor" type="color"></label><label>Tags <input id="charTags" placeholder="king, soldier"></label><button id="deleteCharacter" class="danger">Delete Character</button>
     </aside>
 
     <section class="stageArea">
