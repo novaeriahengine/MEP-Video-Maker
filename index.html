@@ -14,13 +14,13 @@
     <label>Category
       <select id="category"><option>History</option><option>Biography</option><option>War</option><option>Politics</option><option>Comedy</option><option>Education</option><option>Custom</option></select>
     </label>
-    <button id="newProject">New</button><button id="saveProject">Save</button><button id="exportProject">Export JSON</button>
+    <button id="newProject">New</button><button id="saveProject">Save Local</button><button id="saveCloud">☁ Save Cloud</button><button id="loadCloud">☁ Projects</button><button id="exportProject">Export JSON</button>
     <label class="fileButton">Import JSON<input id="importProject" type="file" accept=".json,application/json"></label>
   </header>
 
   <main class="workspace">
     <aside class="panel library">
-      <h2>Characters</h2>
+      <h2>Scene</h2><label>Scene <select id="sceneSelect"></select></label><button id="addScene">+ Add Scene</button><label>Era <select id="era"></select></label><label>Background <select id="backgroundPreset"></select></label><label>Tags <input id="sceneTags" placeholder="war, france, 1800s"></label><h2>Characters</h2>
       <button id="addCharacter">+ Add Character</button>
       <div id="characterList"></div>
       <h2>Selected</h2>
@@ -29,7 +29,7 @@
       <label>Y <input id="charY" type="number"></label>
       <label>Scale <input id="charScale" type="number" min=".2" max="3" step=".1"></label>
       <label>Facing <select id="charFacing"><option value="1">Right</option><option value="-1">Left</option></select></label>
-      <button id="deleteCharacter" class="danger">Delete Character</button>
+      <h2>Character Maker</h2><label>Skin <input id="skinColor" type="color"></label><label>Hair <input id="hairColor" type="color"></label><label>Shirt <input id="shirtColor" type="color"></label><label>Tags <input id="charTags" placeholder="king, soldier"></label><button id="deleteCharacter" class="danger">Delete Character</button>
     </aside>
 
     <section class="stageArea">
@@ -44,7 +44,7 @@
     </section>
 
     <aside class="panel pose">
-      <h2>Pose</h2>
+      <h2>Animation Presets</h2><label>Pose <select id="posePreset"></select></label><button id="applyPose">Apply Pose</button><button id="makeMarch">Generate 2s March</button><h2>Pose</h2>
       <div id="jointControls"></div>
       <button id="resetPose">Reset Pose</button>
       <button id="addKeyframe" class="primary">◆ Add / Update Keyframe</button>
@@ -61,7 +61,7 @@
     <div id="timeline"></div>
   </section>
 </div>
-<script src="js/model.js"></script>
+<script src="js/firebase-config.js"></script>\n<script src="js/model.js"></script>
 <script src="js/renderer.js"></script>
 <script src="js/storage.js"></script>
 <script src="js/app.js"></script>
