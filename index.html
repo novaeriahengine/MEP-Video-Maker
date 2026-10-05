@@ -25,6 +25,7 @@
 <label>Scene <select id="sceneSelect"></select></label>
 <div class="sceneActions"><button id="prevScene">◀</button><button id="addScene">+ Scene</button><button id="duplicateScene">Duplicate</button><button id="deleteScene">Delete</button><button id="nextScene">▶</button></div>
 <label>Transition <select id="sceneTransition"><option value="cut">Cut</option><option value="fade">Fade</option><option value="crossfade">Crossfade</option></select></label>
+<div class="cameraGrid"><label>Camera X <input id="cameraX" type="number" value="640"></label><label>Camera Y <input id="cameraY" type="number" value="360"></label><label>Zoom <input id="cameraZoom" type="number" min=".5" max="3" step=".05" value="1"></label></div>
 <label>Scene Notes <textarea id="sceneNotes" placeholder="Director notes, shot idea, historical note..."></textarea></label>
 <div id="sceneBoard" class="sceneBoard"></div><label>Era <select id="era"></select></label><label>Background <span class="cycle"><button id="prevBackground">◀</button><select id="backgroundPreset"></select><button id="nextBackground">▶</button></span></label><label>Tags <input id="sceneTags" placeholder="war, france, 1800s"></label><label class="fileButton wide">Use Local Background<input id="backgroundUpload" type="file" accept="image/*"></label><button id="clearBackgroundImage">Use Drawn Background</button><h2>Characters</h2>
       <label>Preset <span class="cycle"><button id="prevCharacterPreset">◀</button><select id="characterPreset"></select><button id="nextCharacterPreset">▶</button></span></label><button id="openCharacterGallery" class="primary">+ Character Gallery</button><button id="addPresetCharacter">+ Add Selected Preset</button><button id="addCharacter">+ Blank Character</button><button id="openStudio">✎ Character Studio</button>
@@ -62,6 +63,7 @@
 <label>Text <textarea id="bubbleText" placeholder="What should the character say?"></textarea></label>
 <label>Style <select id="bubbleStyle"></select></label>
 <div class="bubbleGrid"><label>Font <input id="bubbleFontSize" type="number" min="12" max="72" value="28"></label><label>Width <input id="bubbleWidth" type="number" min="100" max="800" value="300"></label></div>
+<div class="bubbleGrid"><label>Start <input id="bubbleStart" type="number" min="0" step=".1" value="0"></label><label>End <input id="bubbleEnd" type="number" min="0" step=".1" value="8"></label></div>
 <div class="bubbleGrid"><label>Fill <input id="bubbleFill" type="color" value="#ffffff"></label><label>Text <input id="bubbleTextColor" type="color" value="#171717"></label></div>
 <button id="addBubble" class="primary">+ Add Bubble</button><button id="deleteBubble">Delete Selected Bubble</button>
 <div id="bubbleList"></div><h2>Pose</h2>
