@@ -43,7 +43,8 @@
       <p class="hint">Drag characters to position them. Pose the rig with joint controls, apply preset poses, or generate a March animation. Keyframes store movement and pose data.</p>
     </section>
 
-<section id="videoDeck" class="videoDeck hidden"><div class="videoStage"><canvas id="videoStage" width="1280" height="720"></canvas><div id="videoCaption" class="videoCaption"></div></div><div class="transport"><button id="videoPrevScene">Prev Scene</button><button id="videoPlayPause" class="primary">Play / Pause</button><button id="videoStop">Stop</button><button id="videoNextScene">Next Scene</button><span id="videoClock">00:00 / 00:00</span><button id="recordVideo">Record WebM</button></div><input id="videoScrubber" class="videoScrubber" type="range" min="0" max="1" value="0" step=".01"><div id="sceneStrip" class="sceneStrip"></div><div class="narrationPanel"><strong>Scene narration / caption</strong><textarea id="sceneNarration" placeholder="Narration notes for this scene"></textarea><input id="sceneCaption" placeholder="On-screen caption"></div></section>\n    <aside class="panel pose">
+<section id="videoDeck" class="videoDeck hidden"><div class="videoStage"><canvas id="videoStage" width="1280" height="720"></canvas><div id="videoCaption" class="videoCaption"></div></div><div class="transport"><button id="videoPrevScene">Prev Scene</button><button id="videoPlayPause" class="primary">Play / Pause</button><button id="videoStop">Stop</button><button id="videoNextScene">Next Scene</button><span id="videoClock">00:00 / 00:00</span><button id="recordVideo">Record WebM</button></div><input id="videoScrubber" class="videoScrubber" type="range" min="0" max="1" value="0" step=".01"><div id="sceneStrip" class="sceneStrip"></div><div class="narrationPanel"><strong>Scene narration / caption</strong><textarea id="sceneNarration" placeholder="Narration notes for this scene"></textarea><input id="sceneCaption" placeholder="On-screen caption"></div></section>
+    <aside class="panel pose">
       <h2>Character State</h2><label>State <span class="cycle"><button id="prevState">◀</button><select id="characterState"></select><button id="nextState">▶</button></span></label><label>Expression <select id="expression"><option>neutral</option><option>happy</option><option>sad</option><option>angry</option></select></label><label>Prop / Weapon <span class="cycle"><button id="prevProp">◀</button><select id="characterProp"></select><button id="nextProp">▶</button></span></label><button id="applyState" class="primary">Apply State</button><h2>Animation Presets</h2><label>Pose <select id="posePreset"></select></label><button id="applyPose">Apply Pose</button><button id="makeMarch">Generate 2s March</button><h2>Dialogue / Bubbles</h2>
 <label>Text <textarea id="bubbleText" placeholder="What should the character say?"></textarea></label>
 <label>Style <select id="bubbleStyle"></select></label>
@@ -67,8 +68,12 @@
     <div id="timeline"></div>
   </section>
 </div><nav id="mobileDock" class="mobileDock"><button data-mobile-target=".stageArea">Canvas</button><button data-mobile-target=".library">Scene</button><button data-mobile-target=".pose">Animate</button><button data-mobile-target=".timelinePanel">Timeline</button><button id="mobileVideo">Video</button></nav>
-<script src="js/firebase-config.js"></script>\n<script src="js/model.js"></script>\n<script src="js/ai-config.js"></script>\n<script src="js/ai-director.js"></script>
-<script src="js/renderer.js"></script>\n<script src="js/character-studio.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/model.js"></script>
+<script src="js/ai-config.js"></script>
+<script src="js/ai-director.js"></script>
+<script src="js/renderer.js"></script>
+<script src="js/character-studio.js"></script>
 <script src="js/storage.js"></script>
 <script src="js/app.js"></script>
 </body>
