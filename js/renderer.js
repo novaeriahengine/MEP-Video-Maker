@@ -1,21 +1,19 @@
 window.MEPRenderer=(()=>{
 const rad=d=>d*Math.PI/180;
 function end(p,len,ang,face=1){return{x:p.x+Math.sin(rad(ang))*len*face,y:p.y+Math.cos(rad(ang))*len}}
-function geometry(s){
- const sc=s.scale,face=s.facing,p=s.pose,hip={x:s.x,y:s.y},shoulder=end(hip,-100*sc,p.torso,face),neck=end(shoulder,-22*sc,p.torso,face),head=end(neck,-35*sc,p.head+p.torso,face);
- const la1=end(shoulder,70*sc,p.leftUpperArm-110,face),la2=end(la1,65*sc,p.leftUpperArm+p.leftLowerArm-110,face);
- const ra1=end(shoulder,70*sc,p.rightUpperArm+110,face),ra2=end(ra1,65*sc,p.rightUpperArm+p.rightLowerArm+110,face);
- const ll1=end(hip,82*sc,p.leftUpperLeg-15,face),ll2=end(ll1,78*sc,p.leftUpperLeg+p.leftLowerLeg-8,face);
- const rl1=end(hip,82*sc,p.rightUpperLeg+15,face),rl2=end(rl1,78*sc,p.rightUpperLeg+p.rightLowerLeg+8,face);
- return{hip,shoulder,neck,head,leftElbow:la1,leftHand:la2,rightElbow:ra1,rightHand:ra2,leftKnee:ll1,leftFoot:ll2,rightKnee:rl1,rightFoot:rl2};
-}
-function line(ctx,a,b,w=10){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle="#242424";ctx.lineWidth=w;ctx.lineCap="round";ctx.stroke()}
-function draw(ctx,s,selected=false,rig={}){\n const g=geometry(s),sc=s.scale;
- line(ctx,g.hip,g.shoulder,18*sc);line(ctx,g.shoulder,g.leftElbow,11*sc);line(ctx,g.leftElbow,g.leftHand,9*sc);line(ctx,g.shoulder,g.rightElbow,11*sc);line(ctx,g.rightElbow,g.rightHand,9*sc);line(ctx,g.hip,g.leftKnee,13*sc);line(ctx,g.leftKnee,g.leftFoot,11*sc);line(ctx,g.hip,g.rightKnee,13*sc);line(ctx,g.rightKnee,g.rightFoot,11*sc);
- ctx.beginPath();ctx.arc(g.head.x,g.head.y,30*sc,0,Math.PI*2);ctx.fillStyle=rig.skin||"#f2c7a5";ctx.fill();ctx.strokeStyle=rig.line||"#242424";ctx.lineWidth=5*sc;ctx.stroke();
- const eyeX=g.head.x+10*sc*s.facing;ctx.beginPath();ctx.arc(eyeX,g.head.y-4*sc,2.5*sc,0,Math.PI*2);ctx.fillStyle="#222";ctx.fill();
- if(selected){Object.values(g).forEach(pt=>{ctx.beginPath();ctx.arc(pt.x,pt.y,5,0,Math.PI*2);ctx.fillStyle="#ffb020";ctx.fill()});ctx.strokeStyle="#ffb020";ctx.lineWidth=2;ctx.strokeRect(g.hip.x-45*sc,g.head.y-45*sc,90*sc,(g.hip.y-g.head.y)+190*sc)}
- return g;
-}
-return{draw,geometry};
+function geometry(s){const sc=s.scale,face=s.facing,p=s.pose,hip={x:s.x,y:s.y},shoulder=end(hip,-100*sc,p.torso,face),neck=end(shoulder,-22*sc,p.torso,face),head=end(neck,-38*sc,p.head+p.torso,face),la1=end(shoulder,70*sc,p.leftUpperArm-110,face),la2=end(la1,65*sc,p.leftUpperArm+p.leftLowerArm-110,face),ra1=end(shoulder,70*sc,p.rightUpperArm+110,face),ra2=end(ra1,65*sc,p.rightUpperArm+p.rightLowerArm+110,face),ll1=end(hip,82*sc,p.leftUpperLeg-15,face),ll2=end(ll1,78*sc,p.leftUpperLeg+p.leftLowerLeg-8,face),rl1=end(hip,82*sc,p.rightUpperLeg+15,face),rl2=end(rl1,78*sc,p.rightUpperLeg+p.rightLowerLeg+8,face);return{hip,shoulder,neck,head,leftElbow:la1,leftHand:la2,rightElbow:ra1,rightHand:ra2,leftKnee:ll1,leftFoot:ll2,rightKnee:rl1,rightFoot:rl2}}
+function limb(ctx,a,b,w,color){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=color;ctx.lineWidth=w;ctx.lineCap="round";ctx.stroke()}
+function circle(ctx,p,r,fill,stroke="#242424",sw=3){ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2);ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=stroke;ctx.lineWidth=sw;ctx.stroke()}
+function hat(ctx,g,sc,rig,face){ctx.save();ctx.translate(g.head.x,g.head.y-28*sc);ctx.fillStyle=rig.hair||"#34261e";ctx.strokeStyle=rig.line||"#242424";ctx.lineWidth=3*sc;if(rig.hat==="crown"){ctx.beginPath();ctx.moveTo(-25*sc,0);ctx.lineTo(-22*sc,-25*sc);ctx.lineTo(-8*sc,-12*sc);ctx.lineTo(0,-29*sc);ctx.lineTo(10*sc,-12*sc);ctx.lineTo(24*sc,-25*sc);ctx.lineTo(25*sc,0);ctx.closePath();ctx.fillStyle="#e6b83f";ctx.fill();ctx.stroke()}else if(rig.hat==="helmet"){ctx.beginPath();ctx.arc(0,0,29*sc,Math.PI,Math.PI*2);ctx.lineTo(31*sc,2*sc);ctx.lineTo(-31*sc,2*sc);ctx.closePath();ctx.fillStyle="#59654c";ctx.fill();ctx.stroke()}else if(rig.hat==="officer"){ctx.fillStyle="#35455a";ctx.fillRect(-28*sc,-13*sc,56*sc,16*sc);ctx.fillRect(-19*sc,-25*sc,38*sc,15*sc);ctx.strokeRect(-28*sc,-13*sc,56*sc,16*sc)}else if(rig.hat==="tricorn"){ctx.beginPath();ctx.moveTo(-32*sc,0);ctx.lineTo(0,-22*sc);ctx.lineTo(32*sc,0);ctx.lineTo(0,-7*sc);ctx.closePath();ctx.fillStyle="#3a302a";ctx.fill();ctx.stroke()}ctx.restore()}
+function hair(ctx,g,sc,rig){if(rig.hat&&rig.hat!=="none")return;ctx.beginPath();ctx.arc(g.head.x,g.head.y-5*sc,31*sc,Math.PI*1.05,Math.PI*1.95);ctx.strokeStyle=rig.hair||"#34261e";ctx.lineWidth=(rig.hairStyle==="messy"?12:9)*sc;ctx.stroke()}
+function draw(ctx,s,selected=false,rig={}){const g=geometry(s),sc=s.scale,line=rig.line||"#242424",skin=rig.skin||"#f2c7a5",shirt=rig.shirt||"#58667a",pants=rig.pants||"#343a46";
+ limb(ctx,g.hip,g.shoulder,31*sc,shirt);limb(ctx,g.shoulder,g.leftElbow,16*sc,shirt);limb(ctx,g.leftElbow,g.leftHand,13*sc,skin);limb(ctx,g.shoulder,g.rightElbow,16*sc,shirt);limb(ctx,g.rightElbow,g.rightHand,13*sc,skin);limb(ctx,g.hip,g.leftKnee,19*sc,pants);limb(ctx,g.leftKnee,g.leftFoot,16*sc,pants);limb(ctx,g.hip,g.rightKnee,19*sc,pants);limb(ctx,g.rightKnee,g.rightFoot,16*sc,pants);
+ circle(ctx,g.leftHand,8*sc,skin,line,2*sc);circle(ctx,g.rightHand,8*sc,skin,line,2*sc);
+ ctx.fillStyle=line;[g.leftFoot,g.rightFoot].forEach(f=>{ctx.beginPath();ctx.ellipse(f.x+8*sc*s.facing,f.y,16*sc,7*sc,0,0,Math.PI*2);ctx.fill()});
+ circle(ctx,g.head,33*sc*(rig.headScale||1),skin,line,4*sc);hair(ctx,g,sc,rig);hat(ctx,g,sc,rig,s.facing);
+ const eyeX=g.head.x+11*sc*s.facing;circle(ctx,{x:eyeX,y:g.head.y-4*sc},3*sc,"#222","#222",1);ctx.beginPath();ctx.arc(g.head.x+13*sc*s.facing,g.head.y+8*sc,10*sc,0.15*Math.PI,0.7*Math.PI);ctx.strokeStyle=line;ctx.lineWidth=2*sc;ctx.stroke();
+ if(rig.accessory==="tie"){ctx.fillStyle="#9a2d31";ctx.beginPath();ctx.moveTo(g.shoulder.x,g.shoulder.y+6*sc);ctx.lineTo(g.shoulder.x-6*sc,g.shoulder.y+34*sc);ctx.lineTo(g.shoulder.x,g.shoulder.y+46*sc);ctx.lineTo(g.shoulder.x+6*sc,g.shoulder.y+34*sc);ctx.closePath();ctx.fill()}if(rig.accessory==="sash"){ctx.strokeStyle="#d9b447";ctx.lineWidth=8*sc;ctx.beginPath();ctx.moveTo(g.shoulder.x-15*sc,g.shoulder.y);ctx.lineTo(g.hip.x+18*sc,g.hip.y);ctx.stroke()}
+ if(selected){Object.values(g).forEach(pt=>circle(ctx,pt,5,"#ffb020","#fff",1));ctx.strokeStyle="#ffb020";ctx.lineWidth=2;ctx.setLineDash([6,5]);ctx.strokeRect(g.hip.x-58*sc,g.head.y-55*sc,116*sc,(g.hip.y-g.head.y)+205*sc);ctx.setLineDash([])}return g}
+function drawBackground(ctx,bgKey,w=1280,h=720){const bg=MEPModel.BACKGROUNDS[bgKey]||MEPModel.BACKGROUNDS.parchment;ctx.fillStyle=bg.fill;ctx.fillRect(0,0,w,h);ctx.fillStyle=bg.ground;ctx.fillRect(0,570,w,150);if(bg.kind==="map"){ctx.fillStyle="#748f66";const blobs=[[.18,.36,.12,.18],[.35,.3,.09,.12],[.49,.29,.13,.11],[.58,.39,.17,.16],[.72,.32,.12,.2],[.84,.54,.1,.1],[.3,.58,.08,.18]];blobs.forEach(([x,y,rx,ry])=>{ctx.beginPath();ctx.ellipse(w*x,h*y,w*rx,h*ry,0,0,Math.PI*2);ctx.fill()});ctx.fillStyle="#ffffffaa";ctx.font="bold 34px system-ui";ctx.fillText(bg.name,34,52)}}
+return{draw,geometry,drawBackground};
 })();
