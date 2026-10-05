@@ -95,5 +95,13 @@ $("#videoPrevScene").onclick=()=>{const a=sceneAtGlobal(videoGlobalTime);videoGl
 $("#sceneNarration").onchange=e=>{sceneAtGlobal(videoGlobalTime).scene.narration=e.target.value;changed()};$("#sceneCaption").onchange=e=>{sceneAtGlobal(videoGlobalTime).scene.caption=e.target.value;changed();renderVideo()};
 $("#recordVideo").onclick=()=>{if(recorder&&recorder.state==="recording"){recorder.stop();return}if(!videoCanvas.captureStream||!window.MediaRecorder)return alert("This browser does not support canvas recording.");recordChunks=[];const stream=videoCanvas.captureStream(project.fps||30);recorder=new MediaRecorder(stream,{mimeType:MediaRecorder.isTypeSupported("video/webm;codecs=vp9")?"video/webm;codecs=vp9":"video/webm"});recorder.ondataavailable=e=>{if(e.data.size)recordChunks.push(e.data)};recorder.onstop=()=>{const blob=new Blob(recordChunks,{type:"video/webm"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=(project.name||"mep-video")+".webm";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);$("#recordVideo").textContent="Record WebM"};recorder.start();$("#recordVideo").textContent="Stop Recording";videoGlobalTime=0;videoPlaying=true;videoLast=performance.now();requestAnimationFrame(videoTick)};
 
+
+MEPStorage.initCloud().then(r=>{if(!r.ok)$("#accountStatus").textContent="Firebase error";});
+MEPStorage.onUser(u=>{$("#accountStatus").textContent=u?u.email:"Signed out";$("#signOutButton").disabled=!u;});
+$("#accountButton").onclick=()=>$("#accountDialog").showModal();$("#closeAccount").onclick=()=>$("#accountDialog").close();
+$("#signInButton").onclick=async()=>{try{await MEPStorage.signIn($("#authEmail").value.trim(),$("#authPassword").value);$("#authMessage").textContent="Signed in. Cloud sync is ready.";$("#accountDialog").close()}catch(e){$("#authMessage").textContent=e.message}};
+$("#signUpButton").onclick=async()=>{try{await MEPStorage.signUp($("#authEmail").value.trim(),$("#authPassword").value);$("#authMessage").textContent="Account created. Cloud sync is ready.";$("#accountDialog").close()}catch(e){$("#authMessage").textContent=e.message}};
+$("#signOutButton").onclick=async()=>{await MEPStorage.signOut();$("#authMessage").textContent="Signed out."};
+
 syncUI();
 })();
