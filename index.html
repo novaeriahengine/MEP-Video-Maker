@@ -67,7 +67,37 @@
     <div class="timelineHeader"><strong>Timeline</strong><input id="scrubber" type="range" min="0" max="8" value="0" step=".01"></div>
     <div id="timeline"></div>
   </section>
-</div><nav id="mobileDock" class="mobileDock"><button data-mobile-target=".stageArea">Canvas</button><button data-mobile-target=".library">Scene</button><button data-mobile-target=".pose">Animate</button><button data-mobile-target=".timelinePanel">Timeline</button><button id="mobileVideo">Video</button></nav>
+</div>
+<dialog id="characterStudioDialog">
+  <div class="studioShell">
+    <header><div><h2>Character Studio</h2><p>Draw, import artwork, lasso a cutout, and assign pieces to a custom rig.</p></div><button id="closeStudio">Close</button></header>
+    <div class="studioTools">
+      <button data-studio-tool="brush">Brush</button><button data-studio-tool="eraser">Eraser</button><button data-studio-tool="lasso">Lasso Sticker</button>
+      <label>Color <input id="studioColor" type="color" value="#242424"></label>
+      <label>Size <input id="studioSize" type="range" min="2" max="40" value="8"></label>
+      <label class="fileButton">Import Image<input id="studioImport" type="file" accept="image/*"></label>
+      <button id="studioClear">Clear</button><button id="studioExport">Export PNG</button>
+    </div>
+    <div class="studioWork">
+      <canvas id="characterStudioCanvas" width="800" height="600"></canvas>
+      <aside><h3>Cutout Rig Builder</h3><p id="studioStatus">Import or draw artwork, then lasso a body piece.</p>
+        <div class="rigSlots"><button data-rig-slot="head">Assign → Head</button><button data-rig-slot="torso">Assign → Torso</button><button data-rig-slot="leftArm">Assign → Left Arm</button><button data-rig-slot="rightArm">Assign → Right Arm</button><button data-rig-slot="leftLeg">Assign → Left Leg</button><button data-rig-slot="rightLeg">Assign → Right Leg</button></div>
+      </aside>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="aiDialog">
+  <form method="dialog" class="aiPanel">
+    <h2>AI Director</h2><p>Describe a history video, or paste a Director JSON plan.</p>
+    <textarea id="aiPrompt" rows="4" placeholder="Make a short illustrated history video..."></textarea>
+    <div class="aiActions"><button type="button" id="aiGenerate" class="primary">Generate with Backend</button><button type="button" id="aiShowContext">Show Engine Context</button><button>Close</button></div>
+    <label>Director JSON<textarea id="aiJson" rows="10"></textarea></label>
+    <button type="button" id="aiApply" class="primary">Apply JSON to Project</button>
+    <pre id="aiStatus"></pre>
+  </form>
+</dialog>
+<nav id="mobileDock" class="mobileDock"><button data-mobile-target=".stageArea">Canvas</button><button data-mobile-target=".library">Scene</button><button data-mobile-target=".pose">Animate</button><button data-mobile-target=".timelinePanel">Timeline</button><button id="mobileVideo">Video</button></nav>
 <script src="js/firebase-config.js"></script>
 <script src="js/model.js"></script>
 <script src="js/ai-config.js"></script>
