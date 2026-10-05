@@ -1,13 +1,10 @@
-// Paste the Firebase web-app config from your Firebase console here.
-// This file contains public client configuration, not a Firebase Admin/service-account key.
-window.MEP_FIREBASE_CONFIG = null;
-/*
+// Firebase web client configuration. Public by design; access is enforced by Auth + Security Rules.
 window.MEP_FIREBASE_CONFIG = {
-  apiKey: "YOUR_WEB_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT",
-  storageBucket: "YOUR_PROJECT.firebasestorage.app",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDta5CspYbrde9MNft5F_OOIs_zSMdS_24",
+  authDomain: "mep-video-maker.firebaseapp.com",
+  projectId: "mep-video-maker",
+  storageBucket: "mep-video-maker.firebasestorage.app",
+  messagingSenderId: "266398441656",
+  appId: "1:266398441656:web:e3ddd3f8517baba4e3544d",
+  measurementId: "G-B1QP0HGZZR"
 };
-*/
