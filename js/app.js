@@ -1,6 +1,6 @@
 (()=>{
 const $=s=>document.querySelector(s),canvas=$("#stage"),ctx=canvas.getContext("2d");
-let project=MEPModel.migrate(MEPStorage.load()||MEPModel.project()),scene=MEPModel.activeScene(project),selectedId=scene.characters[0]?.id||null,time=0,playing=false,last=0,drag=null;
+const imageCache=new Map();\nlet project=MEPModel.migrate(MEPStorage.load()||MEPModel.project()),scene=MEPModel.activeScene(project),selectedId=scene.characters[0]?.id||null,time=0,playing=false,last=0,drag=null;
 const jointNames={head:"Head",torso:"Torso",leftUpperArm:"L Upper Arm",leftLowerArm:"L Forearm",rightUpperArm:"R Upper Arm",rightLowerArm:"R Forearm",leftUpperLeg:"L Thigh",leftLowerLeg:"L Shin",rightUpperLeg:"R Thigh",rightLowerLeg:"R Shin"};
 const selected=()=>scene.characters.find(c=>c.id===selectedId);
 const stateFor=c=>(playing||time>0)?MEPModel.poseAt(c,time):{x:c.x,y:c.y,scale:c.scale,facing:c.facing,pose:c.pose};
@@ -22,18 +22,29 @@ function syncUI(){
  $("#sceneSelect").innerHTML=project.scenes.map(s=>'<option value="'+s.id+'">'+esc(s.name)+'</option>').join("");$("#sceneSelect").value=scene.id;
  $("#era").innerHTML=MEPModel.HISTORY_ERAS.map(x=>'<option>'+x+'</option>').join("");$("#era").value=project.era||"Custom";
  $("#backgroundPreset").innerHTML=Object.entries(MEPModel.BACKGROUNDS).map(([k,v])=>'<option value="'+k+'">'+v.name+'</option>').join("");$("#backgroundPreset").value=scene.background.preset;
- $("#sceneTags").value=(scene.tags||[]).join(", ");\n $("#characterPreset").innerHTML=Object.entries(MEPModel.CHARACTER_PRESETS).map(([k,v])=>"<option value=\""+k+"\">"+v.name+"</option>").join("");
+ $("#sceneTags").value=(scene.tags||[]).join(", ");\n const eraKeys=MEPModel.ERA_CHARACTER_PRESETS[project.era]||Object.keys(MEPModel.CHARACTER_PRESETS);$("#characterPreset").innerHTML=eraKeys.filter(k=>MEPModel.CHARACTER_PRESETS[k]).map(k=>"<option value=\""+k+"\">"+MEPModel.CHARACTER_PRESETS[k].name+"</option>").join("");\n $("#characterState").innerHTML=Object.keys(MEPModel.STATES).map(k=>"<option value=\""+k+"\">"+k+"</option>").join("");$("#characterProp").innerHTML=Object.entries(MEPModel.PROPS).map(([k,v])=>"<option value=\""+k+"\">"+v.name+"</option>").join("");
  $("#posePreset").innerHTML=Object.keys(MEPModel.POSES).map(x=>'<option value="'+x+'">'+x.replace(/([A-Z])/g," $1")+'</option>').join("");
  $("#characterList").innerHTML=scene.characters.map(x=>'<div class="characterItem '+(x.id===selectedId?'active':'')+'" data-id="'+x.id+'">'+esc(x.name)+'<small>'+esc((x.tags||[]).join(" · "))+'</small></div>').join("");
  document.querySelectorAll(".characterItem").forEach(el=>el.onclick=()=>{selectedId=el.dataset.id;time=0;syncUI()});
  ["charName","charX","charY","charScale","charFacing","skinColor","hairColor","shirtColor","charTags"].forEach(id=>$("#"+id).disabled=!c);$("#deleteCharacter").disabled=!c;
- if(c){c.rig=c.rig||MEPModel.character().rig;$("#charName").value=c.name;$("#charX").value=Math.round(c.x);$("#charY").value=Math.round(c.y);$("#charScale").value=c.scale;$("#charFacing").value=c.facing;$("#skinColor").value=c.rig.skin;$("#hairColor").value=c.rig.hair;$("#shirtColor").value=c.rig.shirt;$("#charTags").value=(c.tags||[]).join(", ")}
+ if(c){c.rig=c.rig||MEPModel.character().rig;$("#charName").value=c.name;$("#charX").value=Math.round(c.x);$("#charY").value=Math.round(c.y);$("#charScale").value=c.scale;$("#charFacing").value=c.facing;$("#skinColor").value=c.rig.skin;$("#hairColor").value=c.rig.hair;$("#shirtColor").value=c.rig.shirt;$("#charTags").value=(c.tags||[]).join(", ");$("#characterState").value=c.rig.state||"standing";$("#characterProp").value=c.rig.prop||"none";$("#expression").value=c.rig.expression||"neutral"}
  $("#jointControls").innerHTML=c?Object.keys(MEPModel.DEFAULT_POSE).map(k=>'<label class="jointRow">'+jointNames[k]+'<input type="range" min="-180" max="180" value="'+c.pose[k]+'" data-joint="'+k+'"><output>'+Math.round(c.pose[k])+'°</output></label>').join(""):"<p>No character selected.</p>";
  document.querySelectorAll("[data-joint]").forEach(el=>el.oninput=()=>{c.pose[el.dataset.joint]=+el.value;el.nextElementSibling.value=Math.round(+el.value)+"°";time=0;changed()});
  $("#charCount").textContent=scene.characters.length;$("#keyCount").textContent=scene.characters.reduce((n,x)=>n+x.keyframes.length,0);drawTimeline();render();
 }
 function drawTimeline(){$("#timeline").innerHTML=scene.characters.map(c=>'<div class="track"><div class="trackName">'+esc(c.name)+'</div><div class="trackLane">'+c.keyframes.map(k=>'<span class="key" data-char="'+c.id+'" data-time="'+k.time+'" style="left:'+(k.time/scene.duration*100)+'%" title="'+k.time.toFixed(2)+'s"></span>').join("")+'</div></div>').join("");document.querySelectorAll(".key").forEach(k=>k.onclick=()=>{selectedId=k.dataset.char;time=+k.dataset.time;syncUI()})}
 function addKey(at=time,pose=null){const c=selected();if(!c)return;if(pose)c.pose={...pose};const q=Math.max(0,Math.min(scene.duration,Math.round(at*100)/100)),state=MEPModel.capture(c),old=c.keyframes.find(k=>Math.abs(k.time-q)<.011);old?old.state=state:c.keyframes.push({id:MEPModel.id(),time:q,state});c.keyframes.sort((a,b)=>a.time-b.time);changed()}
+function cycleSelect(id,dir,fire=true){const el=$(id);if(!el||!el.options.length)return;el.selectedIndex=(el.selectedIndex+dir+el.options.length)%el.options.length;if(fire)el.dispatchEvent(new Event("change"))}
+$("#prevBackground").onclick=()=>cycleSelect("#backgroundPreset",-1);$("#nextBackground").onclick=()=>cycleSelect("#backgroundPreset",1);
+$("#prevCharacterPreset").onclick=()=>cycleSelect("#characterPreset",-1,false);$("#nextCharacterPreset").onclick=()=>cycleSelect("#characterPreset",1,false);
+$("#prevState").onclick=()=>cycleSelect("#characterState",-1,false);$("#nextState").onclick=()=>cycleSelect("#characterState",1,false);
+$("#prevProp").onclick=()=>cycleSelect("#characterProp",-1,false);$("#nextProp").onclick=()=>cycleSelect("#characterProp",1,false);
+$("#applyState").onclick=()=>{const ch=selected();if(!ch)return;const state=$("#characterState").value;ch.rig.state=state;ch.rig.prop=$("#characterProp").value;ch.rig.expression=$("#expression").value;MEPModel.applyPose(ch,MEPModel.STATES[state]||"idle");changed();syncUI()};
+$("#expression").onchange=e=>{const ch=selected();if(ch){ch.rig.expression=e.target.value;changed()}};
+$("#characterProp").onchange=e=>{const ch=selected();if(ch){ch.rig.prop=e.target.value;changed()}};
+$("#backgroundUpload").onchange=async e=>{const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{scene.background.imageData=reader.result;changed();render()};reader.readAsDataURL(file);e.target.value=""};
+$("#clearBackgroundImage").onclick=()=>{delete scene.background.imageData;changed()};
+
 $("#sceneSelect").onchange=e=>{project.activeSceneId=e.target.value;scene=MEPModel.activeScene(project);selectedId=scene.characters[0]?.id||null;time=0;changed();syncUI()};
 $("#addScene").onclick=()=>{const s=MEPModel.scene("Scene "+(project.scenes.length+1));project.scenes.push(s);project.activeSceneId=s.id;scene=s;selectedId=s.characters[0].id;time=0;changed();syncUI()};
 $("#era").onchange=e=>{project.era=e.target.value;changed()};$("#backgroundPreset").onchange=e=>{scene.background.preset=e.target.value;scene.background.tags=[...MEPModel.BACKGROUNDS[e.target.value].tags];changed()};$("#sceneTags").onchange=e=>{scene.tags=e.target.value.split(",").map(x=>x.trim()).filter(Boolean);changed()};
