@@ -1,0 +1,1262 @@
+{
+  "schema": "mep-video-project",
+  "version": 3,
+  "id": "demo-haiti-vertieres-30s",
+  "name": "Haiti 1803 — Capois-la-Mort at Vertières",
+  "category": "History",
+  "era": "Early Modern",
+  "tags": [
+    "haiti",
+    "haitian-revolution",
+    "vertieres",
+    "capois-la-mort",
+    "1803"
+  ],
+  "sync": {
+    "provider": "firestore",
+    "status": "local",
+    "revision": 0,
+    "lastSyncedAt": null
+  },
+  "assets": [],
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "activeSceneId": "haiti-scene-1",
+  "createdAt": "2026-10-05T00:00:00.000Z",
+  "updatedAt": "2026-10-05T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "haiti-scene-1",
+      "name": "The Final Campaign",
+      "duration": 7.5,
+      "background": {
+        "preset": "parchment",
+        "tags": [
+          "haiti",
+          "map",
+          "1803"
+        ],
+        "customFill": null
+      },
+      "tags": [
+        "haiti",
+        "context"
+      ],
+      "caption": "Saint-Domingue, November 1803",
+      "narration": "By November 1803, Haiti's revolution had reached a decisive final campaign. Jean-Jacques Dessalines led the revolutionary army against French forces commanded by General Rochambeau.",
+      "characters": [
+        {
+          "id": "dessalines-1",
+          "type": "character",
+          "name": "Jean-Jacques Dessalines",
+          "tags": [
+            "character",
+            "dessalines",
+            "leader"
+          ],
+          "x": 490,
+          "y": 430,
+          "scale": 1,
+          "facing": 1,
+          "rig": {
+            "type": "mep-humanoid-v3",
+            "body": "adult",
+            "bodyStyle": "humanCartoon",
+            "skin": "#8f5a3b",
+            "line": "#221a18",
+            "shirt": "#303c71",
+            "hair": "#16110e",
+            "pants": "#e5d8ba",
+            "hairStyle": "short",
+            "hat": "officer",
+            "accessory": "sash",
+            "prop": "sword",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Early Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -18,
+            "leftLowerArm": -10,
+            "rightUpperArm": 82,
+            "rightLowerArm": 5,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "d1",
+              "time": 0,
+              "state": {
+                "x": 430,
+                "y": 430,
+                "scale": 1,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                }
+              }
+            },
+            {
+              "id": "d2",
+              "time": 3,
+              "state": {
+                "x": 500,
+                "y": 430,
+                "scale": 1,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -18,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 82,
+                  "rightLowerArm": 5,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                }
+              }
+            },
+            {
+              "id": "d3",
+              "time": 7.5,
+              "state": {
+                "x": 540,
+                "y": 430,
+                "scale": 1,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -92,
+                  "leftLowerArm": -5,
+                  "rightUpperArm": 92,
+                  "rightLowerArm": 5,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "capois-1",
+          "type": "character",
+          "name": "Capois-la-Mort",
+          "tags": [
+            "character",
+            "capois",
+            "haitian-general"
+          ],
+          "x": 760,
+          "y": 435,
+          "scale": 1,
+          "facing": 1,
+          "rig": {
+            "type": "mep-humanoid-v3",
+            "body": "adult",
+            "bodyStyle": "heroic",
+            "skin": "#8f5a3b",
+            "line": "#221a18",
+            "shirt": "#9b2f32",
+            "hair": "#1b1411",
+            "pants": "#ece8d9",
+            "hairStyle": "short",
+            "hat": "none",
+            "accessory": "sash",
+            "prop": "sword",
+            "expression": "angry",
+            "state": "standing",
+            "era": "Early Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": -5,
+            "leftUpperArm": -48,
+            "leftLowerArm": -18,
+            "rightUpperArm": 35,
+            "rightLowerArm": 12,
+            "leftUpperLeg": 28,
+            "leftLowerLeg": 12,
+            "rightUpperLeg": -24,
+            "rightLowerLeg": 20
+          },
+          "keyframes": [
+            {
+              "id": "c1",
+              "time": 0,
+              "state": {
+                "x": 800,
+                "y": 435,
+                "scale": 1,
+                "facing": -1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                }
+              }
+            },
+            {
+              "id": "c2",
+              "time": 3.5,
+              "state": {
+                "x": 740,
+                "y": 435,
+                "scale": 1,
+                "facing": -1,
+                "pose": {
+                  "head": 0,
+                  "torso": -5,
+                  "leftUpperArm": -48,
+                  "leftLowerArm": -18,
+                  "rightUpperArm": 35,
+                  "rightLowerArm": 12,
+                  "leftUpperLeg": 28,
+                  "leftLowerLeg": 12,
+                  "rightUpperLeg": -24,
+                  "rightLowerLeg": 20
+                }
+              }
+            },
+            {
+              "id": "c3",
+              "time": 7.5,
+              "state": {
+                "x": 680,
+                "y": 435,
+                "scale": 1,
+                "facing": -1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -55,
+                  "leftLowerArm": 35,
+                  "rightUpperArm": 105,
+                  "rightLowerArm": -40,
+                  "leftUpperLeg": -18,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 18,
+                  "rightLowerLeg": 5
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "bubbles": [
+        {
+          "id": "b1",
+          "type": "bubble",
+          "text": "The final push.",
+          "style": "history",
+          "x": 420,
+          "y": 95,
+          "width": 330,
+          "height": 100,
+          "fontSize": 30,
+          "fill": "#f3e4bd",
+          "textColor": "#302419",
+          "tailX": 520,
+          "tailY": 235
+        }
+      ]
+    },
+    {
+      "id": "haiti-scene-2",
+      "name": "Battle of Vertières",
+      "duration": 7.5,
+      "background": {
+        "preset": "battlefield",
+        "tags": [
+          "vertieres",
+          "battle"
+        ],
+        "customFill": null
+      },
+      "tags": [
+        "battle",
+        "vertieres"
+      ],
+      "caption": "Battle of Vertières — November 18, 1803",
+      "narration": "On November 18, Haitian forces attacked the fortified French position at Vertières, near Cap-Français. Capois-la-Mort led repeated assaults under intense fire.",
+      "characters": [
+        {
+          "id": "capois-2",
+          "type": "character",
+          "name": "Capois-la-Mort",
+          "tags": [
+            "character",
+            "capois"
+          ],
+          "x": 330,
+          "y": 445,
+          "scale": 1,
+          "facing": 1,
+          "rig": {
+            "type": "mep-humanoid-v3",
+            "body": "adult",
+            "bodyStyle": "heroic",
+            "skin": "#8f5a3b",
+            "line": "#221a18",
+            "shirt": "#9b2f32",
+            "hair": "#1b1411",
+            "pants": "#ece8d9",
+            "hairStyle": "short",
+            "hat": "none",
+            "accessory": "sash",
+            "prop": "sword",
+            "expression": "angry",
+            "state": "standing",
+            "era": "Early Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -55,
+            "leftLowerArm": 35,
+            "rightUpperArm": 105,
+            "rightLowerArm": -40,
+            "leftUpperLeg": -18,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 18,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "c21",
+              "time": 0,
+              "state": {
+                "x": 250,
+                "y": 445,
+                "scale": 1,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": -5,
+                  "leftUpperArm": -48,
+                  "leftLowerArm": -18,
+                  "rightUpperArm": 35,
+                  "rightLowerArm": 12,
+                  "leftUpperLeg": 28,
+                  "leftLowerLeg": 12,
+                  "rightUpperLeg": -24,
+                  "rightLowerLeg": 20
+                }
+              }
+            },
+            {
+              "id": "c22",
+              "time": 2.5,
+              "state": {
+                "x": 420,
+                "y": 445,
+                "scale": 1,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -55,
+                  "leftLowerArm": 35,
+                  "rightUpperArm": 105,
+                  "rightLowerArm": -40,
+                  "leftUpperLeg": -18,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 18,
+                  "rightLowerLeg": 5
+                }
+              }
+            },
+            {
+              "id": "c23",
+              "time": 5,
+              "state": {
+                "x": 575,
+                "y": 445,
+                "scale": 1,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -55,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 55,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": 24,
+                  "leftLowerLeg": 20,
+                  "rightUpperLeg": -24,
+                  "rightLowerLeg": -10
+                }
+              }
+            },
+            {
+              "id": "c24",
+              "time": 7.5,
+              "state": {
+                "x": 690,
+                "y": 445,
+                "scale": 1,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -55,
+                  "leftLowerArm": 35,
+                  "rightUpperArm": 105,
+                  "rightLowerArm": -40,
+                  "leftUpperLeg": -18,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 18,
+                  "rightLowerLeg": 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "fr1",
+          "type": "character",
+          "name": "French Soldier",
+          "tags": [
+            "character",
+            "french",
+            "soldier"
+          ],
+          "x": 900,
+          "y": 430,
+          "scale": 1,
+          "facing": 1,
+          "rig": {
+            "type": "mep-humanoid-v3",
+            "body": "adult",
+            "bodyStyle": "humanCartoon",
+            "skin": "#e4b793",
+            "line": "#221a18",
+            "shirt": "#244d7a",
+            "hair": "#5b4030",
+            "pants": "#e7e5da",
+            "hairStyle": "short",
+            "hat": "none",
+            "accessory": "belt",
+            "prop": "musket",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Early Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -55,
+            "leftLowerArm": 35,
+            "rightUpperArm": 105,
+            "rightLowerArm": -40,
+            "leftUpperLeg": -18,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 18,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "f11",
+              "time": 0,
+              "state": {
+                "x": 970,
+                "y": 430,
+                "scale": 1,
+                "facing": -1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                }
+              }
+            },
+            {
+              "id": "f12",
+              "time": 3,
+              "state": {
+                "x": 900,
+                "y": 430,
+                "scale": 1,
+                "facing": -1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -55,
+                  "leftLowerArm": 35,
+                  "rightUpperArm": 105,
+                  "rightLowerArm": -40,
+                  "leftUpperLeg": -18,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 18,
+                  "rightLowerLeg": 5
+                }
+              }
+            },
+            {
+              "id": "f13",
+              "time": 7.5,
+              "state": {
+                "x": 850,
+                "y": 430,
+                "scale": 1,
+                "facing": -1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -55,
+                  "leftLowerArm": 35,
+                  "rightUpperArm": 105,
+                  "rightLowerArm": -40,
+                  "leftUpperLeg": -18,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 18,
+                  "rightLowerLeg": 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "fr2",
+          "type": "character",
+          "name": "French Soldier",
+          "tags": [
+            "character",
+            "french",
+            "soldier"
+          ],
+          "x": 1090,
+          "y": 445,
+          "scale": 1,
+          "facing": 1,
+          "rig": {
+            "type": "mep-humanoid-v3",
+            "body": "adult",
+            "bodyStyle": "humanCartoon",
+            "skin": "#e4b793",
+            "line": "#221a18",
+            "shirt": "#244d7a",
+            "hair": "#5b4030",
+            "pants": "#e7e5da",
+            "hairStyle": "short",
+            "hat": "none",
+            "accessory": "belt",
+            "prop": "musket",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Early Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -55,
+            "leftLowerArm": 35,
+            "rightUpperArm": 105,
+            "rightLowerArm": -40,
+            "leftUpperLeg": -18,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 18,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "f21",
+              "time": 0,
+              "state": {
+                "x": 1120,
+                "y": 445,
+                "scale": 1,
+                "facing": -1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                }
+              }
+            },
+            {
+              "id": "f22",
+              "time": 4,
+              "state": {
+                "x": 1060,
+                "y": 445,
+                "scale": 1,
+                "facing": -1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -55,
+                  "leftLowerArm": 35,
+                  "rightUpperArm": 105,
+                  "rightLowerArm": -40,
+                  "leftUpperLeg": -18,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 18,
+                  "rightLowerLeg": 5
+                }
+              }
+            },
+            {
+              "id": "f23",
+              "time": 7.5,
+              "state": {
+                "x": 1010,
+                "y": 445,
+                "scale": 1,
+                "facing": -1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -55,
+                  "leftLowerArm": 35,
+                  "rightUpperArm": 105,
+                  "rightLowerArm": -40,
+                  "leftUpperLeg": -18,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 18,
+                  "rightLowerLeg": 5
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "bubbles": [
+        {
+          "id": "b2",
+          "type": "bubble",
+          "text": "Advance!",
+          "style": "comic",
+          "x": 250,
+          "y": 90,
+          "width": 220,
+          "height": 90,
+          "fontSize": 34,
+          "fill": "#fff8cf",
+          "textColor": "#111111",
+          "tailX": 380,
+          "tailY": 250
+        }
+      ]
+    },
+    {
+      "id": "haiti-scene-3",
+      "name": "Capois Keeps Advancing",
+      "duration": 7.5,
+      "background": {
+        "preset": "battlefield",
+        "tags": [
+          "capois",
+          "battle"
+        ],
+        "customFill": null
+      },
+      "tags": [
+        "capois",
+        "legend"
+      ],
+      "caption": "Capois became a symbol of determination",
+      "narration": "A famous account says Capois kept advancing after his horse was struck down. The story helped make him a lasting symbol of courage in the Haitian Revolution.",
+      "characters": [
+        {
+          "id": "capois-3",
+          "type": "character",
+          "name": "Capois-la-Mort",
+          "tags": [
+            "character",
+            "capois"
+          ],
+          "x": 430,
+          "y": 455,
+          "scale": 1,
+          "facing": 1,
+          "rig": {
+            "type": "mep-humanoid-v3",
+            "body": "adult",
+            "bodyStyle": "heroic",
+            "skin": "#8f5a3b",
+            "line": "#221a18",
+            "shirt": "#9b2f32",
+            "hair": "#1b1411",
+            "pants": "#ece8d9",
+            "hairStyle": "short",
+            "hat": "none",
+            "accessory": "sash",
+            "prop": "sword",
+            "expression": "angry",
+            "state": "standing",
+            "era": "Early Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -55,
+            "leftLowerArm": -10,
+            "rightUpperArm": 55,
+            "rightLowerArm": 10,
+            "leftUpperLeg": 24,
+            "leftLowerLeg": 20,
+            "rightUpperLeg": -24,
+            "rightLowerLeg": -10
+          },
+          "keyframes": [
+            {
+              "id": "c31",
+              "time": 0,
+              "state": {
+                "x": 260,
+                "y": 455,
+                "scale": 1,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -55,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 55,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": 24,
+                  "leftLowerLeg": 20,
+                  "rightUpperLeg": -24,
+                  "rightLowerLeg": -10
+                }
+              }
+            },
+            {
+              "id": "c32",
+              "time": 2,
+              "state": {
+                "x": 430,
+                "y": 455,
+                "scale": 1,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": 55,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": -55,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -24,
+                  "leftLowerLeg": -10,
+                  "rightUpperLeg": 24,
+                  "rightLowerLeg": 20
+                }
+              }
+            },
+            {
+              "id": "c33",
+              "time": 4,
+              "state": {
+                "x": 590,
+                "y": 455,
+                "scale": 1,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -55,
+                  "leftLowerArm": 35,
+                  "rightUpperArm": 105,
+                  "rightLowerArm": -40,
+                  "leftUpperLeg": -18,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 18,
+                  "rightLowerLeg": 5
+                }
+              }
+            },
+            {
+              "id": "c34",
+              "time": 6,
+              "state": {
+                "x": 760,
+                "y": 455,
+                "scale": 1,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -55,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 55,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": 24,
+                  "leftLowerLeg": 20,
+                  "rightUpperLeg": -24,
+                  "rightLowerLeg": -10
+                }
+              }
+            },
+            {
+              "id": "c35",
+              "time": 7.5,
+              "state": {
+                "x": 880,
+                "y": 455,
+                "scale": 1,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -92,
+                  "leftLowerArm": -5,
+                  "rightUpperArm": 92,
+                  "rightLowerArm": 5,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "fr3",
+          "type": "character",
+          "name": "French Soldier",
+          "tags": [
+            "character",
+            "french",
+            "soldier"
+          ],
+          "x": 1030,
+          "y": 445,
+          "scale": 1,
+          "facing": 1,
+          "rig": {
+            "type": "mep-humanoid-v3",
+            "body": "adult",
+            "bodyStyle": "humanCartoon",
+            "skin": "#e4b793",
+            "line": "#221a18",
+            "shirt": "#244d7a",
+            "hair": "#5b4030",
+            "pants": "#e7e5da",
+            "hairStyle": "short",
+            "hat": "none",
+            "accessory": "belt",
+            "prop": "musket",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Early Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -55,
+            "leftLowerArm": 35,
+            "rightUpperArm": 105,
+            "rightLowerArm": -40,
+            "leftUpperLeg": -18,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 18,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "f31",
+              "time": 0,
+              "state": {
+                "x": 1080,
+                "y": 445,
+                "scale": 1,
+                "facing": -1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -55,
+                  "leftLowerArm": 35,
+                  "rightUpperArm": 105,
+                  "rightLowerArm": -40,
+                  "leftUpperLeg": -18,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 18,
+                  "rightLowerLeg": 5
+                }
+              }
+            },
+            {
+              "id": "f32",
+              "time": 4,
+              "state": {
+                "x": 1030,
+                "y": 445,
+                "scale": 1,
+                "facing": -1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -55,
+                  "leftLowerArm": 35,
+                  "rightUpperArm": 105,
+                  "rightLowerArm": -40,
+                  "leftUpperLeg": -18,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 18,
+                  "rightLowerLeg": 5
+                }
+              }
+            },
+            {
+              "id": "f33",
+              "time": 7.5,
+              "state": {
+                "x": 970,
+                "y": 445,
+                "scale": 1,
+                "facing": -1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "bubbles": [
+        {
+          "id": "b3",
+          "type": "bubble",
+          "text": "Keep moving!",
+          "style": "speech",
+          "x": 390,
+          "y": 80,
+          "width": 300,
+          "height": 100,
+          "fontSize": 31,
+          "fill": "#ffffff",
+          "textColor": "#171717",
+          "tailX": 600,
+          "tailY": 245
+        }
+      ]
+    },
+    {
+      "id": "haiti-scene-4",
+      "name": "Victory and Independence",
+      "duration": 7.5,
+      "background": {
+        "preset": "parchment",
+        "tags": [
+          "haiti",
+          "victory"
+        ],
+        "customFill": null
+      },
+      "tags": [
+        "victory",
+        "independence"
+      ],
+      "caption": "Victory at Vertières helped clear the way for independence",
+      "narration": "The French position collapsed, and Rochambeau soon agreed to evacuate. Weeks later, on January 1, 1804, Haiti declared independence and became the first independent Black republic.",
+      "characters": [
+        {
+          "id": "capois-4",
+          "type": "character",
+          "name": "Capois-la-Mort",
+          "tags": [
+            "character",
+            "capois"
+          ],
+          "x": 440,
+          "y": 440,
+          "scale": 1,
+          "facing": 1,
+          "rig": {
+            "type": "mep-humanoid-v3",
+            "body": "adult",
+            "bodyStyle": "heroic",
+            "skin": "#8f5a3b",
+            "line": "#221a18",
+            "shirt": "#9b2f32",
+            "hair": "#1b1411",
+            "pants": "#ece8d9",
+            "hairStyle": "short",
+            "hat": "none",
+            "accessory": "sash",
+            "prop": "sword",
+            "expression": "angry",
+            "state": "standing",
+            "era": "Early Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -145,
+            "leftLowerArm": 0,
+            "rightUpperArm": 145,
+            "rightLowerArm": 0,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "c41",
+              "time": 0,
+              "state": {
+                "x": 440,
+                "y": 440,
+                "scale": 1,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                }
+              }
+            },
+            {
+              "id": "c42",
+              "time": 3,
+              "state": {
+                "x": 500,
+                "y": 440,
+                "scale": 1,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -92,
+                  "leftLowerArm": -5,
+                  "rightUpperArm": 92,
+                  "rightLowerArm": 5,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                }
+              }
+            },
+            {
+              "id": "c43",
+              "time": 7.5,
+              "state": {
+                "x": 540,
+                "y": 440,
+                "scale": 1,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -145,
+                  "leftLowerArm": 0,
+                  "rightUpperArm": 145,
+                  "rightLowerArm": 0,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "dessalines-4",
+          "type": "character",
+          "name": "Jean-Jacques Dessalines",
+          "tags": [
+            "character",
+            "dessalines"
+          ],
+          "x": 790,
+          "y": 440,
+          "scale": 1,
+          "facing": 1,
+          "rig": {
+            "type": "mep-humanoid-v3",
+            "body": "adult",
+            "bodyStyle": "humanCartoon",
+            "skin": "#8f5a3b",
+            "line": "#221a18",
+            "shirt": "#303c71",
+            "hair": "#16110e",
+            "pants": "#e5d8ba",
+            "hairStyle": "short",
+            "hat": "officer",
+            "accessory": "sash",
+            "prop": "sword",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Early Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -92,
+            "leftLowerArm": -5,
+            "rightUpperArm": 92,
+            "rightLowerArm": 5,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "d41",
+              "time": 0,
+              "state": {
+                "x": 790,
+                "y": 440,
+                "scale": 1,
+                "facing": -1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                }
+              }
+            },
+            {
+              "id": "d42",
+              "time": 3.5,
+              "state": {
+                "x": 760,
+                "y": 440,
+                "scale": 1,
+                "facing": -1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -92,
+                  "leftLowerArm": -5,
+                  "rightUpperArm": 92,
+                  "rightLowerArm": 5,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                }
+              }
+            },
+            {
+              "id": "d43",
+              "time": 7.5,
+              "state": {
+                "x": 720,
+                "y": 440,
+                "scale": 1,
+                "facing": -1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -145,
+                  "leftLowerArm": 0,
+                  "rightUpperArm": 145,
+                  "rightLowerArm": 0,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "bubbles": [
+        {
+          "id": "b4",
+          "type": "bubble",
+          "text": "1804: Haiti is independent.",
+          "style": "history",
+          "x": 390,
+          "y": 85,
+          "width": 500,
+          "height": 105,
+          "fontSize": 30,
+          "fill": "#f3e4bd",
+          "textColor": "#302419",
+          "tailX": 650,
+          "tailY": 245
+        }
+      ]
+    }
+  ]
+}
