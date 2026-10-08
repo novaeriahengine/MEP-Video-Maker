@@ -1,7 +1,11 @@
 (()=>{
 const $=s=>document.querySelector(s),canvas=$("#stage"),ctx=canvas.getContext("2d");
-const imageCache=new Map();
-let project=MEPModel.migrate(MEPStorage.load()||MEPModel.project()),scene=MEPModel.activeScene(project),selectedId=scene.characters[0]?.id||null,selectedBubbleId=null,time=0,playing=false,last=0,drag=null,editPreview=null;
+ctx.fillStyle="#d9e7d0";ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle="#25322a";ctx.font="700 42px system-ui";ctx.fillText("MEP Video Maker",52,82);ctx.font="24px system-ui";ctx.fillText("Loading starter studio…",52,125);
+const imageCache=new Map(),hadLocal=MEPStorage.hasLocal?.()||false;
+let cloudReady=false,cloudTimer=null,project;
+try{project=MEPModel.migrate(MEPStorage.load()||MEPModel.starterProject())}catch(e){console.error(e);project=MEPModel.starterProject()}
+let scene=MEPModel.activeScene(project);if(!scene){project=MEPModel.starterProject();scene=MEPModel.activeScene(project)}
+let selectedId=scene.characters?.[0]?.id||null,selectedBubbleId=null,time=0,playing=false,last=0,drag=null,editPreview=null;
 const jointNames={head:"Head",torso:"Torso",leftUpperArm:"L Upper Arm",leftLowerArm:"L Forearm",rightUpperArm:"R Upper Arm",rightLowerArm:"R Forearm",leftUpperLeg:"L Thigh",leftLowerLeg:"L Shin",rightUpperLeg:"R Thigh",rightLowerLeg:"R Shin"};
 const selected=()=>scene.characters.find(c=>c.id===selectedId);
 const stateFor=c=>(!playing&&editPreview&&editPreview.id===c.id&&Math.abs(editPreview.time-time)<.001)?{x:c.x,y:c.y,scale:c.scale,facing:c.facing,pose:c.pose}:(playing||time>0)?MEPModel.poseAt(c,time):{x:c.x,y:c.y,scale:c.scale,facing:c.facing,pose:c.pose};
@@ -17,7 +21,7 @@ function render(){
  visibleBubbles(scene,time).forEach(b=>MEPRenderer.drawBubble(ctx,b));
  $("#timeLabel").textContent=time.toFixed(2)+" / "+scene.duration.toFixed(2)+"s";$("#scrubber").value=time;
 }
-function changed(){project.updatedAt=new Date().toISOString();MEPStorage.save(project);$("#saveStatus").textContent="Local ✓";$("#keyCount").textContent=scene.characters.reduce((n,x)=>n+x.keyframes.length,0);drawTimeline();render()}
+function changed(){project.updatedAt=new Date().toISOString();MEPStorage.save(project);$("#saveStatus").textContent=cloudReady?"Saving…":"Local ✓";$("#keyCount").textContent=(scene.characters||[]).reduce((n,x)=>n+(x.keyframes||[]).length,0);drawTimeline();render();if(cloudReady){clearTimeout(cloudTimer);cloudTimer=setTimeout(async()=>{try{await MEPStorage.saveCloud(project);$("#saveStatus").textContent="Firestore ✓"}catch(e){console.warn(e);$("#saveStatus").textContent="Local ✓"}},1200)}}
 function syncUI(){
  scene=MEPModel.activeScene(project);if(!scene)return;
  if(!scene.characters.some(c=>c.id===selectedId))selectedId=scene.characters[0]?.id||null;
@@ -31,6 +35,7 @@ function syncUI(){
  $("#animationClip").innerHTML=Object.entries(MEPModel.ANIMATION_CLIPS).map(([k,v])=>'<option value="'+k+'">'+v.name+'</option>').join("");$("#keyframeEasing").innerHTML=Object.entries(MEPModel.EASINGS).map(([k,v])=>'<option value="'+k+'">'+v+'</option>').join("");
  $("#sceneBoard").innerHTML=project.scenes.map((s,i)=>'<button class="sceneCard '+(s.id===scene.id?'active':'')+'" data-scene-card="'+s.id+'"><strong>'+(i+1)+'. '+esc(s.name)+'</strong><small>'+s.duration.toFixed(1)+'s · '+s.characters.length+' chars · '+(s.transition?.type||'cut')+'</small></button>').join("");document.querySelectorAll("[data-scene-card]").forEach(el=>el.onclick=()=>{project.activeSceneId=el.dataset.sceneCard;scene=MEPModel.activeScene(project);selectedId=scene.characters[0]?.id||null;selectedBubbleId=null;time=0;editPreview=null;syncUI()});
  const eraKeys=MEPModel.ERA_CHARACTER_PRESETS[project.era]||Object.keys(MEPModel.CHARACTER_PRESETS);$("#characterPreset").innerHTML=eraKeys.filter(k=>MEPModel.CHARACTER_PRESETS[k]).map(k=>"<option value=\""+k+"\">"+MEPModel.CHARACTER_PRESETS[k].name+"</option>").join("");
+ const quickKeys=["hunter","ancientSoldier","knight","haitianRevolutionary","wwSoldier","presenter"];$("#quickPresetGrid").innerHTML=quickKeys.filter(k=>MEPModel.CHARACTER_PRESETS[k]).map(k=>'<button data-quick-preset="'+k+'">'+esc(MEPModel.CHARACTER_PRESETS[k].name)+'</button>').join("");document.querySelectorAll("[data-quick-preset]").forEach(btn=>btn.onclick=()=>{const type=btn.dataset.quickPreset,p=MEPModel.CHARACTER_PRESETS[type],ch=MEPModel.character(p.name,430+(scene.characters?.length||0)*110,430,type);scene.characters=scene.characters||[];scene.characters.push(ch);selectedId=ch.id;time=0;editPreview=null;changed();syncUI()});
  $("#bodyStyle").innerHTML=Object.entries(MEPModel.BODY_STYLES).map(([k,v])=>"<option value=\""+k+"\">"+v.name+"</option>").join("");
  $("#characterState").innerHTML=Object.keys(MEPModel.STATES).map(k=>"<option value=\""+k+"\">"+k+"</option>").join("");$("#characterProp").innerHTML=Object.entries(MEPModel.PROPS).map(([k,v])=>"<option value=\""+k+"\">"+v.name+"</option>").join("");
  $("#bubbleStyle").innerHTML=Object.entries(MEPModel.BUBBLE_STYLES).map(([k,v])=>`<option value="${k}">${v.name}</option>`).join("");
@@ -84,7 +89,7 @@ $("#addScene").onclick=()=>{const s=MEPModel.scene("Scene "+(project.scenes.leng
 $("#era").onchange=e=>{project.era=e.target.value;changed()};$("#backgroundPreset").onchange=e=>{scene.background.preset=e.target.value;scene.background.tags=[...MEPModel.BACKGROUNDS[e.target.value].tags];changed()};$("#sceneTags").onchange=e=>{scene.tags=e.target.value.split(",").map(x=>x.trim()).filter(Boolean);changed()};
 
 function renderCharacterGallery(){
- const entries=Object.entries(MEPModel.CHARACTER_PRESETS);
+ const entries=Object.entries(MEPModel.CHARACTER_PRESETS).sort((a,b)=>((a[1].era||"Custom")+" "+a[1].name).localeCompare((b[1].era||"Custom")+" "+b[1].name));
  $("#characterGalleryList").innerHTML=entries.map(([key,p])=>`<button class="characterCard" data-gallery-character="${key}"><strong>${esc(p.name)}</strong><span>${esc(p.era||"General")}</span><small>${esc((p.prop&&p.prop!=="none")?("Prop: "+p.prop):"No default prop")}</small></button>`).join("");
  document.querySelectorAll("[data-gallery-character]").forEach(btn=>btn.onclick=()=>{const type=btn.dataset.galleryCharacter,p=MEPModel.CHARACTER_PRESETS[type],ch=MEPModel.character(p.name,520+scene.characters.length*70,405,type);scene.characters.push(ch);selectedId=ch.id;time=0;changed();syncUI();$("#characterGalleryDialog").close()});
 }
@@ -175,6 +180,7 @@ $("#recordVideo").onclick=()=>{if(recorder&&recorder.state==="recording"){record
 
 
 
+$("#loadStarterPack").onclick=async()=>{try{const res=await fetch("presets/mep-starter-pack-v4.mep.json",{cache:"no-store"});if(!res.ok)throw new Error("Starter pack file not found.");project=MEPModel.migrate(await res.json());scene=MEPModel.activeScene(project);selectedId=scene.characters[0]?.id||null;selectedBubbleId=null;time=0;editPreview=null;MEPStorage.save(project);syncUI();$("#bootStatus").textContent="Starter Pack loaded";document.querySelector(".stageArea")?.scrollIntoView({behavior:"smooth",block:"start"})}catch(e){alert("Could not load starter pack: "+e.message)}};
 $("#loadHaitiDemo").onclick=async()=>{try{const res=await fetch("presets/haiti-vertieres-30s.mep.json",{cache:"no-store"});if(!res.ok)throw new Error("Demo file not found.");project=MEPModel.migrate(await res.json());scene=MEPModel.activeScene(project);selectedId=scene.characters[0]?.id||null;selectedBubbleId=null;time=0;MEPStorage.save(project);syncUI();document.querySelector(".stageArea")?.scrollIntoView({behavior:"smooth",block:"start"})}catch(e){alert("Could not load Haiti demo: "+e.message)}};
 $("#quickStart").onclick=()=>{
  project=MEPModel.project();project.name="My First MEP Video";project.era="Prehistory";
@@ -186,7 +192,6 @@ $("#quickStart").onclick=()=>{
 document.querySelectorAll("[data-mobile-target]").forEach(b=>b.onclick=()=>document.querySelector(b.dataset.mobileTarget)?.scrollIntoView({behavior:"smooth",block:"start"}));
 $("#mobileVideo").onclick=()=>$("#videoMode").click();
 
-MEPStorage.initCloud().then(r=>{$("#saveStatus").textContent=r.ok?"Firestore ready":"Local only";if(!r.ok)console.warn(r.reason)});
-
-syncUI();
+try{syncUI();$("#bootStatus").className="bootStatus ready";$("#bootStatus").textContent="MEP ready · "+Object.keys(MEPModel.CHARACTER_PRESETS).length+" characters · "+Object.keys(MEPModel.BACKGROUNDS).length+" backgrounds"}catch(e){console.error(e);$("#bootStatus").className="bootStatus error";$("#bootStatus").textContent="MEP startup error: "+e.message;project=MEPModel.starterProject();scene=MEPModel.activeScene(project);selectedId=scene.characters[0]?.id||null;try{syncUI()}catch{}}
+MEPStorage.initCloud().then(async r=>{if(!r.ok){$("#saveStatus").textContent="Local only";return console.warn(r.reason)}cloudReady=true;$("#saveStatus").textContent="Firestore ready";try{await MEPStorage.seedLibrary(MEPModel.librarySnapshot());if(!hadLocal){const latest=await MEPStorage.loadLatestCloud();if(latest){project=latest;scene=MEPModel.activeScene(project);selectedId=scene.characters[0]?.id||null;selectedBubbleId=null;time=0;editPreview=null;syncUI();$("#bootStatus").textContent="MEP ready · latest Firestore project loaded"}}}catch(e){console.warn("Firestore startup sync",e)}});
 })();
