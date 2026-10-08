@@ -99,7 +99,18 @@ const BACKGROUNDS={
  europeMap:{name:"Europe Map",fill:"#b7cddd",ground:"#d9cfad",tags:["europe","map","war"],kind:"map"},
  americasMap:{name:"Americas Map",fill:"#a9c8dc",ground:"#c9c59d",tags:["americas","map","geography"],kind:"map"},
  asiaMap:{name:"Asia Map",fill:"#b7cddd",ground:"#d4c89e",tags:["asia","map","geography"],kind:"map"},
- africaMap:{name:"Africa Map",fill:"#b7cddd",ground:"#d7c79d",tags:["africa","map","geography"],kind:"map"}
+ africaMap:{name:"Africa Map",fill:"#b7cddd",ground:"#d7c79d",tags:["africa","map","geography"],kind:"map"},
+ prehistoricCamp:{name:"Prehistoric Camp",fill:"#d8b17a",ground:"#7e6548",tags:["prehistory","camp","cave"]},
+ forest:{name:"Forest",fill:"#a9c8a0",ground:"#566b45",tags:["forest","nature","travel"]},
+ village:{name:"Village",fill:"#d9c7a2",ground:"#8b7558",tags:["village","medieval","town"]},
+ castle:{name:"Castle Courtyard",fill:"#b9c1c8",ground:"#777e82",tags:["castle","medieval","war"]},
+ throneRoom:{name:"Throne Room",fill:"#6a5364",ground:"#4b3844",tags:["royal","palace","court"]},
+ trench:{name:"Trench",fill:"#a99c7d",ground:"#5e5140",tags:["world war","trench","battle"]},
+ harbor:{name:"Harbor",fill:"#a8c8da",ground:"#8d765e",tags:["ships","harbor","trade"]},
+ ocean:{name:"Ocean",fill:"#78aeca",ground:"#3f6f89",tags:["ocean","navy","travel"]},
+ factory:{name:"Factory",fill:"#a9abb0",ground:"#62656a",tags:["industrial","factory","machines"]},
+ classroom:{name:"Classroom",fill:"#d8c9ad",ground:"#8e7656",tags:["school","education","interior"]},
+ desert:{name:"Desert",fill:"#e3c27b",ground:"#c59a52",tags:["desert","campaign","travel"]}
 };
 let uid=0;const id=()=>Date.now().toString(36)+(uid++).toString(36);
 function character(name="Historian",x=640,y=405,template="civilian"){
@@ -152,6 +163,7 @@ function validateProject(p){
  });
  return{ok:errors.length===0,errors,warnings};
 }
+function librarySnapshot(){return{schema:"mep-library-v1",version:1,eras:HISTORY_ERAS,characterPresets:structuredClone(CHARACTER_PRESETS),eraCharacterPresets:structuredClone(ERA_CHARACTER_PRESETS),bodyStyles:structuredClone(BODY_STYLES),backgrounds:structuredClone(BACKGROUNDS),poses:structuredClone(POSES),states:structuredClone(STATES),props:structuredClone(PROPS),animationClips:structuredClone(ANIMATION_CLIPS),bubbleStyles:structuredClone(BUBBLE_STYLES),easings:structuredClone(EASINGS),updatedAt:new Date().toISOString()}}
 function activeScene(p){return p.scenes.find(s=>s.id===p.activeSceneId)||p.scenes[0]}
-return{DEFAULT_POSE,starterProject,normalizeScene,normalizeCharacter,BODY_STYLES,STATES,PROPS,POSES,EASINGS,ANIMATION_CLIPS,BUBBLE_STYLES,HISTORY_ERAS,ERA_CHARACTER_PRESETS,CHARACTER_PRESETS,BACKGROUNDS,id,character,scene,project,migrate,poseAt,capture,applyPose,validateProject,activeScene};
+return{DEFAULT_POSE,starterProject,normalizeScene,normalizeCharacter,BODY_STYLES,STATES,PROPS,POSES,EASINGS,ANIMATION_CLIPS,BUBBLE_STYLES,HISTORY_ERAS,ERA_CHARACTER_PRESETS,CHARACTER_PRESETS,BACKGROUNDS,id,character,scene,project,migrate,poseAt,capture,applyPose,validateProject,librarySnapshot,activeScene};
 })();
