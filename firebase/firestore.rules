@@ -1,6 +1,11 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    match /mepLibrary/{docId} {
+      allow read: if true;
+      allow create, update: if request.resource.data.schema == "mep-library-v1";
+      allow delete: if true;
+    }
     match /mepProjects/{projectId} {
       allow read: if true;
       allow create, update: if request.resource.data.schema == "mep-video-project";
