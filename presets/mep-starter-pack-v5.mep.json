@@ -1,0 +1,5540 @@
+{
+  "schema": "mep-video-project",
+  "version": 5,
+  "id": "mep-starter-pack-v5",
+  "name": "MEP Full History Starter Pack",
+  "category": "History",
+  "era": "Industrial",
+  "year": 1863,
+  "tags": [
+    "starter-pack",
+    "all-presets",
+    "multi-era",
+    "v5"
+  ],
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "activeSceneId": "id-ev0o479oans-mv00gjrs",
+  "scenes": [
+    {
+      "id": "id-ev0o479oans-mv00gjrs",
+      "name": "1600s Empires",
+      "duration": 8,
+      "background": {
+        "preset": "mapRoom",
+        "mode": "preset",
+        "assetId": null,
+        "fit": "cover",
+        "opacity": 1,
+        "keyframes": [],
+        "tags": [
+          "history"
+        ]
+      },
+      "transition": {
+        "type": "fade",
+        "duration": 0.4
+      },
+      "camera": {
+        "x": 640,
+        "y": 360,
+        "zoom": 1,
+        "keyframes": []
+      },
+      "markers": [
+        {
+          "id": "id-7oj84qbc38x-mv00gjrs",
+          "time": 0,
+          "label": "Start"
+        },
+        {
+          "id": "id-kx77r5wdigk-mv00gjrs",
+          "time": 4,
+          "label": "Narration beat"
+        },
+        {
+          "id": "id-x5idcc6amd-mv00gjrs",
+          "time": 8,
+          "label": "End"
+        }
+      ],
+      "notes": "Starter demo scene for 1650",
+      "script": "Compare major imperial powers and explain how flags, borders and political identities changed over time.",
+      "caption": "1600s Empires",
+      "tags": [
+        "history"
+      ],
+      "characters": [
+        {
+          "id": "id-8x5zvzqjmrx-mv00gjrs",
+          "type": "character",
+          "name": "Spanish Empire",
+          "tags": [
+            "character",
+            "spanishEmpire"
+          ],
+          "x": 280,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "country",
+            "shape": "square",
+            "countryCode": "ES",
+            "historicalYear": 1650,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#eef0f2",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "none",
+            "prop": "sword",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Early Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-1qmfm750g1z-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 280,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-w195do1b45f-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 210,
+                "y": 430,
+                "scale": 1,
+                "rotation": -6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-haoz6ne9dvn-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 160,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        },
+        {
+          "id": "id-e27fe0mhf7-mv00gjrs",
+          "type": "character",
+          "name": "British Empire",
+          "tags": [
+            "character",
+            "britishEmpire"
+          ],
+          "x": 500,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "country",
+            "shape": "square",
+            "countryCode": "GB",
+            "historicalYear": 1650,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#eef0f2",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "none",
+            "prop": "musket",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Early Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-a2k2spcy73q-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 500,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-4ae9bnldtyp-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 570,
+                "y": 430,
+                "scale": 1,
+                "rotation": 6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-extclrdkti9-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 620,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        },
+        {
+          "id": "id-874vpvtowab-mv00gjrs",
+          "type": "character",
+          "name": "Narrator",
+          "tags": [
+            "character",
+            "narratorSquare"
+          ],
+          "x": 720,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "square",
+            "shape": "square",
+            "countryCode": "US",
+            "historicalYear": 1800,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#f0f1f3",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "none",
+            "prop": "none",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Custom",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-08svmbez7lc4-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 720,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-8n0ejupw85n-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 650,
+                "y": 430,
+                "scale": 1,
+                "rotation": -6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": true
+              }
+            },
+            {
+              "id": "id-zqrvwimy71c-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 600,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        }
+      ],
+      "bubbles": [
+        {
+          "id": "id-2c1zeh4j8ch-mv00gjrs",
+          "type": "bubble",
+          "text": "1600s Empires",
+          "style": "caption",
+          "x": 410,
+          "y": 55,
+          "width": 460,
+          "height": 70,
+          "fontSize": 28,
+          "startTime": 0,
+          "endTime": 2.6
+        }
+      ]
+    },
+    {
+      "id": "id-vz4xsssjkn-mv00gjrs",
+      "name": "American Revolution",
+      "duration": 8,
+      "background": {
+        "preset": "colonialPort",
+        "mode": "preset",
+        "assetId": null,
+        "fit": "cover",
+        "opacity": 1,
+        "keyframes": [],
+        "tags": [
+          "history"
+        ]
+      },
+      "transition": {
+        "type": "fade",
+        "duration": 0.4
+      },
+      "camera": {
+        "x": 640,
+        "y": 360,
+        "zoom": 1,
+        "keyframes": []
+      },
+      "markers": [
+        {
+          "id": "id-46xoahvxyf-mv00gjrs",
+          "time": 0,
+          "label": "Start"
+        },
+        {
+          "id": "id-04dwgh7rkz36-mv00gjrs",
+          "time": 4,
+          "label": "Narration beat"
+        },
+        {
+          "id": "id-jzfnvlkofg-mv00gjrs",
+          "time": 8,
+          "label": "End"
+        }
+      ],
+      "notes": "Starter demo scene for 1776",
+      "script": "Use the year slider and country layouts to explain the American Revolution with period flag variants.",
+      "caption": "American Revolution",
+      "tags": [
+        "history"
+      ],
+      "characters": [
+        {
+          "id": "id-tix5b6s04jr-mv00gjrs",
+          "type": "character",
+          "name": "American Colonies",
+          "tags": [
+            "character",
+            "usaColonial"
+          ],
+          "x": 280,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "country",
+            "shape": "square",
+            "countryCode": "US",
+            "historicalYear": 1776,
+            "flagVariant": "auto",
+            "expression": "determined",
+            "fill": "#eef0f2",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "none",
+            "prop": "none",
+            "expression": "determined",
+            "state": "standing",
+            "era": "Early Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-kax8pa6bx1-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 280,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-thsg3po4ndh-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 210,
+                "y": 430,
+                "scale": 1,
+                "rotation": -6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-oeqsm9lx089-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 160,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        },
+        {
+          "id": "id-4om40jgfy1l-mv00gjrs",
+          "type": "character",
+          "name": "British Empire",
+          "tags": [
+            "character",
+            "britishEmpire"
+          ],
+          "x": 500,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "country",
+            "shape": "square",
+            "countryCode": "GB",
+            "historicalYear": 1776,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#eef0f2",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "none",
+            "prop": "musket",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Early Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-izs0e8a8wx-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 500,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-nv02mtlmn4-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 570,
+                "y": 430,
+                "scale": 1,
+                "rotation": 6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-m99nbigkzha-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 620,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        },
+        {
+          "id": "id-xa6jfnb254i-mv00gjrs",
+          "type": "character",
+          "name": "Narrator",
+          "tags": [
+            "character",
+            "narratorCircle"
+          ],
+          "x": 720,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "circle",
+            "shape": "circle",
+            "countryCode": "US",
+            "historicalYear": 1800,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#f0f1f3",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "none",
+            "prop": "none",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Custom",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-0q836ymnj32a-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 720,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-x2hzwmiz7wl-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 650,
+                "y": 430,
+                "scale": 1,
+                "rotation": -6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": true
+              }
+            },
+            {
+              "id": "id-p6gmv26rk5-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 600,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        }
+      ],
+      "bubbles": [
+        {
+          "id": "id-8z8ucuf5nk4-mv00gjrs",
+          "type": "bubble",
+          "text": "American Revolution",
+          "style": "caption",
+          "x": 410,
+          "y": 55,
+          "width": 460,
+          "height": 70,
+          "fontSize": 28,
+          "startTime": 0,
+          "endTime": 2.6
+        }
+      ]
+    },
+    {
+      "id": "id-qrzd1fzm8h-mv00gjrs",
+      "name": "Haitian Revolution",
+      "duration": 8,
+      "background": {
+        "preset": "battlefield",
+        "mode": "preset",
+        "assetId": null,
+        "fit": "cover",
+        "opacity": 1,
+        "keyframes": [],
+        "tags": [
+          "history"
+        ]
+      },
+      "transition": {
+        "type": "fade",
+        "duration": 0.4
+      },
+      "camera": {
+        "x": 640,
+        "y": 360,
+        "zoom": 1,
+        "keyframes": []
+      },
+      "markers": [
+        {
+          "id": "id-n7067f07ca-mv00gjrs",
+          "time": 0,
+          "label": "Start"
+        },
+        {
+          "id": "id-5xdojzjrz7a-mv00gjrs",
+          "time": 4,
+          "label": "Narration beat"
+        },
+        {
+          "id": "id-r8yeab92pes-mv00gjrs",
+          "time": 8,
+          "label": "End"
+        }
+      ],
+      "notes": "Starter demo scene for 1803",
+      "script": "Introduce the Haitian Revolution and the final campaign against French forces.",
+      "caption": "Haitian Revolution",
+      "tags": [
+        "history"
+      ],
+      "characters": [
+        {
+          "id": "id-ulwksm2kjw-mv00gjrs",
+          "type": "character",
+          "name": "Haitian Revolutionary",
+          "tags": [
+            "character",
+            "haitianRevolutionary"
+          ],
+          "x": 280,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "country",
+            "shape": "square",
+            "countryCode": "HT",
+            "historicalYear": 1803,
+            "flagVariant": "auto",
+            "expression": "determined",
+            "fill": "#eef0f2",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "sash"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "sash",
+            "prop": "sword",
+            "expression": "determined",
+            "state": "standing",
+            "era": "Early Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-41neamnoktw-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 280,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-sw7tevzyaf-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 210,
+                "y": 430,
+                "scale": 1,
+                "rotation": -6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-qd0b7lpjyub-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 160,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        },
+        {
+          "id": "id-fk6exh23o4-mv00gjrs",
+          "type": "character",
+          "name": "French Soldier",
+          "tags": [
+            "character",
+            "french1803"
+          ],
+          "x": 500,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "country",
+            "shape": "square",
+            "countryCode": "FR",
+            "historicalYear": 1803,
+            "flagVariant": "auto",
+            "expression": "angry",
+            "fill": "#eef0f2",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "none",
+            "prop": "musket",
+            "expression": "angry",
+            "state": "standing",
+            "era": "Early Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-q8wjvb1s0hn-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 500,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-svob59mpwup-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 570,
+                "y": 430,
+                "scale": 1,
+                "rotation": 6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-gd8lrv7udcn-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 620,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        },
+        {
+          "id": "id-gg9pciu5s8-mv00gjrs",
+          "type": "character",
+          "name": "Narrator",
+          "tags": [
+            "character",
+            "narratorTriangle"
+          ],
+          "x": 720,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "triangle",
+            "shape": "triangle",
+            "countryCode": "US",
+            "historicalYear": 1800,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#f0f1f3",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "none",
+            "prop": "none",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Custom",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-kznh29likk-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 720,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-qqhy70nrlb9-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 650,
+                "y": 430,
+                "scale": 1,
+                "rotation": -6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": true
+              }
+            },
+            {
+              "id": "id-ojumep7gsq-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 600,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        }
+      ],
+      "bubbles": [
+        {
+          "id": "id-cm3j7b5ntcv-mv00gjrs",
+          "type": "bubble",
+          "text": "Haitian Revolution",
+          "style": "caption",
+          "x": 410,
+          "y": 55,
+          "width": 460,
+          "height": 70,
+          "fontSize": 28,
+          "startTime": 0,
+          "endTime": 2.6
+        }
+      ]
+    },
+    {
+      "id": "id-yn6krt2al2-mv00gjrs",
+      "name": "Empire of Brazil",
+      "duration": 8,
+      "background": {
+        "preset": "royalCourt",
+        "mode": "preset",
+        "assetId": null,
+        "fit": "cover",
+        "opacity": 1,
+        "keyframes": [],
+        "tags": [
+          "history"
+        ]
+      },
+      "transition": {
+        "type": "fade",
+        "duration": 0.4
+      },
+      "camera": {
+        "x": 640,
+        "y": 360,
+        "zoom": 1,
+        "keyframes": []
+      },
+      "markers": [
+        {
+          "id": "id-qb4tb8rozcp-mv00gjrs",
+          "time": 0,
+          "label": "Start"
+        },
+        {
+          "id": "id-wpml0yvhbi-mv00gjrs",
+          "time": 4,
+          "label": "Narration beat"
+        },
+        {
+          "id": "id-dk1iu1kbt9g-mv00gjrs",
+          "time": 8,
+          "label": "End"
+        }
+      ],
+      "notes": "Starter demo scene for 1825",
+      "script": "Demonstrate a 19th-century monarchy scene with country bodies and humanoid presenter.",
+      "caption": "Empire of Brazil",
+      "tags": [
+        "history"
+      ],
+      "characters": [
+        {
+          "id": "id-ouh7397iv1f-mv00gjrs",
+          "type": "character",
+          "name": "Empire of Brazil",
+          "tags": [
+            "character",
+            "empireBrazil"
+          ],
+          "x": 280,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "country",
+            "shape": "square",
+            "countryCode": "BR",
+            "historicalYear": 1825,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#eef0f2",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "none",
+            "prop": "none",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Industrial",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-k594ehlt06a-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 280,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-tyw47bqfpkp-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 210,
+                "y": 430,
+                "scale": 1,
+                "rotation": -6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-mmvsulphij-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 160,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        },
+        {
+          "id": "id-ksk3650gp8n-mv00gjrs",
+          "type": "character",
+          "name": "British Empire",
+          "tags": [
+            "character",
+            "britishEmpire"
+          ],
+          "x": 500,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "country",
+            "shape": "square",
+            "countryCode": "GB",
+            "historicalYear": 1825,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#eef0f2",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "none",
+            "prop": "musket",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Early Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-msx3v2xdoy-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 500,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-w8oj57cnck-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 570,
+                "y": 430,
+                "scale": 1,
+                "rotation": 6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-rqshxblv1ha-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 620,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        },
+        {
+          "id": "id-nir8g23xlos-mv00gjrs",
+          "type": "character",
+          "name": "Presenter",
+          "tags": [
+            "character",
+            "presenter"
+          ],
+          "x": 720,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "humanoid",
+            "shape": "square",
+            "countryCode": "US",
+            "historicalYear": 1800,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#eef0f2",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "tie"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "humanCartoon",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#315f86",
+            "hair": "#34261e",
+            "pants": "#30343b",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "tie",
+            "prop": "none",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-qwmo8p0edb-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 720,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-0511sryzl5du-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 650,
+                "y": 430,
+                "scale": 1,
+                "rotation": -6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": true
+              }
+            },
+            {
+              "id": "id-f0y39v6qb-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 600,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        }
+      ],
+      "bubbles": [
+        {
+          "id": "id-c51nak89sbk-mv00gjrs",
+          "type": "bubble",
+          "text": "Empire of Brazil",
+          "style": "caption",
+          "x": 410,
+          "y": 55,
+          "width": 460,
+          "height": 70,
+          "fontSize": 28,
+          "startTime": 0,
+          "endTime": 2.6
+        }
+      ]
+    },
+    {
+      "id": "id-79ojr0y45z-mv00gjrs",
+      "name": "American Civil War",
+      "duration": 8,
+      "background": {
+        "preset": "cityBattleStreet",
+        "mode": "preset",
+        "assetId": null,
+        "fit": "cover",
+        "opacity": 1,
+        "keyframes": [],
+        "tags": [
+          "history"
+        ]
+      },
+      "transition": {
+        "type": "fade",
+        "duration": 0.4
+      },
+      "camera": {
+        "x": 640,
+        "y": 360,
+        "zoom": 1,
+        "keyframes": []
+      },
+      "markers": [
+        {
+          "id": "id-ull5rooh9jk-mv00gjrs",
+          "time": 0,
+          "label": "Start"
+        },
+        {
+          "id": "id-9expxqtrypi-mv00gjrs",
+          "time": 4,
+          "label": "Narration beat"
+        },
+        {
+          "id": "id-7ikfzw3cksj-mv00gjrs",
+          "time": 8,
+          "label": "End"
+        }
+      ],
+      "notes": "Starter demo scene for 1863",
+      "script": "Historical Civil War context. The Confederate flag is included only as a historical visual option for documentary use.",
+      "caption": "American Civil War",
+      "tags": [
+        "history"
+      ],
+      "characters": [
+        {
+          "id": "id-j2m1ibgzaz-mv00gjrs",
+          "type": "character",
+          "name": "Union",
+          "tags": [
+            "character",
+            "unionSquare"
+          ],
+          "x": 280,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "country",
+            "shape": "square",
+            "countryCode": "US",
+            "historicalYear": 1863,
+            "flagVariant": "auto",
+            "expression": "determined",
+            "fill": "#eef0f2",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none",
+            "prop": "rifle",
+            "expression": "determined",
+            "state": "standing",
+            "era": "Industrial",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-tio6867wii-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 280,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-dda26v6xplp-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 210,
+                "y": 430,
+                "scale": 1,
+                "rotation": -6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-3ozjvn7r88i-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 160,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        },
+        {
+          "id": "id-b5xr95raeaq-mv00gjrs",
+          "type": "character",
+          "name": "Confederate States",
+          "tags": [
+            "character",
+            "confederateHistorical"
+          ],
+          "x": 500,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "country",
+            "shape": "square",
+            "countryCode": "CSA",
+            "historicalYear": 1863,
+            "flagVariant": "auto",
+            "expression": "angry",
+            "fill": "#eef0f2",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "none",
+            "prop": "rifle",
+            "expression": "angry",
+            "state": "standing",
+            "era": "Industrial",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-n6vkxkc36i-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 500,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-lwndu2942jb-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 570,
+                "y": 430,
+                "scale": 1,
+                "rotation": 6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-db04ty7svv-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 620,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        },
+        {
+          "id": "id-1iks4kas92l-mv00gjrs",
+          "type": "character",
+          "name": "Reporter",
+          "tags": [
+            "character",
+            "narratorSquare"
+          ],
+          "x": 720,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "square",
+            "shape": "square",
+            "countryCode": "US",
+            "historicalYear": 1800,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#f0f1f3",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "none",
+            "prop": "none",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Custom",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-c96oknuifsg-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 720,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-1tdpbdtnv49-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 650,
+                "y": 430,
+                "scale": 1,
+                "rotation": -6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": true
+              }
+            },
+            {
+              "id": "id-fka608zgssk-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 600,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        }
+      ],
+      "bubbles": [
+        {
+          "id": "id-m2ww0qjhn87-mv00gjrs",
+          "type": "bubble",
+          "text": "American Civil War",
+          "style": "caption",
+          "x": 410,
+          "y": 55,
+          "width": 460,
+          "height": 70,
+          "fontSize": 28,
+          "startTime": 0,
+          "endTime": 2.6
+        }
+      ]
+    },
+    {
+      "id": "id-bdlqsa6td0w-mv00gjrs",
+      "name": "World War",
+      "duration": 8,
+      "background": {
+        "preset": "trench",
+        "mode": "preset",
+        "assetId": null,
+        "fit": "cover",
+        "opacity": 1,
+        "keyframes": [],
+        "tags": [
+          "history"
+        ]
+      },
+      "transition": {
+        "type": "fade",
+        "duration": 0.4
+      },
+      "camera": {
+        "x": 640,
+        "y": 360,
+        "zoom": 1,
+        "keyframes": []
+      },
+      "markers": [
+        {
+          "id": "id-21f4n8qpvmw-mv00gjrs",
+          "time": 0,
+          "label": "Start"
+        },
+        {
+          "id": "id-4zc8kq4gb7p-mv00gjrs",
+          "time": 4,
+          "label": "Narration beat"
+        },
+        {
+          "id": "id-pfrs3brpef-mv00gjrs",
+          "time": 8,
+          "label": "End"
+        }
+      ],
+      "notes": "Starter demo scene for 1944",
+      "script": "Demonstrate humanoid and country-layout characters in a trench scene.",
+      "caption": "World War",
+      "tags": [
+        "history"
+      ],
+      "characters": [
+        {
+          "id": "id-p1g7swbivz-mv00gjrs",
+          "type": "character",
+          "name": "World War Soldier",
+          "tags": [
+            "character",
+            "wwSoldier"
+          ],
+          "x": 280,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "humanoid",
+            "shape": "square",
+            "countryCode": "US",
+            "historicalYear": 1800,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#eef0f2",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "helmet",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "humanCartoon",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#626a4e",
+            "hair": "#34261e",
+            "pants": "#484c3d",
+            "hairStyle": "side",
+            "hat": "helmet",
+            "accessory": "none",
+            "prop": "rifle",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "World Wars",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-gprmbplsvs5-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 280,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-vzruobdd76-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 210,
+                "y": 430,
+                "scale": 1,
+                "rotation": -6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-xche1u3zgo-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 160,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        },
+        {
+          "id": "id-kpozbeqigb-mv00gjrs",
+          "type": "character",
+          "name": "Officer",
+          "tags": [
+            "character",
+            "officer"
+          ],
+          "x": 500,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "humanoid",
+            "shape": "square",
+            "countryCode": "US",
+            "historicalYear": 1800,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#eef0f2",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "officer",
+            "accessory": "sash"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "heroic",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#35455a",
+            "hair": "#34261e",
+            "pants": "#27313e",
+            "hairStyle": "side",
+            "hat": "officer",
+            "accessory": "sash",
+            "prop": "none",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "World Wars",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-0c1t9a8gz1jg-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 500,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-um26khrlp0p-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 570,
+                "y": 430,
+                "scale": 1,
+                "rotation": 6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-xrasvag2z0p-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 620,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        },
+        {
+          "id": "id-t2n3fi5tu8m-mv00gjrs",
+          "type": "character",
+          "name": "Country Marker",
+          "tags": [
+            "character",
+            "modernCountry"
+          ],
+          "x": 720,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "country",
+            "shape": "square",
+            "countryCode": "US",
+            "historicalYear": 1944,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#eef0f2",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "none",
+            "prop": "none",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-yj1kgz9mbz-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 720,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-iyxg9c62g9-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 650,
+                "y": 430,
+                "scale": 1,
+                "rotation": -6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": true
+              }
+            },
+            {
+              "id": "id-zbmllzyg4m-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 600,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        }
+      ],
+      "bubbles": [
+        {
+          "id": "id-cad2xt2q1p-mv00gjrs",
+          "type": "bubble",
+          "text": "World War",
+          "style": "caption",
+          "x": 410,
+          "y": 55,
+          "width": 460,
+          "height": 70,
+          "fontSize": 28,
+          "startTime": 0,
+          "endTime": 2.6
+        }
+      ]
+    },
+    {
+      "id": "id-6393vd93ox8-mv00gjrs",
+      "name": "Cold War Map",
+      "duration": 8,
+      "background": {
+        "preset": "worldMap",
+        "mode": "preset",
+        "assetId": null,
+        "fit": "cover",
+        "opacity": 1,
+        "keyframes": [],
+        "tags": [
+          "history"
+        ]
+      },
+      "transition": {
+        "type": "fade",
+        "duration": 0.4
+      },
+      "camera": {
+        "x": 640,
+        "y": 360,
+        "zoom": 1,
+        "keyframes": []
+      },
+      "markers": [
+        {
+          "id": "id-7lp3lrztvyv-mv00gjrs",
+          "time": 0,
+          "label": "Start"
+        },
+        {
+          "id": "id-qd1o0bt9l0f-mv00gjrs",
+          "time": 4,
+          "label": "Narration beat"
+        },
+        {
+          "id": "id-5qj6w4lre3-mv00gjrs",
+          "time": 8,
+          "label": "End"
+        }
+      ],
+      "notes": "Starter demo scene for 1962",
+      "script": "Use map backgrounds, country markers and narration to explain geopolitical movement.",
+      "caption": "Cold War Map",
+      "tags": [
+        "history"
+      ],
+      "characters": [
+        {
+          "id": "id-dnrtzr0uk5s-mv00gjrs",
+          "type": "character",
+          "name": "Cold War Soldier",
+          "tags": [
+            "character",
+            "coldWarSoldier"
+          ],
+          "x": 280,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "humanoid",
+            "shape": "square",
+            "countryCode": "US",
+            "historicalYear": 1800,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#eef0f2",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "helmet",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "humanCartoon",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#56634b",
+            "hair": "#34261e",
+            "pants": "#3e4938",
+            "hairStyle": "side",
+            "hat": "helmet",
+            "accessory": "none",
+            "prop": "rifle",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Cold War",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-8n533nmbcst-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 280,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-m6fl8bppaw-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 210,
+                "y": 430,
+                "scale": 1,
+                "rotation": -6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-wm76m50me79-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 160,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        },
+        {
+          "id": "id-uf1etkyovc-mv00gjrs",
+          "type": "character",
+          "name": "Presenter",
+          "tags": [
+            "character",
+            "presenter"
+          ],
+          "x": 500,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "humanoid",
+            "shape": "square",
+            "countryCode": "US",
+            "historicalYear": 1800,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#eef0f2",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "tie"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "humanCartoon",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#315f86",
+            "hair": "#34261e",
+            "pants": "#30343b",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "tie",
+            "prop": "none",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-62i4j893wvt-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 500,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-htub6nk2wnh-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 570,
+                "y": 430,
+                "scale": 1,
+                "rotation": 6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-m0eilzfueva-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 620,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        },
+        {
+          "id": "id-y9084ccq26c-mv00gjrs",
+          "type": "character",
+          "name": "Country Marker",
+          "tags": [
+            "character",
+            "modernCountry"
+          ],
+          "x": 720,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "country",
+            "shape": "square",
+            "countryCode": "US",
+            "historicalYear": 1962,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#eef0f2",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "none",
+            "prop": "none",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-qp6b6qplhq-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 720,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-sdoi0975pcc-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 650,
+                "y": 430,
+                "scale": 1,
+                "rotation": -6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": true
+              }
+            },
+            {
+              "id": "id-y6j5hp52tfj-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 600,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        }
+      ],
+      "bubbles": [
+        {
+          "id": "id-3j9j5jurq92-mv00gjrs",
+          "type": "bubble",
+          "text": "Cold War Map",
+          "style": "caption",
+          "x": 410,
+          "y": 55,
+          "width": 460,
+          "height": 70,
+          "fontSize": 28,
+          "startTime": 0,
+          "endTime": 2.6
+        }
+      ]
+    },
+    {
+      "id": "id-7if60ew77ot-mv00gjrs",
+      "name": "Modern Explainer",
+      "duration": 8,
+      "background": {
+        "preset": "classroom",
+        "mode": "preset",
+        "assetId": null,
+        "fit": "cover",
+        "opacity": 1,
+        "keyframes": [],
+        "tags": [
+          "history"
+        ]
+      },
+      "transition": {
+        "type": "fade",
+        "duration": 0.4
+      },
+      "camera": {
+        "x": 640,
+        "y": 360,
+        "zoom": 1,
+        "keyframes": []
+      },
+      "markers": [
+        {
+          "id": "id-lrjxanxzfaq-mv00gjrs",
+          "time": 0,
+          "label": "Start"
+        },
+        {
+          "id": "id-p64oefmuukl-mv00gjrs",
+          "time": 4,
+          "label": "Narration beat"
+        },
+        {
+          "id": "id-v3s85yydunm-mv00gjrs",
+          "time": 8,
+          "label": "End"
+        }
+      ],
+      "notes": "Starter demo scene for 2026",
+      "script": "This scene demonstrates every current MEP character look in one place.",
+      "caption": "Modern Explainer",
+      "tags": [
+        "history"
+      ],
+      "characters": [
+        {
+          "id": "id-prx2drmgahc-mv00gjrs",
+          "type": "character",
+          "name": "Square",
+          "tags": [
+            "character",
+            "narratorSquare"
+          ],
+          "x": 280,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "square",
+            "shape": "square",
+            "countryCode": "US",
+            "historicalYear": 1800,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#f0f1f3",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "none",
+            "prop": "none",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Custom",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-315zyih94d5-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 280,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-gzazs71fri9-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 210,
+                "y": 430,
+                "scale": 1,
+                "rotation": -6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-u49dzobvxyd-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 160,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        },
+        {
+          "id": "id-7vhqbpd42ml-mv00gjrs",
+          "type": "character",
+          "name": "Circle",
+          "tags": [
+            "character",
+            "narratorCircle"
+          ],
+          "x": 500,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "circle",
+            "shape": "circle",
+            "countryCode": "US",
+            "historicalYear": 1800,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#f0f1f3",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "none",
+            "prop": "none",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Custom",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-wfu4e8mh62h-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 500,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-55290ni4hl-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 570,
+                "y": 430,
+                "scale": 1,
+                "rotation": 6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-aar9066c8o-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 620,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        },
+        {
+          "id": "id-jxgv387wth-mv00gjrs",
+          "type": "character",
+          "name": "Triangle",
+          "tags": [
+            "character",
+            "narratorTriangle"
+          ],
+          "x": 720,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "triangle",
+            "shape": "triangle",
+            "countryCode": "US",
+            "historicalYear": 1800,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#f0f1f3",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "none",
+            "prop": "none",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Custom",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-m6qceaoly0n-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 720,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-ulc5i4kayu-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 650,
+                "y": 430,
+                "scale": 1,
+                "rotation": -6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": true
+              }
+            },
+            {
+              "id": "id-btmikbrqapk-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 600,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        },
+        {
+          "id": "id-pp8tdfa9k8-mv00gjrs",
+          "type": "character",
+          "name": "Humanoid",
+          "tags": [
+            "character",
+            "presenter"
+          ],
+          "x": 940,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "humanoid",
+            "shape": "square",
+            "countryCode": "US",
+            "historicalYear": 1800,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#eef0f2",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "tie"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "humanCartoon",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#315f86",
+            "hair": "#34261e",
+            "pants": "#30343b",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "tie",
+            "prop": "none",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-v7iqbol5or-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 940,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-syaw9hm23p-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 1010,
+                "y": 430,
+                "scale": 1,
+                "rotation": 6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-3ia699rzqke-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 1060,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        },
+        {
+          "id": "id-sjjn5rt5up8-mv00gjrs",
+          "type": "character",
+          "name": "Country",
+          "tags": [
+            "character",
+            "modernCountry"
+          ],
+          "x": 1160,
+          "y": 430,
+          "scale": 1,
+          "rotation": 0,
+          "facing": 1,
+          "layer": 5,
+          "visual": {
+            "lookType": "country",
+            "shape": "square",
+            "countryCode": "US",
+            "historicalYear": 2026,
+            "flagVariant": "auto",
+            "expression": "neutral",
+            "fill": "#eef0f2",
+            "stroke": "#17191d",
+            "eyeColor": "#111",
+            "mouthEnabled": true,
+            "mouthOpen": false,
+            "hairStyle": "none",
+            "hat": "none",
+            "accessory": "none"
+          },
+          "rig": {
+            "type": "mep-humanoid-v5",
+            "bodyStyle": "historyCutout",
+            "skin": "#d49b74",
+            "line": "#242424",
+            "shirt": "#58667a",
+            "hair": "#34261e",
+            "pants": "#343a46",
+            "hairStyle": "side",
+            "hat": "none",
+            "accessory": "none",
+            "prop": "none",
+            "expression": "neutral",
+            "state": "standing",
+            "era": "Modern",
+            "headScale": 1,
+            "limbScale": 1
+          },
+          "pose": {
+            "head": 0,
+            "torso": 0,
+            "leftUpperArm": -25,
+            "leftLowerArm": -10,
+            "rightUpperArm": 25,
+            "rightLowerArm": 10,
+            "leftUpperLeg": -8,
+            "leftLowerLeg": 5,
+            "rightUpperLeg": 8,
+            "rightLowerLeg": 5
+          },
+          "keyframes": [
+            {
+              "id": "id-htn743s21ej-mv00gjrs",
+              "time": 0,
+              "easing": "linear",
+              "state": {
+                "x": 1160,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-ws4cwg0l48m-mv00gjrs",
+              "time": 4,
+              "easing": "easeInOut",
+              "state": {
+                "x": 1090,
+                "y": 430,
+                "scale": 1,
+                "rotation": -6,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            },
+            {
+              "id": "id-ev53jdmqhm-mv00gjrs",
+              "time": 8,
+              "easing": "easeOut",
+              "state": {
+                "x": 1040,
+                "y": 430,
+                "scale": 1,
+                "rotation": 0,
+                "facing": 1,
+                "pose": {
+                  "head": 0,
+                  "torso": 0,
+                  "leftUpperArm": -25,
+                  "leftLowerArm": -10,
+                  "rightUpperArm": 25,
+                  "rightLowerArm": 10,
+                  "leftUpperLeg": -8,
+                  "leftLowerLeg": 5,
+                  "rightUpperLeg": 8,
+                  "rightLowerLeg": 5
+                },
+                "mouthOpen": false
+              }
+            }
+          ],
+          "clips": []
+        }
+      ],
+      "bubbles": [
+        {
+          "id": "id-w2y0wud3mln-mv00gjrs",
+          "type": "bubble",
+          "text": "Modern Explainer",
+          "style": "caption",
+          "x": 410,
+          "y": 55,
+          "width": 460,
+          "height": 70,
+          "fontSize": 28,
+          "startTime": 0,
+          "endTime": 2.6
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "customPoses": {},
+  "scripts": {
+    "project": "Use this project as a sandbox. Each scene demonstrates a different era, background, character look, historical-country layout, captions and movement.",
+    "sceneById": {
+      "id-ev0o479oans-mv00gjrs": "Compare major imperial powers and explain how flags, borders and political identities changed over time.",
+      "id-vz4xsssjkn-mv00gjrs": "Use the year slider and country layouts to explain the American Revolution with period flag variants.",
+      "id-qrzd1fzm8h-mv00gjrs": "Introduce the Haitian Revolution and the final campaign against French forces.",
+      "id-yn6krt2al2-mv00gjrs": "Demonstrate a 19th-century monarchy scene with country bodies and humanoid presenter.",
+      "id-79ojr0y45z-mv00gjrs": "Historical Civil War context. The Confederate flag is included only as a historical visual option for documentary use.",
+      "id-bdlqsa6td0w-mv00gjrs": "Demonstrate humanoid and country-layout characters in a trench scene.",
+      "id-6393vd93ox8-mv00gjrs": "Use map backgrounds, country markers and narration to explain geopolitical movement.",
+      "id-7if60ew77ot-mv00gjrs": "This scene demonstrates every current MEP character look in one place."
+    }
+  },
+  "sync": {
+    "provider": "firestore",
+    "status": "local",
+    "revision": 0,
+    "lastSyncedAt": null
+  },
+  "createdAt": "2026-10-08T20:50:34.647Z",
+  "updatedAt": "2026-10-08T20:50:34.649Z",
+  "library": {
+    "schema": "mep-library-v2",
+    "version": 2,
+    "eras": [
+      "Prehistory",
+      "Ancient",
+      "Medieval",
+      "Early Modern",
+      "Industrial",
+      "World Wars",
+      "Cold War",
+      "Modern",
+      "Custom"
+    ],
+    "lookTypes": {
+      "square": "Square",
+      "circle": "Circle",
+      "triangle": "Triangle",
+      "humanoid": "Humanoid",
+      "country": "Country Layout"
+    },
+    "shapes": {
+      "square": "Square",
+      "circle": "Circle",
+      "triangle": "Triangle"
+    },
+    "expressions": [
+      "neutral",
+      "happy",
+      "angry",
+      "sad",
+      "surprised",
+      "determined",
+      "sleepy"
+    ],
+    "characterPresets": {
+      "unionSquare": {
+        "name": "Union Square",
+        "era": "Industrial",
+        "lookType": "country",
+        "shape": "square",
+        "countryCode": "US",
+        "year": 1863,
+        "expression": "determined",
+        "hat": "none",
+        "hairStyle": "none",
+        "prop": "rifle"
+      },
+      "narratorSquare": {
+        "name": "Narrator Square",
+        "era": "Custom",
+        "lookType": "square",
+        "shape": "square",
+        "fill": "#f0f1f3",
+        "expression": "neutral"
+      },
+      "narratorCircle": {
+        "name": "Narrator Circle",
+        "era": "Custom",
+        "lookType": "circle",
+        "shape": "circle",
+        "fill": "#f0f1f3",
+        "expression": "neutral"
+      },
+      "narratorTriangle": {
+        "name": "Narrator Triangle",
+        "era": "Custom",
+        "lookType": "triangle",
+        "shape": "triangle",
+        "fill": "#f0f1f3",
+        "expression": "neutral"
+      },
+      "hunter": {
+        "name": "Prehistoric Hunter",
+        "era": "Prehistory",
+        "lookType": "humanoid",
+        "bodyStyle": "historyCutout",
+        "shirt": "#8a5d36",
+        "pants": "#604128",
+        "hairStyle": "messy",
+        "prop": "spear"
+      },
+      "gatherer": {
+        "name": "Prehistoric Gatherer",
+        "era": "Prehistory",
+        "lookType": "humanoid",
+        "bodyStyle": "historyCutout",
+        "shirt": "#a87545",
+        "pants": "#6b4d32",
+        "hairStyle": "messy",
+        "prop": "none"
+      },
+      "ancientSoldier": {
+        "name": "Ancient Soldier",
+        "era": "Ancient",
+        "lookType": "humanoid",
+        "bodyStyle": "humanCartoon",
+        "shirt": "#9a3f35",
+        "pants": "#6d5235",
+        "hat": "helmet",
+        "prop": "spear"
+      },
+      "ancientRuler": {
+        "name": "Ancient Ruler",
+        "era": "Ancient",
+        "lookType": "humanoid",
+        "bodyStyle": "humanCartoon",
+        "shirt": "#713f65",
+        "pants": "#d1b17b",
+        "hat": "crown",
+        "accessory": "sash"
+      },
+      "knight": {
+        "name": "Medieval Knight",
+        "era": "Medieval",
+        "lookType": "humanoid",
+        "bodyStyle": "heroic",
+        "shirt": "#7d8790",
+        "pants": "#444a50",
+        "hat": "helmet",
+        "prop": "sword"
+      },
+      "medievalKing": {
+        "name": "Medieval King",
+        "era": "Medieval",
+        "lookType": "humanoid",
+        "bodyStyle": "humanCartoon",
+        "shirt": "#793a61",
+        "pants": "#382f48",
+        "hat": "crown",
+        "accessory": "sash"
+      },
+      "haitianRevolutionary": {
+        "name": "Haitian Revolutionary",
+        "era": "Early Modern",
+        "lookType": "country",
+        "shape": "square",
+        "countryCode": "HT",
+        "year": 1803,
+        "expression": "determined",
+        "prop": "sword",
+        "accessory": "sash"
+      },
+      "french1803": {
+        "name": "French Soldier 1803",
+        "era": "Early Modern",
+        "lookType": "country",
+        "shape": "square",
+        "countryCode": "FR",
+        "year": 1803,
+        "expression": "angry",
+        "prop": "musket"
+      },
+      "britishEmpire": {
+        "name": "British Empire",
+        "era": "Early Modern",
+        "lookType": "country",
+        "shape": "square",
+        "countryCode": "GB",
+        "year": 1776,
+        "expression": "neutral",
+        "prop": "musket"
+      },
+      "spanishEmpire": {
+        "name": "Spanish Empire",
+        "era": "Early Modern",
+        "lookType": "country",
+        "shape": "square",
+        "countryCode": "ES",
+        "year": 1700,
+        "expression": "neutral",
+        "prop": "sword"
+      },
+      "usaColonial": {
+        "name": "American Colonies",
+        "era": "Early Modern",
+        "lookType": "country",
+        "shape": "square",
+        "countryCode": "US",
+        "year": 1776,
+        "expression": "determined"
+      },
+      "confederateHistorical": {
+        "name": "Confederate States (historical)",
+        "era": "Industrial",
+        "lookType": "country",
+        "shape": "square",
+        "countryCode": "CSA",
+        "year": 1863,
+        "expression": "angry",
+        "prop": "rifle"
+      },
+      "empireBrazil": {
+        "name": "Empire of Brazil",
+        "era": "Industrial",
+        "lookType": "country",
+        "shape": "square",
+        "countryCode": "BR",
+        "year": 1825,
+        "expression": "neutral"
+      },
+      "industrialWorker": {
+        "name": "Industrial Worker",
+        "era": "Industrial",
+        "lookType": "humanoid",
+        "bodyStyle": "humanCartoon",
+        "shirt": "#6b655d",
+        "pants": "#3f4347"
+      },
+      "wwSoldier": {
+        "name": "World War Soldier",
+        "era": "World Wars",
+        "lookType": "humanoid",
+        "bodyStyle": "humanCartoon",
+        "shirt": "#626a4e",
+        "pants": "#484c3d",
+        "hat": "helmet",
+        "prop": "rifle"
+      },
+      "officer": {
+        "name": "Military Officer",
+        "era": "World Wars",
+        "lookType": "humanoid",
+        "bodyStyle": "heroic",
+        "shirt": "#35455a",
+        "pants": "#27313e",
+        "hat": "officer",
+        "accessory": "sash"
+      },
+      "coldWarSoldier": {
+        "name": "Cold War Soldier",
+        "era": "Cold War",
+        "lookType": "humanoid",
+        "bodyStyle": "humanCartoon",
+        "shirt": "#56634b",
+        "pants": "#3e4938",
+        "hat": "helmet",
+        "prop": "rifle"
+      },
+      "presenter": {
+        "name": "Modern Presenter",
+        "era": "Modern",
+        "lookType": "humanoid",
+        "bodyStyle": "humanCartoon",
+        "shirt": "#315f86",
+        "pants": "#30343b",
+        "hairStyle": "side",
+        "accessory": "tie"
+      },
+      "modernCountry": {
+        "name": "Modern Country",
+        "era": "Modern",
+        "lookType": "country",
+        "shape": "square",
+        "countryCode": "US",
+        "year": 2026,
+        "expression": "neutral"
+      }
+    },
+    "eraCharacterPresets": {
+      "Prehistory": [
+        "hunter",
+        "gatherer"
+      ],
+      "Ancient": [
+        "ancientSoldier",
+        "ancientRuler"
+      ],
+      "Medieval": [
+        "knight",
+        "medievalKing"
+      ],
+      "Early Modern": [
+        "haitianRevolutionary",
+        "french1803",
+        "britishEmpire",
+        "spanishEmpire",
+        "usaColonial"
+      ],
+      "Industrial": [
+        "unionSquare",
+        "confederateHistorical",
+        "empireBrazil",
+        "industrialWorker"
+      ],
+      "World Wars": [
+        "wwSoldier",
+        "officer"
+      ],
+      "Cold War": [
+        "coldWarSoldier",
+        "presenter"
+      ],
+      "Modern": [
+        "modernCountry",
+        "presenter"
+      ],
+      "Custom": [
+        "unionSquare",
+        "narratorSquare",
+        "narratorCircle",
+        "narratorTriangle",
+        "presenter"
+      ]
+    },
+    "backgrounds": {
+      "parchment": {
+        "name": "Parchment",
+        "kind": "map",
+        "fill": "#e6d7a8",
+        "ground": "#c8b47e",
+        "tags": [
+          "history",
+          "map"
+        ]
+      },
+      "worldMap": {
+        "name": "World Map",
+        "kind": "map",
+        "fill": "#a9c8dc",
+        "ground": "#d9d0ae",
+        "tags": [
+          "world",
+          "map"
+        ]
+      },
+      "americasMap": {
+        "name": "Americas Map",
+        "kind": "map",
+        "fill": "#a9c8dc",
+        "ground": "#c9c59d",
+        "tags": [
+          "americas",
+          "map"
+        ]
+      },
+      "europeMap": {
+        "name": "Europe Map",
+        "kind": "map",
+        "fill": "#b7cddd",
+        "ground": "#d9cfad",
+        "tags": [
+          "europe",
+          "map"
+        ]
+      },
+      "africaMap": {
+        "name": "Africa Map",
+        "kind": "map",
+        "fill": "#b7cddd",
+        "ground": "#d7c79d",
+        "tags": [
+          "africa",
+          "map"
+        ]
+      },
+      "asiaMap": {
+        "name": "Asia Map",
+        "kind": "map",
+        "fill": "#b7cddd",
+        "ground": "#d4c89e",
+        "tags": [
+          "asia",
+          "map"
+        ]
+      },
+      "prehistoricCamp": {
+        "name": "Prehistoric Camp",
+        "kind": "scene",
+        "tags": [
+          "prehistory",
+          "camp"
+        ]
+      },
+      "forest": {
+        "name": "Forest",
+        "kind": "scene",
+        "tags": [
+          "forest",
+          "nature"
+        ]
+      },
+      "countryside": {
+        "name": "Countryside",
+        "kind": "scene",
+        "tags": [
+          "field",
+          "village"
+        ]
+      },
+      "village": {
+        "name": "Village",
+        "kind": "scene",
+        "tags": [
+          "village",
+          "medieval"
+        ]
+      },
+      "castle": {
+        "name": "Castle Courtyard",
+        "kind": "scene",
+        "tags": [
+          "castle",
+          "medieval"
+        ]
+      },
+      "royalCourt": {
+        "name": "Royal Court",
+        "kind": "scene",
+        "tags": [
+          "royal",
+          "court"
+        ]
+      },
+      "throneRoom": {
+        "name": "Throne Room",
+        "kind": "scene",
+        "tags": [
+          "royal",
+          "interior"
+        ]
+      },
+      "shipDeck": {
+        "name": "Ship Deck",
+        "kind": "scene",
+        "tags": [
+          "ship",
+          "ocean",
+          "colonial"
+        ]
+      },
+      "colonialPort": {
+        "name": "Colonial Port",
+        "kind": "scene",
+        "tags": [
+          "port",
+          "colonial",
+          "trade"
+        ]
+      },
+      "harbor": {
+        "name": "Harbor",
+        "kind": "scene",
+        "tags": [
+          "harbor",
+          "trade"
+        ]
+      },
+      "ocean": {
+        "name": "Ocean",
+        "kind": "scene",
+        "tags": [
+          "ocean",
+          "navy"
+        ]
+      },
+      "city": {
+        "name": "City",
+        "kind": "scene",
+        "tags": [
+          "city"
+        ]
+      },
+      "cityBattleStreet": {
+        "name": "Battle Street",
+        "kind": "scene",
+        "tags": [
+          "battle",
+          "city",
+          "street"
+        ]
+      },
+      "battlefield": {
+        "name": "Battlefield",
+        "kind": "scene",
+        "tags": [
+          "war",
+          "battle"
+        ]
+      },
+      "trench": {
+        "name": "Trench",
+        "kind": "scene",
+        "tags": [
+          "world war",
+          "trench"
+        ]
+      },
+      "factory": {
+        "name": "Factory",
+        "kind": "scene",
+        "tags": [
+          "industrial",
+          "factory"
+        ]
+      },
+      "classroom": {
+        "name": "Classroom",
+        "kind": "scene",
+        "tags": [
+          "school",
+          "lecture"
+        ]
+      },
+      "library": {
+        "name": "Library",
+        "kind": "scene",
+        "tags": [
+          "library",
+          "education"
+        ]
+      },
+      "mapRoom": {
+        "name": "Map Room",
+        "kind": "scene",
+        "tags": [
+          "map",
+          "war room"
+        ]
+      },
+      "desert": {
+        "name": "Desert",
+        "kind": "scene",
+        "tags": [
+          "desert",
+          "campaign"
+        ]
+      }
+    },
+    "poses": {
+      "idle": {
+        "head": 0,
+        "torso": 0,
+        "leftUpperArm": -25,
+        "leftLowerArm": -10,
+        "rightUpperArm": 25,
+        "rightLowerArm": 10,
+        "leftUpperLeg": -8,
+        "leftLowerLeg": 5,
+        "rightUpperLeg": 8,
+        "rightLowerLeg": 5
+      },
+      "attention": {
+        "head": 0,
+        "torso": 0,
+        "leftUpperArm": -8,
+        "leftLowerArm": -10,
+        "rightUpperArm": 8,
+        "rightLowerArm": 10,
+        "leftUpperLeg": 0,
+        "leftLowerLeg": 5,
+        "rightUpperLeg": 0,
+        "rightLowerLeg": 5
+      },
+      "talk": {
+        "head": 0,
+        "torso": 0,
+        "leftUpperArm": -48,
+        "leftLowerArm": -35,
+        "rightUpperArm": 35,
+        "rightLowerArm": 25,
+        "leftUpperLeg": -8,
+        "leftLowerLeg": 5,
+        "rightUpperLeg": 8,
+        "rightLowerLeg": 5
+      },
+      "point": {
+        "head": 0,
+        "torso": 0,
+        "leftUpperArm": -18,
+        "leftLowerArm": -10,
+        "rightUpperArm": 82,
+        "rightLowerArm": 5,
+        "leftUpperLeg": -8,
+        "leftLowerLeg": 5,
+        "rightUpperLeg": 8,
+        "rightLowerLeg": 5
+      },
+      "armsWide": {
+        "head": 0,
+        "torso": 0,
+        "leftUpperArm": -92,
+        "leftLowerArm": -5,
+        "rightUpperArm": 92,
+        "rightLowerArm": 5,
+        "leftUpperLeg": -8,
+        "leftLowerLeg": 5,
+        "rightUpperLeg": 8,
+        "rightLowerLeg": 5
+      },
+      "handsTogether": {
+        "head": 0,
+        "torso": 0,
+        "leftUpperArm": -38,
+        "leftLowerArm": -62,
+        "rightUpperArm": 38,
+        "rightLowerArm": 62,
+        "leftUpperLeg": -8,
+        "leftLowerLeg": 5,
+        "rightUpperLeg": 8,
+        "rightLowerLeg": 5
+      },
+      "crouch": {
+        "head": 0,
+        "torso": -12,
+        "leftUpperArm": -18,
+        "leftLowerArm": -10,
+        "rightUpperArm": 18,
+        "rightLowerArm": 10,
+        "leftUpperLeg": 62,
+        "leftLowerLeg": -70,
+        "rightUpperLeg": 48,
+        "rightLowerLeg": -62
+      },
+      "kneel": {
+        "head": 0,
+        "torso": 0,
+        "leftUpperArm": -25,
+        "leftLowerArm": -10,
+        "rightUpperArm": 25,
+        "rightLowerArm": 10,
+        "leftUpperLeg": 12,
+        "leftLowerLeg": 72,
+        "rightUpperLeg": 55,
+        "rightLowerLeg": -75
+      },
+      "fight": {
+        "head": 0,
+        "torso": 0,
+        "leftUpperArm": -55,
+        "leftLowerArm": 35,
+        "rightUpperArm": 105,
+        "rightLowerArm": -40,
+        "leftUpperLeg": -18,
+        "leftLowerLeg": 5,
+        "rightUpperLeg": 18,
+        "rightLowerLeg": 5
+      },
+      "victory": {
+        "head": 0,
+        "torso": 0,
+        "leftUpperArm": -145,
+        "leftLowerArm": 0,
+        "rightUpperArm": 145,
+        "rightLowerArm": 0,
+        "leftUpperLeg": -8,
+        "leftLowerLeg": 5,
+        "rightUpperLeg": 8,
+        "rightLowerLeg": 5
+      },
+      "marchA": {
+        "head": 0,
+        "torso": 0,
+        "leftUpperArm": -55,
+        "leftLowerArm": -10,
+        "rightUpperArm": 55,
+        "rightLowerArm": 10,
+        "leftUpperLeg": 24,
+        "leftLowerLeg": 20,
+        "rightUpperLeg": -24,
+        "rightLowerLeg": -10
+      },
+      "marchB": {
+        "head": 0,
+        "torso": 0,
+        "leftUpperArm": 55,
+        "leftLowerArm": -10,
+        "rightUpperArm": -55,
+        "rightLowerArm": 10,
+        "leftUpperLeg": -24,
+        "leftLowerLeg": -10,
+        "rightUpperLeg": 24,
+        "rightLowerLeg": 20
+      },
+      "spearWalk": {
+        "head": 0,
+        "torso": -5,
+        "leftUpperArm": -48,
+        "leftLowerArm": -18,
+        "rightUpperArm": 35,
+        "rightLowerArm": 12,
+        "leftUpperLeg": 28,
+        "leftLowerLeg": 12,
+        "rightUpperLeg": -24,
+        "rightLowerLeg": 20
+      }
+    },
+    "states": {
+      "standing": "idle",
+      "walking": "marchA",
+      "talking": "talk",
+      "pointing": "point",
+      "fighting": "fight",
+      "kneeling": "kneel",
+      "celebrating": "victory"
+    },
+    "props": {
+      "none": {
+        "name": "None"
+      },
+      "spear": {
+        "name": "Spear"
+      },
+      "bow": {
+        "name": "Bow"
+      },
+      "sword": {
+        "name": "Sword"
+      },
+      "rifle": {
+        "name": "Rifle"
+      },
+      "musket": {
+        "name": "Musket"
+      },
+      "axe": {
+        "name": "Axe"
+      },
+      "torch": {
+        "name": "Torch"
+      },
+      "staff": {
+        "name": "Staff"
+      }
+    },
+    "bodyStyles": {
+      "historyCutout": {
+        "name": "History Cutout",
+        "torsoWidth": 1,
+        "limbWidth": 1,
+        "headScale": 1
+      },
+      "humanCartoon": {
+        "name": "Human Cartoon",
+        "torsoWidth": 1.25,
+        "limbWidth": 1.35,
+        "headScale": 0.82
+      },
+      "broad": {
+        "name": "Broad / Heavy",
+        "torsoWidth": 1.65,
+        "limbWidth": 1.55,
+        "headScale": 1.05
+      },
+      "tall": {
+        "name": "Tall / Slim",
+        "torsoWidth": 0.82,
+        "limbWidth": 0.78,
+        "headScale": 0.82,
+        "length": 1.18
+      },
+      "child": {
+        "name": "Child",
+        "torsoWidth": 0.8,
+        "limbWidth": 0.75,
+        "headScale": 1.22,
+        "length": 0.72
+      },
+      "heroic": {
+        "name": "Heroic",
+        "torsoWidth": 1.45,
+        "limbWidth": 1.35,
+        "headScale": 0.78,
+        "length": 1.08
+      }
+    },
+    "animationClips": {
+      "slide": {
+        "name": "Slide",
+        "duration": 2,
+        "poses": [
+          "idle",
+          "idle"
+        ],
+        "move": 180
+      },
+      "talkLoop": {
+        "name": "Talk / Explain",
+        "duration": 2.4,
+        "poses": [
+          "idle",
+          "talk",
+          "point",
+          "talk",
+          "idle"
+        ],
+        "move": 0,
+        "mouth": true
+      },
+      "walk": {
+        "name": "Walk",
+        "duration": 2,
+        "poses": [
+          "marchA",
+          "marchB",
+          "marchA",
+          "marchB",
+          "marchA"
+        ],
+        "move": 150
+      },
+      "attack": {
+        "name": "Attack",
+        "duration": 1.6,
+        "poses": [
+          "attention",
+          "fight",
+          "fight",
+          "attention"
+        ],
+        "move": 55
+      },
+      "celebrate": {
+        "name": "Celebrate",
+        "duration": 2,
+        "poses": [
+          "idle",
+          "armsWide",
+          "victory",
+          "armsWide"
+        ],
+        "move": 0
+      }
+    },
+    "bubbleStyles": {
+      "speech": {
+        "name": "Speech Bubble",
+        "fill": "#fff",
+        "stroke": "#222",
+        "text": "#171717",
+        "tail": "speech",
+        "radius": 22
+      },
+      "thought": {
+        "name": "Thought Bubble",
+        "fill": "#fff",
+        "stroke": "#222",
+        "text": "#171717",
+        "tail": "thought",
+        "radius": 28
+      },
+      "caption": {
+        "name": "Caption Box",
+        "fill": "#111d",
+        "stroke": "#0000",
+        "text": "#fff",
+        "tail": "none",
+        "radius": 8
+      },
+      "history": {
+        "name": "History Parchment",
+        "fill": "#f3e4bd",
+        "stroke": "#5b4630",
+        "text": "#302419",
+        "tail": "speech",
+        "radius": 12
+      },
+      "comic": {
+        "name": "Comic Burst",
+        "fill": "#fff8cf",
+        "stroke": "#222",
+        "text": "#111",
+        "tail": "burst",
+        "radius": 4
+      },
+      "subtitle": {
+        "name": "Subtitle",
+        "fill": "#000a",
+        "stroke": "#0000",
+        "text": "#fff",
+        "tail": "none",
+        "radius": 2
+      }
+    },
+    "historicalFlags": {
+      "US": [
+        {
+          "from": 1775,
+          "to": 1776,
+          "id": "grand-union",
+          "label": "Thirteen Colonies — Grand Union",
+          "pattern": "grandUnion"
+        },
+        {
+          "from": 1777,
+          "to": 1794,
+          "id": "us-13",
+          "label": "United States — 13-star flag",
+          "pattern": "us13"
+        },
+        {
+          "from": 1795,
+          "to": 1817,
+          "id": "us-15",
+          "label": "United States — 15-star flag",
+          "pattern": "us15"
+        },
+        {
+          "from": 1818,
+          "to": 1860,
+          "id": "us-union-19c",
+          "label": "United States — Union",
+          "pattern": "usUnion"
+        },
+        {
+          "from": 1861,
+          "to": 1865,
+          "id": "union",
+          "label": "United States / Union",
+          "pattern": "usUnion"
+        },
+        {
+          "from": 1866,
+          "to": 9999,
+          "id": "us",
+          "label": "United States",
+          "pattern": "emoji"
+        }
+      ],
+      "CSA": [
+        {
+          "from": 1861,
+          "to": 1865,
+          "id": "confederate-battle",
+          "label": "Confederate battle flag (historical)",
+          "pattern": "confederate"
+        }
+      ],
+      "GB": [
+        {
+          "from": 1600,
+          "to": 1706,
+          "id": "england",
+          "label": "Kingdom of England",
+          "pattern": "stGeorge"
+        },
+        {
+          "from": 1707,
+          "to": 1800,
+          "id": "great-britain",
+          "label": "Kingdom of Great Britain",
+          "pattern": "union1707"
+        },
+        {
+          "from": 1801,
+          "to": 9999,
+          "id": "uk",
+          "label": "United Kingdom",
+          "pattern": "union1801"
+        }
+      ],
+      "FR": [
+        {
+          "from": 1600,
+          "to": 1789,
+          "id": "bourbon",
+          "label": "Kingdom of France",
+          "pattern": "bourbon"
+        },
+        {
+          "from": 1790,
+          "to": 1814,
+          "id": "tricolor",
+          "label": "France — Tricolor",
+          "pattern": "france"
+        },
+        {
+          "from": 1815,
+          "to": 1829,
+          "id": "bourbon-restoration",
+          "label": "Bourbon Restoration",
+          "pattern": "bourbon"
+        },
+        {
+          "from": 1830,
+          "to": 9999,
+          "id": "france",
+          "label": "France",
+          "pattern": "france"
+        }
+      ],
+      "ES": [
+        {
+          "from": 1600,
+          "to": 1784,
+          "id": "burgundy",
+          "label": "Spanish Monarchy — Cross of Burgundy",
+          "pattern": "burgundy"
+        },
+        {
+          "from": 1785,
+          "to": 1930,
+          "id": "spain-red-yellow",
+          "label": "Spain — red-yellow-red",
+          "pattern": "spain"
+        },
+        {
+          "from": 1931,
+          "to": 1938,
+          "id": "spanish-republic",
+          "label": "Spanish Republic",
+          "pattern": "spainRepublic"
+        },
+        {
+          "from": 1939,
+          "to": 9999,
+          "id": "spain",
+          "label": "Spain",
+          "pattern": "spain"
+        }
+      ],
+      "HT": [
+        {
+          "from": 1791,
+          "to": 1802,
+          "id": "saint-domingue",
+          "label": "Saint-Domingue / French colonial era",
+          "pattern": "france"
+        },
+        {
+          "from": 1803,
+          "to": 1803,
+          "id": "haiti-revolution",
+          "label": "Haitian revolutionary bicolor",
+          "pattern": "haiti"
+        },
+        {
+          "from": 1804,
+          "to": 9999,
+          "id": "haiti",
+          "label": "Haiti",
+          "pattern": "haiti"
+        }
+      ],
+      "BR": [
+        {
+          "from": 1600,
+          "to": 1815,
+          "id": "colonial-brazil",
+          "label": "Colonial Brazil / Portuguese monarchy",
+          "pattern": "portugalRoyal"
+        },
+        {
+          "from": 1816,
+          "to": 1821,
+          "id": "uk-portugal-brazil",
+          "label": "United Kingdom of Portugal, Brazil and the Algarves",
+          "pattern": "portugalRoyal"
+        },
+        {
+          "from": 1822,
+          "to": 1888,
+          "id": "empire-brazil",
+          "label": "Empire of Brazil",
+          "pattern": "brazilEmpire"
+        },
+        {
+          "from": 1889,
+          "to": 9999,
+          "id": "brazil",
+          "label": "Brazil",
+          "pattern": "brazil"
+        }
+      ],
+      "PT": [
+        {
+          "from": 1600,
+          "to": 1815,
+          "id": "portugal-royal",
+          "label": "Kingdom of Portugal",
+          "pattern": "portugalRoyal"
+        },
+        {
+          "from": 1816,
+          "to": 1821,
+          "id": "uk-portugal-brazil",
+          "label": "United Kingdom of Portugal, Brazil and the Algarves",
+          "pattern": "portugalRoyal"
+        },
+        {
+          "from": 1822,
+          "to": 1910,
+          "id": "portugal-monarchy",
+          "label": "Kingdom of Portugal",
+          "pattern": "portugalRoyal"
+        },
+        {
+          "from": 1911,
+          "to": 9999,
+          "id": "portugal",
+          "label": "Portugal",
+          "pattern": "emoji"
+        }
+      ],
+      "NL": [
+        {
+          "from": 1600,
+          "to": 1649,
+          "id": "princes-flag",
+          "label": "Dutch Republic — Prince’s Flag",
+          "pattern": "prince"
+        },
+        {
+          "from": 1650,
+          "to": 9999,
+          "id": "netherlands",
+          "label": "Netherlands",
+          "pattern": "netherlands"
+        }
+      ],
+      "RU": [
+        {
+          "from": 1696,
+          "to": 1857,
+          "id": "russia-tricolor",
+          "label": "Russian Empire — tricolor",
+          "pattern": "russia"
+        },
+        {
+          "from": 1858,
+          "to": 1882,
+          "id": "russia-imperial",
+          "label": "Russian Empire — black/yellow/white",
+          "pattern": "russiaImperial"
+        },
+        {
+          "from": 1883,
+          "to": 1917,
+          "id": "russia-tricolor-empire",
+          "label": "Russian Empire — tricolor",
+          "pattern": "russia"
+        },
+        {
+          "from": 1922,
+          "to": 1991,
+          "id": "ussr",
+          "label": "Soviet Union",
+          "pattern": "ussr"
+        },
+        {
+          "from": 1992,
+          "to": 9999,
+          "id": "russia",
+          "label": "Russia",
+          "pattern": "russia"
+        }
+      ],
+      "DE": [
+        {
+          "from": 1871,
+          "to": 1918,
+          "id": "german-empire",
+          "label": "German Empire",
+          "pattern": "germanEmpire"
+        },
+        {
+          "from": 1919,
+          "to": 1932,
+          "id": "weimar",
+          "label": "Weimar Germany",
+          "pattern": "germany"
+        },
+        {
+          "from": 1933,
+          "to": 1945,
+          "id": "germany-1933",
+          "label": "Germany (1933–1945; symbol simplified)",
+          "pattern": "germany1933"
+        },
+        {
+          "from": 1949,
+          "to": 9999,
+          "id": "germany",
+          "label": "Germany",
+          "pattern": "germany"
+        }
+      ],
+      "PRU": [
+        {
+          "from": 1701,
+          "to": 1871,
+          "id": "prussia",
+          "label": "Kingdom of Prussia",
+          "pattern": "prussia"
+        }
+      ],
+      "HRE": [
+        {
+          "from": 1600,
+          "to": 1806,
+          "id": "hre",
+          "label": "Holy Roman Empire",
+          "pattern": "hre"
+        }
+      ],
+      "AT": [
+        {
+          "from": 1700,
+          "to": 1866,
+          "id": "habsburg",
+          "label": "Habsburg Monarchy / Austrian Empire",
+          "pattern": "habsburg"
+        },
+        {
+          "from": 1867,
+          "to": 1918,
+          "id": "austria-hungary",
+          "label": "Austria-Hungary",
+          "pattern": "habsburg"
+        },
+        {
+          "from": 1919,
+          "to": 9999,
+          "id": "austria",
+          "label": "Austria",
+          "pattern": "austria"
+        }
+      ],
+      "OTT": [
+        {
+          "from": 1600,
+          "to": 1922,
+          "id": "ottoman",
+          "label": "Ottoman Empire",
+          "pattern": "ottoman"
+        }
+      ],
+      "MX": [
+        {
+          "from": 1821,
+          "to": 1863,
+          "id": "mexico-first",
+          "label": "Mexico",
+          "pattern": "mexico"
+        },
+        {
+          "from": 1864,
+          "to": 1867,
+          "id": "mexican-empire",
+          "label": "Second Mexican Empire",
+          "pattern": "mexicoEmpire"
+        },
+        {
+          "from": 1868,
+          "to": 9999,
+          "id": "mexico",
+          "label": "Mexico",
+          "pattern": "mexico"
+        }
+      ],
+      "GC": [
+        {
+          "from": 1819,
+          "to": 1831,
+          "id": "gran-colombia",
+          "label": "Gran Colombia",
+          "pattern": "granColombia"
+        }
+      ],
+      "JP": [
+        {
+          "from": 1600,
+          "to": 1867,
+          "id": "tokugawa",
+          "label": "Tokugawa Japan (stylized mon)",
+          "pattern": "japanMon"
+        },
+        {
+          "from": 1868,
+          "to": 9999,
+          "id": "japan",
+          "label": "Japan",
+          "pattern": "japan"
+        }
+      ],
+      "CN": [
+        {
+          "from": 1644,
+          "to": 1911,
+          "id": "qing",
+          "label": "Qing dynasty",
+          "pattern": "qing"
+        },
+        {
+          "from": 1912,
+          "to": 1948,
+          "id": "roc",
+          "label": "Republic of China",
+          "pattern": "roc"
+        },
+        {
+          "from": 1949,
+          "to": 9999,
+          "id": "china",
+          "label": "China",
+          "pattern": "china"
+        }
+      ],
+      "IR": [
+        {
+          "from": 1600,
+          "to": 1735,
+          "id": "safavid",
+          "label": "Safavid Persia (stylized)",
+          "pattern": "persia"
+        },
+        {
+          "from": 1736,
+          "to": 1924,
+          "id": "persia",
+          "label": "Persia (stylized)",
+          "pattern": "persia"
+        },
+        {
+          "from": 1925,
+          "to": 1978,
+          "id": "iran-monarchy",
+          "label": "Iran — monarchy era",
+          "pattern": "iranMonarchy"
+        },
+        {
+          "from": 1979,
+          "to": 9999,
+          "id": "iran",
+          "label": "Iran",
+          "pattern": "emoji"
+        }
+      ],
+      "IN": [
+        {
+          "from": 1600,
+          "to": 1857,
+          "id": "mughal",
+          "label": "Mughal Empire (stylized)",
+          "pattern": "mughal"
+        },
+        {
+          "from": 1858,
+          "to": 1946,
+          "id": "british-india",
+          "label": "British India (stylized)",
+          "pattern": "britishIndia"
+        },
+        {
+          "from": 1947,
+          "to": 9999,
+          "id": "india",
+          "label": "India",
+          "pattern": "india"
+        }
+      ]
+    },
+    "updatedAt": "2026-10-08T20:50:34.649Z"
+  }
+}
