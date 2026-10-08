@@ -1,134 +1,167 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>MEP Video Maker</title>
-  <link rel="stylesheet" href="css/style.css?v=20261008b">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>MEP Video Maker</title>
+<link rel="stylesheet" href="css/style.css?v=20261008c">
 </head>
 <body>
 <div id="app">
-  <header class="topbar">
-    <div class="brand"><strong>MEP</strong><span>Video Maker</span></div><nav class="modeTabs"><button id="editorMode" class="active">Editor</button><button id="videoMode">Video / Playback</button></nav>
-    <label>Project <input id="projectName" value="Untitled History"></label>
-    <label>Category
-      <select id="category"><option>History</option><option>Biography</option><option>War</option><option>Politics</option><option>Comedy</option><option>Education</option><option>Custom</option></select>
-    </label>
-    <button id="quickStart" class="primary">Quick Start</button><button id="loadHaitiDemo">Haiti Demo</button><button id="loadStarterPack">Full Starter Pack</button><a class="fileButton" href="presets/mep-starter-pack-v4.mep.json" download>Download Starter Pack JSON</a><a class="fileButton" href="presets/haiti-vertieres-30s.mep.json" download>Download Haiti JSON</a><button id="newProject">New</button><button id="aiDirector">✦ AI Director</button><button id="saveProject">Save Local</button><button id="saveCloud">☁ Save Cloud</button><button id="loadCloud">☁ Projects</button><button id="exportProject">Export JSON</button>
-    <label class="fileButton">Import JSON<input id="importProject" type="file" accept=".json,application/json"></label>
-<button id="importInspectorButton">Import / Project Info</button>
-  </header><div id="bootStatus" class="bootStatus">Starting MEP…</div>
+<header class="topbar">
+  <div class="brand"><strong>MEP</strong><span>Video Maker</span></div>
+  <nav class="modeTabs"><button id="editorMode" class="active">Editor</button><button id="videoMode">Video</button></nav>
+  <label class="projectNameLabel">Project <input id="projectName" value="MEP History Video"></label>
+  <div class="yearControl">
+    <label>Year <input id="projectYear" type="number" min="1600" max="2026" value="1863"></label>
+    <input id="yearSlider" type="range" min="1600" max="2026" value="1863" step="1">
+    <b id="eraBadge">Industrial</b>
+  </div>
+  <button id="quickStart" class="primary">Starter Scene</button>
+  <button id="loadStarterPack">Full Starter Pack</button>
+  <button id="loadHaitiDemo">Haiti Demo</button>
+  <button id="saveProject">Save Local</button>
+  <button id="saveCloud">Save Firestore</button>
+  <button id="loadCloud">Cloud Projects</button>
+  <button id="exportProject">Export JSON</button>
+  <label class="fileButton">Import JSON<input id="importProject" type="file" accept=".json,application/json"></label>
+</header>
+<div id="bootStatus" class="bootStatus">Starting MEP…</div>
 
-  <main class="workspace">
-    <aside class="panel library">
-      <h2>Scene</h2>
-<label>Scene <select id="sceneSelect"></select></label>
-<div class="sceneActions"><button id="prevScene">◀</button><button id="addScene">+ Scene</button><button id="duplicateScene">Duplicate</button><button id="deleteScene">Delete</button><button id="nextScene">▶</button></div>
-<label>Transition <select id="sceneTransition"><option value="cut">Cut</option><option value="fade">Fade</option><option value="crossfade">Crossfade</option></select></label>
-<div class="cameraGrid"><label>Camera X <input id="cameraX" type="number" value="640"></label><label>Camera Y <input id="cameraY" type="number" value="360"></label><label>Zoom <input id="cameraZoom" type="number" min=".5" max="3" step=".05" value="1"></label></div>
-<label>Scene Notes <textarea id="sceneNotes" placeholder="Director notes, shot idea, historical note..."></textarea></label>
-<div id="sceneBoard" class="sceneBoard"></div><label>Era <select id="era"></select></label><label>Background <span class="cycle"><button id="prevBackground">◀</button><select id="backgroundPreset"></select><button id="nextBackground">▶</button></span></label><label>Tags <input id="sceneTags" placeholder="war, france, 1800s"></label><label class="fileButton wide">Use Local Background<input id="backgroundUpload" type="file" accept="image/*"></label><button id="clearBackgroundImage">Use Drawn Background</button><h2>Characters</h2><div id="quickPresetGrid" class="quickPresetGrid"></div>
-      <label>Preset <span class="cycle"><button id="prevCharacterPreset">◀</button><select id="characterPreset"></select><button id="nextCharacterPreset">▶</button></span></label><button id="openCharacterGallery" class="primary">+ Character Gallery</button><button id="addPresetCharacter">+ Add Selected Preset</button><button id="addCharacter">+ Blank Character</button><button id="openStudio">✎ Character Studio</button>
-      <div id="characterList"></div>
-      <h2>Selected</h2>
-      <label>Name <input id="charName" value=""></label>
-      <label>X <input id="charX" type="number"></label>
-      <label>Y <input id="charY" type="number"></label>
-      <label>Scale <input id="charScale" type="number" min=".2" max="3" step=".1"></label>
-      <label>Facing <select id="charFacing"><option value="1">Right</option><option value="-1">Left</option></select></label>
-      <h2>Character Maker</h2><label>Body Type <span class="cycle"><button id="prevBody">◀</button><select id="bodyStyle"></select><button id="nextBody">▶</button></span></label><label>Skin <input id="skinColor" type="color"></label><label>Hair <input id="hairColor" type="color"></label><label>Shirt <input id="shirtColor" type="color"></label><label>Tags <input id="charTags" placeholder="king, soldier"></label><button id="saveCharacterCloud">☁ Save Character JSON</button><button id="deleteCharacter" class="danger">Delete Character</button>
-    </aside>
+<main class="workspace">
+  <aside id="scenePanel" class="panel scenePanel">
+    <h2>Scene</h2>
+    <label>Scene <select id="sceneSelect"></select></label>
+    <div class="sceneActions"><button id="prevScene">◀</button><button id="addScene">+ Scene</button><button id="duplicateScene">Duplicate</button><button id="deleteScene">Delete</button><button id="nextScene">▶</button></div>
+    <label>Transition <select id="sceneTransition"><option value="cut">Cut</option><option value="fade">Fade</option><option value="crossfade">Crossfade</option></select></label>
+    <div id="sceneBoard" class="sceneBoard"></div>
 
-    <section class="stageArea">
-      <div class="stageToolbar">
-        <button id="play">▶ Play</button><button id="stop">■ Stop</button>
-        <span id="timeLabel">0.00 / 8.00s</span>
-        <label>Duration <input id="duration" type="number" value="8" min="1" max="300" step=".5"> s</label>
-        <label>FPS <select id="fps"><option>24</option><option selected>30</option><option>60</option></select></label>
-      </div>
-      <div class="canvasWrap"><canvas id="stage" width="1280" height="720"></canvas></div>
-      <p class="hint">Drag characters to position them. Pose the rig with joint controls, apply preset poses, or generate a March animation. Keyframes store movement and pose data.</p>
-    </section>
+    <h2 id="backgroundSection">Background</h2>
+    <label>Preset <span class="cycle"><button id="prevBackground">◀</button><select id="backgroundPreset"></select><button id="nextBackground">▶</button></span></label>
+    <div class="backgroundPreviewInfo"><span id="backgroundModeLabel">Drawn background</span><span id="backgroundAssetLabel"></span></div>
+    <label class="fileButton wide">Upload historical/photo background<input id="backgroundUpload" type="file" accept="image/*"></label>
+    <div class="buttonGrid"><button id="useDrawnBackground">Use Drawn</button><button id="addBackgroundKeyframe">◆ BG Keyframe</button></div>
+    <label>Fit <select id="backgroundFit"><option value="cover">Cover</option><option value="contain">Contain</option><option value="stretch">Stretch</option></select></label>
+    <label>Opacity <input id="backgroundOpacity" type="range" min="0" max="1" step=".05" value="1"></label>
+    <div id="backgroundKeyframes" class="miniList"></div>
 
-<section id="videoDeck" class="videoDeck hidden"><div class="videoStage"><canvas id="videoStage" width="1280" height="720"></canvas><div id="videoCaption" class="videoCaption"></div></div><div class="transport"><button id="videoPrevScene">Prev Scene</button><button id="videoPlayPause" class="primary">Play / Pause</button><button id="videoStop">Stop</button><button id="videoNextScene">Next Scene</button><span id="videoClock">00:00 / 00:00</span><button id="recordVideo">Record WebM</button></div><input id="videoScrubber" class="videoScrubber" type="range" min="0" max="1" value="0" step=".01"><div id="sceneStrip" class="sceneStrip"></div><div class="narrationPanel"><strong>Scene narration / caption</strong><textarea id="sceneNarration" placeholder="Narration notes for this scene"></textarea><input id="sceneCaption" placeholder="On-screen caption"></div></section>
-    <aside class="panel pose">
-      <h2>Character State</h2><label>State <span class="cycle"><button id="prevState">◀</button><select id="characterState"></select><button id="nextState">▶</button></span></label><label>Expression <select id="expression"><option>neutral</option><option>happy</option><option>sad</option><option>angry</option></select></label><label>Prop / Weapon <span class="cycle"><button id="prevProp">◀</button><select id="characterProp"></select><button id="nextProp">▶</button></span></label><button id="applyState" class="primary">Apply State</button><h2>Animation</h2>
-<label>Pose <select id="posePreset"></select></label>
-<button id="applyPose">Apply Pose</button><button id="saveCustomPose">Save Current Pose</button>
-<label>Clip <select id="animationClip"></select></label>
-<label>Clip Duration <input id="clipDuration" type="number" min=".5" max="20" step=".1" value="2"></label>
-<button id="generateClip" class="primary">Generate Clip at Playhead</button>
-<label>Keyframe Easing <select id="keyframeEasing"></select></label>
-<button id="makeMarch">Quick March</button><button id="saveAnimationCloud">☁ Save Animation JSON</button><h2>Dialogue / Bubbles</h2>
-<label>Text <textarea id="bubbleText" placeholder="What should the character say?"></textarea></label>
-<label>Style <select id="bubbleStyle"></select></label>
-<div class="bubbleGrid"><label>Font <input id="bubbleFontSize" type="number" min="12" max="72" value="28"></label><label>Width <input id="bubbleWidth" type="number" min="100" max="800" value="300"></label></div>
-<div class="bubbleGrid"><label>Start <input id="bubbleStart" type="number" min="0" step=".1" value="0"></label><label>End <input id="bubbleEnd" type="number" min="0" step=".1" value="8"></label></div>
-<div class="bubbleGrid"><label>Fill <input id="bubbleFill" type="color" value="#ffffff"></label><label>Text <input id="bubbleTextColor" type="color" value="#171717"></label></div>
-<button id="addBubble" class="primary">+ Add Bubble</button><button id="deleteBubble">Delete Selected Bubble</button>
-<div id="bubbleList"></div><h2>Pose</h2>
-      <div id="jointControls"></div>
-      <button id="resetPose">Reset Pose</button>
-      <button id="addKeyframe" class="primary">◆ Add / Update Keyframe</button>
-      <button id="deleteKeyframe">Delete Keyframe</button>
-      <h2>Project</h2>
-      <div class="stat"><span>Autosave</span><b id="saveStatus">Local</b></div>
-      <div class="stat"><span>Characters</span><b id="charCount">0</b></div>
-      <div class="stat"><span>Keyframes</span><b id="keyCount">0</b></div>
-    </aside>
-  </main>
+    <h2>Camera</h2>
+    <div class="cameraGrid"><label>X <input id="cameraX" type="number" value="640"></label><label>Y <input id="cameraY" type="number" value="360"></label><label>Zoom <input id="cameraZoom" type="number" min=".5" max="3" step=".05" value="1"></label></div>
+  </aside>
 
-  <section class="timelinePanel">
-    <div class="timelineHeader"><strong>Timeline</strong><input id="scrubber" type="range" min="0" max="8" value="0" step=".01"></div>
-    <div id="timeline"></div>
+  <section id="stageArea" class="stageArea">
+    <div class="stageToolbar">
+      <button id="play">▶ Play</button><button id="stop">■ Stop</button>
+      <span id="timeLabel">0.00 / 8.00s</span>
+      <label>Duration <input id="duration" type="number" min="1" max="300" step=".5" value="8"></label>
+      <label>FPS <select id="fps"><option>24</option><option selected>30</option><option>60</option></select></label>
+      <button id="addKeyframe" class="primary">◆ Keyframe</button>
+    </div>
+    <div class="canvasWrap"><canvas id="stage" width="1280" height="720"></canvas></div>
+    <div class="canvasHint">Tap a character to select it. Drag it to move. Shape/country characters animate mainly by movement, scale, rotation, eyes and mouth.</div>
   </section>
+
+  <aside id="characterPanel" class="panel characterPanel">
+    <h2>Characters</h2>
+    <div id="quickPresetGrid" class="quickPresetGrid"></div>
+    <label>Preset <select id="characterPreset"></select></label>
+    <div class="buttonGrid"><button id="addPresetCharacter" class="primary">+ Add Preset</button><button id="openCharacterGallery">Gallery</button></div>
+    <button id="addCharacter">+ Default Union Square</button>
+    <div id="characterList" class="miniList"></div>
+
+    <h2>Selected Character</h2>
+    <label>Name <input id="charName"></label>
+    <label>Look <select id="characterLook"></select></label>
+    <label id="countryShapeRow">Country Shape <select id="countryShape"></select></label>
+    <label id="countryRow">Country / State <select id="countryCode"></select></label>
+    <div id="flagLabel" class="flagLabel"></div>
+    <label>Expression <select id="expression"></select></label>
+    <label>Mouth <select id="mouthMode"><option value="on">Line / dot</option><option value="off">No mouth</option></select></label>
+    <button id="toggleMouth">Toggle Mouth Open</button>
+    <label>Hat <select id="hatStyle"><option value="none">None</option><option value="tricorn">Tricorn</option><option value="officer">Officer</option><option value="helmet">Helmet</option><option value="crown">Crown</option></select></label>
+    <label>Hair <select id="hairStyle"><option value="none">None</option><option value="short">Short</option><option value="side">Side</option><option value="messy">Messy</option><option value="wave">Wave</option></select></label>
+    <label>Prop <select id="characterProp"></select></label>
+    <div class="transformGrid"><label>X <input id="charX" type="number"></label><label>Y <input id="charY" type="number"></label><label>Scale <input id="charScale" type="number" min=".2" max="4" step=".05"></label><label>Rotate <input id="charRotation" type="number" min="-180" max="180"></label></div>
+    <div class="buttonGrid"><button id="flipCharacter">Flip</button><button id="deleteCharacter" class="danger">Delete</button></div>
+
+    <details id="humanoidDetails"><summary>Humanoid controls</summary>
+      <label>Body <select id="bodyStyle"></select></label>
+      <label>Skin <input id="skinColor" type="color"></label>
+      <label>Shirt <input id="shirtColor" type="color"></label>
+      <label>Hair color <input id="hairColor" type="color"></label>
+      <label>Pose <select id="posePreset"></select></label>
+      <button id="applyPose">Apply Pose</button>
+      <div id="jointControls"></div>
+    </details>
+
+    <h2>Motion</h2>
+    <label>Clip <select id="animationClip"></select></label>
+    <label>Seconds <input id="clipDuration" type="number" min=".5" max="20" step=".1" value="2"></label>
+    <label>Easing <select id="keyframeEasing"></select></label>
+    <button id="generateClip" class="primary">Generate Clip at Playhead</button>
+    <div class="buttonGrid"><button id="deleteKeyframe">Delete Keyframe</button><button id="saveCharacterCloud">Save Character</button></div>
+  </aside>
+
+  <aside id="scriptPanel" class="panel scriptPanel">
+    <h2>Narration Script</h2>
+    <label class="stack">Project Script<textarea id="projectScript" rows="9" placeholder="Overall narration, outline, facts, hooks..."></textarea></label>
+    <label class="stack">Current Scene Script<textarea id="sceneScript" rows="9" placeholder="What you will narrate during this scene..."></textarea></label>
+    <label class="stack">On-screen Caption<textarea id="sceneCaption" rows="3" placeholder="Short caption shown during playback"></textarea></label>
+    <label class="stack">Scene Notes<textarea id="sceneNotes" rows="5" placeholder="Shot direction, history note, visual idea..."></textarea></label>
+    <div class="scriptTools"><button id="copySceneScript">Copy Scene Script</button><button id="copyProjectScript">Copy Project Script</button></div>
+    <h2>Dialogue / Bubble</h2>
+    <label class="stack">Text<textarea id="bubbleText" rows="3"></textarea></label>
+    <label>Style <select id="bubbleStyle"></select></label>
+    <div class="transformGrid"><label>Start <input id="bubbleStart" type="number" step=".1"></label><label>End <input id="bubbleEnd" type="number" step=".1"></label></div>
+    <div class="buttonGrid"><button id="addBubble">+ Bubble</button><button id="deleteBubble">Delete</button></div>
+    <div id="bubbleList" class="miniList"></div>
+  </aside>
+
+  <section id="videoDeck" class="videoDeck">
+    <div class="videoStage"><canvas id="videoStage" width="1280" height="720"></canvas><div id="videoCaption" class="videoCaption"></div></div>
+    <div class="transport"><button id="videoPrevScene">Prev Scene</button><button id="videoPlayPause" class="primary">Play / Pause</button><button id="videoStop">Stop</button><button id="videoNextScene">Next Scene</button><span id="videoClock">00:00 / 00:00</span><button id="recordVideo">Record WebM</button></div>
+    <input id="videoScrubber" type="range" min="0" max="1" value="0" step=".01">
+    <div id="sceneStrip" class="sceneStrip"></div>
+    <div class="teleprompter"><strong>Narration</strong><div id="videoScript"></div></div>
+  </section>
+</main>
+
+<section id="timelinePanel" class="timelinePanel">
+  <div class="timelineHeader"><strong>Timeline</strong><input id="scrubber" type="range" min="0" max="8" value="0" step=".01"></div>
+  <div id="timeline"></div>
+</section>
 </div>
 
-<dialog id="importInspectorDialog"><div class="importInspector"><header><div><h2>Project Import / Inspector</h2><p>Inspect the current project structure or import a MEP JSON file.</p></div><button id="closeImportInspector">Close</button></header><div id="importSummary"></div><textarea id="rawProjectJson" rows="14" spellcheck="false"></textarea><div class="aiActions"><button id="refreshProjectJson">Refresh JSON</button><button id="applyRawProjectJson" class="primary">Apply JSON</button><button id="downloadProjectJson">Download JSON</button></div></div></dialog>
-<dialog id="characterGalleryDialog">
-  <div class="galleryShell">
-    <header><div><h2>Character Gallery</h2><p>Tap a preset to add it to the current scene.</p></div><button id="closeCharacterGallery">Close</button></header>
-    <div id="characterGalleryList" class="characterGalleryList"></div>
+<button id="helperAvatar" class="helperAvatar" aria-label="Open MEP helper"><span class="helperFace">•‿•</span></button>
+<aside id="helperPanel" class="helperPanel">
+  <header><div><strong>MEP Navigator</strong><small id="helperStatus">Ready</small></div><button id="closeHelper">×</button></header>
+  <div class="helperGrid">
+    <button data-jump="#stageArea">Canvas</button><button data-jump="#scenePanel">Scenes</button>
+    <button data-jump="#backgroundSection">Backgrounds</button><button data-jump="#characterPanel">Characters</button>
+    <button data-jump="#scriptPanel">Script</button><button data-jump="#timelinePanel">Timeline</button>
   </div>
-</dialog>
-<dialog id="characterStudioDialog">
-  <div class="studioShell">
-    <header><div><h2>Character Studio</h2><p>Draw, import artwork, lasso a cutout, and assign pieces to a custom rig.</p></div><button id="closeStudio">Close</button></header>
-    <div class="studioTools">
-      <button data-studio-tool="brush">Brush</button><button data-studio-tool="eraser">Eraser</button><button data-studio-tool="lasso">Lasso Sticker</button>
-      <label>Color <input id="studioColor" type="color" value="#242424"></label>
-      <label>Size <input id="studioSize" type="range" min="2" max="40" value="8"></label>
-      <label class="fileButton">Import Image<input id="studioImport" type="file" accept="image/*"></label>
-      <button id="studioClear">Clear</button><button id="studioExport">Export PNG</button>
-    </div>
-    <div class="studioWork">
-      <canvas id="characterStudioCanvas" width="800" height="600"></canvas>
-      <aside><h3>Cutout Rig Builder</h3><p id="studioStatus">Import or draw artwork, then lasso a body piece.</p>
-        <div class="rigSlots"><button data-rig-slot="head">Assign → Head</button><button data-rig-slot="torso">Assign → Torso</button><button data-rig-slot="leftArm">Assign → Left Arm</button><button data-rig-slot="rightArm">Assign → Right Arm</button><button data-rig-slot="leftLeg">Assign → Left Leg</button><button data-rig-slot="rightLeg">Assign → Right Leg</button></div>
-      </aside>
-    </div>
-  </div>
-</dialog>
+  <div class="helperCard"><b id="helperYear">1863 · Industrial</b><span id="helperScene">Opening Scene</span><span id="helperCharacter">Union Square</span></div>
+  <button id="helperAddCountry" class="primary">+ Country Character</button>
+  <button id="helperAddBackgroundKey">◆ Background Keyframe</button>
+  <button id="helperVideoMode">Open Video Mode</button>
+</aside>
 
-<dialog id="aiDialog">
-  <form method="dialog" class="aiPanel">
-    <h2>AI Director</h2><p>Describe a history video, or paste a Director JSON plan.</p>
-    <textarea id="aiPrompt" rows="4" placeholder="Make a short illustrated history video..."></textarea>
-    <div class="aiActions"><button type="button" id="aiGenerate" class="primary">Generate with Backend</button><button type="button" id="aiShowContext">Show Engine Context</button><button>Close</button></div>
-    <label>Director JSON<textarea id="aiJson" rows="10"></textarea></label>
-    <button type="button" id="aiApply" class="primary">Apply JSON to Project</button>
-    <pre id="aiStatus"></pre>
-  </form>
-</dialog>
-<nav id="mobileDock" class="mobileDock"><button data-mobile-target=".stageArea">Canvas</button><button data-mobile-target=".library">Scene</button><button data-mobile-target=".pose">Animate</button><button data-mobile-target=".timelinePanel">Timeline</button><button id="mobileVideo">Video</button></nav>
-<script src="js/firebase-config.js?v=20261008b"></script>
-<script src="js/model.js?v=20261008b"></script>
-<script src="js/ai-config.js?v=20261008b"></script>
-<script src="js/ai-director.js?v=20261008b"></script>
-<script src="js/renderer.js?v=20261008b"></script>
-<script src="js/character-studio.js?v=20261008b"></script>
-<script src="js/storage.js?v=20261008b"></script>
+<dialog id="characterGalleryDialog"><div class="dialogShell"><header><div><h2>Character Gallery</h2><p>Pick a preset or switch any character to Square, Circle, Triangle, Humanoid or Country Layout afterward.</p></div><button id="closeCharacterGallery">Close</button></header><div id="characterGalleryList" class="characterGalleryList"></div></div></dialog>
+<dialog id="cloudDialog"><div class="dialogShell"><header><div><h2>Firestore Projects</h2><p>No login. Projects are JSON documents in your MEP Firestore collections.</p></div><button id="closeCloudDialog">Close</button></header><div id="cloudProjectList" class="cloudProjectList"></div></div></dialog>
+<dialog id="characterStudioDialog"><div class="studioShell"><header><div><h2>Character Studio</h2><p>Draw, import artwork, lasso a cutout, and keep it as a custom asset.</p></div><button id="closeStudio">Close</button></header><div class="studioTools"><button data-studio-tool="brush">Brush</button><button data-studio-tool="eraser">Eraser</button><button data-studio-tool="lasso">Lasso Sticker</button><label>Color <input id="studioColor" type="color" value="#242424"></label><label>Size <input id="studioSize" type="range" min="2" max="40" value="8"></label><label class="fileButton">Import Image<input id="studioImport" type="file" accept="image/*"></label><button id="studioClear">Clear</button><button id="studioExport">Export PNG</button></div><div class="studioWork"><canvas id="characterStudioCanvas" width="800" height="600"></canvas><aside><h3>Cutout</h3><p id="studioStatus">Import or draw artwork, then lasso a piece.</p></aside></div></div></dialog>
+<dialog id="aiDialog"><form method="dialog" class="dialogShell aiPanel"><header><div><h2>AI Director</h2><p>Provider-neutral scene-plan endpoint.</p></div><button>Close</button></header><textarea id="aiPrompt" rows="4" placeholder="Make a short illustrated history video..."></textarea><div class="buttonGrid"><button type="button" id="aiGenerate" class="primary">Generate</button><button type="button" id="aiShowContext">Show Context</button></div><textarea id="aiJson" rows="12"></textarea><button type="button" id="aiApply">Apply JSON</button><pre id="aiStatus"></pre></form></dialog>
+
+<nav id="mobileDock" class="mobileDock"><button data-jump="#stageArea">Canvas</button><button data-jump="#scenePanel">Scene</button><button data-jump="#characterPanel">Character</button><button data-jump="#scriptPanel">Script</button><button id="mobileVideo">Video</button></nav>
+
+<script src="js/firebase-config.js?v=20261008c"></script>
+<script src="js/history-flags.js?v=20261008c"></script>
+<script src="js/model.js?v=20261008c"></script>
+<script src="js/ai-config.js?v=20261008c"></script>
+<script src="js/ai-director.js?v=20261008c"></script>
+<script src="js/renderer.js?v=20261008c"></script>
+<script src="js/character-studio.js?v=20261008c"></script>
+<script src="js/storage.js?v=20261008c"></script>
 <script>window.addEventListener("error",e=>{const el=document.getElementById("bootStatus");if(el){el.className="bootStatus error";el.textContent="MEP error: "+(e.message||"Unknown startup error")}});</script>
-<script src="js/app.js?v=20261008b"></script>
+<script src="js/app.js?v=20261008c"></script>
 </body>
 </html>
