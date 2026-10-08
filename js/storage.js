@@ -9,6 +9,7 @@ function save(p){
   localStorage.setItem(KEY,JSON.stringify(p));
   return p;
 }
+function hasLocal(){return !!(localStorage.getItem(KEY)||localStorage.getItem("mep-video-maker-project-v2"))}
 function load(){
   try{
     const raw=localStorage.getItem(KEY)||localStorage.getItem("mep-video-maker-project-v2");
@@ -67,6 +68,19 @@ async function loadCloud(id){
   localStorage.setItem(KEY,JSON.stringify(p));
   return p;
 }
+async function loadLatestCloud(){
+  await ensureCloud();
+  const snap=await cloud.fs.getDocs(cloud.fs.collection(cloud.db,"mepProjects"));
+  const docs=snap.docs.map(d=>d.data()).filter(Boolean).sort((a,b)=>(b.updatedAt||"").localeCompare(a.updatedAt||""));
+  if(!docs.length)return null;
+  const p=MEPModel.migrate(docs[0]);localStorage.setItem(KEY,JSON.stringify(p));return p;
+}
+async function seedLibrary(snapshot){
+  await ensureCloud();
+  const doc={...structuredClone(snapshot),updatedAt:new Date().toISOString()};
+  await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepLibrary","default"),doc,{merge:true});
+  return true;
+}
 async function listCloud(){
   await ensureCloud();
   const snap=await cloud.fs.getDocs(cloud.fs.collection(cloud.db,"mepProjects"));
@@ -94,5 +108,5 @@ function download(p){
   setTimeout(()=>URL.revokeObjectURL(a.href),1000);
 }
 function desktopEnvelope(p){return{protocol:"mep-sync-v1",projectId:p.id,revision:p.sync?.revision||0,updatedAt:p.updatedAt,project:p}}
-return{save,load,download,initCloud,saveCloud,loadCloud,listCloud,saveCharacter,saveAnimation,desktopEnvelope};
+return{save,load,hasLocal,download,initCloud,saveCloud,loadCloud,loadLatestCloud,listCloud,seedLibrary,saveCharacter,saveAnimation,desktopEnvelope};
 })();
