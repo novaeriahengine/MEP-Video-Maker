@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>MEP Video Maker</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=20261008b">
 </head>
 <body>
 <div id="app">
@@ -14,10 +14,10 @@
     <label>Category
       <select id="category"><option>History</option><option>Biography</option><option>War</option><option>Politics</option><option>Comedy</option><option>Education</option><option>Custom</option></select>
     </label>
-    <button id="quickStart" class="primary">Quick Start</button><button id="loadHaitiDemo">Haiti Demo</button><a class="fileButton" href="presets/haiti-vertieres-30s.mep.json" download>Download Haiti JSON</a><button id="newProject">New</button><button id="aiDirector">✦ AI Director</button><button id="saveProject">Save Local</button><button id="saveCloud">☁ Save Cloud</button><button id="loadCloud">☁ Projects</button><button id="exportProject">Export JSON</button>
+    <button id="quickStart" class="primary">Quick Start</button><button id="loadHaitiDemo">Haiti Demo</button><button id="loadStarterPack">Full Starter Pack</button><a class="fileButton" href="presets/haiti-vertieres-30s.mep.json" download>Download Haiti JSON</a><button id="newProject">New</button><button id="aiDirector">✦ AI Director</button><button id="saveProject">Save Local</button><button id="saveCloud">☁ Save Cloud</button><button id="loadCloud">☁ Projects</button><button id="exportProject">Export JSON</button>
     <label class="fileButton">Import JSON<input id="importProject" type="file" accept=".json,application/json"></label>
 <button id="importInspectorButton">Import / Project Info</button>
-  </header>
+  </header><div id="bootStatus" class="bootStatus">Starting MEP…</div>
 
   <main class="workspace">
     <aside class="panel library">
@@ -27,7 +27,7 @@
 <label>Transition <select id="sceneTransition"><option value="cut">Cut</option><option value="fade">Fade</option><option value="crossfade">Crossfade</option></select></label>
 <div class="cameraGrid"><label>Camera X <input id="cameraX" type="number" value="640"></label><label>Camera Y <input id="cameraY" type="number" value="360"></label><label>Zoom <input id="cameraZoom" type="number" min=".5" max="3" step=".05" value="1"></label></div>
 <label>Scene Notes <textarea id="sceneNotes" placeholder="Director notes, shot idea, historical note..."></textarea></label>
-<div id="sceneBoard" class="sceneBoard"></div><label>Era <select id="era"></select></label><label>Background <span class="cycle"><button id="prevBackground">◀</button><select id="backgroundPreset"></select><button id="nextBackground">▶</button></span></label><label>Tags <input id="sceneTags" placeholder="war, france, 1800s"></label><label class="fileButton wide">Use Local Background<input id="backgroundUpload" type="file" accept="image/*"></label><button id="clearBackgroundImage">Use Drawn Background</button><h2>Characters</h2>
+<div id="sceneBoard" class="sceneBoard"></div><label>Era <select id="era"></select></label><label>Background <span class="cycle"><button id="prevBackground">◀</button><select id="backgroundPreset"></select><button id="nextBackground">▶</button></span></label><label>Tags <input id="sceneTags" placeholder="war, france, 1800s"></label><label class="fileButton wide">Use Local Background<input id="backgroundUpload" type="file" accept="image/*"></label><button id="clearBackgroundImage">Use Drawn Background</button><h2>Characters</h2><div id="quickPresetGrid" class="quickPresetGrid"></div>
       <label>Preset <span class="cycle"><button id="prevCharacterPreset">◀</button><select id="characterPreset"></select><button id="nextCharacterPreset">▶</button></span></label><button id="openCharacterGallery" class="primary">+ Character Gallery</button><button id="addPresetCharacter">+ Add Selected Preset</button><button id="addCharacter">+ Blank Character</button><button id="openStudio">✎ Character Studio</button>
       <div id="characterList"></div>
       <h2>Selected</h2>
@@ -121,13 +121,14 @@
   </form>
 </dialog>
 <nav id="mobileDock" class="mobileDock"><button data-mobile-target=".stageArea">Canvas</button><button data-mobile-target=".library">Scene</button><button data-mobile-target=".pose">Animate</button><button data-mobile-target=".timelinePanel">Timeline</button><button id="mobileVideo">Video</button></nav>
-<script src="js/firebase-config.js"></script>
-<script src="js/model.js"></script>
-<script src="js/ai-config.js"></script>
-<script src="js/ai-director.js"></script>
-<script src="js/renderer.js"></script>
-<script src="js/character-studio.js"></script>
-<script src="js/storage.js"></script>
-<script src="js/app.js"></script>
+<script src="js/firebase-config.js?v=20261008b"></script>
+<script src="js/model.js?v=20261008b"></script>
+<script src="js/ai-config.js?v=20261008b"></script>
+<script src="js/ai-director.js?v=20261008b"></script>
+<script src="js/renderer.js?v=20261008b"></script>
+<script src="js/character-studio.js?v=20261008b"></script>
+<script src="js/storage.js?v=20261008b"></script>
+<script>window.addEventListener("error",e=>{const el=document.getElementById("bootStatus");if(el){el.className="bootStatus error";el.textContent="MEP error: "+(e.message||"Unknown startup error")}});</script>
+<script src="js/app.js?v=20261008b"></script>
 </body>
 </html>
