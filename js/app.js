@@ -193,5 +193,13 @@ document.querySelectorAll("[data-mobile-target]").forEach(b=>b.onclick=()=>docum
 $("#mobileVideo").onclick=()=>$("#videoMode").click();
 
 try{syncUI();$("#bootStatus").className="bootStatus ready";$("#bootStatus").textContent="MEP ready · "+Object.keys(MEPModel.CHARACTER_PRESETS).length+" characters · "+Object.keys(MEPModel.BACKGROUNDS).length+" backgrounds"}catch(e){console.error(e);$("#bootStatus").className="bootStatus error";$("#bootStatus").textContent="MEP startup error: "+e.message;project=MEPModel.starterProject();scene=MEPModel.activeScene(project);selectedId=scene.characters[0]?.id||null;try{syncUI()}catch{}}
-MEPStorage.initCloud().then(async r=>{if(!r.ok){$("#saveStatus").textContent="Local only";return console.warn(r.reason)}cloudReady=true;$("#saveStatus").textContent="Firestore ready";try{await MEPStorage.seedLibrary(MEPModel.librarySnapshot());if(!hadLocal){const latest=await MEPStorage.loadLatestCloud();if(latest){project=latest;scene=MEPModel.activeScene(project);selectedId=scene.characters[0]?.id||null;selectedBubbleId=null;time=0;editPreview=null;syncUI();$("#bootStatus").textContent="MEP ready · latest Firestore project loaded"}}}catch(e){console.warn("Firestore startup sync",e)}});
+MEPStorage.initCloud().then(async r=>{
+ if(!r.ok){cloudReady=false;$("#saveStatus").textContent="Local only";$("#bootStatus").textContent+=" · Firestore unavailable";return console.warn(r.reason)}
+ try{
+  await MEPStorage.seedLibrary(MEPModel.librarySnapshot());cloudReady=true;$("#saveStatus").textContent="Firestore ✓";
+  if(!hadLocal){const latest=await MEPStorage.loadLatestCloud();if(latest){project=latest;scene=MEPModel.activeScene(project);selectedId=scene.characters[0]?.id||null;selectedBubbleId=null;time=0;editPreview=null;syncUI();$("#bootStatus").textContent="MEP ready · latest Firestore project loaded"}}
+ }catch(e){
+  cloudReady=false;console.warn("Firestore startup sync",e);$("#saveStatus").textContent="Firestore blocked";$("#bootStatus").className="bootStatus warn";$("#bootStatus").textContent="MEP works locally · Firestore writes are blocked until you publish the MEP rules";
+ }
+});
 })();
