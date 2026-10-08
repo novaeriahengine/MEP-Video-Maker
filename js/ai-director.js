@@ -1,41 +1,21 @@
 window.MEPAIDirector=(()=>{
-const VERSION="mep-director-v1";
-const CAPABILITIES={
- schema:VERSION,
- canvas:{width:1280,height:720,origin:"top-left",groundY:570},
- eras:MEPModel.HISTORY_ERAS,
- backgrounds:Object.keys(MEPModel.BACKGROUNDS),
- poses:Object.keys(MEPModel.POSES),
- states:Object.keys(MEPModel.STATES),
- props:Object.keys(MEPModel.PROPS),
- characterPresets:Object.keys(MEPModel.CHARACTER_PRESETS),
- characterRig:{type:"mep-humanoid-v1",fields:["name","tags","x","y","scale","facing","rig.skin","rig.hair","rig.shirt"]},
- animation:{keyframeFields:["time","x","y","scale","facing","pose"],interpolation:"linear",poseJoints:Object.keys(MEPModel.DEFAULT_POSE)},
- limits:{recommendedSceneSeconds:[4,15],recommendedVideoSeconds:[15,180]}
-};
+const VERSION="mep-director-v2";
+function capabilities(){return{schema:VERSION,canvas:{width:1280,height:720,origin:"top-left"},years:[1600,2026],eras:MEPModel.HISTORY_ERAS,lookTypes:Object.keys(MEPModel.LOOK_TYPES),shapes:Object.keys(MEPModel.SHAPES),backgrounds:Object.keys(MEPModel.BACKGROUNDS),poses:Object.keys(MEPModel.POSES),states:Object.keys(MEPModel.STATES),props:Object.keys(MEPModel.PROPS),expressions:MEPModel.EXPRESSIONS,characterPresets:Object.keys(MEPModel.CHARACTER_PRESETS),historicalCountryCodes:window.MEPHistoryFlags?Object.keys(MEPHistoryFlags.HISTORICAL):[],animation:{keyframes:["time","x","y","scale","rotation","facing","pose","mouthOpen"],easing:Object.keys(MEPModel.EASINGS)},backgroundAnimation:{fields:["time","preset","mode","assetId","fit","opacity"]}}}
 function systemContext(){
- return `You are the MEP Video Maker AI Director. Return ONLY valid JSON matching mep-director-v1.
-MEP is a 1280x720 2D history animation engine. Ground is y=570. Characters are articulated mep-humanoid-v1 rigs. Available backgrounds: ${CAPABILITIES.backgrounds.join(", ")}. Available poses: ${CAPABILITIES.poses.join(", ")}. Available eras: ${CAPABILITIES.eras.join(", ")}. Character states: ${CAPABILITIES.states.join(", ")}. Props/weapons: ${CAPABILITIES.props.join(", ")}. Prefer era-appropriate character presets and props.
-Create factual, concise educational history videos. Never invent dates, quotations, casualty numbers, motives, or identities when uncertain. Put uncertainty in researchNotes. Separate narration/factual claims from visual animation commands.
-Output: {"schema":"mep-director-v1","title":"...","era":"...","tags":[],"researchNotes":[],"scenes":[{"name":"...","duration":8,"background":"parchment","tags":[],"narration":"...","caption":"...","characters":[{"name":"...","template":"civilian","tags":[],"x":400,"y":405,"scale":1,"facing":1,"appearance":{"skin":"#f2c7a5","hair":"#34261e","shirt":"#58667a"},"actions":[{"time":0,"pose":"idle","x":400,"y":405},{"time":2,"pose":"point","x":500,"y":405}]}]}]}.
-Keep all times within each scene duration. Use only supported background and pose names. Prefer multiple short scenes over one huge scene.`;
+ const c=capabilities();return "You are the MEP Video Maker AI Director. Return ONLY valid JSON matching "+VERSION+". MEP is a 1280x720 narrated 2D history-video editor. The user usually narrates, so prioritize a factual scene script and clear visuals over character lip-sync. Project years are 1600-2026. Character looks: "+c.lookTypes.join(", ")+". Country-layout characters can use square, circle or triangle bodies and automatically resolve a historical flag for the project year. Humanoid remains available. Expressions: "+c.expressions.join(", ")+". Backgrounds: "+c.backgrounds.join(", ")+". Prefer strong scene/background changes, maps, uploaded historical images when supplied, and simple character movement. Available poses: "+c.poses.join(", ")+". Return scenes with narration/script, captions, characters, and timed actions. Do not invent dates, quotations, casualty figures or identities when uncertain. Put uncertainty in researchNotes. Use period-appropriate countryCode/year combinations where possible."
 }
-function promptPackage(userPrompt,currentProject=null){return{protocol:VERSION,systemContext:systemContext(),capabilities:CAPABILITIES,userPrompt,currentProjectSummary:currentProject?{name:currentProject.name,category:currentProject.category,era:currentProject.era,tags:currentProject.tags,sceneCount:currentProject.scenes.length}:null}}
+function promptPackage(userPrompt,currentProject=null){const c=capabilities();return{protocol:VERSION,systemContext:systemContext(),capabilities:c,userPrompt,currentProjectSummary:currentProject?{name:currentProject.name,year:currentProject.year,era:currentProject.era,sceneCount:currentProject.scenes.length,scripts:currentProject.scripts?.project||""}:null}}
 function validate(plan){
  const errors=[];if(plan?.schema!==VERSION)errors.push("schema must be "+VERSION);if(!Array.isArray(plan?.scenes)||!plan.scenes.length)errors.push("scenes must be a non-empty array");
- (plan?.scenes||[]).forEach((s,i)=>{if(!(s.duration>0&&s.duration<=300))errors.push("scene "+(i+1)+" has invalid duration");if(!MEPModel.BACKGROUNDS[s.background])errors.push("scene "+(i+1)+" has unsupported background");(s.characters||[]).forEach((c,j)=>(c.actions||[]).forEach((a,k)=>{if(a.time<0||a.time>s.duration)errors.push("scene "+(i+1)+" character "+(j+1)+" action "+(k+1)+" time is outside scene");if(a.pose&&!MEPModel.POSES[a.pose])errors.push("unsupported pose: "+a.pose)}))});return{ok:errors.length===0,errors};
+ (plan?.scenes||[]).forEach((s,i)=>{if(!(s.duration>0&&s.duration<=300))errors.push("scene "+(i+1)+" has invalid duration");if(s.background&&!MEPModel.BACKGROUNDS[s.background])errors.push("scene "+(i+1)+" has unsupported background");(s.characters||[]).forEach((ch,j)=>(ch.actions||[]).forEach((a,k)=>{if(a.time<0||a.time>s.duration)errors.push("scene "+(i+1)+" character "+(j+1)+" action "+(k+1)+" time is outside scene")}))});return{ok:!errors.length,errors}
 }
 function apply(plan){
- const check=validate(plan);if(!check.ok)throw new Error(check.errors.join(String.fromCharCode(10)));
- const p=MEPModel.project();p.name=plan.title||"AI History Video";p.era=plan.era||"Custom";p.tags=plan.tags||["history"];p.scenes=[];
- plan.scenes.forEach((src,si)=>{const s=MEPModel.scene(src.name||("Scene "+(si+1)));s.duration=src.duration;s.background.preset=src.background;s.tags=src.tags||[];s.narration=src.narration||"";s.caption=src.caption||"";s.characters=[];
- (src.characters||[]).forEach((spec,ci)=>{const c=MEPModel.character(spec.name||("Character "+(ci+1)),Number(spec.x??400),Number(spec.y??405),spec.template||"civilian");c.tags=spec.tags||[];c.scale=Number(spec.scale??1);c.facing=Number(spec.facing??1)>=0?1:-1;if(spec.appearance)c.rig={...c.rig,...spec.appearance};c.keyframes=[];
- (spec.actions||[]).forEach(a=>{if(a.pose)MEPModel.applyPose(c,a.pose);if(Number.isFinite(a.x))c.x=a.x;if(Number.isFinite(a.y))c.y=a.y;if(Number.isFinite(a.scale))c.scale=a.scale;if(Number.isFinite(a.facing))c.facing=a.facing>=0?1:-1;c.keyframes.push({id:MEPModel.id(),time:a.time,state:MEPModel.capture(c)})});s.characters.push(c)});p.scenes.push(s)});
- p.activeSceneId=p.scenes[0].id;p.updatedAt=new Date().toISOString();return p;
+ const check=validate(plan);if(!check.ok)throw new Error(check.errors.join("\n"));const p=MEPModel.project();p.name=plan.title||"AI History Video";p.year=Math.max(1600,Math.min(2026,Number(plan.year)||p.year));p.era=MEPModel.yearToEra(p.year);p.tags=plan.tags||["history"];p.scripts.project=plan.projectScript||"";p.scenes=[];
+ plan.scenes.forEach((src,si)=>{const s=MEPModel.scene(src.name||("Scene "+(si+1)));s.duration=Number(src.duration)||8;s.background.preset=MEPModel.BACKGROUNDS[src.background]?src.background:"countryside";s.script=src.script||src.narration||"";s.caption=src.caption||"";s.notes=src.notes||"";s.characters=[];
+ (src.characters||[]).forEach((spec,ci)=>{const ch=MEPModel.character(spec.name||("Character "+(ci+1)),Number(spec.x??400),Number(spec.y??430),spec.template||"unionSquare");if(spec.lookType)ch.visual.lookType=spec.lookType;if(spec.shape)ch.visual.shape=spec.shape;if(spec.countryCode){ch.visual.lookType="country";ch.visual.countryCode=spec.countryCode;ch.visual.historicalYear=p.year}if(spec.expression)ch.visual.expression=spec.expression;if(spec.hat)ch.visual.hat=spec.hat;if(spec.hairStyle)ch.visual.hairStyle=spec.hairStyle;if(spec.prop)ch.rig.prop=spec.prop;ch.scale=Number(spec.scale??1);ch.rotation=Number(spec.rotation??0);ch.keyframes=[];
+ (spec.actions||[]).forEach(a=>{if(a.pose&&MEPModel.POSES[a.pose])MEPModel.applyPose(ch,a.pose);if(Number.isFinite(a.x))ch.x=a.x;if(Number.isFinite(a.y))ch.y=a.y;if(Number.isFinite(a.scale))ch.scale=a.scale;if(Number.isFinite(a.rotation))ch.rotation=a.rotation;if(typeof a.mouthOpen==="boolean")ch.visual.mouthOpen=a.mouthOpen;ch.keyframes.push({id:MEPModel.id(),time:Number(a.time)||0,easing:a.easing||"easeInOut",state:MEPModel.capture(ch)})});s.characters.push(ch)});
+ p.scenes.push(s);p.scripts.sceneById[s.id]=s.script});p.activeSceneId=p.scenes[0].id;p.updatedAt=new Date().toISOString();return p
 }
-async function generate(userPrompt,currentProject){
- const endpoint=window.MEP_AI_ENDPOINT;if(!endpoint)throw new Error("AI backend is not configured. Set window.MEP_AI_ENDPOINT in js/ai-config.js.");
- const res=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(promptPackage(userPrompt,currentProject))});if(!res.ok)throw new Error("AI backend returned "+res.status);return await res.json();
-}
-return{VERSION,CAPABILITIES,systemContext,promptPackage,validate,apply,generate};
+async function generate(userPrompt,currentProject){const endpoint=window.MEP_AI_ENDPOINT;if(!endpoint)throw new Error("AI backend is not configured. Set window.MEP_AI_ENDPOINT in js/ai-config.js.");const res=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(promptPackage(userPrompt,currentProject))});if(!res.ok)throw new Error("AI backend returned "+res.status);return await res.json()}
+return{VERSION,capabilities,systemContext,promptPackage,validate,apply,generate};
 })();
