@@ -1,10 +1,10 @@
 {
   "schema": "mep-video-project",
-  "version": 5,
+  "version": 6,
   "id": "demo-haiti-vertieres-30s",
-  "name": "Haiti 1803 — Capois-la-Mort at Vertières",
+  "name": "Haiti — Vertières Shape Demo",
   "category": "History",
-  "era": "Early Modern",
+  "era": "Early 1800s",
   "year": 1803,
   "tags": [
     "haiti",
@@ -26,11 +26,16 @@
       "name": "The Final Campaign",
       "duration": 7.5,
       "background": {
-        "preset": "mapRoom",
+        "preset": "battleMap",
         "mode": "preset",
         "assetId": null,
         "fit": "cover",
         "opacity": 1,
+        "panX": 0,
+        "panY": 0,
+        "scale": 1,
+        "brightness": 1,
+        "blur": 0,
         "keyframes": [],
         "tags": [
           "haiti",
@@ -95,13 +100,12 @@
           "facing": 1,
           "layer": 5,
           "visual": {
-            "lookType": "country",
             "shape": "square",
             "countryCode": "HT",
             "historicalYear": 1803,
+            "followProjectYear": true,
             "flagVariant": "auto",
             "expression": "neutral",
-            "fill": "#eef0f2",
             "stroke": "#17191d",
             "eyeColor": "#111",
             "mouthEnabled": true,
@@ -109,117 +113,51 @@
             "hairStyle": "none",
             "hat": "none",
             "accessory": "none",
-            "followProjectYear": true
+            "fill": "#eef0f2"
           },
-          "rig": {
-            "type": "mep-humanoid-v3",
-            "bodyStyle": "humanCartoon",
-            "skin": "#8f5a3b",
-            "line": "#221a18",
-            "shirt": "#303c71",
-            "hair": "#16110e",
-            "pants": "#e5d8ba",
-            "hairStyle": "short",
-            "hat": "officer",
-            "accessory": "sash",
-            "prop": "sword",
-            "expression": "neutral",
-            "state": "standing",
-            "era": "Early Modern",
-            "headScale": 1,
-            "limbScale": 1,
-            "body": "adult"
-          },
-          "pose": {
-            "head": 0,
-            "torso": 0,
-            "leftUpperArm": -18,
-            "leftLowerArm": -10,
-            "rightUpperArm": 82,
-            "rightLowerArm": 5,
-            "leftUpperLeg": -8,
-            "leftLowerLeg": 5,
-            "rightUpperLeg": 8,
-            "rightLowerLeg": 5
-          },
+          "prop": "sword",
           "keyframes": [
             {
               "id": "d1",
               "time": 0,
+              "easing": "linear",
+              "label": "Start",
               "state": {
                 "x": 430,
                 "y": 430,
                 "scale": 1,
                 "rotation": 0,
                 "facing": 1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -25,
-                  "leftLowerArm": -10,
-                  "rightUpperArm": 25,
-                  "rightLowerArm": 10,
-                  "leftUpperLeg": -8,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 8,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "linear",
-              "label": "Start"
+              }
             },
             {
               "id": "d2",
               "time": 3,
+              "easing": "easeInOut",
+              "label": "Action",
               "state": {
                 "x": 500,
                 "y": 430,
                 "scale": 1,
                 "rotation": 0,
                 "facing": 1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -18,
-                  "leftLowerArm": -10,
-                  "rightUpperArm": 82,
-                  "rightLowerArm": 5,
-                  "leftUpperLeg": -8,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 8,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeInOut",
-              "label": "Action"
+              }
             },
             {
               "id": "d3",
               "time": 7.5,
+              "easing": "easeOut",
+              "label": "End",
               "state": {
                 "x": 540,
                 "y": 430,
                 "scale": 1,
                 "rotation": 0,
                 "facing": 1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -92,
-                  "leftLowerArm": -5,
-                  "rightUpperArm": 92,
-                  "rightLowerArm": 5,
-                  "leftUpperLeg": -8,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 8,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeOut",
-              "label": "End"
+              }
             }
           ],
           "clips": [
@@ -247,13 +185,12 @@
           "facing": 1,
           "layer": 6,
           "visual": {
-            "lookType": "country",
-            "shape": "square",
+            "shape": "circle",
             "countryCode": "HT",
             "historicalYear": 1803,
+            "followProjectYear": true,
             "flagVariant": "auto",
             "expression": "determined",
-            "fill": "#eef0f2",
             "stroke": "#17191d",
             "eyeColor": "#111",
             "mouthEnabled": true,
@@ -261,117 +198,51 @@
             "hairStyle": "none",
             "hat": "none",
             "accessory": "sash",
-            "followProjectYear": true
+            "fill": "#eef0f2"
           },
-          "rig": {
-            "type": "mep-humanoid-v3",
-            "bodyStyle": "heroic",
-            "skin": "#8f5a3b",
-            "line": "#221a18",
-            "shirt": "#9b2f32",
-            "hair": "#1b1411",
-            "pants": "#ece8d9",
-            "hairStyle": "short",
-            "hat": "none",
-            "accessory": "sash",
-            "prop": "sword",
-            "expression": "angry",
-            "state": "standing",
-            "era": "Early Modern",
-            "headScale": 1,
-            "limbScale": 1,
-            "body": "adult"
-          },
-          "pose": {
-            "head": 0,
-            "torso": -5,
-            "leftUpperArm": -48,
-            "leftLowerArm": -18,
-            "rightUpperArm": 35,
-            "rightLowerArm": 12,
-            "leftUpperLeg": 28,
-            "leftLowerLeg": 12,
-            "rightUpperLeg": -24,
-            "rightLowerLeg": 20
-          },
+          "prop": "sword",
           "keyframes": [
             {
               "id": "c1",
               "time": 0,
+              "easing": "linear",
+              "label": "Start",
               "state": {
                 "x": 800,
                 "y": 435,
                 "scale": 1,
                 "rotation": 0,
                 "facing": -1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -25,
-                  "leftLowerArm": -10,
-                  "rightUpperArm": 25,
-                  "rightLowerArm": 10,
-                  "leftUpperLeg": -8,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 8,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "linear",
-              "label": "Start"
+              }
             },
             {
               "id": "c2",
               "time": 3.5,
+              "easing": "easeInOut",
+              "label": "Action",
               "state": {
                 "x": 740,
                 "y": 435,
                 "scale": 1,
                 "rotation": 0,
                 "facing": -1,
-                "pose": {
-                  "head": 0,
-                  "torso": -5,
-                  "leftUpperArm": -48,
-                  "leftLowerArm": -18,
-                  "rightUpperArm": 35,
-                  "rightLowerArm": 12,
-                  "leftUpperLeg": 28,
-                  "leftLowerLeg": 12,
-                  "rightUpperLeg": -24,
-                  "rightLowerLeg": 20
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeInOut",
-              "label": "Action"
+              }
             },
             {
               "id": "c3",
               "time": 7.5,
+              "easing": "easeOut",
+              "label": "End",
               "state": {
                 "x": 680,
                 "y": 435,
                 "scale": 1,
                 "rotation": 0,
                 "facing": -1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -55,
-                  "leftLowerArm": 35,
-                  "rightUpperArm": 105,
-                  "rightLowerArm": -40,
-                  "leftUpperLeg": -18,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 18,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeOut",
-              "label": "End"
+              }
             }
           ],
           "clips": [
@@ -411,11 +282,16 @@
       "name": "Battle of Vertières",
       "duration": 7.5,
       "background": {
-        "preset": "battlefield",
+        "preset": "militaryCamp",
         "mode": "preset",
         "assetId": null,
         "fit": "cover",
         "opacity": 1,
+        "panX": 0,
+        "panY": 0,
+        "scale": 1,
+        "brightness": 1,
+        "blur": 0,
         "keyframes": [],
         "tags": [
           "vertieres",
@@ -478,13 +354,12 @@
           "facing": 1,
           "layer": 5,
           "visual": {
-            "lookType": "country",
             "shape": "square",
             "countryCode": "HT",
             "historicalYear": 1803,
+            "followProjectYear": true,
             "flagVariant": "auto",
             "expression": "determined",
-            "fill": "#eef0f2",
             "stroke": "#17191d",
             "eyeColor": "#111",
             "mouthEnabled": true,
@@ -492,143 +367,65 @@
             "hairStyle": "none",
             "hat": "none",
             "accessory": "sash",
-            "followProjectYear": true
+            "fill": "#eef0f2"
           },
-          "rig": {
-            "type": "mep-humanoid-v3",
-            "bodyStyle": "heroic",
-            "skin": "#8f5a3b",
-            "line": "#221a18",
-            "shirt": "#9b2f32",
-            "hair": "#1b1411",
-            "pants": "#ece8d9",
-            "hairStyle": "short",
-            "hat": "none",
-            "accessory": "sash",
-            "prop": "sword",
-            "expression": "angry",
-            "state": "standing",
-            "era": "Early Modern",
-            "headScale": 1,
-            "limbScale": 1,
-            "body": "adult"
-          },
-          "pose": {
-            "head": 0,
-            "torso": 0,
-            "leftUpperArm": -55,
-            "leftLowerArm": 35,
-            "rightUpperArm": 105,
-            "rightLowerArm": -40,
-            "leftUpperLeg": -18,
-            "leftLowerLeg": 5,
-            "rightUpperLeg": 18,
-            "rightLowerLeg": 5
-          },
+          "prop": "sword",
           "keyframes": [
             {
               "id": "c21",
               "time": 0,
+              "easing": "linear",
+              "label": "Start",
               "state": {
                 "x": 250,
                 "y": 445,
                 "scale": 1,
                 "rotation": 0,
                 "facing": 1,
-                "pose": {
-                  "head": 0,
-                  "torso": -5,
-                  "leftUpperArm": -48,
-                  "leftLowerArm": -18,
-                  "rightUpperArm": 35,
-                  "rightLowerArm": 12,
-                  "leftUpperLeg": 28,
-                  "leftLowerLeg": 12,
-                  "rightUpperLeg": -24,
-                  "rightLowerLeg": 20
-                },
                 "mouthOpen": false
-              },
-              "easing": "linear",
-              "label": "Start"
+              }
             },
             {
               "id": "c22",
               "time": 2.5,
+              "easing": "easeInOut",
+              "label": "Action",
               "state": {
                 "x": 420,
                 "y": 445,
                 "scale": 1,
                 "rotation": 0,
                 "facing": 1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -55,
-                  "leftLowerArm": 35,
-                  "rightUpperArm": 105,
-                  "rightLowerArm": -40,
-                  "leftUpperLeg": -18,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 18,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeInOut",
-              "label": "Action"
+              }
             },
             {
               "id": "c23",
               "time": 5,
+              "easing": "easeInOut",
+              "label": "Action",
               "state": {
                 "x": 575,
                 "y": 445,
                 "scale": 1,
                 "rotation": 0,
                 "facing": 1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -55,
-                  "leftLowerArm": -10,
-                  "rightUpperArm": 55,
-                  "rightLowerArm": 10,
-                  "leftUpperLeg": 24,
-                  "leftLowerLeg": 20,
-                  "rightUpperLeg": -24,
-                  "rightLowerLeg": -10
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeInOut",
-              "label": "Action"
+              }
             },
             {
               "id": "c24",
               "time": 7.5,
+              "easing": "easeOut",
+              "label": "End",
               "state": {
                 "x": 690,
                 "y": 445,
                 "scale": 1,
                 "rotation": 0,
                 "facing": 1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -55,
-                  "leftLowerArm": 35,
-                  "rightUpperArm": 105,
-                  "rightLowerArm": -40,
-                  "leftUpperLeg": -18,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 18,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeOut",
-              "label": "End"
+              }
             }
           ],
           "clips": [
@@ -656,13 +453,12 @@
           "facing": 1,
           "layer": 6,
           "visual": {
-            "lookType": "country",
-            "shape": "square",
+            "shape": "circle",
             "countryCode": "FR",
             "historicalYear": 1803,
+            "followProjectYear": true,
             "flagVariant": "auto",
             "expression": "angry",
-            "fill": "#eef0f2",
             "stroke": "#17191d",
             "eyeColor": "#111",
             "mouthEnabled": true,
@@ -670,117 +466,51 @@
             "hairStyle": "none",
             "hat": "none",
             "accessory": "none",
-            "followProjectYear": true
+            "fill": "#eef0f2"
           },
-          "rig": {
-            "type": "mep-humanoid-v3",
-            "bodyStyle": "humanCartoon",
-            "skin": "#e4b793",
-            "line": "#221a18",
-            "shirt": "#244d7a",
-            "hair": "#5b4030",
-            "pants": "#e7e5da",
-            "hairStyle": "short",
-            "hat": "none",
-            "accessory": "belt",
-            "prop": "musket",
-            "expression": "neutral",
-            "state": "standing",
-            "era": "Early Modern",
-            "headScale": 1,
-            "limbScale": 1,
-            "body": "adult"
-          },
-          "pose": {
-            "head": 0,
-            "torso": 0,
-            "leftUpperArm": -55,
-            "leftLowerArm": 35,
-            "rightUpperArm": 105,
-            "rightLowerArm": -40,
-            "leftUpperLeg": -18,
-            "leftLowerLeg": 5,
-            "rightUpperLeg": 18,
-            "rightLowerLeg": 5
-          },
+          "prop": "musket",
           "keyframes": [
             {
               "id": "f11",
               "time": 0,
+              "easing": "linear",
+              "label": "Start",
               "state": {
                 "x": 970,
                 "y": 430,
                 "scale": 1,
                 "rotation": 0,
                 "facing": -1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -25,
-                  "leftLowerArm": -10,
-                  "rightUpperArm": 25,
-                  "rightLowerArm": 10,
-                  "leftUpperLeg": -8,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 8,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "linear",
-              "label": "Start"
+              }
             },
             {
               "id": "f12",
               "time": 3,
+              "easing": "easeInOut",
+              "label": "Action",
               "state": {
                 "x": 900,
                 "y": 430,
                 "scale": 1,
                 "rotation": 0,
                 "facing": -1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -55,
-                  "leftLowerArm": 35,
-                  "rightUpperArm": 105,
-                  "rightLowerArm": -40,
-                  "leftUpperLeg": -18,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 18,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeInOut",
-              "label": "Action"
+              }
             },
             {
               "id": "f13",
               "time": 7.5,
+              "easing": "easeOut",
+              "label": "End",
               "state": {
                 "x": 850,
                 "y": 430,
                 "scale": 1,
                 "rotation": 0,
                 "facing": -1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -55,
-                  "leftLowerArm": 35,
-                  "rightUpperArm": 105,
-                  "rightLowerArm": -40,
-                  "leftUpperLeg": -18,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 18,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeOut",
-              "label": "End"
+              }
             }
           ],
           "clips": [
@@ -808,13 +538,12 @@
           "facing": 1,
           "layer": 7,
           "visual": {
-            "lookType": "country",
-            "shape": "square",
+            "shape": "triangle",
             "countryCode": "FR",
             "historicalYear": 1803,
+            "followProjectYear": true,
             "flagVariant": "auto",
             "expression": "angry",
-            "fill": "#eef0f2",
             "stroke": "#17191d",
             "eyeColor": "#111",
             "mouthEnabled": true,
@@ -822,117 +551,51 @@
             "hairStyle": "none",
             "hat": "none",
             "accessory": "none",
-            "followProjectYear": true
+            "fill": "#eef0f2"
           },
-          "rig": {
-            "type": "mep-humanoid-v3",
-            "bodyStyle": "humanCartoon",
-            "skin": "#e4b793",
-            "line": "#221a18",
-            "shirt": "#244d7a",
-            "hair": "#5b4030",
-            "pants": "#e7e5da",
-            "hairStyle": "short",
-            "hat": "none",
-            "accessory": "belt",
-            "prop": "musket",
-            "expression": "neutral",
-            "state": "standing",
-            "era": "Early Modern",
-            "headScale": 1,
-            "limbScale": 1,
-            "body": "adult"
-          },
-          "pose": {
-            "head": 0,
-            "torso": 0,
-            "leftUpperArm": -55,
-            "leftLowerArm": 35,
-            "rightUpperArm": 105,
-            "rightLowerArm": -40,
-            "leftUpperLeg": -18,
-            "leftLowerLeg": 5,
-            "rightUpperLeg": 18,
-            "rightLowerLeg": 5
-          },
+          "prop": "musket",
           "keyframes": [
             {
               "id": "f21",
               "time": 0,
+              "easing": "linear",
+              "label": "Start",
               "state": {
                 "x": 1120,
                 "y": 445,
                 "scale": 1,
                 "rotation": 0,
                 "facing": -1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -25,
-                  "leftLowerArm": -10,
-                  "rightUpperArm": 25,
-                  "rightLowerArm": 10,
-                  "leftUpperLeg": -8,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 8,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "linear",
-              "label": "Start"
+              }
             },
             {
               "id": "f22",
               "time": 4,
+              "easing": "easeInOut",
+              "label": "Action",
               "state": {
                 "x": 1060,
                 "y": 445,
                 "scale": 1,
                 "rotation": 0,
                 "facing": -1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -55,
-                  "leftLowerArm": 35,
-                  "rightUpperArm": 105,
-                  "rightLowerArm": -40,
-                  "leftUpperLeg": -18,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 18,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeInOut",
-              "label": "Action"
+              }
             },
             {
               "id": "f23",
               "time": 7.5,
+              "easing": "easeOut",
+              "label": "End",
               "state": {
                 "x": 1010,
                 "y": 445,
                 "scale": 1,
                 "rotation": 0,
                 "facing": -1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -55,
-                  "leftLowerArm": 35,
-                  "rightUpperArm": 105,
-                  "rightLowerArm": -40,
-                  "leftUpperLeg": -18,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 18,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeOut",
-              "label": "End"
+              }
             }
           ],
           "clips": [
@@ -972,11 +635,16 @@
       "name": "Capois Keeps Advancing",
       "duration": 7.5,
       "background": {
-        "preset": "battlefield",
+        "preset": "battlefieldNight",
         "mode": "preset",
         "assetId": null,
         "fit": "cover",
         "opacity": 1,
+        "panX": 0,
+        "panY": 0,
+        "scale": 1,
+        "brightness": 1,
+        "blur": 0,
         "keyframes": [],
         "tags": [
           "capois",
@@ -1039,13 +707,12 @@
           "facing": 1,
           "layer": 5,
           "visual": {
-            "lookType": "country",
             "shape": "square",
             "countryCode": "HT",
             "historicalYear": 1803,
+            "followProjectYear": true,
             "flagVariant": "auto",
             "expression": "determined",
-            "fill": "#eef0f2",
             "stroke": "#17191d",
             "eyeColor": "#111",
             "mouthEnabled": true,
@@ -1053,169 +720,79 @@
             "hairStyle": "none",
             "hat": "none",
             "accessory": "sash",
-            "followProjectYear": true
+            "fill": "#eef0f2"
           },
-          "rig": {
-            "type": "mep-humanoid-v3",
-            "bodyStyle": "heroic",
-            "skin": "#8f5a3b",
-            "line": "#221a18",
-            "shirt": "#9b2f32",
-            "hair": "#1b1411",
-            "pants": "#ece8d9",
-            "hairStyle": "short",
-            "hat": "none",
-            "accessory": "sash",
-            "prop": "sword",
-            "expression": "angry",
-            "state": "standing",
-            "era": "Early Modern",
-            "headScale": 1,
-            "limbScale": 1,
-            "body": "adult"
-          },
-          "pose": {
-            "head": 0,
-            "torso": 0,
-            "leftUpperArm": -55,
-            "leftLowerArm": -10,
-            "rightUpperArm": 55,
-            "rightLowerArm": 10,
-            "leftUpperLeg": 24,
-            "leftLowerLeg": 20,
-            "rightUpperLeg": -24,
-            "rightLowerLeg": -10
-          },
+          "prop": "sword",
           "keyframes": [
             {
               "id": "c31",
               "time": 0,
+              "easing": "linear",
+              "label": "Start",
               "state": {
                 "x": 260,
                 "y": 455,
                 "scale": 1,
                 "rotation": 0,
                 "facing": 1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -55,
-                  "leftLowerArm": -10,
-                  "rightUpperArm": 55,
-                  "rightLowerArm": 10,
-                  "leftUpperLeg": 24,
-                  "leftLowerLeg": 20,
-                  "rightUpperLeg": -24,
-                  "rightLowerLeg": -10
-                },
                 "mouthOpen": false
-              },
-              "easing": "linear",
-              "label": "Start"
+              }
             },
             {
               "id": "c32",
               "time": 2,
+              "easing": "easeInOut",
+              "label": "Action",
               "state": {
                 "x": 430,
                 "y": 455,
                 "scale": 1,
                 "rotation": 0,
                 "facing": 1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": 55,
-                  "leftLowerArm": -10,
-                  "rightUpperArm": -55,
-                  "rightLowerArm": 10,
-                  "leftUpperLeg": -24,
-                  "leftLowerLeg": -10,
-                  "rightUpperLeg": 24,
-                  "rightLowerLeg": 20
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeInOut",
-              "label": "Action"
+              }
             },
             {
               "id": "c33",
               "time": 4,
+              "easing": "easeInOut",
+              "label": "Action",
               "state": {
                 "x": 590,
                 "y": 455,
                 "scale": 1,
                 "rotation": 0,
                 "facing": 1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -55,
-                  "leftLowerArm": 35,
-                  "rightUpperArm": 105,
-                  "rightLowerArm": -40,
-                  "leftUpperLeg": -18,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 18,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeInOut",
-              "label": "Action"
+              }
             },
             {
               "id": "c34",
               "time": 6,
+              "easing": "easeInOut",
+              "label": "Action",
               "state": {
                 "x": 760,
                 "y": 455,
                 "scale": 1,
                 "rotation": 0,
                 "facing": 1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -55,
-                  "leftLowerArm": -10,
-                  "rightUpperArm": 55,
-                  "rightLowerArm": 10,
-                  "leftUpperLeg": 24,
-                  "leftLowerLeg": 20,
-                  "rightUpperLeg": -24,
-                  "rightLowerLeg": -10
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeInOut",
-              "label": "Action"
+              }
             },
             {
               "id": "c35",
               "time": 7.5,
+              "easing": "easeOut",
+              "label": "End",
               "state": {
                 "x": 880,
                 "y": 455,
                 "scale": 1,
                 "rotation": 0,
                 "facing": 1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -92,
-                  "leftLowerArm": -5,
-                  "rightUpperArm": 92,
-                  "rightLowerArm": 5,
-                  "leftUpperLeg": -8,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 8,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeOut",
-              "label": "End"
+              }
             }
           ],
           "clips": [
@@ -1243,13 +820,12 @@
           "facing": 1,
           "layer": 6,
           "visual": {
-            "lookType": "country",
-            "shape": "square",
+            "shape": "circle",
             "countryCode": "FR",
             "historicalYear": 1803,
+            "followProjectYear": true,
             "flagVariant": "auto",
             "expression": "angry",
-            "fill": "#eef0f2",
             "stroke": "#17191d",
             "eyeColor": "#111",
             "mouthEnabled": true,
@@ -1257,117 +833,51 @@
             "hairStyle": "none",
             "hat": "none",
             "accessory": "none",
-            "followProjectYear": true
+            "fill": "#eef0f2"
           },
-          "rig": {
-            "type": "mep-humanoid-v3",
-            "bodyStyle": "humanCartoon",
-            "skin": "#e4b793",
-            "line": "#221a18",
-            "shirt": "#244d7a",
-            "hair": "#5b4030",
-            "pants": "#e7e5da",
-            "hairStyle": "short",
-            "hat": "none",
-            "accessory": "belt",
-            "prop": "musket",
-            "expression": "neutral",
-            "state": "standing",
-            "era": "Early Modern",
-            "headScale": 1,
-            "limbScale": 1,
-            "body": "adult"
-          },
-          "pose": {
-            "head": 0,
-            "torso": 0,
-            "leftUpperArm": -55,
-            "leftLowerArm": 35,
-            "rightUpperArm": 105,
-            "rightLowerArm": -40,
-            "leftUpperLeg": -18,
-            "leftLowerLeg": 5,
-            "rightUpperLeg": 18,
-            "rightLowerLeg": 5
-          },
+          "prop": "musket",
           "keyframes": [
             {
               "id": "f31",
               "time": 0,
+              "easing": "linear",
+              "label": "Start",
               "state": {
                 "x": 1080,
                 "y": 445,
                 "scale": 1,
                 "rotation": 0,
                 "facing": -1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -55,
-                  "leftLowerArm": 35,
-                  "rightUpperArm": 105,
-                  "rightLowerArm": -40,
-                  "leftUpperLeg": -18,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 18,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "linear",
-              "label": "Start"
+              }
             },
             {
               "id": "f32",
               "time": 4,
+              "easing": "easeInOut",
+              "label": "Action",
               "state": {
                 "x": 1030,
                 "y": 445,
                 "scale": 1,
                 "rotation": 0,
                 "facing": -1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -55,
-                  "leftLowerArm": 35,
-                  "rightUpperArm": 105,
-                  "rightLowerArm": -40,
-                  "leftUpperLeg": -18,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 18,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeInOut",
-              "label": "Action"
+              }
             },
             {
               "id": "f33",
               "time": 7.5,
+              "easing": "easeOut",
+              "label": "End",
               "state": {
                 "x": 970,
                 "y": 445,
                 "scale": 1,
                 "rotation": 0,
                 "facing": -1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -25,
-                  "leftLowerArm": -10,
-                  "rightUpperArm": 25,
-                  "rightLowerArm": 10,
-                  "leftUpperLeg": -8,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 8,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeOut",
-              "label": "End"
+              }
             }
           ],
           "clips": [
@@ -1407,11 +917,16 @@
       "name": "Victory and Independence",
       "duration": 7.5,
       "background": {
-        "preset": "royalCourt",
+        "preset": "governmentHall",
         "mode": "preset",
         "assetId": null,
         "fit": "cover",
         "opacity": 1,
+        "panX": 0,
+        "panY": 0,
+        "scale": 1,
+        "brightness": 1,
+        "blur": 0,
         "keyframes": [],
         "tags": [
           "haiti",
@@ -1474,13 +989,12 @@
           "facing": 1,
           "layer": 5,
           "visual": {
-            "lookType": "country",
             "shape": "square",
             "countryCode": "HT",
             "historicalYear": 1803,
+            "followProjectYear": true,
             "flagVariant": "auto",
             "expression": "determined",
-            "fill": "#eef0f2",
             "stroke": "#17191d",
             "eyeColor": "#111",
             "mouthEnabled": true,
@@ -1488,117 +1002,51 @@
             "hairStyle": "none",
             "hat": "none",
             "accessory": "sash",
-            "followProjectYear": true
+            "fill": "#eef0f2"
           },
-          "rig": {
-            "type": "mep-humanoid-v3",
-            "bodyStyle": "heroic",
-            "skin": "#8f5a3b",
-            "line": "#221a18",
-            "shirt": "#9b2f32",
-            "hair": "#1b1411",
-            "pants": "#ece8d9",
-            "hairStyle": "short",
-            "hat": "none",
-            "accessory": "sash",
-            "prop": "sword",
-            "expression": "angry",
-            "state": "standing",
-            "era": "Early Modern",
-            "headScale": 1,
-            "limbScale": 1,
-            "body": "adult"
-          },
-          "pose": {
-            "head": 0,
-            "torso": 0,
-            "leftUpperArm": -145,
-            "leftLowerArm": 0,
-            "rightUpperArm": 145,
-            "rightLowerArm": 0,
-            "leftUpperLeg": -8,
-            "leftLowerLeg": 5,
-            "rightUpperLeg": 8,
-            "rightLowerLeg": 5
-          },
+          "prop": "sword",
           "keyframes": [
             {
               "id": "c41",
               "time": 0,
+              "easing": "linear",
+              "label": "Start",
               "state": {
                 "x": 440,
                 "y": 440,
                 "scale": 1,
                 "rotation": 0,
                 "facing": 1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -25,
-                  "leftLowerArm": -10,
-                  "rightUpperArm": 25,
-                  "rightLowerArm": 10,
-                  "leftUpperLeg": -8,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 8,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "linear",
-              "label": "Start"
+              }
             },
             {
               "id": "c42",
               "time": 3,
+              "easing": "easeInOut",
+              "label": "Action",
               "state": {
                 "x": 500,
                 "y": 440,
                 "scale": 1,
                 "rotation": 0,
                 "facing": 1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -92,
-                  "leftLowerArm": -5,
-                  "rightUpperArm": 92,
-                  "rightLowerArm": 5,
-                  "leftUpperLeg": -8,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 8,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeInOut",
-              "label": "Action"
+              }
             },
             {
               "id": "c43",
               "time": 7.5,
+              "easing": "easeOut",
+              "label": "End",
               "state": {
                 "x": 540,
                 "y": 440,
                 "scale": 1,
                 "rotation": 0,
                 "facing": 1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -145,
-                  "leftLowerArm": 0,
-                  "rightUpperArm": 145,
-                  "rightLowerArm": 0,
-                  "leftUpperLeg": -8,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 8,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeOut",
-              "label": "End"
+              }
             }
           ],
           "clips": [
@@ -1625,13 +1073,12 @@
           "facing": 1,
           "layer": 6,
           "visual": {
-            "lookType": "country",
-            "shape": "square",
+            "shape": "circle",
             "countryCode": "HT",
             "historicalYear": 1803,
+            "followProjectYear": true,
             "flagVariant": "auto",
             "expression": "neutral",
-            "fill": "#eef0f2",
             "stroke": "#17191d",
             "eyeColor": "#111",
             "mouthEnabled": true,
@@ -1639,117 +1086,51 @@
             "hairStyle": "none",
             "hat": "none",
             "accessory": "none",
-            "followProjectYear": true
+            "fill": "#eef0f2"
           },
-          "rig": {
-            "type": "mep-humanoid-v3",
-            "bodyStyle": "humanCartoon",
-            "skin": "#8f5a3b",
-            "line": "#221a18",
-            "shirt": "#303c71",
-            "hair": "#16110e",
-            "pants": "#e5d8ba",
-            "hairStyle": "short",
-            "hat": "officer",
-            "accessory": "sash",
-            "prop": "sword",
-            "expression": "neutral",
-            "state": "standing",
-            "era": "Early Modern",
-            "headScale": 1,
-            "limbScale": 1,
-            "body": "adult"
-          },
-          "pose": {
-            "head": 0,
-            "torso": 0,
-            "leftUpperArm": -92,
-            "leftLowerArm": -5,
-            "rightUpperArm": 92,
-            "rightLowerArm": 5,
-            "leftUpperLeg": -8,
-            "leftLowerLeg": 5,
-            "rightUpperLeg": 8,
-            "rightLowerLeg": 5
-          },
+          "prop": "sword",
           "keyframes": [
             {
               "id": "d41",
               "time": 0,
+              "easing": "linear",
+              "label": "Start",
               "state": {
                 "x": 790,
                 "y": 440,
                 "scale": 1,
                 "rotation": 0,
                 "facing": -1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -25,
-                  "leftLowerArm": -10,
-                  "rightUpperArm": 25,
-                  "rightLowerArm": 10,
-                  "leftUpperLeg": -8,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 8,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "linear",
-              "label": "Start"
+              }
             },
             {
               "id": "d42",
               "time": 3.5,
+              "easing": "easeInOut",
+              "label": "Action",
               "state": {
                 "x": 760,
                 "y": 440,
                 "scale": 1,
                 "rotation": 0,
                 "facing": -1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -92,
-                  "leftLowerArm": -5,
-                  "rightUpperArm": 92,
-                  "rightLowerArm": 5,
-                  "leftUpperLeg": -8,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 8,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeInOut",
-              "label": "Action"
+              }
             },
             {
               "id": "d43",
               "time": 7.5,
+              "easing": "easeOut",
+              "label": "End",
               "state": {
                 "x": 720,
                 "y": 440,
                 "scale": 1,
                 "rotation": 0,
                 "facing": -1,
-                "pose": {
-                  "head": 0,
-                  "torso": 0,
-                  "leftUpperArm": -145,
-                  "leftLowerArm": 0,
-                  "rightUpperArm": 145,
-                  "rightLowerArm": 0,
-                  "leftUpperLeg": -8,
-                  "leftLowerLeg": 5,
-                  "rightUpperLeg": 8,
-                  "rightLowerLeg": 5
-                },
                 "mouthOpen": false
-              },
-              "easing": "easeOut",
-              "label": "End"
+              }
             }
           ],
           "clips": [
@@ -1786,46 +1167,8 @@
     }
   ],
   "assets": [],
-  "customPoses": {
-    "Capois Charge": {
-      "head": -4,
-      "torso": -10,
-      "leftUpperArm": -52,
-      "leftLowerArm": -20,
-      "rightUpperArm": 92,
-      "rightLowerArm": -34,
-      "leftUpperLeg": 30,
-      "leftLowerLeg": 14,
-      "rightUpperLeg": -26,
-      "rightLowerLeg": 22
-    },
-    "Dessalines Address": {
-      "head": 0,
-      "torso": 0,
-      "leftUpperArm": -72,
-      "leftLowerArm": -42,
-      "rightUpperArm": 68,
-      "rightLowerArm": 38,
-      "leftUpperLeg": -4,
-      "leftLowerLeg": 4,
-      "rightUpperLeg": 4,
-      "rightLowerLeg": 4
-    },
-    "Victory Salute": {
-      "head": -6,
-      "torso": -2,
-      "leftUpperArm": -118,
-      "leftLowerArm": -12,
-      "rightUpperArm": 138,
-      "rightLowerArm": -6,
-      "leftUpperLeg": -8,
-      "leftLowerLeg": 5,
-      "rightUpperLeg": 8,
-      "rightLowerLeg": 5
-    }
-  },
   "scripts": {
-    "project": "Thirty-second narrated history short about the final 1803 campaign of the Haitian Revolution and the Battle of Vertières.",
+    "project": "Narrated shape-only history short about the final 1803 campaign of the Haitian Revolution and the Battle of Vertières.",
     "sceneById": {
       "haiti-scene-1": "By November 1803, Haiti's revolution had reached a decisive final campaign. Jean-Jacques Dessalines led the revolutionary army against French forces commanded by General Rochambeau.",
       "haiti-scene-2": "On November 18, Haitian forces attacked the fortified French position at Vertières, near Cap-Français. Capois-la-Mort led repeated assaults under intense fire.",
