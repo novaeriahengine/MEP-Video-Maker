@@ -1,5 +1,5 @@
 window.MEPStorage=(()=>{
-const INDEX_KEY="mep-video-maker-project-index-v7",RECENT_KEY="mep-video-maker-recent-v7",PREFIX="mep-video-maker-project-v7:",RESET_KEY="mep-youtube-short-maker-reset-v1";let cloud=null;
+const INDEX_KEY="mep-video-maker-project-index-v7",RECENT_KEY="mep-video-maker-recent-v7",PREFIX="mep-video-maker-project-v7:",RESET_KEY="mep-youtube-short-maker-reset-v2";let cloud=null;
 function readIndex(){try{return JSON.parse(localStorage.getItem(INDEX_KEY)||"[]")}catch{return[]}}
 function writeIndex(items){localStorage.setItem(INDEX_KEY,JSON.stringify(items.slice(0,50)))}
 function save(p){
