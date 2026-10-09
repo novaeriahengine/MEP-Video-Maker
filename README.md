@@ -49,13 +49,8 @@ Use the **AI Director** button to generate through a configured backend, inspect
 
 For factual history videos, the intended production pipeline is: user topic → research/fact-check → script/narration → Director scene plan → MEP validation → animation project. This keeps historical claims separate from visual animation commands.
 
-## Animator / Character Studio upgrade
-The main renderer now uses original illustrated history-cartoon characters rather than bare stick figures. Built-in presets include Civilian, Monarch, Infantry Soldier, Military Officer, Revolutionary and Modern Presenter, with clothes, hair, hats/accessories, hands, shoes, faces and articulated joints.
-
-Character Studio provides its own 800×600 drawing canvas with brush, eraser, image import and a freeform lasso. Closing a lasso masks pixels outside the selected polygon and creates a transparent PNG sticker cutout. A cutout can be assigned to head, torso, arm and leg custom-rig slots and is stored with the character project data. Full rendering/deformation of those custom sprite slots is a following renderer milestone; the cutout creation and rig-slot data pipeline are already present.
-
-Background presets now include World, Europe, Americas, Asia and Africa map modes. The current maps are intentionally schematic visual presets; accurate country borders and country-level map presets should use geographic vector/GeoJSON assets in the next map-system pass rather than fabricated boundaries.
-
+## Shape-only animator workflow
+MEP now uses flag-filled square, circle, and triangle characters only. The old articulated character studio and limb-rig workflow were removed. Character animation is intentionally simple: position, scale, rotation, eye expression, mouth open/close, hats, hair overlays, and props. This keeps narrated history videos fast to build and puts more visual emphasis on maps, historical photos, scene composition, and backgrounds.
 
 ## MEP v6 flag-shape history workflow
 MEP now boots with a visible Union square country-layout character and is centered around an era/year-first workflow. Character bodies are flag-filled Square, Circle, or Triangle shapes only. Each character resolves a period flag from the project year when historical data is available and falls back to the modern country flag otherwise. The built-in country selector covers the ISO country list plus historical entities such as the Union, Confederate States (historical context), Prussia, the Holy Roman Empire, Ottoman Empire, and Gran Colombia.
