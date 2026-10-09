@@ -3,7 +3,7 @@ service cloud.firestore {
   match /databases/{database}/documents {
     match /mepLibrary/{docId} {
       allow read: if true;
-      allow create, update: if request.resource.data.schema == "mep-library-v3";
+      allow create, update: if request.resource.data.schema == "mep-library-v4";
       allow delete: if true;
     }
     match /mepProjects/{projectId} {
