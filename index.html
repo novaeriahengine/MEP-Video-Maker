@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Noveria History — MEP Short Maker</title>
-<link rel="stylesheet" href="css/style.css?v=20261009d">
+<link rel="stylesheet" href="css/style.css?v=20261010a">
 </head>
 <body>
 <div id="app">
@@ -128,7 +128,8 @@
     <div id="voiceStatus" class="voiceStatus">No recorded voiceover yet.</div>
     <h3>Chrome Auto Voice</h3>
     <label>Chrome Voice <select id="chromeVoice"></select></label>
-    <div class="voiceActions"><button id="speakScene">Speak Scene</button><button id="speakShort">Speak Whole Short</button><button id="stopSpeaking">Stop Voice</button></div>
+    <div id="chromeVoiceHint" class="voiceStatus">Detecting the best voice available on this phone…</div>
+    <div class="voiceActions"><button id="autoChromeVoice" class="primary">★ Best Voice on This Phone</button><button id="speakScene">Speak Scene</button><button id="speakShort">Speak Whole Short</button><button id="stopSpeaking">Stop Voice</button></div>
     <div class="voiceGrid"><label>TTS Rate <input id="ttsRate" type="range" min=".65" max="1.5" step=".05" value="1"><output id="ttsRateOut">1.00</output></label><label>TTS Pitch <input id="ttsPitch" type="range" min=".5" max="1.6" step=".05" value="1"><output id="ttsPitchOut">1.00</output></label></div>
     <h3>Voice Changer / EQ</h3>
     <div class="voicePresetRow"><button data-voice-preset="natural">Natural</button><button data-voice-preset="deep">Deep</button><button data-voice-preset="documentary">Documentary</button><button data-voice-preset="radio">Radio</button></div>
@@ -177,14 +178,15 @@
 
 <nav id="mobileDock" class="mobileDock"><button data-jump="#stageArea">Canvas</button><button data-jump="#scenePanel">Shorts</button><button data-jump="#characterPanel">Flags</button><button data-jump="#scriptPanel">Script</button><button id="mobileVideo">Preview</button></nav>
 
-<script src="js/firebase-config.js?v=20261009d"></script>
-<script src="js/history-flags.js?v=20261009d"></script>
-<script src="js/model.js?v=20261009d"></script>
-<script src="js/ai-config.js?v=20261009d"></script>
-<script src="js/ai-director.js?v=20261009d"></script>
-<script src="js/renderer.js?v=20261009d"></script>
-<script src="js/storage.js?v=20261009d"></script>
+<script src="js/firebase-config.js?v=20261010a"></script>
+<script src="js/history-flags.js?v=20261010a"></script>
+<script src="js/historical-maps.js?v=20261010a"></script>
+<script src="js/model.js?v=20261010a"></script>
+<script src="js/ai-config.js?v=20261010a"></script>
+<script src="js/ai-director.js?v=20261010a"></script>
+<script src="js/renderer.js?v=20261010a"></script>
+<script src="js/storage.js?v=20261010a"></script>
 <script>window.addEventListener("error",e=>{const el=document.getElementById("bootStatus");if(el){el.className="bootStatus error";el.textContent="MEP error: "+(e.message||"Unknown startup error")}});</script>
-<script src="js/app.js?v=20261009d"></script>
+<script src="js/app.js?v=20261010a"></script>
 </body>
 </html>
