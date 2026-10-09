@@ -32,7 +32,7 @@ async function saveAssetDoc(projectId,a){
  await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepAssets",projectId+"__"+a.id),doc,{merge:true})
 }
 async function saveCloud(p){
- await ensure();save(p);const payload=stripProject(p);await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepProjects",p.id),payload,{merge:true});
+ await ensure();save(p);const payload=stripProject(p);await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepProjects",p.id),payload,{merge:false});
  for(const a of p.assets||[])if(a.dataUrl)await saveAssetDoc(p.id,a);p.sync.status="synced";p.sync.lastSyncedAt=payload.sync.lastSyncedAt;save(p);return p.id
 }
 async function hydrateAssets(p){const assets=[];for(const meta of p.assetManifest||p.assets||[]){try{const snap=await cloud.fs.getDoc(cloud.fs.doc(cloud.db,"mepAssets",p.id+"__"+meta.id));if(snap.exists())assets.push({...meta,dataUrl:snap.data().dataUrl})}catch(e){console.warn("Asset load failed",meta.id,e)}}p.assets=assets;return p}
@@ -44,7 +44,7 @@ function isHaitiLegacy(data,id=""){const raw=(id+" "+JSON.stringify(data||{})).t
 async function deleteLegacyHaitiCloud(){
  await ensure();const deletedProjects=[];
  const ps=await cloud.fs.getDocs(cloud.fs.collection(cloud.db,"mepProjects"));
- for(const d of ps.docs){if(d.id!=="youtube-short-maker"&&isHaitiLegacy(d.data(),d.id)){deletedProjects.push(d.id);await cloud.fs.deleteDoc(d.ref)}}
+ for(const d of ps.docs){const data=d.data();const legacy=!Array.isArray(data?.shorts)||Number(data?.version||0)<7;if(d.id!=="youtube-short-maker"&&(legacy||isHaitiLegacy(data,d.id))){deletedProjects.push(d.id);await cloud.fs.deleteDoc(d.ref)}}
  const chars=await cloud.fs.getDocs(cloud.fs.collection(cloud.db,"mepCharacters"));for(const d of chars.docs)if(isHaitiLegacy(d.data(),d.id))await cloud.fs.deleteDoc(d.ref);
  const anim=await cloud.fs.getDocs(cloud.fs.collection(cloud.db,"mepAnimations"));for(const d of anim.docs)if(isHaitiLegacy(d.data(),d.id))await cloud.fs.deleteDoc(d.ref);
  if(deletedProjects.length){const assets=await cloud.fs.getDocs(cloud.fs.collection(cloud.db,"mepAssets"));for(const d of assets.docs)if(deletedProjects.includes(d.data()?.projectId))await cloud.fs.deleteDoc(d.ref)}
