@@ -7,7 +7,7 @@ Browser-first 2D animation workspace for illustrated history and educational vid
 - History era metadata: Ancient through Modern
 - Tagged background presets: parchment/map, battlefield, palace, city, countryside and archive
 - Per-scene tags and per-character tags
-- Multiple articulated humanoid characters
+- Flag-filled square, circle, and triangle characters
 - Character Maker rig metadata and appearance colors
 - Joint pose editor
 - Reusable pose library: idle, attention, point, talk, victory and march poses
@@ -58,7 +58,7 @@ Background presets now include World, Europe, Americas, Asia and Africa map mode
 
 
 ## MEP v5 all-in-one history workflow
-MEP now boots with a visible Union square country-layout character and is centered around an era/year-first workflow. Character looks are Square, Circle, Triangle, Humanoid, and Country Layout. Country Layout resolves a period flag from the project year when historical data is available and falls back to the modern country flag otherwise. The built-in country selector covers the ISO country list plus historical entities such as the Union, Confederate States (historical context), Prussia, the Holy Roman Empire, Ottoman Empire, and Gran Colombia.
+MEP now boots with a visible Union square country-layout character and is centered around an era/year-first workflow. Character bodies are flag-filled Square, Circle, or Triangle shapes only. Each character resolves a period flag from the project year when historical data is available and falls back to the modern country flag otherwise. The built-in country selector covers the ISO country list plus historical entities such as the Union, Confederate States (historical context), Prussia, the Holy Roman Empire, Ottoman Empire, and Gran Colombia.
 
 The editor includes eye-based expressions, a line/dot mouth that can open/close through keyframes, props/accessories, narration scripts, scene scripts, a floating MEP Navigator, mobile Android/Chrome controls, rich procedural history backgrounds, uploaded image backgrounds, background keyframes, project/video playback, WebM recording, and no-login Firestore JSON persistence. Large uploaded background images are compressed and stored as separate `mepAssets` Firestore documents while project JSON references the asset IDs.
 
