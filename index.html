@@ -122,6 +122,17 @@
     <label class="stack">On-screen Caption<textarea id="sceneCaption" rows="3"></textarea></label>
     <label class="stack">Scene Notes<textarea id="sceneNotes" rows="4"></textarea></label>
 
+    <h2>Voice Studio</h2>
+    <label>Voice Source <select id="voiceSource"><option value="mic">Recorded Mic Voiceover</option><option value="chrome">Chrome Auto Voice Preview</option><option value="none">No Voice</option></select></label>
+    <div class="voiceActions"><button id="recordVoice" class="primary">Record Full Voiceover</button><button id="stopVoiceRecord">Stop</button><button id="playVoiceover">Play Processed</button><button id="clearVoiceover">Clear</button></div>
+    <div id="voiceStatus" class="voiceStatus">No recorded voiceover yet.</div>
+    <h3>Chrome Auto Voice</h3>
+    <label>Chrome Voice <select id="chromeVoice"></select></label>
+    <div class="voiceActions"><button id="speakScene">Speak Scene</button><button id="speakShort">Speak Whole Short</button><button id="stopSpeaking">Stop Voice</button></div>
+    <div class="voiceGrid"><label>TTS Rate <input id="ttsRate" type="range" min=".65" max="1.5" step=".05" value="1"><output id="ttsRateOut">1.00</output></label><label>TTS Pitch <input id="ttsPitch" type="range" min=".5" max="1.6" step=".05" value="1"><output id="ttsPitchOut">1.00</output></label></div>
+    <h3>Voice Changer / EQ</h3>
+    <div class="voicePresetRow"><button data-voice-preset="natural">Natural</button><button data-voice-preset="deep">Deep</button><button data-voice-preset="documentary">Documentary</button><button data-voice-preset="radio">Radio</button></div>
+    <div class="voiceGrid"><label>Pitch <input id="voicePitch" type="range" min="-6" max="6" step=".5" value="0"><output id="voicePitchOut">0 st</output></label><label>Speed <input id="voiceSpeed" type="range" min=".8" max="1.2" step=".02" value="1"><output id="voiceSpeedOut">1.00x</output></label></div>
     <h2>Dialogue / Bubble</h2>
     <label class="stack">Text<textarea id="bubbleText" rows="3"></textarea></label>
     <label>Style <select id="bubbleStyle"></select></label>
