@@ -66,7 +66,7 @@
     <div id="quickPresetGrid" class="quickPresetGrid"></div>
     <label>Preset <select id="characterPreset"></select></label>
     <div class="buttonGrid"><button id="addPresetCharacter" class="primary">+ Add Preset</button><button id="openCharacterGallery">Gallery</button></div>
-    <button id="addCharacter">+ Union Square</button><button id="openStudio">Character Studio</button>
+    <button id="addCharacter">+ Union Square</button>
     <div id="characterList" class="miniList"></div>
 
     <h2>Selected Character</h2>
@@ -136,7 +136,7 @@
   <button id="helperVideoMode">Open Video Mode</button><button id="helperOpenAI">AI Director</button>
 </aside>
 
-<dialog id="characterGalleryDialog"><div class="dialogShell"><header><div><h2>Character Gallery</h2><p>Pick a preset or switch any character to Square, Circle, Triangle, Humanoid or Country Layout afterward.</p></div><button id="closeCharacterGallery">Close</button></header><div id="characterGalleryList" class="characterGalleryList"></div></div></dialog>
+<dialog id="characterGalleryDialog"><div class="dialogShell"><header><div><h2>Character Gallery</h2><p>Every preset uses a flag-filled Square, Circle, or Triangle.</p></div><button id="closeCharacterGallery">Close</button></header><div id="characterGalleryList" class="characterGalleryList"></div></div></dialog>
 <dialog id="cloudDialog"><div class="dialogShell"><header><div><h2>Firestore Projects</h2><p>No login. Projects are JSON documents in your MEP Firestore collections.</p></div><button id="closeCloudDialog">Close</button></header><div id="cloudProjectList" class="cloudProjectList"></div></div></dialog>
 <dialog id="aiDialog"><form method="dialog" class="dialogShell aiPanel"><header><div><h2>AI Director</h2><p>Provider-neutral scene-plan endpoint.</p></div><button>Close</button></header><textarea id="aiPrompt" rows="4" placeholder="Make a short illustrated history video..."></textarea><div class="buttonGrid"><button type="button" id="aiGenerate" class="primary">Generate</button><button type="button" id="aiShowContext">Show Context</button></div><textarea id="aiJson" rows="12"></textarea><button type="button" id="aiApply">Apply JSON</button><pre id="aiStatus"></pre></form></dialog>
 
