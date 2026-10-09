@@ -14,7 +14,7 @@ function wholeNarration(sh=short){return(sh?.scenes||[]).map(s=>s.script||"").fi
 function dataUrlToBuffer(url){return fetch(url).then(r=>r.arrayBuffer())}
 function distortionCurve(amount=0){const n=2048,a=Math.max(0,amount)*80,curve=new Float32Array(n);for(let i=0;i<n;i++){const x=i*2/n-1;curve[i]=a?((3+a)*x*20*Math.PI/180)/(Math.PI+a*Math.abs(x)):x}return curve}
 async function buildVoiceGraph(sh,{monitor=false}={}){
- const asset=voiceAssetFor(sh);if(!asset?.dataUrl)return null;const A=window.AudioContext||window.webkitAudioContext;if(!A)return null;const ac=new A(),buf=await ac.decodeAudioData(await dataUrlToBuffer(asset.dataUrl)),src=ac.createBufferSource(),v=sh.voice||{};src.buffer=buf;src.playbackRate.value=Number(v.speed)||1;src.detune.value=(Number(v.pitchSemitones)||0)*100;
+ if(sh?.voice?.source!=="mic")return null;const asset=voiceAssetFor(sh);if(!asset?.dataUrl)return null;const A=window.AudioContext||window.webkitAudioContext;if(!A)return null;const ac=new A(),buf=await ac.decodeAudioData(await dataUrlToBuffer(asset.dataUrl)),src=ac.createBufferSource(),v=sh.voice||{};src.buffer=buf;src.playbackRate.value=Number(v.speed)||1;src.detune.value=(Number(v.pitchSemitones)||0)*100;
  const bass=ac.createBiquadFilter();bass.type="lowshelf";bass.frequency.value=180;bass.gain.value=Number(v.bass)||0;
  const mid=ac.createBiquadFilter();mid.type="peaking";mid.frequency.value=1100;mid.Q.value=.85;mid.gain.value=Number(v.mid)||0;
  const presence=ac.createBiquadFilter();presence.type="peaking";presence.frequency.value=3200;presence.Q.value=1;presence.gain.value=Number(v.presence)||0;
