@@ -1,60 +1,50 @@
-# MEP Video Maker
+# Noveria History — MEP Short Maker
 
-Browser-first 2D animation workspace for illustrated history and educational videos.
+Browser-first vertical history animation editor for 30–60 second YouTube Shorts.
 
-## Current editor
-- Multi-scene project format (schema v2)
-- History era metadata: Ancient through Modern
-- Tagged background presets: parchment/map, battlefield, palace, city, countryside and archive
-- Per-scene tags and per-character tags
-- Flag-filled square, circle, and triangle characters
-- Character Maker rig metadata and appearance colors
-- Joint pose editor
-- Reusable pose library: idle, attention, point, talk, victory and march poses
-- One-click 2-second March animation generator
-- Position/scale/facing animation
-- Timestamped keyframes with interpolation and timeline playback
-- Local autosave plus JSON import/export
-- Optional Firestore save/load with one document per project
-- Automatic migration of the original v1 project format
+## Current workflow
+- One project can contain multiple independent Shorts.
+- 9:16 / 720×1280 canvas optimized for Android Chrome and lower-end laptops.
+- The most recent local project resumes automatically; **New Project** creates a clean blank Shorts project.
+- **Open / Recent** lists saved local projects and Firestore projects.
+- The bundled **YouTube Short Maker** project contains 10 finished history Shorts with titles, descriptions, hashtags, narration, scenes, country flags, map graphics, and timing.
+- Character bodies are flag-filled Square, Circle, or Triangle shapes only.
+- Noveria Host is a small American-flag circle intended to sit near the bottom while maps and graphics do most of the explaining.
+- No Haiti-specific character/video preset is bundled.
+
+## Explainer tools
+Scenes support drawn history backgrounds, uploaded historical photos, background keyframes, front lines, arrows, movement routes, plane routes, highlighted zones, impact markers, labels, captions, bubbles, and simple flag-character movement.
+
+Built-in thematic backgrounds include WWI Western Front, WWI Eastern Front, Pearl Harbor/Pacific, Normandy, Cold War Europe, American Revolution, Napoleonic Europe, and general world/continent maps.
+
+## Video export
+**Export This Short** records the active Short on an offscreen canvas so the editor does not have to visibly play the video. The export is the same scene renderer used by Preview mode. **Export All** processes every Short in the current project sequentially. Browser MediaRecorder still encodes in real time, so a 42-second Short takes roughly 42 seconds to render, but the visible editor can remain on the current screen.
+
+Exports are WebM because that is the broadly available browser MediaRecorder format. MP4 would require WebCodecs/ffmpeg or a backend transcoder.
 
 ## Project data
-A project stores scenes. Each scene stores its background preset/tags and characters. Each character stores its tags, rig/appearance, current pose and animation keyframes. Keyframes store transform + joint state, not rendered frames.
+Schema v7 is:
+Project → Shorts → Scenes → characters / graphics / background / narration.
 
-## Firestore
-MEP remains fully usable without Firebase. To enable cloud projects:
+Each Short stores its own title, description, hashtags, year, 9:16 settings, scene list, and timing. Each scene stores background state, narration, captions, flag characters, graphic overlays, bubbles, and keyframes.
 
-1. Create a Firebase web app and Firestore database.
-2. Open `js/firebase-config.js`.
-3. Replace `window.MEP_FIREBASE_CONFIG = null` with the public Firebase **web app configuration** shown in Firebase Console.
-4. Do not put Firebase Admin SDK/service-account credentials in this repository.
-5. Configure Firestore security rules appropriate for your authentication model before using this with other users.
+## Local projects + Firestore
+Local projects use a small project index plus one localStorage document per project. The latest project resumes on page load. Older v3/v5/v6 local saves are migrated once into the v7 project library.
 
-Cloud projects are stored in the `mepProjects` collection with the MEP project ID as the document ID. The current cloud MVP does not yet implement Firebase Authentication; add Auth before treating this as a multi-user production service.
-
-## Basic animation test
-1. Select the default character.
-2. Apply a pose and add a keyframe at 0s.
-3. Scrub to 2s, move the character/change the pose, and add another keyframe.
-4. Press Play to see interpolation.
-5. Or select **marchA** and press **Generate 2s March** to automatically create a short motion sequence.
-
-## Next
-Direct joint-handle dragging, richer character body/face/hair/clothing construction, reusable named character templates, walk/talk gesture clips, scene duplication/reordering, props and images, text/captions, camera keyframes, audio/narration tracks, Firebase Auth, asset storage, undo/redo and video export.
+Firestore remains no-login for the current personal-development setup. Projects save to `mepProjects`, assets to `mepAssets`, characters to `mepCharacters`, and the reusable engine library to `mepLibrary/default`. Publish the matching rules in `firebase/firestore.rules`.
 
 ## AI Director
-MEP now exposes a provider-neutral `mep-director-v1` protocol. The AI Director knows the editor canvas, backgrounds, history eras, character rig, joints, poses, animation/keyframe format and timing constraints. A model can return structured scenes containing narration, captions, characters and timed actions; MEP validates the response and converts it into native scenes and keyframes.
+AI Director protocol v3 is Shorts-first. It asks a backend model for one 30–60 second vertical history Short using 4–6 scenes, concise narration, country-flag shapes, maps, arrows, front lines, routes, labels, and other explainer graphics. API keys stay on the backend; the browser only receives structured scene JSON.
 
-Use the **AI Director** button to generate through a configured backend, inspect the full engine-context package, or paste Director JSON for offline testing. Configure the backend URL in `js/ai-config.js`. Keep OpenAI/model API keys on that backend and never in the browser repository. See `docs/AI-DIRECTOR.md` for the contract.
-
-For factual history videos, the intended production pipeline is: user topic → research/fact-check → script/narration → Director scene plan → MEP validation → animation project. This keeps historical claims separate from visual animation commands.
-
-## Shape-only animator workflow
-MEP now uses flag-filled square, circle, and triangle characters only. The old articulated character studio and limb-rig workflow were removed. Character animation is intentionally simple: position, scale, rotation, eye expression, mouth open/close, hats, hair overlays, and props. This keeps narrated history videos fast to build and puts more visual emphasis on maps, historical photos, scene composition, and backgrounds.
-
-## MEP v6 flag-shape history workflow
-MEP now boots with a visible Union square country-layout character and is centered around an era/year-first workflow. Character bodies are flag-filled Square, Circle, or Triangle shapes only. Each character resolves a period flag from the project year when historical data is available and falls back to the modern country flag otherwise. The built-in country selector covers the ISO country list plus historical entities such as the Union, Confederate States (historical context), Prussia, the Holy Roman Empire, Ottoman Empire, and Gran Colombia.
-
-The editor includes eye-based expressions, a line/dot mouth that can open/close through keyframes, props/accessories, narration scripts, scene scripts, a floating MEP Navigator, mobile Android/Chrome controls, rich procedural history backgrounds, uploaded image backgrounds, background keyframes, project/video playback, WebM recording, and no-login Firestore JSON persistence. Large uploaded background images are compressed and stored as separate `mepAssets` Firestore documents while project JSON references the asset IDs.
-
-The bundled `presets/mep-starter-pack-v6.mep.json` demonstrates multiple eras, country layouts, all primary body looks, scripts, backgrounds, keyframes and captions. The Haiti / Vertières preset is also migrated to the v5 country-square workflow.
+## Bundled Shorts
+The `presets/youtube-short-maker.mep.json` project includes:
+1. Why the Western Front Froze Into Trenches
+2. Why the Eastern Front Kept Moving
+3. Pearl Harbor in 45 Seconds: Why Japan Attacked
+4. Midway: The Battle That Broke Japan’s Carrier Force
+5. D-Day in 45 Seconds: How Normandy Was Breached
+6. Why the American Revolution Started
+7. French Revolution in 45 Seconds
+8. Waterloo: How Napoleon Lost His Final Battle
+9. Cuban Missile Crisis: 13 Days Near Nuclear War
+10. Why the Berlin Wall Fell
