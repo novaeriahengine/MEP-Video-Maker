@@ -33,7 +33,7 @@
         {
           "id": "id-sr1mf4dwxfj-mv0hah5h",
           "name": "The 1914 rush",
-          "duration": 8,
+          "duration": 8.6,
           "background": {
             "preset": "westernFrontMap",
             "mode": "preset",
@@ -114,7 +114,7 @@
                 },
                 {
                   "id": "id-untva1kyj9-mv0hah5h",
-                  "time": 3.6,
+                  "time": 3.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -127,7 +127,7 @@
                 },
                 {
                   "id": "id-9qjuu4r96wk-mv0hah5h",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -187,7 +187,7 @@
                 },
                 {
                   "id": "id-4c8r6esux69-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 475,
@@ -247,7 +247,7 @@
                 },
                 {
                   "id": "id-pzlom2e4esn-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 330,
@@ -307,7 +307,7 @@
                 },
                 {
                   "id": "id-y2prpjmc47h-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 275,
@@ -327,7 +327,7 @@
             {
               "id": "id-fl2oxwyw4tg-mv0hah5h",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.6,
               "color": "#c43b3b",
               "fill": "#d5444433",
               "width": 8,
@@ -356,7 +356,7 @@
             {
               "id": "id-ya8cu658s6c-mv0hah5h",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.6,
               "color": "#b1282f",
               "fill": "#d5444433",
               "width": 8,
@@ -386,7 +386,7 @@
         {
           "id": "id-5dqowapueza-mv0hah5i",
           "name": "Race to the Sea",
-          "duration": 8,
+          "duration": 8.6,
           "background": {
             "preset": "westernFrontMap",
             "mode": "preset",
@@ -467,7 +467,7 @@
                 },
                 {
                   "id": "id-nl50epon8gi-mv0hah5i",
-                  "time": 3.6,
+                  "time": 3.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -480,7 +480,7 @@
                 },
                 {
                   "id": "id-986u14fi19r-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -540,7 +540,7 @@
                 },
                 {
                   "id": "id-o5n7mwuosql-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 535,
@@ -600,7 +600,7 @@
                 },
                 {
                   "id": "id-tztm73wfc7o-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 250,
@@ -620,7 +620,7 @@
             {
               "id": "id-1591wger4g9-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.6,
               "color": "#6f302b",
               "fill": "#d5444433",
               "width": 8,
@@ -659,7 +659,7 @@
         {
           "id": "id-eq9yv69hy14-mv0hah5i",
           "name": "Why attacks stalled",
-          "duration": 8,
+          "duration": 8.6,
           "background": {
             "preset": "trench",
             "mode": "preset",
@@ -740,7 +740,7 @@
                 },
                 {
                   "id": "id-dedwqxlmczv-mv0hah5i",
-                  "time": 3.6,
+                  "time": 3.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -753,7 +753,7 @@
                 },
                 {
                   "id": "id-k0klb7qbdq-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -813,7 +813,7 @@
                 },
                 {
                   "id": "id-k9i3oc9hl4m-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 390,
@@ -873,7 +873,7 @@
                 },
                 {
                   "id": "id-jgr49uyu6bg-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 450,
@@ -893,7 +893,7 @@
             {
               "id": "id-k9khffgs9sm-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.6,
               "color": "#d34b3f",
               "fill": "#d5444433",
               "width": 8,
@@ -918,7 +918,7 @@
             {
               "id": "id-sx5jlkvbzq-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.6,
               "color": "#416aa3",
               "fill": "#d5444433",
               "width": 8,
@@ -945,7 +945,7 @@
         {
           "id": "id-56t2zt7v77-mv0hah5i",
           "name": "1918 breaks the stalemate",
-          "duration": 9,
+          "duration": 9.7,
           "background": {
             "preset": "westernFrontMap",
             "mode": "preset",
@@ -1026,7 +1026,7 @@
                 },
                 {
                   "id": "id-783o7tb2q7h-mv0hah5i",
-                  "time": 4.05,
+                  "time": 4.4,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -1039,7 +1039,7 @@
                 },
                 {
                   "id": "id-cmhj9ta6ru-mv0hah5i",
-                  "time": 9,
+                  "time": 9.7,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -1099,7 +1099,7 @@
                 },
                 {
                   "id": "id-av776lsnkc-mv0hah5i",
-                  "time": 9,
+                  "time": 9.7,
                   "easing": "easeInOut",
                   "state": {
                     "x": 455,
@@ -1159,7 +1159,7 @@
                 },
                 {
                   "id": "id-ymcn5bf7wa8-mv0hah5i",
-                  "time": 9,
+                  "time": 9.7,
                   "easing": "easeInOut",
                   "state": {
                     "x": 370,
@@ -1219,7 +1219,7 @@
                 },
                 {
                   "id": "id-qw2qxb5sno-mv0hah5i",
-                  "time": 9,
+                  "time": 9.7,
                   "easing": "easeInOut",
                   "state": {
                     "x": 330,
@@ -1279,7 +1279,7 @@
                 },
                 {
                   "id": "id-fui0ip68l0h-mv0hah5i",
-                  "time": 9,
+                  "time": 9.7,
                   "easing": "easeInOut",
                   "state": {
                     "x": 300,
@@ -1299,7 +1299,7 @@
             {
               "id": "id-a3upqofot5d-mv0hah5i",
               "startTime": 0,
-              "endTime": 4,
+              "endTime": 4.3,
               "color": "#c43b3b",
               "fill": "#d5444433",
               "width": 8,
@@ -1323,8 +1323,8 @@
             },
             {
               "id": "id-eu510fx30b-mv0hah5i",
-              "startTime": 4,
-              "endTime": 9,
+              "startTime": 4.3,
+              "endTime": 9.7,
               "color": "#2d6da3",
               "fill": "#d5444433",
               "width": 8,
@@ -1355,7 +1355,7 @@
         {
           "id": "id-fzgufekzvx9-mv0hah5i",
           "name": "How it ended",
-          "duration": 8,
+          "duration": 8.6,
           "background": {
             "preset": "newspaper",
             "mode": "preset",
@@ -1436,7 +1436,7 @@
                 },
                 {
                   "id": "id-k53jh6ph8ck-mv0hah5i",
-                  "time": 3.6,
+                  "time": 3.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -1449,7 +1449,7 @@
                 },
                 {
                   "id": "id-4a817szw0f-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -1469,7 +1469,7 @@
             {
               "id": "id-0n4etun458l-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.6,
               "color": "#d54444",
               "fill": "#d5444433",
               "width": 8,
@@ -1490,7 +1490,24 @@
       "sources": [
         "Imperial War Museums — First World War",
         "Encyclopaedia Britannica — Western Front"
-      ]
+      ],
+      "voice": {
+        "source": "mic",
+        "assetId": null,
+        "chromeVoice": "",
+        "ttsRate": 1,
+        "ttsPitch": 1,
+        "pitchSemitones": 0,
+        "speed": 1,
+        "bass": 0,
+        "mid": 0,
+        "treble": 0,
+        "presence": 2,
+        "compression": 0.35,
+        "echo": 0,
+        "grit": 0,
+        "gain": 1
+      }
     },
     {
       "id": "id-ycj2bfi3s5j-mv0hah5i",
@@ -1514,7 +1531,7 @@
         {
           "id": "id-8vhr1vbu3gv-mv0hah5i",
           "name": "A gigantic front",
-          "duration": 8,
+          "duration": 8.8,
           "background": {
             "preset": "easternFrontMap",
             "mode": "preset",
@@ -1595,7 +1612,7 @@
                 },
                 {
                   "id": "id-v0hlrpg55q-mv0hah5i",
-                  "time": 3.6,
+                  "time": 4,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -1608,7 +1625,7 @@
                 },
                 {
                   "id": "id-02wpcd6h5lkx-mv0hah5i",
-                  "time": 8,
+                  "time": 8.8,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -1668,7 +1685,7 @@
                 },
                 {
                   "id": "id-tvv707a8jf-mv0hah5i",
-                  "time": 8,
+                  "time": 8.8,
                   "easing": "easeInOut",
                   "state": {
                     "x": 300,
@@ -1728,7 +1745,7 @@
                 },
                 {
                   "id": "id-ycpgvg3fnef-mv0hah5i",
-                  "time": 8,
+                  "time": 8.8,
                   "easing": "easeInOut",
                   "state": {
                     "x": 285,
@@ -1788,7 +1805,7 @@
                 },
                 {
                   "id": "id-gkyt3psicxg-mv0hah5i",
-                  "time": 8,
+                  "time": 8.8,
                   "easing": "easeInOut",
                   "state": {
                     "x": 480,
@@ -1808,7 +1825,7 @@
             {
               "id": "id-ku3or4zlfgk-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.8,
               "color": "#7e332f",
               "fill": "#d5444433",
               "width": 8,
@@ -1842,7 +1859,7 @@
         {
           "id": "id-w0fny2gbs0b-mv0hah5i",
           "name": "Tannenberg",
-          "duration": 8,
+          "duration": 8.8,
           "background": {
             "preset": "easternFrontMap",
             "mode": "preset",
@@ -1923,7 +1940,7 @@
                 },
                 {
                   "id": "id-j8d55c79a5b-mv0hah5i",
-                  "time": 3.6,
+                  "time": 4,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -1936,7 +1953,7 @@
                 },
                 {
                   "id": "id-2p4n5adb3j-mv0hah5i",
-                  "time": 8,
+                  "time": 8.8,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -1996,7 +2013,7 @@
                 },
                 {
                   "id": "id-6dks97vhg04-mv0hah5i",
-                  "time": 8,
+                  "time": 8.8,
                   "easing": "easeInOut",
                   "state": {
                     "x": 415,
@@ -2056,7 +2073,7 @@
                 },
                 {
                   "id": "id-d5cg0uyfgmc-mv0hah5i",
-                  "time": 8,
+                  "time": 8.8,
                   "easing": "easeInOut",
                   "state": {
                     "x": 390,
@@ -2076,7 +2093,7 @@
             {
               "id": "id-xdtrcrne2qj-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.8,
               "color": "#436da0",
               "fill": "#d5444433",
               "width": 8,
@@ -2101,7 +2118,7 @@
             {
               "id": "id-17tj7yipm7h-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.8,
               "color": "#c23e3e",
               "fill": "#d5444433",
               "width": 8,
@@ -2128,7 +2145,7 @@
         {
           "id": "id-6diz2osdhp8-mv0hah5i",
           "name": "The Great Retreat",
-          "duration": 8,
+          "duration": 8.8,
           "background": {
             "preset": "easternFrontMap",
             "mode": "preset",
@@ -2209,7 +2226,7 @@
                 },
                 {
                   "id": "id-slxec352e0e-mv0hah5i",
-                  "time": 3.6,
+                  "time": 4,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -2222,7 +2239,7 @@
                 },
                 {
                   "id": "id-ks1eujtwij-mv0hah5i",
-                  "time": 8,
+                  "time": 8.8,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -2282,7 +2299,7 @@
                 },
                 {
                   "id": "id-hr4uymbu6s4-mv0hah5i",
-                  "time": 8,
+                  "time": 8.8,
                   "easing": "easeInOut",
                   "state": {
                     "x": 440,
@@ -2342,7 +2359,7 @@
                 },
                 {
                   "id": "id-88e6hmnpdl3-mv0hah5i",
-                  "time": 8,
+                  "time": 8.8,
                   "easing": "easeInOut",
                   "state": {
                     "x": 450,
@@ -2402,7 +2419,7 @@
                 },
                 {
                   "id": "id-0nlnm139upm-mv0hah5i",
-                  "time": 8,
+                  "time": 8.8,
                   "easing": "easeInOut",
                   "state": {
                     "x": 600,
@@ -2422,7 +2439,7 @@
             {
               "id": "id-o0ivg8gjzn9-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.8,
               "color": "#c44a3a",
               "fill": "#c44a3a33",
               "width": 8,
@@ -2454,7 +2471,7 @@
             {
               "id": "id-kzx2vhk1u3b-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.8,
               "color": "#c44a3a",
               "fill": "#d5444433",
               "width": 8,
@@ -2481,7 +2498,7 @@
         {
           "id": "id-j32cyvx9qae-mv0hah5i",
           "name": "Russia strikes back",
-          "duration": 9,
+          "duration": 9.9,
           "background": {
             "preset": "easternFrontMap",
             "mode": "preset",
@@ -2562,7 +2579,7 @@
                 },
                 {
                   "id": "id-hu5cc71l2q-mv0hah5i",
-                  "time": 4.05,
+                  "time": 4.5,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -2575,7 +2592,7 @@
                 },
                 {
                   "id": "id-uvds4ftvyl-mv0hah5i",
-                  "time": 9,
+                  "time": 9.9,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -2635,7 +2652,7 @@
                 },
                 {
                   "id": "id-6n48m60jl3r-mv0hah5i",
-                  "time": 9,
+                  "time": 9.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 390,
@@ -2695,7 +2712,7 @@
                 },
                 {
                   "id": "id-abpblukm8f8-mv0hah5i",
-                  "time": 9,
+                  "time": 9.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 340,
@@ -2755,7 +2772,7 @@
                 },
                 {
                   "id": "id-b42k0vart5b-mv0hah5i",
-                  "time": 9,
+                  "time": 9.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 330,
@@ -2775,7 +2792,7 @@
             {
               "id": "id-tlvk2cki09-mv0hah5i",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 9.9,
               "color": "#3e6fa4",
               "fill": "#d5444433",
               "width": 8,
@@ -2799,8 +2816,8 @@
             },
             {
               "id": "id-8taeiq5liva-mv0hah5i",
-              "startTime": 4,
-              "endTime": 9,
+              "startTime": 4.4,
+              "endTime": 9.9,
               "color": "#c43b3b",
               "fill": "#d5444433",
               "width": 8,
@@ -2827,7 +2844,7 @@
         {
           "id": "id-ilegovl5psh-mv0hah5i",
           "name": "Russia leaves the war",
-          "duration": 8,
+          "duration": 8.8,
           "background": {
             "preset": "newspaper",
             "mode": "preset",
@@ -2908,7 +2925,7 @@
                 },
                 {
                   "id": "id-v9pziybu97o-mv0hah5i",
-                  "time": 3.6,
+                  "time": 4,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -2921,7 +2938,7 @@
                 },
                 {
                   "id": "id-1wbvbiye052-mv0hah5i",
-                  "time": 8,
+                  "time": 8.8,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -2941,7 +2958,7 @@
             {
               "id": "id-26twrsijm8o-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.8,
               "color": "#d54444",
               "fill": "#d5444433",
               "width": 8,
@@ -2962,7 +2979,24 @@
       "sources": [
         "Encyclopaedia Britannica — Eastern Front",
         "Imperial War Museums — First World War"
-      ]
+      ],
+      "voice": {
+        "source": "mic",
+        "assetId": null,
+        "chromeVoice": "",
+        "ttsRate": 1,
+        "ttsPitch": 1,
+        "pitchSemitones": 0,
+        "speed": 1,
+        "bass": 0,
+        "mid": 0,
+        "treble": 0,
+        "presence": 2,
+        "compression": 0.35,
+        "echo": 0,
+        "grit": 0,
+        "gain": 1
+      }
     },
     {
       "id": "id-mjsyn4vw3hn-mv0hah5i",
@@ -2986,7 +3020,7 @@
         {
           "id": "id-3gdo6pgbpfj-mv0hah5i",
           "name": "Why tensions exploded",
-          "duration": 9,
+          "duration": 12,
           "background": {
             "preset": "pearlHarborMap",
             "mode": "preset",
@@ -3067,7 +3101,7 @@
                 },
                 {
                   "id": "id-pri1y9bf86-mv0hah5i",
-                  "time": 4.05,
+                  "time": 5.4,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -3080,7 +3114,7 @@
                 },
                 {
                   "id": "id-0fv0h5hzbh0s-mv0hah5i",
-                  "time": 9,
+                  "time": 12,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -3140,7 +3174,7 @@
                 },
                 {
                   "id": "id-iusioimfg3-mv0hah5i",
-                  "time": 9,
+                  "time": 12,
                   "easing": "easeInOut",
                   "state": {
                     "x": 570,
@@ -3200,7 +3234,7 @@
                 },
                 {
                   "id": "id-htmvfdxic1n-mv0hah5i",
-                  "time": 9,
+                  "time": 12,
                   "easing": "easeInOut",
                   "state": {
                     "x": 190,
@@ -3220,7 +3254,7 @@
             {
               "id": "id-wq39oeeye2r-mv0hah5i",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 12,
               "color": "#c64545",
               "fill": "#c6454530",
               "width": 8,
@@ -3252,7 +3286,7 @@
             {
               "id": "id-oyv8h8g4zb-mv0hah5i",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 12,
               "color": "#d54444",
               "fill": "#d5444433",
               "width": 8,
@@ -3270,7 +3304,7 @@
         {
           "id": "id-ew25wkxo0zp-mv0hah5i",
           "name": "The strike route",
-          "duration": 8,
+          "duration": 10.7,
           "background": {
             "preset": "pearlHarborMap",
             "mode": "preset",
@@ -3351,7 +3385,7 @@
                 },
                 {
                   "id": "id-wv8s477gle-mv0hah5i",
-                  "time": 3.6,
+                  "time": 4.8,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -3364,7 +3398,7 @@
                 },
                 {
                   "id": "id-d6eg9p6dn8r-mv0hah5i",
-                  "time": 8,
+                  "time": 10.7,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -3424,7 +3458,7 @@
                 },
                 {
                   "id": "id-j8r7i6tgtea-mv0hah5i",
-                  "time": 8,
+                  "time": 10.7,
                   "easing": "easeInOut",
                   "state": {
                     "x": 520,
@@ -3484,7 +3518,7 @@
                 },
                 {
                   "id": "id-njzngtpp21-mv0hah5i",
-                  "time": 8,
+                  "time": 10.7,
                   "easing": "easeInOut",
                   "state": {
                     "x": 320,
@@ -3504,7 +3538,7 @@
             {
               "id": "id-gb5f74764hh-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 10.7,
               "color": "#d13f3f",
               "fill": "#d5444433",
               "width": 8,
@@ -3539,7 +3573,7 @@
         {
           "id": "id-q5q5j5ksjy-mv0hah5i",
           "name": "December 7, 1941",
-          "duration": 9,
+          "duration": 12,
           "background": {
             "preset": "pearlHarborMap",
             "mode": "preset",
@@ -3620,7 +3654,7 @@
                 },
                 {
                   "id": "id-0hyytiltldb-mv0hah5i",
-                  "time": 4.05,
+                  "time": 5.4,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -3633,7 +3667,7 @@
                 },
                 {
                   "id": "id-ddx3o3q206s-mv0hah5i",
-                  "time": 9,
+                  "time": 12,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -3693,7 +3727,7 @@
                 },
                 {
                   "id": "id-v3lkafjz77f-mv0hah5i",
-                  "time": 9,
+                  "time": 12,
                   "easing": "easeInOut",
                   "state": {
                     "x": 380,
@@ -3753,7 +3787,7 @@
                 },
                 {
                   "id": "id-vx9l32g2w1n-mv0hah5i",
-                  "time": 9,
+                  "time": 12,
                   "easing": "easeInOut",
                   "state": {
                     "x": 340,
@@ -3773,7 +3807,7 @@
             {
               "id": "id-xu085u1ajh8-mv0hah5i",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 12,
               "color": "#c9413e",
               "fill": "#d5444433",
               "width": 8,
@@ -3796,8 +3830,8 @@
             },
             {
               "id": "id-5vsqzny09pf-mv0hah5i",
-              "startTime": 4,
-              "endTime": 9,
+              "startTime": 5.3,
+              "endTime": 12,
               "color": "#e24832",
               "fill": "#d5444433",
               "width": 8,
@@ -3811,8 +3845,8 @@
             },
             {
               "id": "id-k0q59rsrrmb-mv0hah5i",
-              "startTime": 5,
-              "endTime": 9,
+              "startTime": 6.7,
+              "endTime": 12,
               "color": "#e24832",
               "fill": "#d5444433",
               "width": 8,
@@ -3829,7 +3863,7 @@
         {
           "id": "id-td1m9pwxrx-mv0hah5i",
           "name": "What Japan missed",
-          "duration": 8,
+          "duration": 10.7,
           "background": {
             "preset": "harbor",
             "mode": "preset",
@@ -3910,7 +3944,7 @@
                 },
                 {
                   "id": "id-uc94vzo0c-mv0hah5i",
-                  "time": 3.6,
+                  "time": 4.8,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -3923,7 +3957,7 @@
                 },
                 {
                   "id": "id-aapznyse4i5-mv0hah5i",
-                  "time": 8,
+                  "time": 10.7,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -3983,7 +4017,7 @@
                 },
                 {
                   "id": "id-f0aaqq2i7g6-mv0hah5i",
-                  "time": 8,
+                  "time": 10.7,
                   "easing": "easeInOut",
                   "state": {
                     "x": 360,
@@ -4003,7 +4037,7 @@
             {
               "id": "id-l6gssqrjmuh-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 10.7,
               "color": "#d54444",
               "fill": "#d5444433",
               "width": 8,
@@ -4019,7 +4053,7 @@
             {
               "id": "id-254jjo2qvjo-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 10.7,
               "color": "#d54444",
               "fill": "#d5444433",
               "width": 8,
@@ -4037,7 +4071,7 @@
         {
           "id": "id-hx4t4jinbom-mv0hah5i",
           "name": "America enters the war",
-          "duration": 8,
+          "duration": 10.7,
           "background": {
             "preset": "newspaper",
             "mode": "preset",
@@ -4118,7 +4152,7 @@
                 },
                 {
                   "id": "id-t84ix81pps-mv0hah5i",
-                  "time": 3.6,
+                  "time": 4.8,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -4131,7 +4165,7 @@
                 },
                 {
                   "id": "id-3cyqb26ofoe-mv0hah5i",
-                  "time": 8,
+                  "time": 10.7,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -4151,7 +4185,7 @@
             {
               "id": "id-4p6nlymakqs-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 10.7,
               "color": "#d54444",
               "fill": "#d5444433",
               "width": 8,
@@ -4172,7 +4206,24 @@
       "sources": [
         "The National WWII Museum — Pearl Harbor Attack, December 7, 1941",
         "The National WWII Museum — The Path to Pearl Harbor"
-      ]
+      ],
+      "voice": {
+        "source": "mic",
+        "assetId": null,
+        "chromeVoice": "",
+        "ttsRate": 1,
+        "ttsPitch": 1,
+        "pitchSemitones": 0,
+        "speed": 1,
+        "bass": 0,
+        "mid": 0,
+        "treble": 0,
+        "presence": 2,
+        "compression": 0.35,
+        "echo": 0,
+        "grit": 0,
+        "gain": 1
+      }
     },
     {
       "id": "id-g8ie5vtmq1-mv0hah5i",
@@ -4196,7 +4247,7 @@
         {
           "id": "id-xlwlguqscb-mv0hah5i",
           "name": "Japan’s plan",
-          "duration": 8,
+          "duration": 8.6,
           "background": {
             "preset": "pearlHarborMap",
             "mode": "preset",
@@ -4277,7 +4328,7 @@
                 },
                 {
                   "id": "id-wfuwj2fsq5-mv0hah5i",
-                  "time": 3.6,
+                  "time": 3.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -4290,7 +4341,7 @@
                 },
                 {
                   "id": "id-g0rlhnfd4j-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -4350,7 +4401,7 @@
                 },
                 {
                   "id": "id-5k119yw2rli-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 430,
@@ -4410,7 +4461,7 @@
                 },
                 {
                   "id": "id-pe37jxge9ar-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 300,
@@ -4430,7 +4481,7 @@
             {
               "id": "id-9lqqlzbv06k-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.6,
               "color": "#c43b3b",
               "fill": "#d5444433",
               "width": 8,
@@ -4457,7 +4508,7 @@
         {
           "id": "id-dn52y1wfmk7-mv0hah5i",
           "name": "Codebreakers changed the odds",
-          "duration": 8,
+          "duration": 8.6,
           "background": {
             "preset": "mapRoom",
             "mode": "preset",
@@ -4538,7 +4589,7 @@
                 },
                 {
                   "id": "id-mf31k32943-mv0hah5i",
-                  "time": 3.6,
+                  "time": 3.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -4551,7 +4602,7 @@
                 },
                 {
                   "id": "id-wmmm2rfn1hc-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -4611,7 +4662,7 @@
                 },
                 {
                   "id": "id-62ryd20iz4p-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 360,
@@ -4631,7 +4682,7 @@
             {
               "id": "id-nmb1vmn5kr-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.6,
               "color": "#d54444",
               "fill": "#d5444433",
               "width": 8,
@@ -4649,7 +4700,7 @@
         {
           "id": "id-gxlclk4g4vj-mv0hah5i",
           "name": "June 4",
-          "duration": 9,
+          "duration": 9.6,
           "background": {
             "preset": "pearlHarborMap",
             "mode": "preset",
@@ -4730,7 +4781,7 @@
                 },
                 {
                   "id": "id-8omy8kr9azg-mv0hah5i",
-                  "time": 4.05,
+                  "time": 4.3,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -4743,7 +4794,7 @@
                 },
                 {
                   "id": "id-dy4qg4im6mi-mv0hah5i",
-                  "time": 9,
+                  "time": 9.6,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -4803,7 +4854,7 @@
                 },
                 {
                   "id": "id-4olns7teewl-mv0hah5i",
-                  "time": 9,
+                  "time": 9.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 470,
@@ -4863,7 +4914,7 @@
                 },
                 {
                   "id": "id-ah5kn22x5kj-mv0hah5i",
-                  "time": 9,
+                  "time": 9.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 330,
@@ -4883,7 +4934,7 @@
             {
               "id": "id-epmcglvxs5d-mv0hah5i",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 9.6,
               "color": "#c43b3b",
               "fill": "#d5444433",
               "width": 8,
@@ -4906,8 +4957,8 @@
             },
             {
               "id": "id-4ux042q65sl-mv0hah5i",
-              "startTime": 3,
-              "endTime": 9,
+              "startTime": 3.2,
+              "endTime": 9.6,
               "color": "#376ea2",
               "fill": "#d5444433",
               "width": 8,
@@ -4933,7 +4984,7 @@
         {
           "id": "id-etsn3rr2f38-mv0hah5i",
           "name": "Four carriers lost",
-          "duration": 9,
+          "duration": 9.6,
           "background": {
             "preset": "ocean",
             "mode": "preset",
@@ -5014,7 +5065,7 @@
                 },
                 {
                   "id": "id-lqjjiild7pd-mv0hah5i",
-                  "time": 4.05,
+                  "time": 4.3,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -5027,7 +5078,7 @@
                 },
                 {
                   "id": "id-gguysiv0af8-mv0hah5i",
-                  "time": 9,
+                  "time": 9.6,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -5087,7 +5138,7 @@
                 },
                 {
                   "id": "id-0kfzcs6huk5n-mv0hah5i",
-                  "time": 9,
+                  "time": 9.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 360,
@@ -5106,8 +5157,8 @@
           "graphics": [
             {
               "id": "id-p8652zxm96k-mv0hah5i",
-              "startTime": 1,
-              "endTime": 9,
+              "startTime": 1.1,
+              "endTime": 9.6,
               "color": "#e14934",
               "fill": "#d5444433",
               "width": 8,
@@ -5121,8 +5172,8 @@
             },
             {
               "id": "id-qqffwph6a2-mv0hah5i",
-              "startTime": 2,
-              "endTime": 9,
+              "startTime": 2.1,
+              "endTime": 9.6,
               "color": "#e14934",
               "fill": "#d5444433",
               "width": 8,
@@ -5136,8 +5187,8 @@
             },
             {
               "id": "id-7msyft4prr6-mv0hah5i",
-              "startTime": 3,
-              "endTime": 9,
+              "startTime": 3.2,
+              "endTime": 9.6,
               "color": "#e14934",
               "fill": "#d5444433",
               "width": 8,
@@ -5151,8 +5202,8 @@
             },
             {
               "id": "id-waoa9x84phg-mv0hah5i",
-              "startTime": 5,
-              "endTime": 9,
+              "startTime": 5.3,
+              "endTime": 9.6,
               "color": "#e14934",
               "fill": "#d5444433",
               "width": 8,
@@ -5169,7 +5220,7 @@
         {
           "id": "id-0q386b829ytb-mv0hah5i",
           "name": "Why Midway mattered",
-          "duration": 8,
+          "duration": 8.6,
           "background": {
             "preset": "newspaper",
             "mode": "preset",
@@ -5250,7 +5301,7 @@
                 },
                 {
                   "id": "id-ivfcq6qqto9-mv0hah5i",
-                  "time": 3.6,
+                  "time": 3.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -5263,7 +5314,7 @@
                 },
                 {
                   "id": "id-74rqi6u1trw-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -5283,7 +5334,7 @@
             {
               "id": "id-od1i4gzyljq-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.6,
               "color": "#d54444",
               "fill": "#d5444433",
               "width": 8,
@@ -5303,7 +5354,24 @@
       "updatedAt": "2026-10-09T04:41:44.790Z",
       "sources": [
         "The National WWII Museum — Battle of Midway"
-      ]
+      ],
+      "voice": {
+        "source": "mic",
+        "assetId": null,
+        "chromeVoice": "",
+        "ttsRate": 1,
+        "ttsPitch": 1,
+        "pitchSemitones": 0,
+        "speed": 1,
+        "bass": 0,
+        "mid": 0,
+        "treble": 0,
+        "presence": 2,
+        "compression": 0.35,
+        "echo": 0,
+        "grit": 0,
+        "gain": 1
+      }
     },
     {
       "id": "id-bkzq3bq3xiu-mv0hah5i",
@@ -5327,7 +5395,7 @@
         {
           "id": "id-o2uv63wbzt-mv0hah5i",
           "name": "Operation Overlord",
-          "duration": 8,
+          "duration": 8.6,
           "background": {
             "preset": "normandyMap",
             "mode": "preset",
@@ -5408,7 +5476,7 @@
                 },
                 {
                   "id": "id-kaekd60854g-mv0hah5i",
-                  "time": 3.6,
+                  "time": 3.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -5421,7 +5489,7 @@
                 },
                 {
                   "id": "id-3e1sf956z1a-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -5481,7 +5549,7 @@
                 },
                 {
                   "id": "id-6o0onobm0bd-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 290,
@@ -5541,7 +5609,7 @@
                 },
                 {
                   "id": "id-zxfkn2uns-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 390,
@@ -5601,7 +5669,7 @@
                 },
                 {
                   "id": "id-ktf7bopshd-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 480,
@@ -5621,7 +5689,7 @@
             {
               "id": "id-1d4fhl8rhtm-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.6,
               "color": "#3d70a4",
               "fill": "#d5444433",
               "width": 8,
@@ -5645,7 +5713,7 @@
             {
               "id": "id-5zy5pvjeyac-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.6,
               "color": "#3d70a4",
               "fill": "#d5444433",
               "width": 8,
@@ -5671,7 +5739,7 @@
         {
           "id": "id-kipglub863-mv0hah5i",
           "name": "Airborne first",
-          "duration": 8,
+          "duration": 8.6,
           "background": {
             "preset": "normandyMap",
             "mode": "preset",
@@ -5752,7 +5820,7 @@
                 },
                 {
                   "id": "id-sk2mejv9fu-mv0hah5i",
-                  "time": 3.6,
+                  "time": 3.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -5765,7 +5833,7 @@
                 },
                 {
                   "id": "id-gg5l848k0cc-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -5825,7 +5893,7 @@
                 },
                 {
                   "id": "id-gnhiqr4rfz-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 300,
@@ -5885,7 +5953,7 @@
                 },
                 {
                   "id": "id-mssaxfqarj8-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 470,
@@ -5905,7 +5973,7 @@
             {
               "id": "id-usnuqbnd06-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.6,
               "color": "#386c9d",
               "fill": "#d5444433",
               "width": 8,
@@ -5929,7 +5997,7 @@
             {
               "id": "id-94fcdzdxgql-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.6,
               "color": "#386c9d",
               "fill": "#d5444433",
               "width": 8,
@@ -5955,7 +6023,7 @@
         {
           "id": "id-mxk7kz5ch0o-mv0hah5i",
           "name": "Five beaches",
-          "duration": 9,
+          "duration": 9.6,
           "background": {
             "preset": "normandyMap",
             "mode": "preset",
@@ -6036,7 +6104,7 @@
                 },
                 {
                   "id": "id-nu40bw16cc9-mv0hah5i",
-                  "time": 4.05,
+                  "time": 4.3,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -6049,7 +6117,7 @@
                 },
                 {
                   "id": "id-wrnwtzbmrhd-mv0hah5i",
-                  "time": 9,
+                  "time": 9.6,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -6109,7 +6177,7 @@
                 },
                 {
                   "id": "id-ylcrbcg7bmi-mv0hah5i",
-                  "time": 9,
+                  "time": 9.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 360,
@@ -6129,7 +6197,7 @@
             {
               "id": "id-6pbi9a3gn5v-mv0hah5i",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 9.6,
               "color": "#326fa4",
               "fill": "#d5444433",
               "width": 8,
@@ -6153,7 +6221,7 @@
             {
               "id": "id-zu0sx604g1n-mv0hah5i",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 9.6,
               "color": "#326fa4",
               "fill": "#d5444433",
               "width": 8,
@@ -6177,7 +6245,7 @@
             {
               "id": "id-8jzd2k5cw7-mv0hah5i",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 9.6,
               "color": "#326fa4",
               "fill": "#d5444433",
               "width": 8,
@@ -6201,7 +6269,7 @@
             {
               "id": "id-euldyt5av7p-mv0hah5i",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 9.6,
               "color": "#326fa4",
               "fill": "#d5444433",
               "width": 8,
@@ -6225,7 +6293,7 @@
             {
               "id": "id-vftyv5zuh3m-mv0hah5i",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 9.6,
               "color": "#326fa4",
               "fill": "#d5444433",
               "width": 8,
@@ -6251,7 +6319,7 @@
         {
           "id": "id-wbqdsykxhsr-mv0hah5i",
           "name": "A foothold, not a finish",
-          "duration": 9,
+          "duration": 9.6,
           "background": {
             "preset": "normandyMap",
             "mode": "preset",
@@ -6332,7 +6400,7 @@
                 },
                 {
                   "id": "id-mrzykjnm3do-mv0hah5i",
-                  "time": 4.05,
+                  "time": 4.3,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -6345,7 +6413,7 @@
                 },
                 {
                   "id": "id-si9xcwg85mb-mv0hah5i",
-                  "time": 9,
+                  "time": 9.6,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -6405,7 +6473,7 @@
                 },
                 {
                   "id": "id-txdqsup34y-mv0hah5i",
-                  "time": 9,
+                  "time": 9.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 280,
@@ -6465,7 +6533,7 @@
                 },
                 {
                   "id": "id-rav463q81k-mv0hah5i",
-                  "time": 9,
+                  "time": 9.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 430,
@@ -6525,7 +6593,7 @@
                 },
                 {
                   "id": "id-jm92urwlr0m-mv0hah5i",
-                  "time": 9,
+                  "time": 9.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 520,
@@ -6545,7 +6613,7 @@
             {
               "id": "id-aed7b5jnsu4-mv0hah5i",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 9.6,
               "color": "#3e73a0",
               "fill": "#3e73a033",
               "width": 8,
@@ -6579,7 +6647,7 @@
         {
           "id": "id-ss4gkqtf14-mv0hah5i",
           "name": "Why D-Day mattered",
-          "duration": 8,
+          "duration": 8.6,
           "background": {
             "preset": "newspaper",
             "mode": "preset",
@@ -6660,7 +6728,7 @@
                 },
                 {
                   "id": "id-lu82hz8bznk-mv0hah5i",
-                  "time": 3.6,
+                  "time": 3.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -6673,7 +6741,7 @@
                 },
                 {
                   "id": "id-9fmjl0nohit-mv0hah5i",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -6693,7 +6761,7 @@
             {
               "id": "id-ujrch04h1m-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.6,
               "color": "#d54444",
               "fill": "#d5444433",
               "width": 8,
@@ -6714,7 +6782,24 @@
       "sources": [
         "U.S. National Archives — Records Relating to D-Day",
         "U.S. National Archives — D-Day"
-      ]
+      ],
+      "voice": {
+        "source": "mic",
+        "assetId": null,
+        "chromeVoice": "",
+        "ttsRate": 1,
+        "ttsPitch": 1,
+        "pitchSemitones": 0,
+        "speed": 1,
+        "bass": 0,
+        "mid": 0,
+        "treble": 0,
+        "presence": 2,
+        "compression": 0.35,
+        "echo": 0,
+        "grit": 0,
+        "gain": 1
+      }
     },
     {
       "id": "id-g388nsj57bl-mv0hah5j",
@@ -6737,7 +6822,7 @@
         {
           "id": "id-vkk2qtjd019-mv0hah5i",
           "name": "After the Seven Years’ War",
-          "duration": 8,
+          "duration": 9.1,
           "background": {
             "preset": "revolutionMap",
             "mode": "preset",
@@ -6818,7 +6903,7 @@
                 },
                 {
                   "id": "id-hmmim2y1el5-mv0hah5i",
-                  "time": 3.6,
+                  "time": 4.1,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -6831,7 +6916,7 @@
                 },
                 {
                   "id": "id-k9xed1spay-mv0hah5i",
-                  "time": 8,
+                  "time": 9.1,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -6891,7 +6976,7 @@
                 },
                 {
                   "id": "id-x5hros34uza-mv0hah5i",
-                  "time": 8,
+                  "time": 9.1,
                   "easing": "easeInOut",
                   "state": {
                     "x": 500,
@@ -6951,7 +7036,7 @@
                 },
                 {
                   "id": "id-m3e1ocsh3is-mv0hah5i",
-                  "time": 8,
+                  "time": 9.1,
                   "easing": "easeInOut",
                   "state": {
                     "x": 390,
@@ -6971,7 +7056,7 @@
             {
               "id": "id-8tpdxgjpoc3-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 9.1,
               "color": "#c44444",
               "fill": "#d5444433",
               "width": 8,
@@ -6998,7 +7083,7 @@
         {
           "id": "id-7azizh0yrmu-mv0hah5i",
           "name": "No taxation without representation",
-          "duration": 8,
+          "duration": 9.1,
           "background": {
             "preset": "oldTownStreet",
             "mode": "preset",
@@ -7079,7 +7164,7 @@
                 },
                 {
                   "id": "id-cj2ctuxxdbq-mv0hah5i",
-                  "time": 3.6,
+                  "time": 4.1,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -7092,7 +7177,7 @@
                 },
                 {
                   "id": "id-rqn3k86dvc-mv0hah5i",
-                  "time": 8,
+                  "time": 9.1,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -7152,7 +7237,7 @@
                 },
                 {
                   "id": "id-tb23s6himvl-mv0hah5j",
-                  "time": 8,
+                  "time": 9.1,
                   "easing": "easeInOut",
                   "state": {
                     "x": 350,
@@ -7212,7 +7297,7 @@
                 },
                 {
                   "id": "id-t7zhkm427l-mv0hah5j",
-                  "time": 8,
+                  "time": 9.1,
                   "easing": "easeInOut",
                   "state": {
                     "x": 450,
@@ -7232,7 +7317,7 @@
             {
               "id": "id-sxidinyydgm-mv0hah5i",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 9.1,
               "color": "#d54444",
               "fill": "#d5444433",
               "width": 8,
@@ -7250,7 +7335,7 @@
         {
           "id": "id-5nso4mrgshi-mv0hah5j",
           "name": "War begins",
-          "duration": 8,
+          "duration": 9.1,
           "background": {
             "preset": "revolutionMap",
             "mode": "preset",
@@ -7331,7 +7416,7 @@
                 },
                 {
                   "id": "id-rxogqmq4v-mv0hah5j",
-                  "time": 3.6,
+                  "time": 4.1,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -7344,7 +7429,7 @@
                 },
                 {
                   "id": "id-quu7a17umdo-mv0hah5j",
-                  "time": 8,
+                  "time": 9.1,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -7404,7 +7489,7 @@
                 },
                 {
                   "id": "id-0adwowz0cx4-mv0hah5j",
-                  "time": 8,
+                  "time": 9.1,
                   "easing": "easeInOut",
                   "state": {
                     "x": 410,
@@ -7464,7 +7549,7 @@
                 },
                 {
                   "id": "id-irf6szql55-mv0hah5j",
-                  "time": 8,
+                  "time": 9.1,
                   "easing": "easeInOut",
                   "state": {
                     "x": 345,
@@ -7484,7 +7569,7 @@
             {
               "id": "id-09hmpzlzsubb-mv0hah5j",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 9.1,
               "color": "#c44343",
               "fill": "#d5444433",
               "width": 8,
@@ -7507,8 +7592,8 @@
             },
             {
               "id": "id-neuogn542f-mv0hah5j",
-              "startTime": 4,
-              "endTime": 8,
+              "startTime": 4.6,
+              "endTime": 9.1,
               "color": "#d34b35",
               "fill": "#d5444433",
               "width": 8,
@@ -7525,7 +7610,7 @@
         {
           "id": "id-w07qdfjrw4j-mv0hah5j",
           "name": "Independence and France",
-          "duration": 9,
+          "duration": 10.3,
           "background": {
             "preset": "revolutionMap",
             "mode": "preset",
@@ -7606,7 +7691,7 @@
                 },
                 {
                   "id": "id-b8pbcl81r5t-mv0hah5j",
-                  "time": 4.05,
+                  "time": 4.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -7619,7 +7704,7 @@
                 },
                 {
                   "id": "id-rnucxm7o1xr-mv0hah5j",
-                  "time": 9,
+                  "time": 10.3,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -7679,7 +7764,7 @@
                 },
                 {
                   "id": "id-be06wlddwbw-mv0hah5j",
-                  "time": 9,
+                  "time": 10.3,
                   "easing": "easeInOut",
                   "state": {
                     "x": 360,
@@ -7739,7 +7824,7 @@
                 },
                 {
                   "id": "id-9yry8mx1kgv-mv0hah5j",
-                  "time": 9,
+                  "time": 10.3,
                   "easing": "easeInOut",
                   "state": {
                     "x": 460,
@@ -7799,7 +7884,7 @@
                 },
                 {
                   "id": "id-1toqx77umn8-mv0hah5j",
-                  "time": 9,
+                  "time": 10.3,
                   "easing": "easeInOut",
                   "state": {
                     "x": 500,
@@ -7819,7 +7904,7 @@
             {
               "id": "id-0bkquojqwzdg-mv0hah5j",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 10.3,
               "color": "#3e6e9f",
               "fill": "#d5444433",
               "width": 8,
@@ -7846,7 +7931,7 @@
         {
           "id": "id-b68n0dqq72-mv0hah5j",
           "name": "Yorktown and peace",
-          "duration": 9,
+          "duration": 10.3,
           "background": {
             "preset": "newspaper",
             "mode": "preset",
@@ -7927,7 +8012,7 @@
                 },
                 {
                   "id": "id-mdqfr6fos6-mv0hah5j",
-                  "time": 4.05,
+                  "time": 4.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -7940,7 +8025,7 @@
                 },
                 {
                   "id": "id-xgpwy537d6i-mv0hah5j",
-                  "time": 9,
+                  "time": 10.3,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -7960,7 +8045,7 @@
             {
               "id": "id-q07g4tfjqr-mv0hah5j",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 10.3,
               "color": "#d54444",
               "fill": "#d5444433",
               "width": 8,
@@ -7981,7 +8066,24 @@
       "sources": [
         "U.S. National Park Service — American Revolution resources",
         "U.S. National Archives — Declaration of Independence"
-      ]
+      ],
+      "voice": {
+        "source": "mic",
+        "assetId": null,
+        "chromeVoice": "",
+        "ttsRate": 1,
+        "ttsPitch": 1,
+        "pitchSemitones": 0,
+        "speed": 1,
+        "bass": 0,
+        "mid": 0,
+        "treble": 0,
+        "presence": 2,
+        "compression": 0.35,
+        "echo": 0,
+        "grit": 0,
+        "gain": 1
+      }
     },
     {
       "id": "id-5ukf2xdcgno-mv0hah5j",
@@ -8004,7 +8106,7 @@
         {
           "id": "id-hgy3y58aevv-mv0hah5j",
           "name": "France is in crisis",
-          "duration": 8,
+          "duration": 9.5,
           "background": {
             "preset": "royalCourt",
             "mode": "preset",
@@ -8085,7 +8187,7 @@
                 },
                 {
                   "id": "id-4ifb34ftrdw-mv0hah5j",
-                  "time": 3.6,
+                  "time": 4.3,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -8098,7 +8200,7 @@
                 },
                 {
                   "id": "id-60sc73lwx6x-mv0hah5j",
-                  "time": 8,
+                  "time": 9.5,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -8158,7 +8260,7 @@
                 },
                 {
                   "id": "id-xgkdtqu55ua-mv0hah5j",
-                  "time": 8,
+                  "time": 9.5,
                   "easing": "easeInOut",
                   "state": {
                     "x": 360,
@@ -8178,7 +8280,7 @@
             {
               "id": "id-ycwzgi4vpo-mv0hah5j",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 9.5,
               "color": "#d54444",
               "fill": "#d5444433",
               "width": 8,
@@ -8196,7 +8298,7 @@
         {
           "id": "id-t4hbxmc5ph-mv0hah5j",
           "name": "The Third Estate breaks away",
-          "duration": 8,
+          "duration": 9.5,
           "background": {
             "preset": "governmentHall",
             "mode": "preset",
@@ -8277,7 +8379,7 @@
                 },
                 {
                   "id": "id-ip2ipqdxmyk-mv0hah5j",
-                  "time": 3.6,
+                  "time": 4.3,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -8290,7 +8392,7 @@
                 },
                 {
                   "id": "id-zc9x0x4r1co-mv0hah5j",
-                  "time": 8,
+                  "time": 9.5,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -8350,7 +8452,7 @@
                 },
                 {
                   "id": "id-wmq40p5tbc-mv0hah5j",
-                  "time": 8,
+                  "time": 9.5,
                   "easing": "easeInOut",
                   "state": {
                     "x": 330,
@@ -8410,7 +8512,7 @@
                 },
                 {
                   "id": "id-ckasmqnatzu-mv0hah5j",
-                  "time": 8,
+                  "time": 9.5,
                   "easing": "easeInOut",
                   "state": {
                     "x": 500,
@@ -8430,7 +8532,7 @@
             {
               "id": "id-qqk9l51uj1-mv0hah5j",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 9.5,
               "color": "#356d9f",
               "fill": "#d5444433",
               "width": 8,
@@ -8457,7 +8559,7 @@
         {
           "id": "id-pwdlncnewnm-mv0hah5j",
           "name": "The Bastille",
-          "duration": 8,
+          "duration": 9.5,
           "background": {
             "preset": "oldTownStreet",
             "mode": "preset",
@@ -8538,7 +8640,7 @@
                 },
                 {
                   "id": "id-m12rh3x3cfo-mv0hah5j",
-                  "time": 3.6,
+                  "time": 4.3,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -8551,7 +8653,7 @@
                 },
                 {
                   "id": "id-icgbhcqha2h-mv0hah5j",
-                  "time": 8,
+                  "time": 9.5,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -8611,7 +8713,7 @@
                 },
                 {
                   "id": "id-rd81c1uhrqh-mv0hah5j",
-                  "time": 8,
+                  "time": 9.5,
                   "easing": "easeInOut",
                   "state": {
                     "x": 390,
@@ -8630,8 +8732,8 @@
           "graphics": [
             {
               "id": "id-uh9j66dfyq-mv0hah5j",
-              "startTime": 3,
-              "endTime": 8,
+              "startTime": 3.6,
+              "endTime": 9.5,
               "color": "#d34635",
               "fill": "#d5444433",
               "width": 8,
@@ -8648,7 +8750,7 @@
         {
           "id": "id-9pcgx3ya9xe-mv0hah5j",
           "name": "Monarchy to republic",
-          "duration": 9,
+          "duration": 10.7,
           "background": {
             "preset": "governmentHall",
             "mode": "preset",
@@ -8729,7 +8831,7 @@
                 },
                 {
                   "id": "id-f0ypmzdttek-mv0hah5j",
-                  "time": 4.05,
+                  "time": 4.8,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -8742,7 +8844,7 @@
                 },
                 {
                   "id": "id-sd955q1x8na-mv0hah5j",
-                  "time": 9,
+                  "time": 10.7,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -8802,7 +8904,7 @@
                 },
                 {
                   "id": "id-e7fd9du7ym-mv0hah5j",
-                  "time": 9,
+                  "time": 10.7,
                   "easing": "easeInOut",
                   "state": {
                     "x": 420,
@@ -8862,7 +8964,7 @@
                 },
                 {
                   "id": "id-oibtev2bfcc-mv0hah5j",
-                  "time": 9,
+                  "time": 10.7,
                   "easing": "easeInOut",
                   "state": {
                     "x": 360,
@@ -8882,7 +8984,7 @@
             {
               "id": "id-f0lxe5topf-mv0hah5j",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 10.7,
               "color": "#c33f3f",
               "fill": "#d5444433",
               "width": 8,
@@ -8909,7 +9011,7 @@
         {
           "id": "id-xiyxu1brh4-mv0hah5j",
           "name": "Terror, then Napoleon",
-          "duration": 9,
+          "duration": 10.7,
           "background": {
             "preset": "newspaper",
             "mode": "preset",
@@ -8990,7 +9092,7 @@
                 },
                 {
                   "id": "id-y6ouuhelta-mv0hah5j",
-                  "time": 4.05,
+                  "time": 4.8,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -9003,7 +9105,7 @@
                 },
                 {
                   "id": "id-zlsch9s6km-mv0hah5j",
-                  "time": 9,
+                  "time": 10.7,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -9023,7 +9125,7 @@
             {
               "id": "id-p1acljx9o5p-mv0hah5j",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 10.7,
               "color": "#d54444",
               "fill": "#d5444433",
               "width": 8,
@@ -9043,7 +9145,24 @@
       "updatedAt": "2026-10-09T04:41:44.791Z",
       "sources": [
         "Encyclopaedia Britannica — French Revolution"
-      ]
+      ],
+      "voice": {
+        "source": "mic",
+        "assetId": null,
+        "chromeVoice": "",
+        "ttsRate": 1,
+        "ttsPitch": 1,
+        "pitchSemitones": 0,
+        "speed": 1,
+        "bass": 0,
+        "mid": 0,
+        "treble": 0,
+        "presence": 2,
+        "compression": 0.35,
+        "echo": 0,
+        "grit": 0,
+        "gain": 1
+      }
     },
     {
       "id": "id-7f0u2n65tgf-mv0hah5j",
@@ -9066,7 +9185,7 @@
         {
           "id": "id-amcfj3xzy3f-mv0hah5j",
           "name": "Napoleon returns",
-          "duration": 8,
+          "duration": 8.6,
           "background": {
             "preset": "napoleonicMap",
             "mode": "preset",
@@ -9147,7 +9266,7 @@
                 },
                 {
                   "id": "id-srtfxad1b4-mv0hah5j",
-                  "time": 3.6,
+                  "time": 3.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -9160,7 +9279,7 @@
                 },
                 {
                   "id": "id-lfatwp3l53-mv0hah5j",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -9220,7 +9339,7 @@
                 },
                 {
                   "id": "id-uso2ci5zm0l-mv0hah5j",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 420,
@@ -9280,7 +9399,7 @@
                 },
                 {
                   "id": "id-jx5qq4nbj-mv0hah5j",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 240,
@@ -9340,7 +9459,7 @@
                 },
                 {
                   "id": "id-2o0mewodn3d-mv0hah5j",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 540,
@@ -9360,7 +9479,7 @@
             {
               "id": "id-lbveuqghvpk-mv0hah5j",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.6,
               "color": "#c44343",
               "fill": "#d5444433",
               "width": 8,
@@ -9387,7 +9506,7 @@
         {
           "id": "id-uku9vi5wvoo-mv0hah5j",
           "name": "Split the coalition",
-          "duration": 8,
+          "duration": 8.6,
           "background": {
             "preset": "napoleonicMap",
             "mode": "preset",
@@ -9468,7 +9587,7 @@
                 },
                 {
                   "id": "id-clf5u2wq6qt-mv0hah5j",
-                  "time": 3.6,
+                  "time": 3.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -9481,7 +9600,7 @@
                 },
                 {
                   "id": "id-lhpnfawxdg-mv0hah5j",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -9541,7 +9660,7 @@
                 },
                 {
                   "id": "id-ab6guhnxi9g-mv0hah5j",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 400,
@@ -9601,7 +9720,7 @@
                 },
                 {
                   "id": "id-x4jqrl3kdle-mv0hah5j",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 250,
@@ -9661,7 +9780,7 @@
                 },
                 {
                   "id": "id-53qvvhc3hhe-mv0hah5j",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 540,
@@ -9681,7 +9800,7 @@
             {
               "id": "id-yqbkwk4mtjc-mv0hah5j",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.6,
               "color": "#c43b3b",
               "fill": "#d5444433",
               "width": 8,
@@ -9705,7 +9824,7 @@
             {
               "id": "id-iwj6pta77co-mv0hah5j",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.6,
               "color": "#c43b3b",
               "fill": "#d5444433",
               "width": 8,
@@ -9731,7 +9850,7 @@
         {
           "id": "id-spwcr0msfps-mv0hah5j",
           "name": "Ligny and Quatre Bras",
-          "duration": 8,
+          "duration": 8.6,
           "background": {
             "preset": "napoleonicMap",
             "mode": "preset",
@@ -9812,7 +9931,7 @@
                 },
                 {
                   "id": "id-wfxq40wflri-mv0hah5j",
-                  "time": 3.6,
+                  "time": 3.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -9825,7 +9944,7 @@
                 },
                 {
                   "id": "id-v6iiq4g3vhi-mv0hah5j",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -9885,7 +10004,7 @@
                 },
                 {
                   "id": "id-f9l3toyke8t-mv0hah5j",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 420,
@@ -9945,7 +10064,7 @@
                 },
                 {
                   "id": "id-37l5jehsv77-mv0hah5j",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 590,
@@ -10005,7 +10124,7 @@
                 },
                 {
                   "id": "id-6l8gta1lj06-mv0hah5j",
-                  "time": 8,
+                  "time": 8.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 245,
@@ -10025,7 +10144,7 @@
             {
               "id": "id-6znw2p0wphb-mv0hah5j",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.6,
               "color": "#c43b3b",
               "fill": "#d5444433",
               "width": 8,
@@ -10049,7 +10168,7 @@
             {
               "id": "id-t3evf3ijwue-mv0hah5j",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.6,
               "color": "#c43b3b",
               "fill": "#d5444433",
               "width": 8,
@@ -10075,7 +10194,7 @@
         {
           "id": "id-q1w75k6qpp-mv0hah5j",
           "name": "Waterloo",
-          "duration": 9,
+          "duration": 9.6,
           "background": {
             "preset": "battlefield",
             "mode": "preset",
@@ -10156,7 +10275,7 @@
                 },
                 {
                   "id": "id-f2cza61nqnd-mv0hah5j",
-                  "time": 4.05,
+                  "time": 4.3,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -10169,7 +10288,7 @@
                 },
                 {
                   "id": "id-9ate6y7i9nr-mv0hah5j",
-                  "time": 9,
+                  "time": 9.6,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -10229,7 +10348,7 @@
                 },
                 {
                   "id": "id-0lpb6pp8jhl-mv0hah5j",
-                  "time": 9,
+                  "time": 9.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 350,
@@ -10289,7 +10408,7 @@
                 },
                 {
                   "id": "id-kqre3n5pwsj-mv0hah5j",
-                  "time": 9,
+                  "time": 9.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 330,
@@ -10349,7 +10468,7 @@
                 },
                 {
                   "id": "id-2vlhfhqsbxu-mv0hah5j",
-                  "time": 9,
+                  "time": 9.6,
                   "easing": "easeInOut",
                   "state": {
                     "x": 410,
@@ -10368,8 +10487,8 @@
           "graphics": [
             {
               "id": "id-ukrjdx7m9fm-mv0hah5j",
-              "startTime": 4,
-              "endTime": 9,
+              "startTime": 4.3,
+              "endTime": 9.6,
               "color": "#3c70a1",
               "fill": "#d5444433",
               "width": 8,
@@ -10394,7 +10513,7 @@
             {
               "id": "id-abc21bc8tei-mv0hah5j",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 9.6,
               "color": "#c43b3b",
               "fill": "#d5444433",
               "width": 8,
@@ -10421,7 +10540,7 @@
         {
           "id": "id-qoy0muj0ckk-mv0hah5j",
           "name": "The final collapse",
-          "duration": 9,
+          "duration": 9.6,
           "background": {
             "preset": "newspaper",
             "mode": "preset",
@@ -10502,7 +10621,7 @@
                 },
                 {
                   "id": "id-jllbsi7bvlb-mv0hah5j",
-                  "time": 4.05,
+                  "time": 4.3,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -10515,7 +10634,7 @@
                 },
                 {
                   "id": "id-o4et9hap9z-mv0hah5j",
-                  "time": 9,
+                  "time": 9.6,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -10535,7 +10654,7 @@
             {
               "id": "id-ntcey38tcl-mv0hah5j",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 9.6,
               "color": "#d54444",
               "fill": "#d5444433",
               "width": 8,
@@ -10555,7 +10674,24 @@
       "updatedAt": "2026-10-09T04:41:44.791Z",
       "sources": [
         "Encyclopaedia Britannica — Battle of Waterloo"
-      ]
+      ],
+      "voice": {
+        "source": "mic",
+        "assetId": null,
+        "chromeVoice": "",
+        "ttsRate": 1,
+        "ttsPitch": 1,
+        "pitchSemitones": 0,
+        "speed": 1,
+        "bass": 0,
+        "mid": 0,
+        "treble": 0,
+        "presence": 2,
+        "compression": 0.35,
+        "echo": 0,
+        "grit": 0,
+        "gain": 1
+      }
     },
     {
       "id": "id-x1cpnmef4s-mv0hah5j",
@@ -10579,7 +10715,7 @@
         {
           "id": "id-amtn148bb24-mv0hah5j",
           "name": "Missiles in Cuba",
-          "duration": 8,
+          "duration": 8.9,
           "background": {
             "preset": "americasMap",
             "mode": "preset",
@@ -10660,7 +10796,7 @@
                 },
                 {
                   "id": "id-ku0epplacp-mv0hah5j",
-                  "time": 3.6,
+                  "time": 4,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -10673,7 +10809,7 @@
                 },
                 {
                   "id": "id-mntewciwnag-mv0hah5j",
-                  "time": 8,
+                  "time": 8.9,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -10733,7 +10869,7 @@
                 },
                 {
                   "id": "id-ajn9x365dkw-mv0hah5j",
-                  "time": 8,
+                  "time": 8.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 520,
@@ -10793,7 +10929,7 @@
                 },
                 {
                   "id": "id-5hofxd2ukt6-mv0hah5j",
-                  "time": 8,
+                  "time": 8.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 390,
@@ -10853,7 +10989,7 @@
                 },
                 {
                   "id": "id-4wnir6xbn6r-mv0hah5j",
-                  "time": 8,
+                  "time": 8.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 230,
@@ -10873,7 +11009,7 @@
             {
               "id": "id-d4hkqlehb2i-mv0hah5j",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.9,
               "color": "#c44343",
               "fill": "#d5444433",
               "width": 8,
@@ -10904,7 +11040,7 @@
         {
           "id": "id-9iu29ogb0mt-mv0hah5j",
           "name": "The U-2 photographs",
-          "duration": 8,
+          "duration": 8.9,
           "background": {
             "preset": "americasMap",
             "mode": "preset",
@@ -10985,7 +11121,7 @@
                 },
                 {
                   "id": "id-pvawbpn8y7h-mv0hah5j",
-                  "time": 3.6,
+                  "time": 4,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -10998,7 +11134,7 @@
                 },
                 {
                   "id": "id-n9d0s7r6dgi-mv0hah5j",
-                  "time": 8,
+                  "time": 8.9,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -11058,7 +11194,7 @@
                 },
                 {
                   "id": "id-p8sd1v3z3nr-mv0hah5j",
-                  "time": 8,
+                  "time": 8.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 260,
@@ -11118,7 +11254,7 @@
                 },
                 {
                   "id": "id-vzr3tpzwhpm-mv0hah5j",
-                  "time": 8,
+                  "time": 8.9,
                   "easing": "easeInOut",
                   "state": {
                     "x": 400,
@@ -11138,7 +11274,7 @@
             {
               "id": "id-y6fm8z9cpcf-mv0hah5j",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 8.9,
               "color": "#396e9f",
               "fill": "#d5444433",
               "width": 8,
@@ -11165,8 +11301,8 @@
             },
             {
               "id": "id-dhc1oonyk2n-mv0hah5j",
-              "startTime": 4,
-              "endTime": 8,
+              "startTime": 4.5,
+              "endTime": 8.9,
               "color": "#d34836",
               "fill": "#d5444433",
               "width": 8,
@@ -11183,7 +11319,7 @@
         {
           "id": "id-0ra7j5uerks-mv0hah5j",
           "name": "The quarantine",
-          "duration": 9,
+          "duration": 10,
           "background": {
             "preset": "americasMap",
             "mode": "preset",
@@ -11264,7 +11400,7 @@
                 },
                 {
                   "id": "id-l67qybn6yv9-mv0hah5j",
-                  "time": 4.05,
+                  "time": 4.5,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -11277,7 +11413,7 @@
                 },
                 {
                   "id": "id-wkrmwtu7ael-mv0hah5j",
-                  "time": 9,
+                  "time": 10,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -11337,7 +11473,7 @@
                 },
                 {
                   "id": "id-59o47n9nd9g-mv0hah5j",
-                  "time": 9,
+                  "time": 10,
                   "easing": "easeInOut",
                   "state": {
                     "x": 300,
@@ -11397,7 +11533,7 @@
                 },
                 {
                   "id": "id-3qhlkakny78-mv0hah5j",
-                  "time": 9,
+                  "time": 10,
                   "easing": "easeInOut",
                   "state": {
                     "x": 410,
@@ -11417,7 +11553,7 @@
             {
               "id": "id-rcxmp777xp-mv0hah5j",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 10,
               "color": "#3972a0",
               "fill": "#3972a02a",
               "width": 8,
@@ -11449,7 +11585,7 @@
             {
               "id": "id-0fyo7wb51zhg-mv0hah5j",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 10,
               "color": "#d54444",
               "fill": "#d5444433",
               "width": 8,
@@ -11467,7 +11603,7 @@
         {
           "id": "id-sxvpsqlowkf-mv0hah5j",
           "name": "October 27: the danger peaks",
-          "duration": 9,
+          "duration": 10,
           "background": {
             "preset": "coldWarMap",
             "mode": "preset",
@@ -11548,7 +11684,7 @@
                 },
                 {
                   "id": "id-5v8xqr73yhp-mv0hah5j",
-                  "time": 4.05,
+                  "time": 4.5,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -11561,7 +11697,7 @@
                 },
                 {
                   "id": "id-6yg6o39ndj-mv0hah5j",
-                  "time": 9,
+                  "time": 10,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -11621,7 +11757,7 @@
                 },
                 {
                   "id": "id-uhnw0k0fjgk-mv0hah5j",
-                  "time": 9,
+                  "time": 10,
                   "easing": "easeInOut",
                   "state": {
                     "x": 300,
@@ -11681,7 +11817,7 @@
                 },
                 {
                   "id": "id-grvg5atyob-mv0hah5j",
-                  "time": 9,
+                  "time": 10,
                   "easing": "easeInOut",
                   "state": {
                     "x": 470,
@@ -11701,7 +11837,7 @@
             {
               "id": "id-u5rai89eyl-mv0hah5j",
               "startTime": 0,
-              "endTime": 5,
+              "endTime": 5.6,
               "color": "#3b6f9f",
               "fill": "#d5444433",
               "width": 8,
@@ -11724,8 +11860,8 @@
             },
             {
               "id": "id-a5x8ezv87e8-mv0hah5j",
-              "startTime": 5,
-              "endTime": 9,
+              "startTime": 5.6,
+              "endTime": 10,
               "color": "#d34734",
               "fill": "#d5444433",
               "width": 8,
@@ -11742,7 +11878,7 @@
         {
           "id": "id-jezu64ywm9p-mv0hah5j",
           "name": "The deal",
-          "duration": 9,
+          "duration": 10,
           "background": {
             "preset": "newspaper",
             "mode": "preset",
@@ -11823,7 +11959,7 @@
                 },
                 {
                   "id": "id-eg0dg691ogk-mv0hah5j",
-                  "time": 4.05,
+                  "time": 4.5,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -11836,7 +11972,7 @@
                 },
                 {
                   "id": "id-jehif8glin-mv0hah5j",
-                  "time": 9,
+                  "time": 10,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -11856,7 +11992,7 @@
             {
               "id": "id-bfqa58hbhe7-mv0hah5j",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 10,
               "color": "#d54444",
               "fill": "#d5444433",
               "width": 8,
@@ -11876,7 +12012,24 @@
       "updatedAt": "2026-10-09T04:41:44.791Z",
       "sources": [
         "U.S. Department of State Office of the Historian — Cuban Missile Crisis"
-      ]
+      ],
+      "voice": {
+        "source": "mic",
+        "assetId": null,
+        "chromeVoice": "",
+        "ttsRate": 1,
+        "ttsPitch": 1,
+        "pitchSemitones": 0,
+        "speed": 1,
+        "bass": 0,
+        "mid": 0,
+        "treble": 0,
+        "presence": 2,
+        "compression": 0.35,
+        "echo": 0,
+        "grit": 0,
+        "gain": 1
+      }
     },
     {
       "id": "id-1fvv55mu2mj-mv0hah5j",
@@ -11900,7 +12053,7 @@
         {
           "id": "id-ou1sryge0p-mv0hah5j",
           "name": "Why the wall went up",
-          "duration": 8,
+          "duration": 10.1,
           "background": {
             "preset": "coldWarMap",
             "mode": "preset",
@@ -11981,7 +12134,7 @@
                 },
                 {
                   "id": "id-p8w7sk2ks1-mv0hah5j",
-                  "time": 3.6,
+                  "time": 4.5,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -11994,7 +12147,7 @@
                 },
                 {
                   "id": "id-7qca7p9sjdf-mv0hah5j",
-                  "time": 8,
+                  "time": 10.1,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -12054,7 +12207,7 @@
                 },
                 {
                   "id": "id-kbtgz3rnewm-mv0hah5j",
-                  "time": 8,
+                  "time": 10.1,
                   "easing": "easeInOut",
                   "state": {
                     "x": 420,
@@ -12114,7 +12267,7 @@
                 },
                 {
                   "id": "id-zyq388vrdq8-mv0hah5j",
-                  "time": 8,
+                  "time": 10.1,
                   "easing": "easeInOut",
                   "state": {
                     "x": 280,
@@ -12134,7 +12287,7 @@
             {
               "id": "id-jzn4y93zvbe-mv0hah5j",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 10.1,
               "color": "#436fa0",
               "fill": "#d5444433",
               "width": 8,
@@ -12165,7 +12318,7 @@
         {
           "id": "id-2ycxst9gx49-mv0hah5j",
           "name": "August 13, 1961",
-          "duration": 8,
+          "duration": 10.1,
           "background": {
             "preset": "coldWarMap",
             "mode": "preset",
@@ -12246,7 +12399,7 @@
                 },
                 {
                   "id": "id-88mare2ex5j-mv0hah5j",
-                  "time": 3.6,
+                  "time": 4.5,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -12259,7 +12412,7 @@
                 },
                 {
                   "id": "id-j80qfjg6l18-mv0hah5j",
-                  "time": 8,
+                  "time": 10.1,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -12319,7 +12472,7 @@
                 },
                 {
                   "id": "id-4kuhfgzpsy8-mv0hah5j",
-                  "time": 8,
+                  "time": 10.1,
                   "easing": "easeInOut",
                   "state": {
                     "x": 500,
@@ -12379,7 +12532,7 @@
                 },
                 {
                   "id": "id-10gvwk17oyma-mv0hah5j",
-                  "time": 8,
+                  "time": 10.1,
                   "easing": "easeInOut",
                   "state": {
                     "x": 220,
@@ -12399,7 +12552,7 @@
             {
               "id": "id-o6jjjy4qnx-mv0hah5j",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 10.1,
               "color": "#222",
               "fill": "#d5444433",
               "width": 12,
@@ -12426,7 +12579,7 @@
         {
           "id": "id-c27ecj6f3m-mv0hah5j",
           "name": "A divided city",
-          "duration": 8,
+          "duration": 10.1,
           "background": {
             "preset": "city",
             "mode": "preset",
@@ -12507,7 +12660,7 @@
                 },
                 {
                   "id": "id-6n8lwweqv6m-mv0hah5j",
-                  "time": 3.6,
+                  "time": 4.5,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -12520,7 +12673,7 @@
                 },
                 {
                   "id": "id-dyva4lwrldm-mv0hah5j",
-                  "time": 8,
+                  "time": 10.1,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -12580,7 +12733,7 @@
                 },
                 {
                   "id": "id-zssn05db70t-mv0hah5j",
-                  "time": 8,
+                  "time": 10.1,
                   "easing": "easeInOut",
                   "state": {
                     "x": 200,
@@ -12640,7 +12793,7 @@
                 },
                 {
                   "id": "id-vbgvksx9mcn-mv0hah5j",
-                  "time": 8,
+                  "time": 10.1,
                   "easing": "easeInOut",
                   "state": {
                     "x": 520,
@@ -12660,7 +12813,7 @@
             {
               "id": "id-9zrgmbpze1o-mv0hah5j",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 10.1,
               "color": "#333",
               "fill": "#d5444433",
               "width": 14,
@@ -12684,7 +12837,7 @@
             {
               "id": "id-7qsizv5rbir-mv0hah5j",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 10.1,
               "color": "#d54444",
               "fill": "#d5444433",
               "width": 8,
@@ -12700,7 +12853,7 @@
             {
               "id": "id-w7vt9ixdwq-mv0hah5j",
               "startTime": 0,
-              "endTime": 8,
+              "endTime": 10.1,
               "color": "#d54444",
               "fill": "#d5444433",
               "width": 8,
@@ -12718,7 +12871,7 @@
         {
           "id": "id-xcvwqj2oa1d-mv0hah5j",
           "name": "1989 pressure builds",
-          "duration": 9,
+          "duration": 11.4,
           "background": {
             "preset": "coldWarMap",
             "mode": "preset",
@@ -12799,7 +12952,7 @@
                 },
                 {
                   "id": "id-hu3vprwsesn-mv0hah5j",
-                  "time": 4.05,
+                  "time": 5.1,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -12812,7 +12965,7 @@
                 },
                 {
                   "id": "id-pf9doyl0ss-mv0hah5j",
-                  "time": 9,
+                  "time": 11.4,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -12872,7 +13025,7 @@
                 },
                 {
                   "id": "id-x36scwcznr-mv0hah5j",
-                  "time": 9,
+                  "time": 11.4,
                   "easing": "easeInOut",
                   "state": {
                     "x": 430,
@@ -12932,7 +13085,7 @@
                 },
                 {
                   "id": "id-uumtad6jl8e-mv0hah5j",
-                  "time": 9,
+                  "time": 11.4,
                   "easing": "easeInOut",
                   "state": {
                     "x": 280,
@@ -12952,7 +13105,7 @@
             {
               "id": "id-6gjguyyscn7-mv0hah5j",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 11.4,
               "color": "#3d70a1",
               "fill": "#d5444433",
               "width": 8,
@@ -12983,7 +13136,7 @@
         {
           "id": "id-0r78lx178yb-mv0hah5j",
           "name": "November 9, 1989",
-          "duration": 9,
+          "duration": 11.4,
           "background": {
             "preset": "newspaper",
             "mode": "preset",
@@ -13064,7 +13217,7 @@
                 },
                 {
                   "id": "id-a1dh7um9tbg-mv0hah5j",
-                  "time": 4.05,
+                  "time": 5.1,
                   "easing": "easeInOut",
                   "state": {
                     "x": 105,
@@ -13077,7 +13230,7 @@
                 },
                 {
                   "id": "id-u5dbn44vl1e-mv0hah5j",
-                  "time": 9,
+                  "time": 11.4,
                   "easing": "easeOut",
                   "state": {
                     "x": 105,
@@ -13097,7 +13250,7 @@
             {
               "id": "id-xxkevhg0zx-mv0hah5j",
               "startTime": 0,
-              "endTime": 9,
+              "endTime": 11.4,
               "color": "#d54444",
               "fill": "#d5444433",
               "width": 8,
@@ -13117,7 +13270,24 @@
       "updatedAt": "2026-10-09T04:41:44.791Z",
       "sources": [
         "U.S. Department of State Office of the Historian — Berlin Wall"
-      ]
+      ],
+      "voice": {
+        "source": "mic",
+        "assetId": null,
+        "chromeVoice": "",
+        "ttsRate": 1,
+        "ttsPitch": 1,
+        "pitchSemitones": 0,
+        "speed": 1,
+        "bass": 0,
+        "mid": 0,
+        "treble": 0,
+        "presence": 2,
+        "compression": 0.35,
+        "echo": 0,
+        "grit": 0,
+        "gain": 1
+      }
     }
   ],
   "scenes": [
