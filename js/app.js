@@ -8,6 +8,24 @@ const fmt=t=>{const m=Math.floor(t/60),s=Math.floor(t%60);return String(m).padSt
 const canvas=$("#stage"),ctx=canvas.getContext("2d"),videoCanvas=$("#videoStage"),videoCtx=videoCanvas.getContext("2d");
 let project=MEPStorage.load()||MEPModel.project("Untitled Project"),short=null,scene=null,selectedId=null,selectedBubbleId=null,time=0,playing=false,lastFrame=0,drag=null,editPreview=null,graphicDraft=null,cloudReady=false,cloudTimer=null,exporting=false;
 const imageCache=new Map();
+let voiceRecorder=null,voiceChunks=[],voiceStream=null,voiceRecordStarted=0,activeVoicePreview=null;
+const voiceAssetFor=sh=>(project.assets||[]).find(a=>a.id===sh?.voice?.assetId);
+function wholeNarration(sh=short){return(sh?.scenes||[]).map(s=>s.script||"").filter(Boolean).join(" ")}
+function dataUrlToBuffer(url){return fetch(url).then(r=>r.arrayBuffer())}
+function distortionCurve(amount=0){const n=2048,a=Math.max(0,amount)*80,curve=new Float32Array(n);for(let i=0;i<n;i++){const x=i*2/n-1;curve[i]=a?((3+a)*x*20*Math.PI/180)/(Math.PI+a*Math.abs(x)):x}return curve}
+async function buildVoiceGraph(sh,{monitor=false}={}){
+ const asset=voiceAssetFor(sh);if(!asset?.dataUrl)return null;const A=window.AudioContext||window.webkitAudioContext;if(!A)return null;const ac=new A(),buf=await ac.decodeAudioData(await dataUrlToBuffer(asset.dataUrl)),src=ac.createBufferSource(),v=sh.voice||{};src.buffer=buf;src.playbackRate.value=Number(v.speed)||1;src.detune.value=(Number(v.pitchSemitones)||0)*100;
+ const bass=ac.createBiquadFilter();bass.type="lowshelf";bass.frequency.value=180;bass.gain.value=Number(v.bass)||0;
+ const mid=ac.createBiquadFilter();mid.type="peaking";mid.frequency.value=1100;mid.Q.value=.85;mid.gain.value=Number(v.mid)||0;
+ const presence=ac.createBiquadFilter();presence.type="peaking";presence.frequency.value=3200;presence.Q.value=1;presence.gain.value=Number(v.presence)||0;
+ const treble=ac.createBiquadFilter();treble.type="highshelf";treble.frequency.value=5200;treble.gain.value=Number(v.treble)||0;
+ const grit=ac.createWaveShaper();grit.curve=distortionCurve(Number(v.grit)||0);grit.oversample="4x";
+ const comp=ac.createDynamicsCompressor(),amt=Math.max(0,Math.min(1,Number(v.compression)||0));comp.threshold.value=-6-amt*24;comp.knee.value=18;comp.ratio.value=1+amt*11;comp.attack.value=.004;comp.release.value=.24;
+ const gain=ac.createGain();gain.gain.value=Number(v.gain)||1;src.connect(bass).connect(mid).connect(presence).connect(treble).connect(grit).connect(comp).connect(gain);
+ const dest=ac.createMediaStreamDestination(),dry=ac.createGain();dry.gain.value=1;gain.connect(dry).connect(dest);if(monitor)dry.connect(ac.destination);
+ const echo=Math.max(0,Math.min(.65,Number(v.echo)||0));if(echo>0){const delay=ac.createDelay(.7),feedback=ac.createGain(),wet=ac.createGain();delay.delayTime.value=.16;feedback.gain.value=Math.min(.45,echo*.65);wet.gain.value=echo*.65;gain.connect(delay);delay.connect(wet).connect(dest);delay.connect(feedback).connect(delay);if(monitor)wet.connect(ac.destination)}
+ return{ac,src,track:dest.stream.getAudioTracks()[0],duration:buf.duration}
+}
 function refreshRefs(){MEPModel.syncAlias(project);short=MEPModel.activeShort(project);scene=MEPModel.activeScene(project);selectedId=scene?.characters?.some(c=>c.id===selectedId)?selectedId:(scene?.characters?.[0]?.id||null);selectedBubbleId=null;time=0;playing=false;editPreview=null;applyCanvasSize()}
 function applyCanvasSize(){if(!short)return;for(const c of [canvas,videoCanvas]){c.width=short.width||720;c.height=short.height||1280}document.documentElement.style.setProperty("--stage-ratio",(short.width||720)+"/"+(short.height||1280))}
 refreshRefs();
