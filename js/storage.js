@@ -8,8 +8,10 @@ function save(p){
  const list=readIndex().filter(x=>x.id!==p.id);list.unshift({id:p.id,name:p.name||"Untitled Project",updatedAt:p.updatedAt,shortCount:p.shorts?.length||0});writeIndex(list);return p
 }
 function hasLocal(){return !!localStorage.getItem(RECENT_KEY)}
-function load(id=null){try{let pid=id||localStorage.getItem(RECENT_KEY);if(pid){const raw=localStorage.getItem(PREFIX+pid);if(raw)return MEPModel.migrate(JSON.parse(raw))}
- if(!id){const legacy=localStorage.getItem("mep-video-maker-project-v6")||localStorage.getItem("mep-video-maker-project-v5")||localStorage.getItem("mep-video-maker-project-v3");if(legacy){const p=MEPModel.migrate(JSON.parse(legacy));save(p);return p}}return null}catch(e){console.warn("Local project ignored",e);return null}}
+function load(id=null){try{
+ if(!id&&needsShortMakerReset()){const xhr=new XMLHttpRequest();xhr.open("GET","presets/youtube-short-maker.mep.json",false);xhr.send(null);if(xhr.status>=200&&xhr.status<300){const p=MEPModel.migrate(JSON.parse(xhr.responseText));resetLocalToProject(p);return p}}
+ let pid=id||localStorage.getItem(RECENT_KEY);if(pid){const raw=localStorage.getItem(PREFIX+pid);if(raw)return MEPModel.migrate(JSON.parse(raw))}
+ return null}catch(e){console.warn("Local project ignored",e);return null}}
 function listLocal(){return readIndex().filter(x=>localStorage.getItem(PREFIX+x.id))}
 function removeLocal(id){localStorage.removeItem(PREFIX+id);writeIndex(readIndex().filter(x=>x.id!==id));if(localStorage.getItem(RECENT_KEY)===id){const next=listLocal()[0];if(next)localStorage.setItem(RECENT_KEY,next.id);else localStorage.removeItem(RECENT_KEY)}}
 function needsShortMakerReset(){return localStorage.getItem(RESET_KEY)!=="done"}
@@ -39,7 +41,7 @@ async function hydrateAssets(p){const assets=[];for(const meta of p.assetManifes
 async function loadCloud(id){await ensure();const snap=await cloud.fs.getDoc(cloud.fs.doc(cloud.db,"mepProjects",id));if(!snap.exists())throw new Error("Project not found");const p=MEPModel.migrate(await hydrateAssets(snap.data()));save(p);return p}
 async function listCloud(){await ensure();const snap=await cloud.fs.getDocs(cloud.fs.collection(cloud.db,"mepProjects"));return snap.docs.map(d=>({id:d.id,name:d.data().name||"Untitled Project",updatedAt:d.data().updatedAt||"",shortCount:d.data().shorts?.length||1})).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt))}
 async function loadLatestCloud(){const list=await listCloud();return list.length?loadCloud(list[0].id):null}
-async function seedLibrary(snapshot){await ensure();await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepLibrary","default"),structuredClone(snapshot),{merge:false});return true}
+async function seedLibrary(snapshot){await ensure();await deleteLegacyHaitiCloud();await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepLibrary","default"),structuredClone(snapshot),{merge:false});return true}
 function isHaitiLegacy(data,id=""){const raw=(id+" "+JSON.stringify(data||{})).toLowerCase();return raw.includes("haiti")||raw.includes("vertiè")||raw.includes("vertie")||raw.includes("capois")||raw.includes("dessalines")}
 async function deleteLegacyHaitiCloud(){
  await ensure();const deletedProjects=[];
