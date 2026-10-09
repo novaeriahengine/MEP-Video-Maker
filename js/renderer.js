@@ -61,8 +61,8 @@ function drawMap(ctx,key,w,h){
 }
 
 function mapLabel(ctx,text,x,y,size=28){ctx.save();ctx.font="800 "+size+"px system-ui";ctx.textAlign="center";ctx.textBaseline="middle";ctx.lineWidth=5;ctx.strokeStyle="#fff";ctx.strokeText(text,x,y);ctx.fillStyle="#26313a";ctx.fillText(text,x,y);ctx.restore()}
-function drawThematicMap(ctx,key,w,h){
- drawMap(ctx,key==="pearlHarborMap"?"worldMap":key==="revolutionMap"?"americasMap":"europeMap",w,h);
+function drawThematicMap(ctx,key,w,h,options={}){
+ const baseKey=key==="pearlHarborMap"?"worldMap":key==="revolutionMap"?"americasMap":"europeMap",hm=window.MEPHistoricalMaps?.draw(ctx,{year:options.year||2026,text:options.text||"",key,width:w,height:h,showLabels:options.showLabels!==false});if(!hm?.drawn)drawMap(ctx,baseKey,w,h);
  ctx.save();ctx.globalAlpha=.18;ctx.fillStyle="#f4e5bc";ctx.fillRect(0,0,w,h);ctx.globalAlpha=1;
  if(key==="westernFrontMap"){mapLabel(ctx,"WESTERN FRONT",w*.5,h*.12,Math.max(22,w*.055));mapLabel(ctx,"France",w*.34,h*.43,22);mapLabel(ctx,"Germany",w*.67,h*.41,22);ctx.strokeStyle="#b3262d";ctx.lineWidth=Math.max(7,w*.018);ctx.setLineDash([18,14]);ctx.beginPath();ctx.moveTo(w*.51,h*.26);ctx.bezierCurveTo(w*.46,h*.38,w*.53,h*.52,w*.47,h*.67);ctx.stroke();ctx.setLineDash([])}
  else if(key==="easternFrontMap"){mapLabel(ctx,"EASTERN FRONT",w*.5,h*.12,Math.max(22,w*.055));mapLabel(ctx,"Germany",w*.24,h*.4,21);mapLabel(ctx,"Austria-Hungary",w*.31,h*.59,18);mapLabel(ctx,"Russian Empire",w*.72,h*.43,21);ctx.strokeStyle="#b3262d";ctx.lineWidth=Math.max(7,w*.018);ctx.setLineDash([18,14]);ctx.beginPath();ctx.moveTo(w*.48,h*.23);ctx.bezierCurveTo(w*.52,h*.36,w*.45,h*.52,w*.55,h*.72);ctx.stroke();ctx.setLineDash([])}
@@ -90,9 +90,9 @@ function drawGraphics(ctx,graphics,time){
  }
 }
 function tents(ctx,w,h,y=.68){for(let x=70;x<w;x+=190){ctx.fillStyle=x%380?"#8d795b":"#6f6452";ctx.beginPath();ctx.moveTo(x,h*y);ctx.lineTo(x+65,h*(y-.13));ctx.lineTo(x+130,h*y);ctx.closePath();ctx.fill();ctx.strokeStyle="#473b30";ctx.lineWidth=2;ctx.stroke()}}
-function drawBackground(ctx,key,w=1280,h=720){
- if(["westernFrontMap","easternFrontMap","pearlHarborMap","normandyMap","coldWarMap","revolutionMap","napoleonicMap"].includes(key))return drawThematicMap(ctx,key,w,h);
- if(["parchment","worldMap","americasMap","europeMap","africaMap","asiaMap","battleMap"].includes(key))return drawMap(ctx,key,w,h);
+function drawBackground(ctx,key,w=1280,h=720,options={}){
+ if(["westernFrontMap","easternFrontMap","pearlHarborMap","normandyMap","coldWarMap","revolutionMap","napoleonicMap"].includes(key))return drawThematicMap(ctx,key,w,h,options);
+ if(["parchment","worldMap","americasMap","europeMap","africaMap","asiaMap","battleMap"].includes(key)){const hm=window.MEPHistoricalMaps?.draw(ctx,{year:options.year||2026,text:options.text||"",key,width:w,height:h,showLabels:options.showLabels!==false});if(!hm?.drawn)drawMap(ctx,key,w,h);return hm}
  if(key==="countryside"||key==="farmVillage"){gradientSky(ctx,w,h,"#8fc3e3","#f1c782");hills(ctx,w,h,["#8ca46b","#6f8758"]);trees(ctx,w,h,.5);if(key==="farmVillage"){ctx.fillStyle="#a87a4f";for(let x=120;x<w;x+=280){ctx.fillRect(x,420,130,100);ctx.fillStyle="#6c4731";ctx.beginPath();ctx.moveTo(x-12,420);ctx.lineTo(x+65,360);ctx.lineTo(x+142,420);ctx.closePath();ctx.fill();ctx.fillStyle="#a87a4f"}}}
  else if(key==="forest"||key==="jungle"){gradientSky(ctx,w,h,key==="jungle"?"#86b9a4":"#9cc6d6","#d8c693");hills(ctx,w,h,[key==="jungle"?"#4a714d":"#5f7950","#405a3d"]);trees(ctx,w,h,.32,key==="jungle"?"#294e34":"#344834");trees(ctx,w,h,.54,key==="jungle"?"#1f3d29":"#2f4933")}
  else if(key==="mountainPass"||key==="snowField"){gradientSky(ctx,w,h,"#8fb6d7","#d9e4ea");ctx.fillStyle=key==="snowField"?"#dce7ee":"#6b7074";for(let i=0;i<4;i++){ctx.beginPath();ctx.moveTo(i*330-150,h*.68);ctx.lineTo(i*330+170,h*.19);ctx.lineTo(i*330+480,h*.68);ctx.closePath();ctx.fill()}ctx.fillStyle=key==="snowField"?"#f4f7f9":"#8b806c";ctx.fillRect(0,h*.68,w,h*.32)}
