@@ -1,5 +1,5 @@
 window.MEPStorage=(()=>{
-const INDEX_KEY="mep-video-maker-project-index-v7",RECENT_KEY="mep-video-maker-recent-v7",PREFIX="mep-video-maker-project-v7:";let cloud=null;
+const INDEX_KEY="mep-video-maker-project-index-v7",RECENT_KEY="mep-video-maker-recent-v7",PREFIX="mep-video-maker-project-v7:",RESET_KEY="mep-youtube-short-maker-reset-v1";let cloud=null;
 function readIndex(){try{return JSON.parse(localStorage.getItem(INDEX_KEY)||"[]")}catch{return[]}}
 function writeIndex(items){localStorage.setItem(INDEX_KEY,JSON.stringify(items.slice(0,50)))}
 function save(p){
@@ -12,6 +12,11 @@ function load(id=null){try{let pid=id||localStorage.getItem(RECENT_KEY);if(pid){
  if(!id){const legacy=localStorage.getItem("mep-video-maker-project-v6")||localStorage.getItem("mep-video-maker-project-v5")||localStorage.getItem("mep-video-maker-project-v3");if(legacy){const p=MEPModel.migrate(JSON.parse(legacy));save(p);return p}}return null}catch(e){console.warn("Local project ignored",e);return null}}
 function listLocal(){return readIndex().filter(x=>localStorage.getItem(PREFIX+x.id))}
 function removeLocal(id){localStorage.removeItem(PREFIX+id);writeIndex(readIndex().filter(x=>x.id!==id));if(localStorage.getItem(RECENT_KEY)===id){const next=listLocal()[0];if(next)localStorage.setItem(RECENT_KEY,next.id);else localStorage.removeItem(RECENT_KEY)}}
+function needsShortMakerReset(){return localStorage.getItem(RESET_KEY)!=="done"}
+function resetLocalToProject(p){
+ const remove=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&(k.startsWith(PREFIX)||/^mep-video-maker-project-v\d+$/.test(k)))remove.push(k)}
+ remove.forEach(k=>localStorage.removeItem(k));localStorage.removeItem(INDEX_KEY);localStorage.removeItem(RECENT_KEY);save(p);localStorage.setItem(RESET_KEY,"done");return p
+}
 async function initCloud(){
  if(cloud)return{ok:true};const cfg=window.MEP_FIREBASE_CONFIG;if(!cfg?.projectId)return{ok:false,reason:"Firebase config missing"};
  try{const [appMod,fs]=await Promise.all([import("https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"),import("https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js")]);const app=appMod.initializeApp(cfg);cloud={app,fs,db:fs.getFirestore(app)};return{ok:true}}catch(e){return{ok:false,reason:e.message}}
@@ -34,8 +39,18 @@ async function hydrateAssets(p){const assets=[];for(const meta of p.assetManifes
 async function loadCloud(id){await ensure();const snap=await cloud.fs.getDoc(cloud.fs.doc(cloud.db,"mepProjects",id));if(!snap.exists())throw new Error("Project not found");const p=MEPModel.migrate(await hydrateAssets(snap.data()));save(p);return p}
 async function listCloud(){await ensure();const snap=await cloud.fs.getDocs(cloud.fs.collection(cloud.db,"mepProjects"));return snap.docs.map(d=>({id:d.id,name:d.data().name||"Untitled Project",updatedAt:d.data().updatedAt||"",shortCount:d.data().shorts?.length||1})).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt))}
 async function loadLatestCloud(){const list=await listCloud();return list.length?loadCloud(list[0].id):null}
-async function seedLibrary(snapshot){await ensure();await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepLibrary","default"),structuredClone(snapshot),{merge:true});return true}
+async function seedLibrary(snapshot){await ensure();await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepLibrary","default"),structuredClone(snapshot),{merge:false});return true}
+function isHaitiLegacy(data,id=""){const raw=(id+" "+JSON.stringify(data||{})).toLowerCase();return raw.includes("haiti")||raw.includes("vertiè")||raw.includes("vertie")||raw.includes("capois")||raw.includes("dessalines")}
+async function deleteLegacyHaitiCloud(){
+ await ensure();const deletedProjects=[];
+ const ps=await cloud.fs.getDocs(cloud.fs.collection(cloud.db,"mepProjects"));
+ for(const d of ps.docs){if(d.id!=="youtube-short-maker"&&isHaitiLegacy(d.data(),d.id)){deletedProjects.push(d.id);await cloud.fs.deleteDoc(d.ref)}}
+ const chars=await cloud.fs.getDocs(cloud.fs.collection(cloud.db,"mepCharacters"));for(const d of chars.docs)if(isHaitiLegacy(d.data(),d.id))await cloud.fs.deleteDoc(d.ref);
+ const anim=await cloud.fs.getDocs(cloud.fs.collection(cloud.db,"mepAnimations"));for(const d of anim.docs)if(isHaitiLegacy(d.data(),d.id))await cloud.fs.deleteDoc(d.ref);
+ if(deletedProjects.length){const assets=await cloud.fs.getDocs(cloud.fs.collection(cloud.db,"mepAssets"));for(const d of assets.docs)if(deletedProjects.includes(d.data()?.projectId))await cloud.fs.deleteDoc(d.ref)}
+ return{deletedProjects}
+}
 async function saveCharacter(c){await ensure();const doc={schema:"mep-character-v3",id:c.id,name:c.name,tags:c.tags||[],visual:c.visual,prop:c.prop||"none",updatedAt:new Date().toISOString()};await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepCharacters",c.id),doc,{merge:true});return c.id}
 function download(p){const blob=new Blob([JSON.stringify(MEPModel.syncAlias(p),null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=(p.name||"mep-project").replace(/[^a-z0-9-_]+/gi,"-").toLowerCase()+".mep.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
-return{save,load,hasLocal,listLocal,removeLocal,download,initCloud,saveCloud,loadCloud,listCloud,loadLatestCloud,seedLibrary,saveCharacter};
+return{save,load,hasLocal,listLocal,removeLocal,needsShortMakerReset,resetLocalToProject,deleteLegacyHaitiCloud,download,initCloud,saveCloud,loadCloud,listCloud,loadLatestCloud,seedLibrary,saveCharacter};
 })();
