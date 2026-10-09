@@ -90,6 +90,36 @@ function drawGraphics(ctx,graphics,time){
  }
 }
 function tents(ctx,w,h,y=.68){for(let x=70;x<w;x+=190){ctx.fillStyle=x%380?"#8d795b":"#6f6452";ctx.beginPath();ctx.moveTo(x,h*y);ctx.lineTo(x+65,h*(y-.13));ctx.lineTo(x+130,h*y);ctx.closePath();ctx.fill();ctx.strokeStyle="#473b30";ctx.lineWidth=2;ctx.stroke()}}
+function drawSceneDetails(ctx,key,w,h){
+ ctx.save();
+ if(key==="trench"){
+  ctx.fillStyle="#8c795a";for(let x=15;x<w;x+=62){ctx.beginPath();ctx.ellipse(x,h*.69,38,18,0,0,Math.PI*2);ctx.fill();ctx.strokeStyle="#5c4b36";ctx.stroke()}
+  ctx.strokeStyle="#2f2d2a";ctx.lineWidth=2;for(let x=35;x<w;x+=120){ctx.beginPath();ctx.moveTo(x,h*.54);ctx.lineTo(x+20,h*.70);ctx.moveTo(x+20,h*.54);ctx.lineTo(x,h*.70);ctx.stroke()}ctx.beginPath();for(let x=0;x<=w;x+=28){const y=h*.57+Math.sin(x*.08)*10;x?ctx.lineTo(x,y):ctx.moveTo(x,y)}ctx.stroke();
+  ctx.fillStyle="rgba(54,45,35,.35)";for(let x=40;x<w;x+=150)ctx.fillRect(x,h*.83,75,12)
+ }else if(key==="harbor"||key==="colonialPort"){
+  ctx.strokeStyle="rgba(255,255,255,.28)";ctx.lineWidth=2;for(let y=h*.53;y<h*.70;y+=20){ctx.beginPath();ctx.moveTo(0,y);for(let x=0;x<=w;x+=40)ctx.lineTo(x,y+Math.sin(x*.03+y)*5);ctx.stroke()}
+  ctx.fillStyle="#3f352c";for(let x=100;x<w;x+=310){ctx.beginPath();ctx.moveTo(x,h*.61);ctx.lineTo(x+145,h*.61);ctx.lineTo(x+112,h*.67);ctx.lineTo(x+25,h*.67);ctx.closePath();ctx.fill();ctx.fillRect(x+72,h*.43,8,h*.18);ctx.strokeStyle="#5d5042";ctx.beginPath();ctx.moveTo(x+76,h*.43);ctx.lineTo(x+125,h*.58);ctx.stroke()}
+ }else if(key==="ocean"){
+  ctx.strokeStyle="rgba(235,248,255,.25)";ctx.lineWidth=2;for(let y=h*.52;y<h;y+=28){ctx.beginPath();ctx.moveTo(0,y);for(let x=0;x<=w;x+=36)ctx.lineTo(x,y+Math.sin(x*.035+y*.02)*5);ctx.stroke()}
+  const g=ctx.createRadialGradient(w*.72,h*.22,8,w*.72,h*.22,w*.20);g.addColorStop(0,"rgba(255,241,173,.55)");g.addColorStop(1,"rgba(255,241,173,0)");ctx.fillStyle=g;ctx.fillRect(0,0,w,h*.5)
+ }else if(key==="battlefield"||key==="battlefieldNight"){
+  ctx.fillStyle=key==="battlefieldNight"?"rgba(80,80,88,.38)":"rgba(104,104,99,.22)";for(let x=80;x<w;x+=210){ctx.beginPath();ctx.arc(x,h*.33+(x%3)*30,38,0,Math.PI*2);ctx.arc(x+35,h*.31+(x%3)*30,55,0,Math.PI*2);ctx.arc(x+80,h*.34+(x%3)*30,42,0,Math.PI*2);ctx.fill()}
+  ctx.strokeStyle="#51473c";ctx.lineWidth=3;for(let x=40;x<w;x+=170){ctx.beginPath();ctx.moveTo(x,h*.73);ctx.lineTo(x+80,h*.68);ctx.lineTo(x+145,h*.74);ctx.stroke()}
+ }else if(key==="city"||key==="cityBattleStreet"){
+  ctx.strokeStyle="rgba(255,255,255,.18)";ctx.lineWidth=3;ctx.setLineDash([25,22]);ctx.beginPath();ctx.moveTo(w*.5,h*.77);ctx.lineTo(w*.5,h);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle="rgba(25,30,35,.18)";for(let x=35;x<w;x+=170)ctx.fillRect(x,h*.74,95,8)
+ }else if(key==="oldTownStreet"||key==="village"){
+  ctx.strokeStyle="rgba(50,48,43,.18)";ctx.lineWidth=1;for(let y=h*.75;y<h;y+=24){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}for(let x=0;x<w;x+=48){ctx.beginPath();ctx.moveTo(x,h*.73);ctx.lineTo(x+18,h);ctx.stroke()}
+ }else if(key==="governmentHall"||key==="royalCourt"||key==="throneRoom"){
+  ctx.strokeStyle="rgba(90,76,55,.35)";ctx.lineWidth=5;for(let x=100;x<w;x+=230){ctx.strokeRect(x,h*.14,110,h*.34);ctx.strokeRect(x+14,h*.18,82,h*.26)}
+  ctx.fillStyle="rgba(250,230,164,.16)";ctx.fillRect(w*.18,h*.07,w*.64,h*.07)
+ }else if(key==="mapRoom"){
+  ctx.strokeStyle="#493a2d";ctx.lineWidth=10;ctx.strokeRect(w*.14,h*.10,w*.72,h*.46);ctx.fillStyle="#b32f35";for(const p of [[.34,.28],[.47,.22],[.63,.31],[.56,.39]])circle(ctx,w*p[0],h*p[1],7,"#b32f35","#fff",2)
+ }else if(key==="newspaper"){
+  ctx.strokeStyle="rgba(45,38,30,.28)";ctx.lineWidth=2;for(let x=w*.1;x<w*.9;x+=w*.27){ctx.strokeRect(x,h*.32,w*.20,h*.19)}ctx.fillStyle="rgba(45,38,30,.14)";ctx.fillRect(w*.1,h*.56,w*.8,4)
+ }
+ const vg=ctx.createRadialGradient(w/2,h/2,Math.min(w,h)*.18,w/2,h/2,Math.max(w,h)*.72);vg.addColorStop(0,"rgba(0,0,0,0)");vg.addColorStop(1,"rgba(0,0,0,.18)");ctx.fillStyle=vg;ctx.fillRect(0,0,w,h);ctx.restore()
+}
 function drawBackground(ctx,key,w=1280,h=720,options={}){
  if(["westernFrontMap","easternFrontMap","pearlHarborMap","normandyMap","coldWarMap","revolutionMap","napoleonicMap"].includes(key))return drawThematicMap(ctx,key,w,h,options);
  if(["parchment","worldMap","americasMap","europeMap","africaMap","asiaMap","battleMap"].includes(key)){const hm=window.MEPHistoricalMaps?.draw(ctx,{year:options.year||2026,text:options.text||"",key,width:w,height:h,showLabels:options.showLabels!==false});if(!hm?.drawn)drawMap(ctx,key,w,h);return hm}
@@ -114,6 +144,7 @@ function drawBackground(ctx,key,w=1280,h=720,options={}){
  else if(key==="newspaper"){ctx.fillStyle="#eee3c9";ctx.fillRect(0,0,w,h);ctx.fillStyle="#29251f";ctx.font="900 64px Georgia";ctx.textAlign="center";ctx.fillText("HISTORY NEWS",w/2,90);ctx.fillRect(80,120,w-160,5);ctx.font="700 34px Georgia";ctx.fillText("Add your headline with a caption",w/2,175);ctx.fillStyle="#777";for(let x=90;x<w-90;x+=260)for(let y=230;y<h-60;y+=35)ctx.fillRect(x,y,210,8)}
  else if(key==="desert"){gradientSky(ctx,w,h,"#91c4df","#f0cc85");hills(ctx,w,h,["#d8ae61","#bd8d4d"],.62)}
  else{ctx.fillStyle="#ece5cf";ctx.fillRect(0,0,w,h)}
+ drawSceneDetails(ctx,key,w,h)
 }
 function drawBubble(ctx,b){const st=MEPModel.BUBBLE_STYLES[b.style]||MEPModel.BUBBLE_STYLES.speech,x=b.x||300,y=b.y||120,w=b.width||300,h=b.height||100,r=st.radius||10;ctx.save();ctx.fillStyle=b.fill||st.fill;ctx.strokeStyle=b.stroke||st.stroke;ctx.lineWidth=b.strokeWidth||3;roundRect(ctx,x,y,w,h,r);ctx.fill();ctx.stroke();if(st.tail==="speech"){ctx.beginPath();const tx=b.tailX??x+w*.25,ty=b.tailY??y+h+40;ctx.moveTo(x+w*.2,y+h-2);ctx.lineTo(tx,ty);ctx.lineTo(x+w*.36,y+h-2);ctx.closePath();ctx.fill();ctx.stroke()}ctx.fillStyle=b.textColor||st.text;ctx.font=(b.bold?"700 ":"600 ")+(b.fontSize||28)+"px system-ui";ctx.textAlign="center";ctx.textBaseline="middle";const words=String(b.text||"Dialogue").split(/\s+/),lines=[];let lineText="";for(const word of words){const test=lineText?lineText+" "+word:word;if(ctx.measureText(test).width>w-30&&lineText){lines.push(lineText);lineText=word}else lineText=test}if(lineText)lines.push(lineText);const lh=(b.fontSize||28)*1.15,start=y+h/2-(lines.length-1)*lh/2;lines.forEach((ln,i)=>ctx.fillText(ln,x+w/2,start+i*lh,w-24));ctx.restore()}
 return{drawCharacter,bounds,drawBackground,drawBubble,drawGraphics};
