@@ -193,6 +193,6 @@ on("#aiShowContext","click",()=>$("#aiJson").value=JSON.stringify(MEPAIDirector.
 try{syncUI()}catch(e){console.error(e);$("#bootStatus").className="bootStatus error";setText("#bootStatus","Startup error: "+e.message)}
 MEPStorage.initCloud().then(async r=>{if(!r.ok){setText("#saveStatus","Local autosave");return}try{await MEPStorage.seedLibrary(MEPModel.librarySnapshot());cloudReady=true;setText("#saveStatus","Firestore ready");syncBuddy()}catch(e){console.warn(e);setText("#saveStatus","Local autosave")}});
 
+if(window.speechSynthesis){speechSynthesis.addEventListener?.("voiceschanged",()=>{try{populateChromeVoices()}catch{}})}
 window.MEP_DEBUG={get project(){return project},get short(){return short},get scene(){return scene},render,syncUI,exportShort};
 })();
-if(window.speechSynthesis){speechSynthesis.addEventListener?.("voiceschanged",()=>{try{populateChromeVoices()}catch{}})}
