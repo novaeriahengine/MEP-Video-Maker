@@ -1,5 +1,5 @@
 window.MEPHistoricalMaps=(()=>{
-const SOURCE_BASE="https://raw.githubusercontent.com/aourednik/historical-basemaps/master/geojson/";
+const SOURCES=["https://raw.githubusercontent.com/aourednik/historical-basemaps/master/geojson/","https://cdn.jsdelivr.net/gh/aourednik/historical-basemaps@master/geojson/"];
 const SNAPSHOTS=[
  {year:1600,file:"world_1600.geojson"},{year:1650,file:"world_1650.geojson"},{year:1700,file:"world_1700.geojson"},{year:1715,file:"world_1715.geojson"},
  {year:1783,file:"world_1783.geojson"},{year:1800,file:"world_1800.geojson"},{year:1815,file:"world_1815.geojson"},{year:1878,file:"world_1878.geojson"},
@@ -37,12 +37,12 @@ function resolveSnapshot(year=2026,text=""){
   return SNAPSHOTS.find(x=>x.year===1938);
  }
  if(/berlin wall|cold war|cuban missile/.test(t)){
-  if(p==="after"||/wall falls|gates open|reunif/.test(t)||year>=1989)return SNAPSHOTS.find(x=>x.year===1994);
+  if(p==="after"||/wall falls|gates open|reunif|november 9/.test(t)||year>=1990)return SNAPSHOTS.find(x=>x.year===1994);
   return SNAPSHOTS.find(x=>x.year===1960);
  }
  if(/american revolution|lexington|concord|yorktown|13 colonies|thirteen colonies/.test(t))return SNAPSHOTS.find(x=>x.year===1783);
  if(/napoleon|waterloo|hundred days/.test(t))return SNAPSHOTS.find(x=>x.year===1815);
- if(/french revolution|bastille/.test(t))return SNAPSHOTS.find(x=>x.year===1800);
+ if(/french revolution|bastille|third estate|national assembly/.test(t)){if(/napoleon|1799|directory/.test(t))return SNAPSHOTS.find(x=>x.year===1800);return SNAPSHOTS.find(x=>x.year===1783)}
  return nearest(Number(year)||2026)
 }
 function focusFor(key="",text=""){
@@ -58,10 +58,8 @@ function focusFor(key="",text=""){
  return"world"
 }
 async function load(snapshot){
- if(cache.has(snapshot.year))return cache.get(snapshot.year);
- if(loading.has(snapshot.year))return loading.get(snapshot.year);
- const p=fetch(SOURCE_BASE+snapshot.file,{cache:"force-cache"}).then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(j=>{cache.set(snapshot.year,j);failures.delete(snapshot.year);loading.delete(snapshot.year);window.dispatchEvent(new CustomEvent("mep-historical-map-ready",{detail:{year:snapshot.year}}));return j}).catch(e=>{loading.delete(snapshot.year);failures.set(snapshot.year,e);console.warn("Historical map load failed",snapshot.file,e);return null});
- loading.set(snapshot.year,p);return p
+ if(cache.has(snapshot.year))return cache.get(snapshot.year);if(loading.has(snapshot.year))return loading.get(snapshot.year);
+ const p=(async()=>{let last=null;for(const base of SOURCES){try{const r=await fetch(base+snapshot.file,{cache:"force-cache",mode:"cors"});if(!r.ok)throw new Error("HTTP "+r.status);const j=await r.json();cache.set(snapshot.year,j);failures.delete(snapshot.year);window.dispatchEvent(new CustomEvent("mep-historical-map-ready",{detail:{year:snapshot.year}}));return j}catch(e){last=e}}failures.set(snapshot.year,last);console.warn("Historical map load failed",snapshot.file,last);return null})().finally(()=>loading.delete(snapshot.year));loading.set(snapshot.year,p);return p
 }
 function normalizeLon(lon,focus){if(focus.wrap&&lon<0)return lon+360;return lon}
 function projector(focus,w,h){
