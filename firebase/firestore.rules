@@ -3,7 +3,7 @@ service cloud.firestore {
   match /databases/{database}/documents {
     match /mepLibrary/{docId} {
       allow read: if true;
-      allow create, update: if request.resource.data.schema == "mep-library-v2";
+      allow create, update: if request.resource.data.schema == "mep-library-v3";
       allow delete: if true;
     }
     match /mepProjects/{projectId} {
@@ -13,12 +13,12 @@ service cloud.firestore {
     }
     match /mepCharacters/{characterId} {
       allow read: if true;
-      allow create, update: if request.resource.data.schema == "mep-character-v2";
+      allow create, update: if request.resource.data.schema == "mep-character-v3";
       allow delete: if true;
     }
     match /mepAnimations/{animationId} {
       allow read: if true;
-      allow create, update: if request.resource.data.schema == "mep-animation-v2";
+      allow create, update: if request.resource.data.schema == "mep-animation-v3";
       allow delete: if true;
     }
     match /mepAssets/{assetId} {
