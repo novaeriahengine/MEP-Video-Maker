@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Noveria History — MEP Short Maker</title>
-<link rel="stylesheet" href="css/style.css?v=20261009a">
+<link rel="stylesheet" href="css/style.css?v=20261009b">
 </head>
 <body>
 <div id="app">
@@ -29,6 +29,7 @@
     <label>Short <select id="shortSelect"></select></label>
     <div class="buttonGrid"><button id="addShort">+ New Short</button><button id="duplicateShort">Duplicate</button></div>
     <button id="deleteShort" class="danger wide">Delete Short</button>
+    <div id="shortList" class="miniList"></div>
     <label class="stack">Short Title<input id="shortTitle"></label>
     <div class="yearControl compact">
       <label>Year <input id="projectYear" type="number" min="1600" max="2026" value="1944"></label>
@@ -163,14 +164,14 @@
 
 <nav id="mobileDock" class="mobileDock"><button data-jump="#stageArea">Canvas</button><button data-jump="#scenePanel">Shorts</button><button data-jump="#characterPanel">Flags</button><button data-jump="#scriptPanel">Script</button><button id="mobileVideo">Preview</button></nav>
 
-<script src="js/firebase-config.js?v=20261009a"></script>
-<script src="js/history-flags.js?v=20261009a"></script>
-<script src="js/model.js?v=20261009a"></script>
-<script src="js/ai-config.js?v=20261009a"></script>
-<script src="js/ai-director.js?v=20261009a"></script>
-<script src="js/renderer.js?v=20261009a"></script>
-<script src="js/storage.js?v=20261009a"></script>
+<script src="js/firebase-config.js?v=20261009b"></script>
+<script src="js/history-flags.js?v=20261009b"></script>
+<script src="js/model.js?v=20261009b"></script>
+<script src="js/ai-config.js?v=20261009b"></script>
+<script src="js/ai-director.js?v=20261009b"></script>
+<script src="js/renderer.js?v=20261009b"></script>
+<script src="js/storage.js?v=20261009b"></script>
 <script>window.addEventListener("error",e=>{const el=document.getElementById("bootStatus");if(el){el.className="bootStatus error";el.textContent="MEP error: "+(e.message||"Unknown startup error")}});</script>
-<script src="js/app.js?v=20261009a"></script>
+<script src="js/app.js?v=20261009b"></script>
 </body>
 </html>
