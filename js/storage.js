@@ -8,7 +8,8 @@ function save(p){
  const list=readIndex().filter(x=>x.id!==p.id);list.unshift({id:p.id,name:p.name||"Untitled Project",updatedAt:p.updatedAt,shortCount:p.shorts?.length||0});writeIndex(list);return p
 }
 function hasLocal(){return !!localStorage.getItem(RECENT_KEY)}
-function load(id=null){try{const pid=id||localStorage.getItem(RECENT_KEY);if(!pid)return null;const raw=localStorage.getItem(PREFIX+pid);return raw?MEPModel.migrate(JSON.parse(raw)):null}catch(e){console.warn("Local project ignored",e);return null}}
+function load(id=null){try{let pid=id||localStorage.getItem(RECENT_KEY);if(pid){const raw=localStorage.getItem(PREFIX+pid);if(raw)return MEPModel.migrate(JSON.parse(raw))}
+ if(!id){const legacy=localStorage.getItem("mep-video-maker-project-v6")||localStorage.getItem("mep-video-maker-project-v5")||localStorage.getItem("mep-video-maker-project-v3");if(legacy){const p=MEPModel.migrate(JSON.parse(legacy));save(p);return p}}return null}catch(e){console.warn("Local project ignored",e);return null}}
 function listLocal(){return readIndex().filter(x=>localStorage.getItem(PREFIX+x.id))}
 function removeLocal(id){localStorage.removeItem(PREFIX+id);writeIndex(readIndex().filter(x=>x.id!==id));if(localStorage.getItem(RECENT_KEY)===id){const next=listLocal()[0];if(next)localStorage.setItem(RECENT_KEY,next.id);else localStorage.removeItem(RECENT_KEY)}}
 async function initCloud(){
