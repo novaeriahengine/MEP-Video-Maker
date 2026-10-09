@@ -20,7 +20,26 @@ const FOCUS={
  pacific:{minLon:100,maxLon:255,minLat:-15,maxLat:72,wrap:true}
 };
 const cache=new Map(),loading=new Map(),failures=new Map();
-const palette=["#9eac86","#c0aa83","#9cb1b5","#b49b9a","#9fa788","#b0a0b8","#a4b69f","#c0b095","#98a9bd","#b59d83","#a5a58d","#9cae9d"];
+const palette=["#b7aa8a","#9eae91","#ac9da0","#9fb3b7","#b8a48d","#a7a1b7","#a6b497","#c0b493","#9fa9bd","#b29f8c","#a8aa8e","#9fb0a0"];
+const SIDE_COLORS={allied:"#6f91b5",axis:"#b56f69",central:"#b87769",entente:"#6f93b8",west:"#6d91b8",east:"#b66f72",neutral:"#aaa891"};
+function conflictSide(name,text=""){
+ const n=name.toLowerCase(),t=text.toLowerCase();
+ if(/world war i|world war 1|wwi|western front|eastern front|trench|tannenberg|brusilov/.test(t)){
+  if(/german|austria.?hungary|ottoman|bulgaria/.test(n))return"central";
+  if(/france|britain|united kingdom|russia|serbia|belgium|united states|italy/.test(n))return"entente";
+ }
+ if(/world war ii|world war 2|wwii|pearl harbor|midway|normandy|d-day|pacific war/.test(t)){
+  if(/german|italy|japan|manchukuo/.test(n))return"axis";
+  if(/united states|britain|united kingdom|france|soviet|ussr|canada|australia|china/.test(n))return"allied";
+ }
+ if(/cold war|berlin wall|cuban missile/.test(t)){
+  if(/soviet|ussr|east germany|poland|czechoslov|hungary|romania|bulgaria/.test(n))return"east";
+  if(/united states|west germany|britain|united kingdom|france|canada/.test(n))return"west";
+ }
+ return"neutral"
+}
+function fillFor(f,text=""){const side=conflictSide(nameOf(f),text);if(side!=="neutral")return SIDE_COLORS[side];return palette[hash(subjectOf(f))%palette.length]}
+
 function hash(s=""){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return Math.abs(h)}
 function nameOf(f){return String(f?.properties?.NAME||f?.properties?.name||f?.properties?.SUBJECTO||"Unknown").trim()||"Unknown"}
 function subjectOf(f){return String(f?.properties?.SUBJECTO||f?.properties?.NAME||"Unknown").trim()||"Unknown"}
@@ -75,17 +94,34 @@ function pathFeature(ctx,f,project,focus){
  let drawn=false;for(const ring of ringsOf(f.geometry)){let started=false,prev=null;ctx.beginPath();for(const coord of ring){const p=project(coord);if(!p.inside&&started&&prev){prev=p;continue}if(!started){ctx.moveTo(p.x,p.y);started=true}else ctx.lineTo(p.x,p.y);prev=p}if(started){ctx.closePath();ctx.fill();ctx.stroke();drawn=true}}return drawn
 }
 function drawLabels(ctx,features,focus,project,w,h){
- const candidates=[];for(const f of features){const b=featureBounds(f,focus);if(!b||b.area<.28)continue;const lon=(b.minX+b.maxX)/2,lat=(b.minY+b.maxY)/2,p=project([focus.wrap&&lon>180?lon-360:lon,lat]),name=nameOf(f);if(!p.inside||name.length>30)continue;candidates.push({name,p,area:b.area})}
- candidates.sort((a,b)=>b.area-a.area);const max=focus===FOCUS.world?18:28;ctx.save();ctx.textAlign="center";ctx.textBaseline="middle";for(const c of candidates.slice(0,max)){const size=Math.max(10,Math.min(18,w*.023,8+Math.sqrt(c.area)*1.3));ctx.font="700 "+size+"px system-ui";ctx.lineWidth=3;ctx.strokeStyle="rgba(255,255,255,.82)";ctx.fillStyle="#263039";ctx.strokeText(c.name,c.p.x,c.p.y);ctx.fillText(c.name,c.p.x,c.p.y)}ctx.restore()
+ const candidates=[];for(const f of features){const b=featureBounds(f,focus);if(!b||b.area<.28)continue;const lon=(b.minX+b.maxX)/2,lat=(b.minY+b.maxY)/2,p=project([focus.wrap&&lon>180?lon-360:lon,lat]),name=nameOf(f);if(!p.inside||name.length>28)continue;candidates.push({name,p,area:b.area})}
+ candidates.sort((a,b)=>b.area-a.area);const max=focus===FOCUS.world?16:26,placed=[];ctx.save();ctx.textAlign="center";ctx.textBaseline="middle";
+ for(const c of candidates){if(placed.length>=max)break;const size=Math.max(10,Math.min(19,w*.024,8+Math.sqrt(c.area)*1.25));ctx.font="700 "+size+"px system-ui";const tw=ctx.measureText(c.name).width,box={x:c.p.x-tw/2-5,y:c.p.y-size*.7,w:tw+10,h:size*1.4};if(placed.some(b=>!(box.x+box.w<b.x||b.x+b.w<box.x||box.y+box.h<b.y||b.y+b.h<box.y)))continue;placed.push(box);ctx.lineWidth=3;ctx.strokeStyle="rgba(248,246,236,.92)";ctx.fillStyle="#20292f";ctx.strokeText(c.name,c.p.x,c.p.y);ctx.fillText(c.name,c.p.x,c.p.y)}
+ ctx.restore()
+}
+function drawGraticule(ctx,focus,project,w,h){
+ ctx.save();ctx.strokeStyle="rgba(41,72,88,.12)";ctx.lineWidth=1;
+ const lonStep=(focus.maxLon-focus.minLon)>150?30:(focus.maxLon-focus.minLon)>70?15:5,latStep=(focus.maxLat-focus.minLat)>80?20:10;
+ for(let lon=Math.ceil(focus.minLon/lonStep)*lonStep;lon<=focus.maxLon;lon+=lonStep){const a=project([focus.wrap&&lon>180?lon-360:lon,focus.minLat]),b=project([focus.wrap&&lon>180?lon-360:lon,focus.maxLat]);ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
+ for(let lat=Math.ceil(focus.minLat/latStep)*latStep;lat<=focus.maxLat;lat+=latStep){const a=project([focus.wrap&&focus.minLon>180?focus.minLon-360:focus.minLon,lat]),b=project([focus.wrap&&focus.maxLon>180?focus.maxLon-360:focus.maxLon,lat]);ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
+ ctx.restore()
+}
+function drawLegend(ctx,text,w,h){
+ const t=text.toLowerCase();let items=[];if(/world war i|world war 1|wwi|western front|eastern front|trench|tannenberg|brusilov/.test(t))items=[["Entente / Allies",SIDE_COLORS.entente],["Central Powers",SIDE_COLORS.central]];
+ else if(/world war ii|world war 2|wwii|pearl harbor|midway|normandy|d-day|pacific war/.test(t))items=[["Allies",SIDE_COLORS.allied],["Axis",SIDE_COLORS.axis]];
+ else if(/cold war|berlin wall|cuban missile/.test(t))items=[["West",SIDE_COLORS.west],["Soviet bloc",SIDE_COLORS.east]];
+ if(!items.length)return;ctx.save();ctx.font="700 "+Math.max(10,w*.017)+"px system-ui";let x=14,y=h-52;for(const [label,color] of items){ctx.fillStyle=color;ctx.fillRect(x,y,14,14);ctx.strokeStyle="#28333a";ctx.strokeRect(x,y,14,14);ctx.fillStyle="#1d2830";ctx.fillText(label,x+20,y+12);x+=ctx.measureText(label).width+58}ctx.restore()
 }
 function draw(ctx,{year=2026,text="",key="worldMap",width=ctx.canvas.width,height=ctx.canvas.height,showLabels=true}={}){
  const snap=resolveSnapshot(year,text),focusName=focusFor(key,text),focus=FOCUS[focusName]||FOCUS.world,data=cache.get(snap.year);
  if(!data){load(snap);return{drawn:false,snapshotYear:snap.year,focus:focusName,loading:true}}
- ctx.save();ctx.fillStyle="#9fc4d7";ctx.fillRect(0,0,width,height);const project=projector(focus,width,height),features=data.features||[];
- ctx.lineJoin="round";ctx.lineCap="round";ctx.lineWidth=Math.max(.7,width*.0014);
- for(const f of features){const b=featureBounds(f,focus);if(!b)continue;ctx.fillStyle=palette[hash(subjectOf(f))%palette.length];ctx.strokeStyle="rgba(37,47,52,.72)";pathFeature(ctx,f,project,focus)}
- if(showLabels)drawLabels(ctx,features,focus,project,width,height);
- ctx.fillStyle="rgba(12,18,24,.76)";ctx.font="600 "+Math.max(10,width*.017)+"px system-ui";ctx.textAlign="left";ctx.textBaseline="bottom";ctx.fillText("Historical borders · "+snap.year+" snapshot",12,height-12);
+ ctx.save();const ocean=ctx.createLinearGradient(0,0,0,height);ocean.addColorStop(0,"#b9d8e4");ocean.addColorStop(1,"#87b5c9");ctx.fillStyle=ocean;ctx.fillRect(0,0,width,height);const project=projector(focus,width,height),features=data.features||[];drawGraticule(ctx,focus,project,width,height);
+ ctx.lineJoin="round";ctx.lineCap="round";ctx.lineWidth=Math.max(1,width*.0016);
+ for(const f of features){const b=featureBounds(f,focus);if(!b)continue;ctx.fillStyle=fillFor(f,text);ctx.strokeStyle="rgba(245,240,226,.85)";pathFeature(ctx,f,project,focus)}
+ ctx.lineWidth=Math.max(.85,width*.00125);for(const f of features){const b=featureBounds(f,focus);if(!b)continue;ctx.fillStyle="rgba(0,0,0,0)";ctx.strokeStyle="rgba(39,48,53,.78)";pathFeature(ctx,f,project,focus)}
+ if(showLabels)drawLabels(ctx,features,focus,project,width,height);drawLegend(ctx,text,width,height);
+ const ph=phase(text),badge=(ph==="before"?"BEFORE":ph==="after"?"AFTER":"HISTORICAL")+" · "+snap.year;ctx.font="800 "+Math.max(12,width*.021)+"px system-ui";const tw=ctx.measureText(badge).width;ctx.fillStyle="rgba(18,26,32,.78)";ctx.fillRect(width-tw-34,14,tw+22,30);ctx.fillStyle="#f5d77f";ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(badge,width-tw-23,29);
+ ctx.fillStyle="rgba(17,27,33,.74)";ctx.font="600 "+Math.max(10,width*.015)+"px system-ui";ctx.textBaseline="bottom";ctx.fillText("Historical borders · auto-selected snapshot",12,height-10);
  ctx.restore();return{drawn:true,snapshotYear:snap.year,focus:focusName,loading:false}
 }
 function prefetch(year,text,key){const s=resolveSnapshot(year,text);load(s);return{snapshotYear:s.year,focus:focusFor(key,text)}}
