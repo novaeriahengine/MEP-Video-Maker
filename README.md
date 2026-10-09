@@ -57,9 +57,9 @@ Character Studio provides its own 800×600 drawing canvas with brush, eraser, im
 Background presets now include World, Europe, Americas, Asia and Africa map modes. The current maps are intentionally schematic visual presets; accurate country borders and country-level map presets should use geographic vector/GeoJSON assets in the next map-system pass rather than fabricated boundaries.
 
 
-## MEP v5 all-in-one history workflow
+## MEP v6 flag-shape history workflow
 MEP now boots with a visible Union square country-layout character and is centered around an era/year-first workflow. Character bodies are flag-filled Square, Circle, or Triangle shapes only. Each character resolves a period flag from the project year when historical data is available and falls back to the modern country flag otherwise. The built-in country selector covers the ISO country list plus historical entities such as the Union, Confederate States (historical context), Prussia, the Holy Roman Empire, Ottoman Empire, and Gran Colombia.
 
 The editor includes eye-based expressions, a line/dot mouth that can open/close through keyframes, props/accessories, narration scripts, scene scripts, a floating MEP Navigator, mobile Android/Chrome controls, rich procedural history backgrounds, uploaded image backgrounds, background keyframes, project/video playback, WebM recording, and no-login Firestore JSON persistence. Large uploaded background images are compressed and stored as separate `mepAssets` Firestore documents while project JSON references the asset IDs.
 
-The bundled `presets/mep-starter-pack-v5.mep.json` demonstrates multiple eras, country layouts, all primary body looks, scripts, backgrounds, keyframes and captions. The Haiti / Vertières preset is also migrated to the v5 country-square workflow.
+The bundled `presets/mep-starter-pack-v6.mep.json` demonstrates multiple eras, country layouts, all primary body looks, scripts, backgrounds, keyframes and captions. The Haiti / Vertières preset is also migrated to the v5 country-square workflow.
