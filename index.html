@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>MEP Video Maker</title>
-<link rel="stylesheet" href="css/style.css?v=20261008c">
+<link rel="stylesheet" href="css/style.css?v=20261008d">
 </head>
 <body>
 <div id="app">
@@ -42,7 +42,7 @@
     <label class="fileButton wide">Upload historical/photo background<input id="backgroundUpload" type="file" accept="image/*"></label>
     <div class="buttonGrid"><button id="useDrawnBackground">Use Drawn</button><button id="addBackgroundKeyframe">◆ BG Keyframe</button></div>
     <label>Fit <select id="backgroundFit"><option value="cover">Cover</option><option value="contain">Contain</option><option value="stretch">Stretch</option></select></label>
-    <label>Opacity <input id="backgroundOpacity" type="range" min="0" max="1" step=".05" value="1"></label>
+    <div class="transformGrid"><label>Pan X <input id="backgroundPanX" type="number" value="0"></label><label>Pan Y <input id="backgroundPanY" type="number" value="0"></label><label>Scale <input id="backgroundScale" type="number" min=".25" max="4" step=".05" value="1"></label><label>Opacity <input id="backgroundOpacity" type="number" min="0" max="1" step=".05" value="1"></label><label>Brightness <input id="backgroundBrightness" type="number" min=".2" max="2" step=".05" value="1"></label><label>Blur <input id="backgroundBlur" type="number" min="0" max="20" step=".5" value="0"></label></div>
     <div id="backgroundKeyframes" class="miniList"></div>
 
     <h2>Camera</h2>
@@ -58,22 +58,20 @@
       <button id="addKeyframe" class="primary">◆ Keyframe</button>
     </div>
     <div class="canvasWrap"><canvas id="stage" width="1280" height="720"></canvas></div>
-    <div class="canvasHint">Tap a character to select it. Drag it to move. Shape/country characters animate mainly by movement, scale, rotation, eyes and mouth.</div>
+    <div class="canvasHint">Characters are flag shapes only: square, circle, or triangle. Drag them, animate position/scale/rotation, change eyes, mouth, hats and props.</div>
   </section>
 
   <aside id="characterPanel" class="panel characterPanel">
-    <h2>Characters</h2>
+    <h2>Flag Characters</h2>
     <div id="quickPresetGrid" class="quickPresetGrid"></div>
     <label>Preset <select id="characterPreset"></select></label>
     <div class="buttonGrid"><button id="addPresetCharacter" class="primary">+ Add Preset</button><button id="openCharacterGallery">Gallery</button></div>
-    <button id="addCharacter">+ Default Union Square</button><button id="openStudio">Character Studio</button>
+    <button id="addCharacter">+ Union Square</button><button id="openStudio">Character Studio</button>
     <div id="characterList" class="miniList"></div>
 
     <h2>Selected Character</h2>
     <label>Name <input id="charName"></label>
-    <label>Look <select id="characterLook"></select></label>
-    <label id="countryShapeRow">Country Shape <select id="countryShape"></select></label>
-    <label id="countryRow">Country / State <select id="countryCode"></select></label>
+    <label>Shape <select id="characterShape"></select></label><label>Country / Entity <select id="countryCode"></select></label>
     <div id="flagLabel" class="flagLabel"></div>
     <label>Expression <select id="expression"></select></label>
     <label>Mouth <select id="mouthMode"><option value="on">Line / dot</option><option value="off">No mouth</option></select></label>
@@ -84,21 +82,13 @@
     <div class="transformGrid"><label>X <input id="charX" type="number"></label><label>Y <input id="charY" type="number"></label><label>Scale <input id="charScale" type="number" min=".2" max="4" step=".05"></label><label>Rotate <input id="charRotation" type="number" min="-180" max="180"></label></div>
     <div class="buttonGrid"><button id="flipCharacter">Flip</button><button id="deleteCharacter" class="danger">Delete</button></div>
 
-    <details id="humanoidDetails"><summary>Humanoid controls</summary>
-      <label>Body <select id="bodyStyle"></select></label>
-      <label>Skin <input id="skinColor" type="color"></label>
-      <label>Shirt <input id="shirtColor" type="color"></label>
-      <label>Hair color <input id="hairColor" type="color"></label>
-      <label>Pose <select id="posePreset"></select></label>
-      <button id="applyPose">Apply Pose</button>
-      <div id="jointControls"></div>
-    </details>
+    
 
-    <h2>Motion</h2>
+    <h2>Simple Motion</h2>
     <label>Clip <select id="animationClip"></select></label>
     <label>Seconds <input id="clipDuration" type="number" min=".5" max="20" step=".1" value="2"></label>
     <label>Easing <select id="keyframeEasing"></select></label>
-    <button id="generateClip" class="primary">Generate Clip at Playhead</button>
+    <button id="generateClip" class="primary">Generate Motion at Playhead</button>
     <div class="buttonGrid"><button id="deleteKeyframe">Delete Keyframe</button><button id="saveCharacterCloud">Save Character</button></div>
   </aside>
 
@@ -132,36 +122,34 @@
 </section>
 </div>
 
-<button id="helperAvatar" class="helperAvatar" aria-label="Open MEP helper"><span class="helperFace">•‿•</span></button>
+<button id="helperAvatar" class="helperAvatar" aria-label="Open MEP helper"><span id="helperFace" class="helperFace">•‿•</span><span id="petHeart" class="petHeart">♥</span></button>
 <aside id="helperPanel" class="helperPanel">
-  <header><div><strong>MEP Navigator</strong><small id="helperStatus">Ready</small></div><button id="closeHelper">×</button></header>
+  <header><div><strong>MEP Buddy</strong><small id="helperStatus">Floating around</small></div><button id="closeHelper">×</button></header>
   <div class="helperGrid">
     <button data-jump="#stageArea">Canvas</button><button data-jump="#scenePanel">Scenes</button>
     <button data-jump="#backgroundSection">Backgrounds</button><button data-jump="#characterPanel">Characters</button>
     <button data-jump="#scriptPanel">Script</button><button data-jump="#timelinePanel">Timeline</button>
   </div>
-  <div class="helperCard"><b id="helperYear">1863 · Industrial</b><span id="helperScene">Opening Scene</span><span id="helperCharacter">Union Square</span></div>
-  <button id="helperAddCountry" class="primary">+ Country Character</button>
+  <div class="helperCard"><b id="helperYear">1863 · Industrial</b><span id="helperScene">Opening Scene</span><span id="helperCharacter">Union Square</span><span id="petCount">Pets: 0</span></div>
+  <button id="helperAddCountry" class="primary">+ Union Square</button>
   <button id="helperAddBackgroundKey">◆ Background Keyframe</button>
   <button id="helperVideoMode">Open Video Mode</button><button id="helperOpenAI">AI Director</button>
 </aside>
 
 <dialog id="characterGalleryDialog"><div class="dialogShell"><header><div><h2>Character Gallery</h2><p>Pick a preset or switch any character to Square, Circle, Triangle, Humanoid or Country Layout afterward.</p></div><button id="closeCharacterGallery">Close</button></header><div id="characterGalleryList" class="characterGalleryList"></div></div></dialog>
 <dialog id="cloudDialog"><div class="dialogShell"><header><div><h2>Firestore Projects</h2><p>No login. Projects are JSON documents in your MEP Firestore collections.</p></div><button id="closeCloudDialog">Close</button></header><div id="cloudProjectList" class="cloudProjectList"></div></div></dialog>
-<dialog id="characterStudioDialog"><div class="studioShell"><header><div><h2>Character Studio</h2><p>Draw, import artwork, lasso a cutout, and keep it as a custom asset.</p></div><button id="closeStudio">Close</button></header><div class="studioTools"><button data-studio-tool="brush">Brush</button><button data-studio-tool="eraser">Eraser</button><button data-studio-tool="lasso">Lasso Sticker</button><label>Color <input id="studioColor" type="color" value="#242424"></label><label>Size <input id="studioSize" type="range" min="2" max="40" value="8"></label><label class="fileButton">Import Image<input id="studioImport" type="file" accept="image/*"></label><button id="studioClear">Clear</button><button id="studioExport">Export PNG</button></div><div class="studioWork"><canvas id="characterStudioCanvas" width="800" height="600"></canvas><aside><h3>Cutout</h3><p id="studioStatus">Import or draw artwork, then lasso a piece.</p></aside></div></div></dialog>
 <dialog id="aiDialog"><form method="dialog" class="dialogShell aiPanel"><header><div><h2>AI Director</h2><p>Provider-neutral scene-plan endpoint.</p></div><button>Close</button></header><textarea id="aiPrompt" rows="4" placeholder="Make a short illustrated history video..."></textarea><div class="buttonGrid"><button type="button" id="aiGenerate" class="primary">Generate</button><button type="button" id="aiShowContext">Show Context</button></div><textarea id="aiJson" rows="12"></textarea><button type="button" id="aiApply">Apply JSON</button><pre id="aiStatus"></pre></form></dialog>
 
 <nav id="mobileDock" class="mobileDock"><button data-jump="#stageArea">Canvas</button><button data-jump="#scenePanel">Scene</button><button data-jump="#characterPanel">Character</button><button data-jump="#scriptPanel">Script</button><button id="mobileVideo">Video</button></nav>
 
-<script src="js/firebase-config.js?v=20261008c"></script>
-<script src="js/history-flags.js?v=20261008c"></script>
-<script src="js/model.js?v=20261008c"></script>
-<script src="js/ai-config.js?v=20261008c"></script>
-<script src="js/ai-director.js?v=20261008c"></script>
-<script src="js/renderer.js?v=20261008c"></script>
-<script src="js/character-studio.js?v=20261008c"></script>
-<script src="js/storage.js?v=20261008c"></script>
+<script src="js/firebase-config.js?v=20261008d"></script>
+<script src="js/history-flags.js?v=20261008d"></script>
+<script src="js/model.js?v=20261008d"></script>
+<script src="js/ai-config.js?v=20261008d"></script>
+<script src="js/ai-director.js?v=20261008d"></script>
+<script src="js/renderer.js?v=20261008d"></script>
+<script src="js/storage.js?v=20261008d"></script>
 <script>window.addEventListener("error",e=>{const el=document.getElementById("bootStatus");if(el){el.className="bootStatus error";el.textContent="MEP error: "+(e.message||"Unknown startup error")}});</script>
-<script src="js/app.js?v=20261008c"></script>
+<script src="js/app.js?v=20261008d"></script>
 </body>
 </html>
