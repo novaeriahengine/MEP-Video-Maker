@@ -44,13 +44,13 @@ async function loadLatestCloud(){const list=await listCloud();return list.length
 async function seedLibrary(snapshot){await ensure();await deleteLegacyHaitiCloud();await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepLibrary","default"),structuredClone(snapshot),{merge:false});return true}
 function isHaitiLegacy(data,id=""){const raw=(id+" "+JSON.stringify(data||{})).toLowerCase();return raw.includes("haiti")||raw.includes("vertiè")||raw.includes("vertie")||raw.includes("capois")||raw.includes("dessalines")}
 async function deleteLegacyHaitiCloud(){
- await ensure();const deletedProjects=[];
+ await ensure();const markerRef=cloud.fs.doc(cloud.db,"mepLibrary","legacyShortMakerCleanupV1"),marker=await cloud.fs.getDoc(markerRef);if(marker.exists())return{deletedProjects:[],alreadyDone:true};const deletedProjects=[];
  const ps=await cloud.fs.getDocs(cloud.fs.collection(cloud.db,"mepProjects"));
  for(const d of ps.docs){const data=d.data();const legacy=!Array.isArray(data?.shorts)||Number(data?.version||0)<7;if(d.id!=="youtube-short-maker"&&(legacy||isHaitiLegacy(data,d.id))){deletedProjects.push(d.id);await cloud.fs.deleteDoc(d.ref)}}
  const chars=await cloud.fs.getDocs(cloud.fs.collection(cloud.db,"mepCharacters"));for(const d of chars.docs)if(isHaitiLegacy(d.data(),d.id))await cloud.fs.deleteDoc(d.ref);
  const anim=await cloud.fs.getDocs(cloud.fs.collection(cloud.db,"mepAnimations"));for(const d of anim.docs)if(isHaitiLegacy(d.data(),d.id))await cloud.fs.deleteDoc(d.ref);
  if(deletedProjects.length){const assets=await cloud.fs.getDocs(cloud.fs.collection(cloud.db,"mepAssets"));for(const d of assets.docs)if(deletedProjects.includes(d.data()?.projectId))await cloud.fs.deleteDoc(d.ref)}
- return{deletedProjects}
+ await cloud.fs.setDoc(markerRef,{schema:"mep-library-v4",kind:"legacy-short-maker-cleanup",completedAt:new Date().toISOString()},{merge:false});return{deletedProjects}
 }
 async function saveCharacter(c){await ensure();const doc={schema:"mep-character-v3",id:c.id,name:c.name,tags:c.tags||[],visual:c.visual,prop:c.prop||"none",updatedAt:new Date().toISOString()};await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepCharacters",c.id),doc,{merge:true});return c.id}
 function download(p){const blob=new Blob([JSON.stringify(MEPModel.syncAlias(p),null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=(p.name||"mep-project").replace(/[^a-z0-9-_]+/gi,"-").toLowerCase()+".mep.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
