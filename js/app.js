@@ -15,15 +15,21 @@ function dataUrlToBuffer(url){return fetch(url).then(r=>r.arrayBuffer())}
 function distortionCurve(amount=0){const n=2048,a=Math.max(0,amount)*80,curve=new Float32Array(n);for(let i=0;i<n;i++){const x=i*2/n-1;curve[i]=a?((3+a)*x*20*Math.PI/180)/(Math.PI+a*Math.abs(x)):x}return curve}
 async function buildVoiceGraph(sh,{monitor=false}={}){
  if(sh?.voice?.source!=="mic")return null;const asset=voiceAssetFor(sh);if(!asset?.dataUrl)return null;const A=window.AudioContext||window.webkitAudioContext;if(!A)return null;const ac=new A(),buf=await ac.decodeAudioData(await dataUrlToBuffer(asset.dataUrl)),src=ac.createBufferSource(),v=sh.voice||{};src.buffer=buf;src.playbackRate.value=Number(v.speed)||1;src.detune.value=(Number(v.pitchSemitones)||0)*100;
- const bass=ac.createBiquadFilter();bass.type="lowshelf";bass.frequency.value=180;bass.gain.value=Number(v.bass)||0;
- const mid=ac.createBiquadFilter();mid.type="peaking";mid.frequency.value=1100;mid.Q.value=.85;mid.gain.value=Number(v.mid)||0;
- const presence=ac.createBiquadFilter();presence.type="peaking";presence.frequency.value=3200;presence.Q.value=1;presence.gain.value=Number(v.presence)||0;
- const treble=ac.createBiquadFilter();treble.type="highshelf";treble.frequency.value=5200;treble.gain.value=Number(v.treble)||0;
+ const lowCut=ac.createBiquadFilter();lowCut.type="highpass";lowCut.frequency.value=Math.max(40,Math.min(140,Number(v.lowCut)||72));lowCut.Q.value=.7;
+ const bass=ac.createBiquadFilter();bass.type="lowshelf";bass.frequency.value=150;bass.gain.value=Number(v.bass)||0;
+ const warmth=ac.createBiquadFilter();warmth.type="peaking";warmth.frequency.value=260;warmth.Q.value=.8;warmth.gain.value=Number(v.warmth)||0;
+ const mid=ac.createBiquadFilter();mid.type="peaking";mid.frequency.value=950;mid.Q.value=.9;mid.gain.value=Number(v.mid)||0;
+ const clarity=ac.createBiquadFilter();clarity.type="peaking";clarity.frequency.value=2100;clarity.Q.value=.95;clarity.gain.value=Number(v.clarity)||0;
+ const presence=ac.createBiquadFilter();presence.type="peaking";presence.frequency.value=3400;presence.Q.value=1.05;presence.gain.value=Number(v.presence)||0;
+ const deEss=ac.createBiquadFilter();deEss.type="peaking";deEss.frequency.value=6500;deEss.Q.value=1.8;deEss.gain.value=-Math.abs(Number(v.deEss)||0);
+ const treble=ac.createBiquadFilter();treble.type="highshelf";treble.frequency.value=7200;treble.gain.value=Number(v.treble)||0;
+ const air=ac.createBiquadFilter();air.type="highshelf";air.frequency.value=10500;air.gain.value=Number(v.air)||0;
  const grit=ac.createWaveShaper();grit.curve=distortionCurve(Number(v.grit)||0);grit.oversample="4x";
- const comp=ac.createDynamicsCompressor(),amt=Math.max(0,Math.min(1,Number(v.compression)||0));comp.threshold.value=-6-amt*24;comp.knee.value=18;comp.ratio.value=1+amt*11;comp.attack.value=.004;comp.release.value=.24;
- const gain=ac.createGain();gain.gain.value=Number(v.gain)||1;src.connect(bass).connect(mid).connect(presence).connect(treble).connect(grit).connect(comp).connect(gain);
+ const comp=ac.createDynamicsCompressor(),amt=Math.max(0,Math.min(1,Number(v.compression)||0));comp.threshold.value=-8-amt*22;comp.knee.value=20;comp.ratio.value=1+amt*10;comp.attack.value=.005;comp.release.value=.20;
+ const limiter=ac.createDynamicsCompressor(),lim=Math.max(0,Math.min(1,Number(v.limiter)||0));limiter.threshold.value=-1.5-lim*4;limiter.knee.value=1;limiter.ratio.value=8+lim*12;limiter.attack.value=.002;limiter.release.value=.09;
+ const gain=ac.createGain();gain.gain.value=Number(v.gain)||1;src.connect(lowCut).connect(bass).connect(warmth).connect(mid).connect(clarity).connect(presence).connect(deEss).connect(treble).connect(air).connect(grit).connect(comp).connect(limiter).connect(gain);
  const dest=ac.createMediaStreamDestination(),dry=ac.createGain();dry.gain.value=1;gain.connect(dry).connect(dest);if(monitor)dry.connect(ac.destination);
- const echo=Math.max(0,Math.min(.65,Number(v.echo)||0));if(echo>0){const delay=ac.createDelay(.7),feedback=ac.createGain(),wet=ac.createGain();delay.delayTime.value=.16;feedback.gain.value=Math.min(.45,echo*.65);wet.gain.value=echo*.65;gain.connect(delay);delay.connect(wet).connect(dest);delay.connect(feedback).connect(delay);if(monitor)wet.connect(ac.destination)}
+ const echo=Math.max(0,Math.min(.65,Number(v.echo)||0));if(echo>0){const delay=ac.createDelay(.7),feedback=ac.createGain(),wet=ac.createGain();delay.delayTime.value=.14;feedback.gain.value=Math.min(.38,echo*.55);wet.gain.value=echo*.55;gain.connect(delay);delay.connect(wet).connect(dest);delay.connect(feedback).connect(delay);if(monitor)wet.connect(ac.destination)}
  return{ac,src,track:dest.stream.getAudioTracks()[0],duration:buf.duration}
 }
 function refreshRefs(){MEPModel.syncAlias(project);short=MEPModel.activeShort(project);scene=MEPModel.activeScene(project);selectedId=scene?.characters?.some(c=>c.id===selectedId)?selectedId:(scene?.characters?.[0]?.id||null);selectedBubbleId=null;time=0;playing=false;editPreview=null;applyCanvasSize()}
@@ -86,7 +92,13 @@ function syncBubbles(){
  $("#bubbleList").innerHTML=(scene.bubbles||[]).map(b=>'<button class="bubbleItem '+(b.id===selectedBubbleId?"active":"")+'" data-bubble="'+b.id+'">'+esc(b.text||"Bubble")+'</button>').join("");$$("[data-bubble]").forEach(b=>on(b,"click",()=>{selectedBubbleId=b.dataset.bubble;syncBubbles()}));const b=selectedBubble();if(b){setVal("#bubbleText",b.text);setVal("#bubbleStyle",b.style||"speech");setVal("#bubbleStart",b.startTime??0);setVal("#bubbleEnd",b.endTime??scene.duration)}else{setVal("#bubbleText","");setVal("#bubbleStart",time);setVal("#bubbleEnd",Math.min(scene.duration,time+3))}
 }
 function chromeVoiceScore(v){
- const n=(v?.name||"").toLowerCase(),lang=(v?.lang||"").toLowerCase();let s=0;if(lang==="en-us")s+=80;else if(lang.startsWith("en-us"))s+=75;else if(lang.startsWith("en-gb"))s+=62;else if(lang.startsWith("en"))s+=50;if(/google|natural|neural|enhanced|premium|high quality/.test(n))s+=38;if(/united states|us english|english us/.test(n))s+=18;if(v?.default)s+=12;if(v?.localService===false)s+=4;if(/espeak|compact|robot|novelty/.test(n))s-=35;return s
+ const n=(v?.name||"").toLowerCase(),lang=(v?.lang||"").toLowerCase();let s=0;
+ if(lang==="en-gb")s+=140;else if(lang.startsWith("en-gb"))s+=132;else if(/british|uk english|english uk|united kingdom/.test(n))s+=118;else if(lang.startsWith("en-au"))s+=70;else if(lang.startsWith("en"))s+=45;
+ if(/male|daniel|george|arthur|oliver|ryan|brian|alfie|edward|thomas|james|william/.test(n))s+=42;
+ if(/google|natural|neural|enhanced|premium|high quality/.test(n))s+=34;
+ if(v?.default)s+=8;if(v?.localService===false)s+=4;
+ if(/female|serena|kate|victoria|samantha|karen|fiona/.test(n))s-=32;
+ if(/espeak|compact|robot|novelty/.test(n))s-=45;return s
 }
 function bestChromeVoice(){const voices=speechSynthesis?.getVoices?.()||[];return voices.slice().sort((a,b)=>chromeVoiceScore(b)-chromeVoiceScore(a))[0]||null}
 function populateChromeVoices(){
