@@ -102,9 +102,11 @@ function drawGraphics(ctx,graphics,time){
   else if(g.type==="cityMarker"){ctx.fillStyle=g.color||"#f2d06b";circle(ctx,g.x||360,g.y||500,g.size||10,g.color||"#f2d06b","#fff",2);if(g.label)mapLabel(ctx,g.label,g.x||360,(g.y||500)-24,18)}
   else if(g.type==="impact"){const p=.55+.45*Math.sin(progress*Math.PI*6);ctx.strokeStyle=g.color||"#e94b35";ctx.lineWidth=6;circle(ctx,g.x||360,g.y||500,(g.size||42)*p,"#0000",g.color||"#e94b35",6);ctx.beginPath();ctx.moveTo((g.x||360)-30,(g.y||500)-30);ctx.lineTo((g.x||360)+30,(g.y||500)+30);ctx.moveTo((g.x||360)+30,(g.y||500)-30);ctx.lineTo((g.x||360)-30,(g.y||500)+30);ctx.stroke()}
   else if(g.type==="zone"){const pts=g.points?.length?g.points:[{x:g.x||200,y:g.y||350},{x:g.x2||520,y:g.y||350},{x:g.x2||520,y:g.y2||650},{x:g.x||200,y:g.y2||650}];ctx.fillStyle=g.fill||"#d5444433";ctx.strokeStyle=g.color||"#d54444";ctx.lineWidth=g.width||5;ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);pts.slice(1).forEach(p=>ctx.lineTo(p.x,p.y));ctx.closePath();ctx.fill();ctx.stroke()}
-  else{const pts=g.points?.length?g.points:[{x:g.x||150,y:g.y||720},{x:g.x2||560,y:g.y2||430}],reveal=g.type==="front"?1:progress;ctx.strokeStyle=g.color||"#d54444";ctx.lineWidth=g.width||8;if(g.type==="front")ctx.setLineDash([18,13]);pathUntil(ctx,pts,reveal);ctx.stroke();ctx.setLineDash([]);
-    if(g.type==="arrow"||g.type==="route"){const tip=pointAlong(pts,reveal),prev=pointAlong(pts,Math.max(0,reveal-.04));drawArrowHead(ctx,prev,tip,Math.max(18,(g.width||8)*2.3),g.color||"#d54444")}
-    if(g.type==="plane"){const tip=pointAlong(pts,progress),prev=pointAlong(pts,Math.max(0,progress-.03));drawPlane(ctx,tip.x,tip.y,Math.atan2(tip.y-prev.y,tip.x-prev.x),g.size||34)}
+  else{const pts=g.points?.length?g.points:[{x:g.x||150,y:g.y||720},{x:g.x2||560,y:g.y2||430}],color=g.color||"#58799b",width=g.width||7;ctx.strokeStyle=color;ctx.lineWidth=width;
+    if(g.type==="front"){ctx.setLineDash([14,11]);pathUntil(ctx,pts,1);ctx.stroke();ctx.setLineDash([])}
+    else if(g.type==="route"){ctx.save();ctx.globalAlpha=.28;ctx.setLineDash([9,9]);pathUntil(ctx,pts,1);ctx.stroke();ctx.restore();ctx.setLineDash([]);pathUntil(ctx,pts,progress);ctx.stroke();const tip=pointAlong(pts,progress),prev=pointAlong(pts,Math.max(0,progress-.045));drawArrowHead(ctx,prev,tip,Math.max(16,width*2.1),color)}
+    else if(g.type==="plane"){ctx.save();ctx.globalAlpha=.26;ctx.setLineDash([8,10]);pathUntil(ctx,pts,1);ctx.stroke();ctx.restore();ctx.setLineDash([]);const tip=pointAlong(pts,progress),prev=pointAlong(pts,Math.max(0,progress-.03));drawPlane(ctx,tip.x,tip.y,Math.atan2(tip.y-prev.y,tip.x-prev.x),g.size||34)}
+    else{pathUntil(ctx,pts,progress);ctx.stroke();if(g.type==="arrow"){const tip=pointAlong(pts,progress),prev=pointAlong(pts,Math.max(0,progress-.04));drawArrowHead(ctx,prev,tip,Math.max(18,width*2.3),color)}}
     if(g.label)mapLabel(ctx,g.label,pointAlong(pts,.5).x,pointAlong(pts,.5).y-28,g.size||24)
   }ctx.restore()
  }
