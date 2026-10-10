@@ -1,0 +1,63 @@
+{
+  "world": {
+    "minLon": -180,
+    "maxLon": 180,
+    "minLat": -62,
+    "maxLat": 82
+  },
+  "europe": {
+    "minLon": -13,
+    "maxLon": 45,
+    "minLat": 34,
+    "maxLat": 72
+  },
+  "westernFront": {
+    "minLon": -7,
+    "maxLon": 15,
+    "minLat": 43,
+    "maxLat": 54
+  },
+  "easternFront": {
+    "minLon": 8,
+    "maxLon": 48,
+    "minLat": 40,
+    "maxLat": 62
+  },
+  "normandy": {
+    "minLon": -7,
+    "maxLon": 4,
+    "minLat": 47,
+    "maxLat": 52.8
+  },
+  "americas": {
+    "minLon": -135,
+    "maxLon": -28,
+    "minLat": -58,
+    "maxLat": 72
+  },
+  "northAmerica": {
+    "minLon": -130,
+    "maxLon": -52,
+    "minLat": 22,
+    "maxLat": 60
+  },
+  "africa": {
+    "minLon": -20,
+    "maxLon": 55,
+    "minLat": -38,
+    "maxLat": 38
+  },
+  "asia": {
+    "minLon": 25,
+    "maxLon": 155,
+    "minLat": -12,
+    "maxLat": 78
+  },
+  "pacific": {
+    "minLon": 100,
+    "maxLon": 255,
+    "minLat": -15,
+    "maxLat": 72,
+    "wrap": true
+  }
+}
