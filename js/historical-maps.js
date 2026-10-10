@@ -102,10 +102,10 @@ function featureBounds(f,focus){
 function pathFeature(ctx,f,project,focus){
  let drawn=false;for(const ring of ringsOf(f.geometry)){let started=false,prev=null;ctx.beginPath();for(const coord of ring){const p=project(coord);if(!p.inside&&started&&prev){prev=p;continue}if(!started){ctx.moveTo(p.x,p.y);started=true}else ctx.lineTo(p.x,p.y);prev=p}if(started){ctx.closePath();ctx.fill();ctx.stroke();drawn=true}}return drawn
 }
-function drawLabels(ctx,features,focus,project,w,h){
- const candidates=[],seen=new Set();for(const f of features){const b=featureBounds(f,focus);if(!b||b.area<.28)continue;const lon=(b.minX+b.maxX)/2,lat=(b.minY+b.maxY)/2,p=project([focus.wrap&&lon>180?lon-360:lon,lat]),name=nameOf(f),key=name.toLowerCase();if(!p.inside||name.length>28||seen.has(key))continue;seen.add(key);candidates.push({name,p,area:b.area})}
- candidates.sort((a,b)=>b.area-a.area);const max=focus===FOCUS.world?16:26,placed=[];ctx.save();ctx.textAlign="center";ctx.textBaseline="middle";
- for(const c of candidates){if(placed.length>=max)break;const size=Math.max(10,Math.min(19,w*.024,8+Math.sqrt(c.area)*1.25));ctx.font="700 "+size+"px system-ui";const tw=ctx.measureText(c.name).width,box={x:c.p.x-tw/2-5,y:c.p.y-size*.7,w:tw+10,h:size*1.4};if(placed.some(b=>!(box.x+box.w<b.x||b.x+b.w<box.x||box.y+box.h<b.y||b.y+b.h<box.y)))continue;placed.push(box);ctx.lineWidth=3;ctx.strokeStyle="rgba(248,246,236,.92)";ctx.fillStyle="#20292f";ctx.strokeText(c.name,c.p.x,c.p.y);ctx.fillText(c.name,c.p.x,c.p.y)}
+function drawLabels(ctx,features,focus,project,w,h,text="",highlights=[]){
+ const candidates=[],seen=new Set();for(const f of features){const b=featureBounds(f,focus);if(!b||b.area<.32)continue;const name=nameOf(f),key=name.toLowerCase();if(seen.has(key))continue;const lon=(b.minX+b.maxX)/2,lat=(b.minY+b.maxY)/2,p=project([focus.wrap&&lon>180?lon-360:lon,lat]);if(!p.inside||name.length>28)continue;seen.add(key);candidates.push({name,p,area:b.area,hi:highlighted(name,text,highlights)})}
+ candidates.sort((a,b)=>(Number(b.hi)-Number(a.hi))||(b.area-a.area));const max=focus===FOCUS.world?12:18,placed=[];ctx.save();ctx.textAlign="center";ctx.textBaseline="middle";
+ for(const c of candidates){if(placed.length>=max)break;const size=Math.max(10,Math.min(c.hi?21:17,w*.023,8+Math.sqrt(c.area)*1.2));ctx.font=(c.hi?"800 ":"650 ")+size+"px system-ui";const tw=ctx.measureText(c.name).width,box={x:c.p.x-tw/2-6,y:c.p.y-size*.75,w:tw+12,h:size*1.5};if(placed.some(b=>!(box.x+box.w<b.x||b.x+b.w<box.x||box.y+box.h<b.y||b.y+b.h<box.y)))continue;placed.push(box);ctx.lineWidth=c.hi?4:3;ctx.strokeStyle=c.hi?"rgba(40,32,18,.92)":"rgba(248,246,236,.88)";ctx.fillStyle=c.hi?"#ffd45d":"#20292f";ctx.strokeText(c.name,c.p.x,c.p.y);ctx.fillText(c.name,c.p.x,c.p.y)}
  ctx.restore()
 }
 function drawGraticule(ctx,focus,project,w,h){
@@ -128,7 +128,7 @@ function draw(ctx,{year=2026,text="",key="worldMap",width=ctx.canvas.width,heigh
  ctx.lineJoin="round";ctx.lineCap="round";ctx.lineWidth=Math.max(1,width*.0016);
  for(const f of features){const b=featureBounds(f,focus);if(!b)continue;ctx.fillStyle=fillFor(f,text,highlights);ctx.strokeStyle="rgba(246,242,229,.72)";pathFeature(ctx,f,project,focus)}
  ctx.lineWidth=Math.max(.9,width*.00135);for(const f of features){const b=featureBounds(f,focus);if(!b)continue;const hi=highlighted(nameOf(f),text,highlights);ctx.fillStyle="rgba(0,0,0,0)";const pulse=.72+.28*Math.sin(Number(time||0)*4.4);ctx.strokeStyle=hi?"rgba(255,212,93,"+pulse+")":"rgba(35,43,48,.82)";ctx.lineWidth=hi?Math.max(3,width*.0045):Math.max(.9,width*.00135);pathFeature(ctx,f,project,focus)}
- if(showLabels)drawLabels(ctx,features,focus,project,width,height);drawLegend(ctx,text,width,height);
+ if(showLabels)drawLabels(ctx,features,focus,project,width,height,text,highlights);drawLegend(ctx,text,width,height);
  const ph=phase(text),badge=(ph==="before"?"BEFORE":ph==="after"?"AFTER":"HISTORICAL")+" · "+snap.year;ctx.font="800 "+Math.max(12,width*.021)+"px system-ui";const tw=ctx.measureText(badge).width;ctx.fillStyle="rgba(18,26,32,.78)";ctx.fillRect(width-tw-34,14,tw+22,30);ctx.fillStyle="#f5d77f";ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(badge,width-tw-23,29);
  ctx.fillStyle="rgba(17,27,33,.74)";ctx.font="600 "+Math.max(10,width*.015)+"px system-ui";ctx.textBaseline="bottom";ctx.fillText("Historical borders · auto-selected snapshot",12,height-10);
  ctx.restore();return{drawn:true,snapshotYear:snap.year,focus:focusName,loading:false}
