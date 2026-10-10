@@ -33,6 +33,17 @@ Local projects use a small project index plus one localStorage document per proj
 
 Firestore remains no-login for the current personal-development setup. Projects save to `mepProjects`, assets to `mepAssets`, characters to `mepCharacters`, and the reusable engine library to `mepLibrary/default`. Publish the matching rules in `firebase/firestore.rules`.
 
+
+## Final AI narration
+Chrome speech is used as a fast editing preview. For final narration the repo now includes two Kokoro-82M workflows:
+
+- **`desktop-server/`** — Flask/Waitress local server with British Kokoro voices, local dashboard, QR code, offline editor cache, historical-map cache, WAV generation, and a direct API for the editor.
+- **`Google Colab/`** — interactive Colab notebook for batch-generating narration for all Shorts. The editor exports a narration-batch JSON and imports the resulting `mep_voice_pack.json`.
+
+Generated AI voice tracks are stored in browser IndexedDB instead of localStorage so 45–90 second WAV files do not overflow normal project storage. The project keeps only lightweight audio metadata.
+
+The Colab workflow can optionally mount the user's Google Drive from inside Colab. No Google password or OAuth secret is stored in this repository.
+
 ## AI Director
 AI Director protocol v3 is Shorts-first. It asks a backend model for one 30–60 second vertical history Short using 4–6 scenes, concise narration, country-flag shapes, maps, arrows, front lines, routes, labels, and other explainer graphics. API keys stay on the backend; the browser only receives structured scene JSON.
 
@@ -40,11 +51,11 @@ AI Director protocol v3 is Shorts-first. It asks a backend model for one 30–60
 The `presets/youtube-short-maker.mep.json` project includes:
 1. Why the Western Front Froze Into Trenches
 2. Why the Eastern Front Kept Moving
-3. Pearl Harbor in 45 Seconds: Why Japan Attacked
+3. Pearl Harbor in Under a Minute: Why Japan Attacked
 4. Midway: The Battle That Broke Japan’s Carrier Force
 5. D-Day in 45 Seconds: How Normandy Was Breached
 6. Why the American Revolution Started
-7. French Revolution in 45 Seconds
+7. French Revolution in Under a Minute
 8. Waterloo: How Napoleon Lost His Final Battle
 9. Cuban Missile Crisis: 13 Days Near Nuclear War
 10. Why the Berlin Wall Fell
