@@ -1,3 +1,11 @@
+# Legacy Piper fallback
+
+The primary desktop workflow is now **[`desktop-server/`](../desktop-server/)**, which runs Kokoro-82M, serves the local MEP editor, generates a phone QR code, and caches the editor/maps for offline use.
+
+This older folder is kept as a lightweight Piper fallback for very weak CPUs.
+
+---
+
 # MEP Offline Voice Server (Windows)
 1. Install Python 3.11 **64-bit** (enable Add to PATH).
 2. Double-click `setup_windows.bat` (internet required only for dependencies).
