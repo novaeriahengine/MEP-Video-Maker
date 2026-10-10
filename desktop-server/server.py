@@ -196,7 +196,7 @@ def download_map(filename: str) -> Path:
     raise RuntimeError(f"Could not download {filename}: {last}")
 
 
-@app.get("/")
+@app.get("/server/")
 def dashboard():
     return render_template(
         "dashboard.html",
@@ -207,11 +207,18 @@ def dashboard():
     )
 
 
+@app.get("/")
+def home():
+    root = editor_root()
+    if (root / "index.html").exists():
+        return redirect("/app/")
+    return redirect("/server/")
+
 @app.get("/app/")
 def local_editor():
     root = editor_root()
     if not (root / "index.html").exists():
-        return redirect("/")
+        return redirect("/server/")
     return send_from_directory(root, "index.html")
 
 
@@ -234,6 +241,7 @@ def health():
         outputDir=str(OUTPUTS),
         offlineMaps=sum((MAP_CACHE / f).exists() for f in MAP_FILES.values()),
         offlineMapsTotal=len(MAP_FILES),
+        offlinePhotos=len([p for p in PHOTO_CACHE.iterdir() if p.is_file() and p.name != "manifest.json"]),
         editorReady=(editor_root() / "index.html").exists(),
         editorLocalCopy=(LOCAL_EDITOR / "index.html").exists(),
         espeakAvailable=bool(shutil.which("espeak-ng") or shutil.which("espeak")),
@@ -283,6 +291,44 @@ def historical_map(filename: str):
         return send_file(download_map(filename), mimetype="application/geo+json", conditional=True)
     except Exception as exc:
         return jsonify(error=str(exc)), 404
+
+
+@app.get("/api/history/photos/search")
+def history_photo_search():
+    query = clean_text(request.args.get("q", ""))[:180]
+    if not query:
+        return jsonify(error="Search query is empty."), 400
+    try:
+        return jsonify(ok=True, query=query, items=commons_search(query, int(request.args.get("limit", "8"))))
+    except Exception as exc:
+        return jsonify(error=str(exc)), 502
+
+
+@app.get("/api/history/photos/proxy")
+def history_photo_proxy():
+    try:
+        path = cached_photo(request.args.get("url", ""))
+        return send_file(path, mimetype=mimetypes.guess_type(path.name)[0] or "image/jpeg", conditional=True)
+    except Exception as exc:
+        return jsonify(error=str(exc)), 400
+
+
+@app.post("/api/prepare/photos")
+def prepare_photos():
+    ready, errors = [], []
+    for query in PHOTO_PACK_QUERIES:
+        try:
+            found = commons_search(query, 4)
+            if not found:
+                raise RuntimeError("No license-safe image found")
+            item = found[0]
+            path = cached_photo(item["thumbUrl"])
+            ready.append({"query": query, "title": item["title"], "license": item["license"], "url": item["thumbUrl"], "file": path.name})
+        except Exception as exc:
+            errors.append({"query": query, "error": str(exc)})
+    manifest = {"schema": "mep-historical-photo-pack-v1", "createdAt": time.time(), "items": ready, "errors": errors}
+    (PHOTO_CACHE / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    return jsonify(ok=not errors, ready=ready, errors=errors)
 
 
 @app.post("/api/tts")
@@ -351,17 +397,19 @@ def output_file(filename: str):
     return send_from_directory(OUTPUTS, filename, as_attachment=True)
 
 
-def open_dashboard():
+def open_editor_tab():
     time.sleep(1.2)
-    webbrowser.open(f"http://127.0.0.1:{PORT}/")
+    target = f"http://127.0.0.1:{PORT}/app/" if (editor_root() / "index.html").exists() else f"http://127.0.0.1:{PORT}/server/"
+    webbrowser.open(target)
 
 
 if __name__ == "__main__":
     print("=" * 68)
     print("MEP Video Maker - Local Kokoro Voice Server")
-    print(f"Dashboard:    http://127.0.0.1:{PORT}/")
+    print(f"Editor:       http://127.0.0.1:{PORT}/app/")
+    print(f"Server setup: http://127.0.0.1:{PORT}/server/")
     print(f"Phone editor: http://{local_ip()}:{PORT}/app/")
     print("Keep this window open while using the local AI voice server.")
     print("=" * 68)
-    threading.Thread(target=open_dashboard, daemon=True).start()
+    threading.Thread(target=open_editor_tab, daemon=True).start()
     serve(app, host=HOST, port=PORT, threads=4)
