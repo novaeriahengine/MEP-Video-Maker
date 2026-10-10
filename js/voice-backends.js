@@ -23,12 +23,12 @@ async function apiFetch(base,path,options={}){
 }
 async function health(base){return(await apiFetch(base,"/api/health")).json()}
 async function voices(base){return(await apiFetch(base,"/api/voices")).json()}
-async function synthesize(base,{text,voice="bm_george",speed=1,title="",shortId=""}={}){
- const r=await apiFetch(base,"/api/tts",{method:"POST",body:JSON.stringify({text,voice,speed,title,shortId})});return r.blob()
+async function synthesize(base,{text,voice="bm_george",speed=.95,pauseMs=70,tailTrimMs=100,title="",shortId=""}={}){
+ const r=await apiFetch(base,"/api/tts",{method:"POST",body:JSON.stringify({text,voice,speed,pauseMs,tailTrimMs,title,shortId})});return r.blob()
 }
 function narrationForShort(sh){return(sh?.scenes||[]).map(s=>s.script||"").filter(Boolean).join(" ")}
 function createColabBatch(project){
- return{schema:"mep-colab-narration-batch-v1",createdAt:new Date().toISOString(),projectId:project.id,projectName:project.name,shorts:(project.shorts||[]).map(sh=>({id:sh.id,title:sh.title,year:sh.year,duration:(sh.scenes||[]).reduce((n,s)=>n+(Number(s.duration)||0),0),voice:sh.voice?.kokoroVoice||"bm_george",speed:Number(sh.voice?.kokoroSpeed||1),narration:narrationForShort(sh),scenes:(sh.scenes||[]).map(s=>({id:s.id,name:s.name,duration:s.duration,script:s.script||"",caption:s.caption||""}))}))}
+ return{schema:"mep-colab-narration-batch-v1",createdAt:new Date().toISOString(),projectId:project.id,projectName:project.name,shorts:(project.shorts||[]).map(sh=>({id:sh.id,title:sh.title,year:sh.year,duration:(sh.scenes||[]).reduce((n,s)=>n+(Number(s.duration)||0),0),voice:sh.voice?.kokoroVoice||"bm_george",speed:Number(sh.voice?.kokoroSpeed||.95),pauseMs:Number(sh.voice?.sentencePauseMs??70),tailTrimMs:Number(sh.voice?.tailTrimMs??100),narration:narrationForShort(sh),scenes:(sh.scenes||[]).map(s=>({id:s.id,name:s.name,duration:s.duration,script:s.script||"",caption:s.caption||""}))}))}
 }
 function downloadJson(name,data){const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1500)}
 function blobToDataUrl(blob){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(blob)})}
