@@ -100,7 +100,7 @@ def prepare_editor() -> Path:
     LOCAL_EDITOR.mkdir(parents=True, exist_ok=True)
     if (REPO_ROOT / "index.html").exists():
         shutil.copy2(REPO_ROOT / "index.html", LOCAL_EDITOR / "index.html")
-        for folder in ("css", "js", "presets", "maps", "historical-maps"):
+        for folder in ("assets", "css", "js", "presets", "maps", "historical-maps"):
             src = REPO_ROOT / folder
             dst = LOCAL_EDITOR / folder
             if src.exists():
@@ -111,7 +111,7 @@ def prepare_editor() -> Path:
         data = io.BytesIO(response.read())
     with zipfile.ZipFile(data) as z:
         prefix = "MEP-Video-Maker-main/"
-        wanted = ("index.html", "css/", "js/", "presets/", "maps/", "historical-maps/")
+        wanted = ("index.html", "assets/", "css/", "js/", "presets/", "maps/", "historical-maps/")
         for name in z.namelist():
             if not name.startswith(prefix):
                 continue
@@ -333,7 +333,7 @@ def local_editor():
 
 @app.get("/app/<path:path>")
 def local_editor_assets(path: str):
-    if not path.startswith(("css/", "js/", "presets/", "maps/", "historical-maps/")):
+    if not path.startswith(("assets/", "css/", "js/", "presets/", "maps/", "historical-maps/")):
         return "Not found", 404
     return send_from_directory(editor_root(), path)
 

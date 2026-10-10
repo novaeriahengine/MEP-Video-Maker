@@ -10,6 +10,7 @@ Browser-first vertical history animation editor for 30–60 second YouTube Short
 - The bundled **YouTube Short Maker** project contains 10 finished history Shorts with titles, descriptions, hashtags, narration, scenes, country flags, map graphics, and timing.
 - Character bodies are flag-filled Square, Circle, or Triangle shapes only.
 - Noveria Host is a small Florida-state-flag circle intended to sit near the bottom while maps and graphics do most of the explaining.
+- The shared Florida/history/playback logo lives at `assets/brand/mep-kokoro-florida-mark.png`; the public editor and local Python server use the same mark.
 - No Haiti-specific character/video preset is bundled.
 
 ## Focused mobile workspace
