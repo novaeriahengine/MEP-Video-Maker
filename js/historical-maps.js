@@ -22,7 +22,11 @@ const FOCUS={
 };
 const cache=new Map(),loading=new Map(),failures=new Map();
 const palette=["#b7aa8a","#9eae91","#ac9da0","#9fb3b7","#b8a48d","#a7a1b7","#a6b497","#c0b493","#9fa9bd","#b29f8c","#a8aa8e","#9fb0a0"];
-const SIDE_COLORS={allied:"#6f91b5",axis:"#b56f69",central:"#b87769",entente:"#6f93b8",west:"#6d91b8",east:"#b66f72",neutral:"#aaa891"};
+const SIDE_COLORS={allied:"#6f91b5",axis:"#a6534f",central:"#a55e4f",entente:"#6f93b8",west:"#5e87b6",east:"#a94a50",neutral:"#aaa891"};
+const COUNTRY_COLORS=[
+ [/soviet|ussr|russian empire|russia/i,"#b53a3f"],[/german|germany|prussia/i,"#4e555d"],[/france/i,"#4d79bd"],[/britain|united kingdom|england/i,"#315a8c"],[/united states|america/i,"#6c8ebf"],[/japan/i,"#a94a4d"],[/italy/i,"#5d8a61"],[/china/i,"#c7a44d"],[/poland/i,"#b46d86"],[/austria|habsburg/i,"#b99a62"],[/ottoman|turkey/i,"#8d6c55"],[/canada/i,"#a96666"],[/belgium/i,"#806c9d"],[/cuba/i,"#c47b4c"],[/spain/i,"#b98a4d"],[/netherlands/i,"#a97755"],[/serbia/i,"#6f79a6"]
+];
+const HIGHLIGHT_ALIASES={US:/united states|america/i,GB:/britain|united kingdom|england/i,FR:/france/i,DE:/german|germany|prussia/i,RU:/soviet|ussr|russian empire|russia/i,JP:/japan/i,IT:/italy/i,CN:/china/i,PL:/poland/i,AT:/austria|habsburg/i,CU:/cuba/i,CA:/canada/i,BE:/belgium/i,PRU:/prussia/i};
 function conflictSide(name,text=""){
  const n=name.toLowerCase(),t=text.toLowerCase();
  if(/world war i|world war 1|wwi|western front|eastern front|trench|tannenberg|brusilov/.test(t)){
@@ -39,7 +43,9 @@ function conflictSide(name,text=""){
  }
  return"neutral"
 }
-function fillFor(f,text=""){const side=conflictSide(nameOf(f),text);if(side!=="neutral")return SIDE_COLORS[side];return palette[hash(subjectOf(f))%palette.length]}
+function baseCountryColor(name,text=""){for(const [rx,color] of COUNTRY_COLORS)if(rx.test(name))return color;const side=conflictSide(name,text);if(side!=="neutral")return SIDE_COLORS[side];return palette[hash(name)%palette.length]}
+function highlighted(name,text="",highlights=[]){const clean=String(name||"").toLowerCase();for(const h of highlights||[]){const rx=HIGHLIGHT_ALIASES[String(h).toUpperCase()];if(rx?.test(name))return true;if(clean.includes(String(h).toLowerCase()))return true}if(name&&name.length>4&&text.toLowerCase().includes(name.toLowerCase()))return true;return false}
+function fillFor(f,text="",highlights=[]){const name=nameOf(f),base=baseCountryColor(name,text);return base}
 
 function hash(s=""){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return Math.abs(h)}
 function nameOf(f){return String(f?.properties?.NAME||f?.properties?.name||f?.properties?.SUBJECTO||"Unknown").trim()||"Unknown"}
@@ -113,13 +119,13 @@ function drawLegend(ctx,text,w,h){
  else if(/cold war|berlin wall|cuban missile/.test(t))items=[["West",SIDE_COLORS.west],["Soviet bloc",SIDE_COLORS.east]];
  if(!items.length)return;ctx.save();ctx.font="700 "+Math.max(10,w*.017)+"px system-ui";let x=14,y=h-52;for(const [label,color] of items){ctx.fillStyle=color;ctx.fillRect(x,y,14,14);ctx.strokeStyle="#28333a";ctx.strokeRect(x,y,14,14);ctx.fillStyle="#1d2830";ctx.fillText(label,x+20,y+12);x+=ctx.measureText(label).width+58}ctx.restore()
 }
-function draw(ctx,{year=2026,text="",key="worldMap",width=ctx.canvas.width,height=ctx.canvas.height,showLabels=true}={}){
+function draw(ctx,{year=2026,text="",key="worldMap",width=ctx.canvas.width,height=ctx.canvas.height,showLabels=true,highlights=[]}={}){
  const snap=resolveSnapshot(year,text),focusName=focusFor(key,text),focus=FOCUS[focusName]||FOCUS.world,data=cache.get(snap.year);
  if(!data){load(snap);return{drawn:false,snapshotYear:snap.year,focus:focusName,loading:true}}
- ctx.save();const ocean=ctx.createLinearGradient(0,0,0,height);ocean.addColorStop(0,"#b9d8e4");ocean.addColorStop(1,"#87b5c9");ctx.fillStyle=ocean;ctx.fillRect(0,0,width,height);const project=projector(focus,width,height),features=data.features||[];drawGraticule(ctx,focus,project,width,height);
+ ctx.save();const ocean=ctx.createLinearGradient(0,0,0,height);ocean.addColorStop(0,"#b5d7e6");ocean.addColorStop(.5,"#94bfd2");ocean.addColorStop(1,"#6f9eb6");ctx.fillStyle=ocean;ctx.fillRect(0,0,width,height);const project=projector(focus,width,height),features=data.features||[];drawGraticule(ctx,focus,project,width,height);
  ctx.lineJoin="round";ctx.lineCap="round";ctx.lineWidth=Math.max(1,width*.0016);
- for(const f of features){const b=featureBounds(f,focus);if(!b)continue;ctx.fillStyle=fillFor(f,text);ctx.strokeStyle="rgba(245,240,226,.85)";pathFeature(ctx,f,project,focus)}
- ctx.lineWidth=Math.max(.85,width*.00125);for(const f of features){const b=featureBounds(f,focus);if(!b)continue;ctx.fillStyle="rgba(0,0,0,0)";ctx.strokeStyle="rgba(39,48,53,.78)";pathFeature(ctx,f,project,focus)}
+ for(const f of features){const b=featureBounds(f,focus);if(!b)continue;ctx.fillStyle=fillFor(f,text,highlights);ctx.strokeStyle="rgba(246,242,229,.72)";pathFeature(ctx,f,project,focus)}
+ ctx.lineWidth=Math.max(.9,width*.00135);for(const f of features){const b=featureBounds(f,focus);if(!b)continue;const hi=highlighted(nameOf(f),text,highlights);ctx.fillStyle="rgba(0,0,0,0)";ctx.strokeStyle=hi?"#ffd45d":"rgba(35,43,48,.82)";ctx.lineWidth=hi?Math.max(3,width*.0045):Math.max(.9,width*.00135);pathFeature(ctx,f,project,focus)}
  if(showLabels)drawLabels(ctx,features,focus,project,width,height);drawLegend(ctx,text,width,height);
  const ph=phase(text),badge=(ph==="before"?"BEFORE":ph==="after"?"AFTER":"HISTORICAL")+" · "+snap.year;ctx.font="800 "+Math.max(12,width*.021)+"px system-ui";const tw=ctx.measureText(badge).width;ctx.fillStyle="rgba(18,26,32,.78)";ctx.fillRect(width-tw-34,14,tw+22,30);ctx.fillStyle="#f5d77f";ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(badge,width-tw-23,29);
  ctx.fillStyle="rgba(17,27,33,.74)";ctx.font="600 "+Math.max(10,width*.015)+"px system-ui";ctx.textBaseline="bottom";ctx.fillText("Historical borders · auto-selected snapshot",12,height-10);
