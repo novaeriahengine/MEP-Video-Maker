@@ -51,6 +51,9 @@ BRITISH_VOICES = [
 ]
 
 MAP_FILES = {
+    1000: "world_1000.geojson", 1100: "world_1100.geojson", 1200: "world_1200.geojson",
+    1279: "world_1279.geojson", 1300: "world_1300.geojson", 1400: "world_1400.geojson",
+    1492: "world_1492.geojson", 1500: "world_1500.geojson", 1530: "world_1530.geojson",
     1600: "world_1600.geojson", 1650: "world_1650.geojson", 1700: "world_1700.geojson",
     1715: "world_1715.geojson", 1783: "world_1783.geojson", 1800: "world_1800.geojson",
     1815: "world_1815.geojson", 1878: "world_1878.geojson", 1880: "world_1880.geojson",
@@ -97,7 +100,7 @@ def prepare_editor() -> Path:
     LOCAL_EDITOR.mkdir(parents=True, exist_ok=True)
     if (REPO_ROOT / "index.html").exists():
         shutil.copy2(REPO_ROOT / "index.html", LOCAL_EDITOR / "index.html")
-        for folder in ("css", "js", "presets", "maps"):
+        for folder in ("css", "js", "presets", "maps", "historical-maps"):
             src = REPO_ROOT / folder
             dst = LOCAL_EDITOR / folder
             if src.exists():
@@ -330,7 +333,7 @@ def local_editor():
 
 @app.get("/app/<path:path>")
 def local_editor_assets(path: str):
-    if not path.startswith(("css/", "js/", "presets/", "maps/")):
+    if not path.startswith(("css/", "js/", "presets/", "maps/", "historical-maps/")):
         return "Not found", 404
     return send_from_directory(editor_root(), path)
 
