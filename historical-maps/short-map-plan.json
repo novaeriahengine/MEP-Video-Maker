@@ -1,0 +1,810 @@
+{
+  "schema": "mep-short-historical-map-plan-v1",
+  "generatedFrom": "presets/youtube-short-maker.mep.json",
+  "shorts": [
+    {
+      "title": "Why the Western Front Froze Into Trenches",
+      "year": 1914,
+      "scenes": [
+        {
+          "name": "The 1914 rush",
+          "mapYear": 1914,
+          "background": "westernFrontMap",
+          "highlights": [
+            "DE",
+            "FR",
+            "GB",
+            "BE"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "arrow",
+            "front"
+          ]
+        },
+        {
+          "name": "Race to the Sea",
+          "mapYear": 1914,
+          "background": "westernFrontMap",
+          "highlights": [
+            "DE",
+            "FR",
+            "BE"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "front"
+          ]
+        },
+        {
+          "name": "Why attacks stalled",
+          "mapYear": 1914,
+          "background": "trench",
+          "highlights": [
+            "DE",
+            "FR"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "arrow",
+            "arrow",
+            "artillery"
+          ]
+        },
+        {
+          "name": "1918 breaks the stalemate",
+          "mapYear": 1914,
+          "background": "westernFrontMap",
+          "highlights": [
+            "DE",
+            "FR",
+            "GB",
+            "US"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "arrow",
+            "arrow",
+            "tank",
+            "tank"
+          ]
+        },
+        {
+          "name": "How it ended",
+          "mapYear": 1920,
+          "background": "westernFrontMap",
+          "highlights": [
+            "DE",
+            "FR",
+            "GB"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "label"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Why the Eastern Front Kept Moving",
+      "year": 1914,
+      "scenes": [
+        {
+          "name": "A gigantic front",
+          "mapYear": 1914,
+          "background": "easternFrontMap",
+          "highlights": [
+            "DE",
+            "AT",
+            "RU"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "front"
+          ]
+        },
+        {
+          "name": "Tannenberg",
+          "mapYear": 1914,
+          "background": "easternFrontMap",
+          "highlights": [
+            "DE",
+            "RU",
+            "PRU"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "arrow",
+            "arrow",
+            "artillery"
+          ]
+        },
+        {
+          "name": "The Great Retreat",
+          "mapYear": 1914,
+          "background": "easternFrontMap",
+          "highlights": [
+            "DE",
+            "AT",
+            "RU",
+            "PL"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "zone",
+            "arrow"
+          ]
+        },
+        {
+          "name": "Russia strikes back",
+          "mapYear": 1914,
+          "background": "easternFrontMap",
+          "highlights": [
+            "DE",
+            "AT",
+            "RU"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "arrow",
+            "arrow"
+          ]
+        },
+        {
+          "name": "Russia leaves the war",
+          "mapYear": 1920,
+          "background": "easternFrontMap",
+          "highlights": [
+            "DE",
+            "RU"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "label"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Pearl Harbor in Under a Minute: Why Japan Attacked",
+      "year": 1941,
+      "scenes": [
+        {
+          "name": "Why tensions exploded",
+          "mapYear": 1938,
+          "background": "pearlHarborMap",
+          "highlights": [
+            "US",
+            "JP"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "zone",
+            "label",
+            "ship"
+          ]
+        },
+        {
+          "name": "The strike route",
+          "mapYear": 1938,
+          "background": "pearlHarborMap",
+          "highlights": [
+            "US",
+            "JP"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "plane"
+          ]
+        },
+        {
+          "name": "December 7, 1941",
+          "mapYear": 1938,
+          "background": "pearlHarborMap",
+          "highlights": [
+            "US",
+            "JP"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "plane",
+            "impact",
+            "impact",
+            "ship"
+          ]
+        },
+        {
+          "name": "What Japan missed",
+          "mapYear": 1938,
+          "background": "harbor",
+          "highlights": [
+            "US",
+            "JP"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "label",
+            "label"
+          ]
+        },
+        {
+          "name": "America enters the war",
+          "mapYear": 1938,
+          "background": "pearlHarborMap",
+          "highlights": [
+            "US",
+            "JP",
+            "DE",
+            "IT"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "label"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Midway: The Battle That Broke Japan’s Carrier Force",
+      "year": 1942,
+      "scenes": [
+        {
+          "name": "Japan’s plan",
+          "mapYear": 1938,
+          "background": "pearlHarborMap",
+          "highlights": [
+            "US",
+            "JP"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "arrow"
+          ]
+        },
+        {
+          "name": "Codebreakers changed the odds",
+          "mapYear": 1938,
+          "background": "mapRoom",
+          "highlights": [
+            "US",
+            "JP"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "label"
+          ]
+        },
+        {
+          "name": "June 4",
+          "mapYear": 1938,
+          "background": "pearlHarborMap",
+          "highlights": [
+            "US",
+            "JP"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "plane",
+            "plane",
+            "ship"
+          ]
+        },
+        {
+          "name": "Four carriers lost",
+          "mapYear": 1938,
+          "background": "ocean",
+          "highlights": [
+            "US",
+            "JP"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "impact",
+            "impact",
+            "impact",
+            "impact",
+            "ship"
+          ]
+        },
+        {
+          "name": "Why Midway mattered",
+          "mapYear": 1945,
+          "background": "pearlHarborMap",
+          "highlights": [
+            "US",
+            "JP"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "label",
+            "ship"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "D-Day in 45 Seconds: How Normandy Was Breached",
+      "year": 1944,
+      "scenes": [
+        {
+          "name": "Operation Overlord",
+          "mapYear": 1938,
+          "background": "normandyMap",
+          "highlights": [
+            "US",
+            "GB",
+            "CA",
+            "DE",
+            "FR"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "plane",
+            "plane",
+            "ship"
+          ]
+        },
+        {
+          "name": "Airborne first",
+          "mapYear": 1938,
+          "background": "normandyMap",
+          "highlights": [
+            "US",
+            "GB",
+            "DE",
+            "FR"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "plane",
+            "plane"
+          ]
+        },
+        {
+          "name": "Five beaches",
+          "mapYear": 1938,
+          "background": "normandyMap",
+          "highlights": [
+            "US",
+            "GB",
+            "CA",
+            "DE",
+            "FR"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "arrow",
+            "arrow",
+            "arrow",
+            "arrow",
+            "arrow",
+            "ship"
+          ]
+        },
+        {
+          "name": "A foothold, not a finish",
+          "mapYear": 1938,
+          "background": "normandyMap",
+          "highlights": [
+            "US",
+            "GB",
+            "DE",
+            "FR"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "zone",
+            "vehicle",
+            "tank"
+          ]
+        },
+        {
+          "name": "Why D-Day mattered",
+          "mapYear": 1945,
+          "background": "normandyMap",
+          "highlights": [
+            "US",
+            "GB",
+            "DE",
+            "FR"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "label"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Why the American Revolution Started",
+      "year": 1776,
+      "scenes": [
+        {
+          "name": "After the Seven Years’ War",
+          "mapYear": 1783,
+          "background": "revolutionMap",
+          "highlights": [
+            "US",
+            "GB"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "arrow"
+          ]
+        },
+        {
+          "name": "No taxation without representation",
+          "mapYear": 1783,
+          "background": "oldTownStreet",
+          "highlights": [
+            "US",
+            "GB"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "label"
+          ]
+        },
+        {
+          "name": "War begins",
+          "mapYear": 1783,
+          "background": "revolutionMap",
+          "highlights": [
+            "US",
+            "GB"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "arrow",
+            "impact"
+          ]
+        },
+        {
+          "name": "Independence and France",
+          "mapYear": 1783,
+          "background": "revolutionMap",
+          "highlights": [
+            "US",
+            "GB",
+            "FR"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "arrow"
+          ]
+        },
+        {
+          "name": "Yorktown and peace",
+          "mapYear": 1783,
+          "background": "revolutionMap",
+          "highlights": [
+            "US",
+            "GB",
+            "FR"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "label"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "French Revolution in Under a Minute",
+      "year": 1789,
+      "scenes": [
+        {
+          "name": "France is in crisis",
+          "mapYear": 1783,
+          "background": "royalCourt",
+          "highlights": [
+            "FR"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "label"
+          ]
+        },
+        {
+          "name": "The Third Estate breaks away",
+          "mapYear": 1783,
+          "background": "governmentHall",
+          "highlights": [
+            "FR"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "arrow"
+          ]
+        },
+        {
+          "name": "The Bastille",
+          "mapYear": 1783,
+          "background": "oldTownStreet",
+          "highlights": [
+            "FR"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "impact"
+          ]
+        },
+        {
+          "name": "Monarchy to republic",
+          "mapYear": 1783,
+          "background": "governmentHall",
+          "highlights": [
+            "FR"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "arrow"
+          ]
+        },
+        {
+          "name": "Terror, then Napoleon",
+          "mapYear": 1800,
+          "background": "napoleonicMap",
+          "highlights": [
+            "FR"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "label"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Waterloo: How Napoleon Lost His Final Battle",
+      "year": 1815,
+      "scenes": [
+        {
+          "name": "Napoleon returns",
+          "mapYear": 1815,
+          "background": "napoleonicMap",
+          "highlights": [
+            "FR",
+            "GB",
+            "PRU",
+            "BE"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "arrow"
+          ]
+        },
+        {
+          "name": "Split the coalition",
+          "mapYear": 1815,
+          "background": "napoleonicMap",
+          "highlights": [
+            "FR",
+            "GB",
+            "PRU",
+            "BE"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "arrow",
+            "arrow"
+          ]
+        },
+        {
+          "name": "Ligny and Quatre Bras",
+          "mapYear": 1815,
+          "background": "napoleonicMap",
+          "highlights": [
+            "FR",
+            "GB",
+            "PRU",
+            "BE"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "arrow",
+            "arrow"
+          ]
+        },
+        {
+          "name": "Waterloo",
+          "mapYear": 1815,
+          "background": "battlefield",
+          "highlights": [
+            "FR",
+            "GB",
+            "PRU",
+            "BE"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "arrow",
+            "arrow",
+            "artillery"
+          ]
+        },
+        {
+          "name": "The final collapse",
+          "mapYear": 1815,
+          "background": "napoleonicMap",
+          "highlights": [
+            "FR",
+            "GB",
+            "PRU",
+            "BE"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "label"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Cuban Missile Crisis: 13 Days Near Nuclear War",
+      "year": 1962,
+      "scenes": [
+        {
+          "name": "Missiles in Cuba",
+          "mapYear": 1960,
+          "background": "americasMap",
+          "highlights": [
+            "US",
+            "RU",
+            "CU"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "route",
+            "missile"
+          ]
+        },
+        {
+          "name": "The U-2 photographs",
+          "mapYear": 1960,
+          "background": "americasMap",
+          "highlights": [
+            "US",
+            "CU"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "plane",
+            "impact"
+          ]
+        },
+        {
+          "name": "The quarantine",
+          "mapYear": 1960,
+          "background": "americasMap",
+          "highlights": [
+            "US",
+            "CU",
+            "RU"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "zone",
+            "label",
+            "ship"
+          ]
+        },
+        {
+          "name": "October 27: the danger peaks",
+          "mapYear": 1960,
+          "background": "coldWarMap",
+          "highlights": [
+            "US",
+            "RU",
+            "CU"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "plane",
+            "impact",
+            "missile"
+          ]
+        },
+        {
+          "name": "The deal",
+          "mapYear": 1960,
+          "background": "americasMap",
+          "highlights": [
+            "US",
+            "RU",
+            "CU"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "label",
+            "missile"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Why the Berlin Wall Fell",
+      "year": 1989,
+      "scenes": [
+        {
+          "name": "Why the wall went up",
+          "mapYear": 1960,
+          "background": "coldWarMap",
+          "highlights": [
+            "DE",
+            "RU",
+            "US",
+            "GB",
+            "FR"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "route"
+          ]
+        },
+        {
+          "name": "August 13, 1961",
+          "mapYear": 1960,
+          "background": "coldWarMap",
+          "highlights": [
+            "DE",
+            "RU",
+            "US",
+            "GB",
+            "FR"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "front"
+          ]
+        },
+        {
+          "name": "A divided city",
+          "mapYear": 1960,
+          "background": "city",
+          "highlights": [
+            "DE",
+            "RU",
+            "US",
+            "GB",
+            "FR"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "front",
+            "label",
+            "label"
+          ]
+        },
+        {
+          "name": "1989 pressure builds",
+          "mapYear": 1960,
+          "background": "coldWarMap",
+          "highlights": [
+            "DE",
+            "RU",
+            "US"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "arrow"
+          ]
+        },
+        {
+          "name": "November 9, 1989",
+          "mapYear": 1994,
+          "background": "coldWarMap",
+          "highlights": [
+            "DE",
+            "RU",
+            "US"
+          ],
+          "frontOverlay": false,
+          "graphics": [
+            "label"
+          ]
+        }
+      ]
+    }
+  ]
+}
