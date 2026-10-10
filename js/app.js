@@ -217,7 +217,7 @@ function applyVoicePreset(name){const presets={
  britishNews:{voiceProfile:"britishMale",source:"chrome",ttsRate:.98,ttsPitch:.92,pitchSemitones:0,speed:1,lowCut:80,bass:1,warmth:0,mid:0,clarity:4,presence:5,deEss:4,treble:2,air:3,compression:.68,limiter:.80,echo:0,grit:0,gain:1.04},
  natural:{source:"chrome",ttsRate:.94,ttsPitch:.96,pitchSemitones:0,speed:1,lowCut:70,bass:1,warmth:1,mid:0,clarity:1,presence:2,deEss:2,treble:1,air:1,compression:.42,limiter:.65,echo:0,grit:0,gain:1.03},
  radio:{source:"mic",ttsRate:.97,ttsPitch:.95,pitchSemitones:0,speed:1,lowCut:110,bass:-4,warmth:-2,mid:4,clarity:4,presence:5,deEss:5,treble:0,air:-2,compression:.78,limiter:.86,echo:.03,grit:.10,gain:1.08}
- };Object.assign(short.voice,presets[name]||presets.britishDocumentary);if(short.voice.voiceProfile==="britishMale"){const v=bestChromeVoice();if(v)short.voice.chromeVoice=v.name}changed();syncVoiceUI()}
+ };migrateVoiceTrackRefs(short);const chosen=presets[name]||presets.britishDocumentary,desiredSource=chosen.source||short.voice.source;Object.assign(short.voice,chosen);selectVoiceSource(short,desiredSource);if(short.voice.voiceProfile==="britishMale"){const v=bestChromeVoice();if(v)short.voice.chromeVoice=v.name}changed();syncVoiceUI()}
 async function attachNeuralAudio(blob,filename="noveria-ai.wav",target=short,{quiet=false,voice=null,speed=null,duration=null,source="server"}={}){
  if(!blob||blob.size>40*1024*1024)throw Error("Audio file is too large.");
  const normalizedSource=source==="ai"?"server":source,old=voiceAssetForSource(target,normalizedSource);if(old?.voiceDbKey&&window.MEPVoiceBackends)await MEPVoiceBackends.deleteAudio(old.voiceDbKey).catch(()=>{});if(old)project.assets=project.assets.filter(a=>a.id!==old.id);
