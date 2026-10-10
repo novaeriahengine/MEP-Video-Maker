@@ -1,0 +1,26 @@
+(()=>{"use strict";
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+function make(tag,cls,html){const n=document.createElement(tag);if(cls)n.className=cls;if(html)n.innerHTML=html;return n}
+function heading(root,text){return [...root.querySelectorAll("h2,h3")].find(h=>h.textContent.trim()===text)||null}
+function moveRange(start,end,target){if(!start)return;const nodes=[];for(let n=start;n&&n!==end;n=n.nextSibling)nodes.push(n);nodes.forEach(n=>target.appendChild(n))}
+function moveChildren(root,target){if(root)[...root.childNodes].forEach(n=>target.appendChild(n))}
+const shell=make("aside","toolAssistant",'<header class="toolAssistantHeader"><div><strong>MEP Tools</strong><small id="toolAssistantStatus">Canvas stays open while you work.</small></div><div class="toolWindowActions"><button id="toolFloatMode">Float</button><button id="toolFullMode">Full</button><button id="toolClose">×</button></div></header><div class="toolChatIntro"><span class="toolBotFace">✦</span><div><b>What do you want to edit?</b><small>Tap a tool or type its name below.</small></div></div><nav id="toolNav" class="toolNav"></nav><div id="toolPaneHost" class="toolPaneHost"></div><form id="toolChatForm" class="toolChatBar"><input id="toolChatInput" placeholder="voice, photos, background, script…"><button>Go</button></form>');
+shell.id="toolAssistant";document.body.appendChild(shell);
+const defs=[["backgrounds","Backgrounds","▧"],["photos","Historical Photos","◫"],["graphics","Map / Graphics","↗"],["characters","Characters","◉"],["scripts","Scripts","≡"],["voice","Voice","◖"],["project","Project","⌂"]],panes={},nav=$("#toolNav"),host=$("#toolPaneHost");
+for(const [id,label,icon] of defs){const b=make("button","toolNavButton",'<span>'+icon+'</span><small>'+label+'</small>');b.dataset.tool=id;nav.appendChild(b);const p=make("section","toolPane",'<div class="toolPaneTitle"><h2>'+label+'</h2><small>MEP editor tool</small></div>');p.dataset.toolPane=id;host.appendChild(p);panes[id]=p}
+const scenePanel=$("#scenePanel"),characterPanel=$("#characterPanel"),scriptPanel=$("#scriptPanel");
+if(scenePanel){const bg=$("#backgroundSection"),graphics=heading(scenePanel,"Map / Explainer Tools");if(bg)moveRange(bg,graphics,panes.backgrounds);if(graphics)moveRange(graphics,null,panes.graphics)}
+if(characterPanel){moveChildren(characterPanel,panes.characters);characterPanel.remove()}
+if(scriptPanel){const first=heading(scriptPanel,"YouTube Upload Info"),voice=heading(scriptPanel,"Voice Studio"),dialogue=heading(scriptPanel,"Dialogue / Bubble");if(first)moveRange(first,voice,panes.scripts);if(voice)moveRange(voice,dialogue,panes.voice);if(dialogue)moveRange(dialogue,null,panes.scripts);scriptPanel.remove()}
+const projectBox=make("div","toolProjectActions");for(const sel of [".projectNameLabel","#newProject","#openProjects","#loadShortPack","#saveProject","#saveCloud","#exportProject",".topbar .fileButton"]){const n=$(sel);if(n)projectBox.appendChild(n)}panes.project.appendChild(projectBox);
+const workspace=$(".workspace");if(workspace)workspace.classList.add("focus-layout");
+const opener=make("button","primary toolOpenButton");opener.id="openTools";opener.textContent="Tools";const topbar=$(".topbar"),modeTabs=$(".modeTabs");if(topbar)topbar.insertBefore(opener,modeTabs?.nextSibling||topbar.firstChild);
+let active="backgrounds",mode=localStorage.getItem("mep-tool-window-mode")||"float";
+function applyMode(){document.body.classList.toggle("tool-full",mode==="full");shell.classList.toggle("full",mode==="full");$("#toolFloatMode").classList.toggle("active",mode==="float");$("#toolFullMode").classList.toggle("active",mode==="full")}
+function openTool(id=active,nextMode=null){if(!panes[id])id="backgrounds";active=id;if(nextMode){mode=nextMode;localStorage.setItem("mep-tool-window-mode",mode)}shell.classList.add("open");applyMode();$$("[data-tool]").forEach(b=>b.classList.toggle("active",b.dataset.tool===id));$$("[data-tool-pane]").forEach(p=>p.classList.toggle("active",p.dataset.toolPane===id));$("#toolAssistantStatus").textContent=(mode==="full"?"Main tab · ":"Floating · ")+defs.find(x=>x[0]===id)[1]}
+function closeTool(){shell.classList.remove("open");document.body.classList.remove("tool-full")}
+opener.onclick=()=>openTool(active);$("#toolClose").onclick=closeTool;$("#toolFloatMode").onclick=()=>openTool(active,"float");$("#toolFullMode").onclick=()=>openTool(active,"full");$$("[data-tool]").forEach(b=>b.onclick=()=>openTool(b.dataset.tool));
+const aliases={voice:"voice",audio:"voice",narration:"voice",photo:"photos",picture:"photos",background:"backgrounds",map:"graphics",graphic:"graphics",character:"characters",flag:"characters",script:"scripts",caption:"scripts",project:"project",save:"project",export:"project"};
+$("#toolChatForm").onsubmit=e=>{e.preventDefault();const raw=$("#toolChatInput").value.toLowerCase();let found="";for(const k of Object.keys(aliases))if(raw.includes(k)){found=aliases[k];break}if(found){openTool(found);$("#toolChatInput").value=""}else $("#toolAssistantStatus").textContent="Try voice, photos, backgrounds, graphics, characters, scripts, or project."};
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeTool()});applyMode();closeTool();window.MEPTools={open:openTool,close:closeTool,panes};
+})();
