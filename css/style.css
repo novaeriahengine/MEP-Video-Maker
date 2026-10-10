@@ -83,3 +83,13 @@ body.tool-full .toolAssistant{background:#0f141b}
  .stageToolbar{position:sticky;top:0}.stageToolbar #addKeyframe,.stageToolbar #exportAllShorts{display:none}.shortCanvasWrap canvas{max-height:calc(100dvh - 245px);object-fit:contain}
 }
 @media(max-width:430px){.toolNavButton{min-width:68px}.historyPhotoCard{grid-template-columns:1fr}.historyPhotoCard img{width:100%;height:180px}.photoSearchRow{grid-template-columns:1fr}.toolPane label{grid-template-columns:1fr}}
+
+
+/* Voice source certainty + saved profiles */
+.voiceSourceCards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:8px 0}
+.voiceSourceCards button{position:relative;display:grid;grid-template-columns:32px minmax(0,1fr) 24px;grid-template-rows:auto auto;gap:1px 7px;align-items:center;text-align:left;padding:9px;background:#10151d}
+.voiceSourceCards button>span{grid-row:1/3;font-size:20px;text-align:center}.voiceSourceCards button>b{font-size:12px}.voiceSourceCards button>small{font-size:10px;color:var(--muted)}.voiceSourceCards button>i{grid-column:3;grid-row:1/3;font-style:normal;font-size:18px;color:transparent;text-align:center}
+.voiceSourceCards button.active{border-color:#ffb020;background:#2f281a;box-shadow:0 0 0 1px #ffb02055}.voiceSourceCards button.active>i{color:#ffd26b}
+.voiceExportBadge{margin:7px 0;padding:8px;border-radius:8px;border:1px solid #5e4d25;background:#2a2417;color:#ffd77c;font-weight:700;font-size:12px}.voiceExportBadge.ready{border-color:#2e7043;background:#17301f;color:#bff0c9}.voiceExportBadge.warn{border-color:#8d3b3b;background:#351b1b;color:#ffc2c2}
+.voicePresetManager{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px}.voiceToggle{display:flex!important;grid-template-columns:none!important;justify-content:space-between;gap:8px!important}.voiceToggle input{width:auto;min-height:auto}
+@media(max-width:430px){.voiceSourceCards{grid-template-columns:1fr}.voicePresetManager{grid-template-columns:1fr}}
