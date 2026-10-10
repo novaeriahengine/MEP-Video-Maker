@@ -9,6 +9,9 @@ import shutil
 import threading
 import time
 import urllib.request
+import urllib.parse
+import hashlib
+import mimetypes
 import webbrowser
 import zipfile
 from pathlib import Path
@@ -25,9 +28,11 @@ LOCAL_EDITOR = BASE / "editor"
 OUTPUTS = BASE / "outputs"
 CACHE = BASE / "cache"
 MAP_CACHE = CACHE / "maps"
+PHOTO_CACHE = CACHE / "historical-photos"
 HF_CACHE = CACHE / "huggingface"
 OUTPUTS.mkdir(exist_ok=True)
 MAP_CACHE.mkdir(parents=True, exist_ok=True)
+PHOTO_CACHE.mkdir(parents=True, exist_ok=True)
 HF_CACHE.mkdir(parents=True, exist_ok=True)
 
 os.environ.setdefault("HF_HOME", str(HF_CACHE))
@@ -36,7 +41,7 @@ os.environ.setdefault("HUGGINGFACE_HUB_CACHE", str(HF_CACHE / "hub"))
 HOST = os.environ.get("MEP_HOST", "0.0.0.0")
 PORT = int(os.environ.get("MEP_PORT", "7860"))
 DEFAULT_VOICE = os.environ.get("MEP_VOICE", "bm_george")
-DEFAULT_SPEED = float(os.environ.get("MEP_SPEED", "1.0"))
+DEFAULT_SPEED = float(os.environ.get("MEP_SPEED", "0.95"))
 
 BRITISH_VOICES = [
     {"id": "bm_george", "name": "George", "description": "Classic British male"},
