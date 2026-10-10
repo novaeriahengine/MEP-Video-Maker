@@ -111,7 +111,7 @@ def prepare_editor() -> Path:
         data = io.BytesIO(response.read())
     with zipfile.ZipFile(data) as z:
         prefix = "MEP-Video-Maker-main/"
-        wanted = ("index.html", "css/", "js/", "presets/", "maps/")
+        wanted = ("index.html", "css/", "js/", "presets/", "maps/", "historical-maps/")
         for name in z.namelist():
             if not name.startswith(prefix):
                 continue
