@@ -90,7 +90,7 @@ async function load(snapshot){
 function normalizeLon(lon,focus){if(focus.wrap&&lon<0)return lon+360;return lon}
 function projector(focus,w,h){
  const minLon=focus.minLon,maxLon=focus.maxLon,minLat=focus.minLat,maxLat=focus.maxLat,dLon=maxLon-minLon,dLat=maxLat-minLat,pad=Math.max(10,Math.min(w,h)*.035);
- const sx=(w-pad*2)/dLon,sy=(h-pad*2)/dLat,scale=focus.fit==="contain"?Math.min(sx,sy):Math.max(sx,sy),drawW=dLon*scale,drawH=dLat*scale,ox=(w-drawW)/2,oy=(h-drawH)/2;
+ const sx=(w-pad*2)/dLon,sy=(h-pad*2)/dLat,baseScale=focus.fit==="cover"?Math.max(sx,sy):Math.min(sx,sy),scale=baseScale*(focus.zoom||1),drawW=dLon*scale,drawH=dLat*scale,ox=(w-drawW)/2,oy=(h-drawH)/2;
  return ([lon,lat])=>({x:ox+(normalizeLon(lon,focus)-minLon)*scale,y:oy+(maxLat-lat)*scale,inside:normalizeLon(lon,focus)>=minLon-3&&normalizeLon(lon,focus)<=maxLon+3&&lat>=minLat-3&&lat<=maxLat+3})
 }
 function ringsOf(geometry){if(!geometry)return[];if(geometry.type==="Polygon")return geometry.coordinates;if(geometry.type==="MultiPolygon")return geometry.coordinates.flat();return[]}
