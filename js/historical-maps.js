@@ -1,5 +1,5 @@
 window.MEPHistoricalMaps=(()=>{
-const SOURCES=["https://raw.githubusercontent.com/aourednik/historical-basemaps/master/geojson/","https://cdn.jsdelivr.net/gh/aourednik/historical-basemaps@master/geojson/"];
+const LOCAL_MAP_SOURCE=(location.protocol==="http:"&&/^(localhost|127\\.|10\\.|192\\.168\\.|172\\.(1[6-9]|2\\d|3[0-1])\\.)/i.test(location.hostname))?location.origin+"/api/maps/":null;\nconst SOURCES=[...(LOCAL_MAP_SOURCE?[LOCAL_MAP_SOURCE]:[]),"https://raw.githubusercontent.com/aourednik/historical-basemaps/master/geojson/","https://cdn.jsdelivr.net/gh/aourednik/historical-basemaps@master/geojson/"];
 const SNAPSHOTS=[
  {year:1600,file:"world_1600.geojson"},{year:1650,file:"world_1650.geojson"},{year:1700,file:"world_1700.geojson"},{year:1715,file:"world_1715.geojson"},
  {year:1783,file:"world_1783.geojson"},{year:1800,file:"world_1800.geojson"},{year:1815,file:"world_1815.geojson"},{year:1878,file:"world_1878.geojson"},
