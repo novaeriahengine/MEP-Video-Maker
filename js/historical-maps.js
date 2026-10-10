@@ -119,13 +119,13 @@ function drawLegend(ctx,text,w,h){
  else if(/cold war|berlin wall|cuban missile/.test(t))items=[["West",SIDE_COLORS.west],["Soviet bloc",SIDE_COLORS.east]];
  if(!items.length)return;ctx.save();ctx.font="700 "+Math.max(10,w*.017)+"px system-ui";let x=14,y=h-52;for(const [label,color] of items){ctx.fillStyle=color;ctx.fillRect(x,y,14,14);ctx.strokeStyle="#28333a";ctx.strokeRect(x,y,14,14);ctx.fillStyle="#1d2830";ctx.fillText(label,x+20,y+12);x+=ctx.measureText(label).width+58}ctx.restore()
 }
-function draw(ctx,{year=2026,text="",key="worldMap",width=ctx.canvas.width,height=ctx.canvas.height,showLabels=true,highlights=[]}={}){
+function draw(ctx,{year=2026,text="",key="worldMap",width=ctx.canvas.width,height=ctx.canvas.height,time=0,showLabels=true,highlights=[]}={}){
  const snap=resolveSnapshot(year,text),focusName=focusFor(key,text),focus=FOCUS[focusName]||FOCUS.world,data=cache.get(snap.year);
  if(!data){load(snap);return{drawn:false,snapshotYear:snap.year,focus:focusName,loading:true}}
  ctx.save();const ocean=ctx.createLinearGradient(0,0,0,height);ocean.addColorStop(0,"#b5d7e6");ocean.addColorStop(.5,"#94bfd2");ocean.addColorStop(1,"#6f9eb6");ctx.fillStyle=ocean;ctx.fillRect(0,0,width,height);const project=projector(focus,width,height),features=data.features||[];drawGraticule(ctx,focus,project,width,height);
  ctx.lineJoin="round";ctx.lineCap="round";ctx.lineWidth=Math.max(1,width*.0016);
  for(const f of features){const b=featureBounds(f,focus);if(!b)continue;ctx.fillStyle=fillFor(f,text,highlights);ctx.strokeStyle="rgba(246,242,229,.72)";pathFeature(ctx,f,project,focus)}
- ctx.lineWidth=Math.max(.9,width*.00135);for(const f of features){const b=featureBounds(f,focus);if(!b)continue;const hi=highlighted(nameOf(f),text,highlights);ctx.fillStyle="rgba(0,0,0,0)";ctx.strokeStyle=hi?"#ffd45d":"rgba(35,43,48,.82)";ctx.lineWidth=hi?Math.max(3,width*.0045):Math.max(.9,width*.00135);pathFeature(ctx,f,project,focus)}
+ ctx.lineWidth=Math.max(.9,width*.00135);for(const f of features){const b=featureBounds(f,focus);if(!b)continue;const hi=highlighted(nameOf(f),text,highlights);ctx.fillStyle="rgba(0,0,0,0)";const pulse=.72+.28*Math.sin(Number(time||0)*4.4);ctx.strokeStyle=hi?"rgba(255,212,93,"+pulse+")":"rgba(35,43,48,.82)";ctx.lineWidth=hi?Math.max(3,width*.0045):Math.max(.9,width*.00135);pathFeature(ctx,f,project,focus)}
  if(showLabels)drawLabels(ctx,features,focus,project,width,height);drawLegend(ctx,text,width,height);
  const ph=phase(text),badge=(ph==="before"?"BEFORE":ph==="after"?"AFTER":"HISTORICAL")+" · "+snap.year;ctx.font="800 "+Math.max(12,width*.021)+"px system-ui";const tw=ctx.measureText(badge).width;ctx.fillStyle="rgba(18,26,32,.78)";ctx.fillRect(width-tw-34,14,tw+22,30);ctx.fillStyle="#f5d77f";ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(badge,width-tw-23,29);
  ctx.fillStyle="rgba(17,27,33,.74)";ctx.font="600 "+Math.max(10,width*.015)+"px system-ui";ctx.textBaseline="bottom";ctx.fillText("Historical borders · auto-selected snapshot",12,height-10);
