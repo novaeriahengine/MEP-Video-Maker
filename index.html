@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Noveria History — MEP Short Maker</title>
-<link rel="stylesheet" href="css/style.css?v=20261010k">
+<link rel="stylesheet" href="css/style.css?v=20261010l">
 </head>
 <body>
 <div id="app">
@@ -55,6 +55,11 @@
       <label>Brightness <input id="backgroundBrightness" type="number" min=".2" max="2" step=".05" value="1"></label><label>Contrast <input id="backgroundContrast" type="number" min=".5" max="2" step=".05" value="1"></label><label>Saturation <input id="backgroundSaturation" type="number" min="0" max="2" step=".05" value="1"></label><label>Sepia <input id="backgroundSepia" type="number" min="0" max="1" step=".05" value="0"></label><label>Blur <input id="backgroundBlur" type="number" min="0" max="20" step=".5" value="0"></label>
     </div>
     <div id="backgroundKeyframes" class="miniList"></div>
+    <h3>Historical Map Controls</h3>
+    <div class="transformGrid"><label>Scene Map Year <input id="sceneMapYear" type="number" min="1600" max="2026" step="1"></label><label>Front Line <select id="sceneMapFront"><option value="off">Only scene graphics</option><option value="on">Show map front</option></select></label></div>
+    <label class="stack">Highlight Countries <input id="sceneMapHighlights" placeholder="US, GB, FR, DE, RU"></label>
+    <div class="buttonGrid"><button id="autoSceneMap" class="primary">Auto Pick Historical Map</button><button id="clearSceneHighlights">Clear Highlights</button></div>
+    <div id="mapSnapshotInfo" class="backgroundPreviewInfo">Historical snapshot will be selected automatically.</div>
 
     <h2>Map / Explainer Tools</h2>
     <label>Tool <select id="graphicType"></select></label>
@@ -205,17 +210,17 @@
 
 <nav id="mobileDock" class="mobileDock"><button data-jump="#stageArea">Canvas</button><button data-jump="#scenePanel">Shorts</button><button data-jump="#characterPanel">Flags</button><button data-jump="#scriptPanel">Script</button><button id="mobileVideo">Preview</button></nav>
 
-<script src="js/firebase-config.js?v=20261010k"></script>
-<script src="js/history-flags.js?v=20261010k"></script>
-<script src="js/historical-maps.js?v=20261010k"></script>
-<script src="js/model.js?v=20261010k"></script>
-<script src="js/ai-config.js?v=20261010k"></script>
-<script src="js/ai-director.js?v=20261010k"></script>
-<script src="js/renderer.js?v=20261010k"></script>
-<script src="js/storage.js?v=20261010k"></script>
-<script src="js/voice-backends.js?v=20261010k"></script>
+<script src="js/firebase-config.js?v=20261010l"></script>
+<script src="js/history-flags.js?v=20261010l"></script>
+<script src="js/historical-maps.js?v=20261010l"></script>
+<script src="js/model.js?v=20261010l"></script>
+<script src="js/ai-config.js?v=20261010l"></script>
+<script src="js/ai-director.js?v=20261010l"></script>
+<script src="js/renderer.js?v=20261010l"></script>
+<script src="js/storage.js?v=20261010l"></script>
+<script src="js/voice-backends.js?v=20261010l"></script>
 <script>window.addEventListener("error",e=>{const el=document.getElementById("bootStatus");if(el){el.className="bootStatus error";el.textContent="MEP error: "+(e.message||"Unknown startup error")}});</script>
-<script src="js/app.js?v=20261010k"></script>
-<script src="js/tool-assistant.js?v=20261010k"></script>
+<script src="js/app.js?v=20261010l"></script>
+<script src="js/tool-assistant.js?v=20261010l"></script>
 </body>
 </html>
