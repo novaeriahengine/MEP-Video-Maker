@@ -594,11 +594,10 @@
           "mapYear": 1914,
           "mapShowFront": false,
           "mapHighlights": [
+            "GB",
             "FR",
             "DE",
-            "GB",
-            "BE",
-            "US"
+            "BE"
           ]
         },
         {
@@ -1085,11 +1084,8 @@
           "mapYear": 1914,
           "mapShowFront": false,
           "mapHighlights": [
-            "FR",
             "DE",
-            "GB",
-            "BE",
-            "US"
+            "FR"
           ]
         },
         {
@@ -1590,10 +1586,7 @@
           "mapShowFront": false,
           "mapHighlights": [
             "FR",
-            "DE",
-            "GB",
-            "BE",
-            "US"
+            "DE"
           ]
         },
         {
@@ -2268,11 +2261,8 @@
           "mapYear": 1914,
           "mapShowFront": false,
           "mapHighlights": [
-            "FR",
-            "DE",
-            "GB",
-            "BE",
-            "US"
+            "US",
+            "DE"
           ]
         },
         {
@@ -2618,11 +2608,7 @@
           "mapYear": 1920,
           "mapShowFront": false,
           "mapHighlights": [
-            "FR",
-            "DE",
-            "GB",
-            "BE",
-            "US"
+            "DE"
           ]
         }
       ],
@@ -3232,10 +3218,8 @@
           "mapYear": 1914,
           "mapShowFront": false,
           "mapHighlights": [
-            "DE",
-            "RU",
-            "AT",
-            "US"
+            "FR",
+            "BE"
           ]
         },
         {
@@ -3751,7 +3735,7 @@
             "DE",
             "RU",
             "AT",
-            "US"
+            "PRU"
           ]
         },
         {
@@ -4331,10 +4315,8 @@
           "mapYear": 1914,
           "mapShowFront": false,
           "mapHighlights": [
-            "DE",
             "RU",
-            "AT",
-            "US"
+            "PL"
           ]
         },
         {
@@ -4935,8 +4917,7 @@
           "mapHighlights": [
             "DE",
             "RU",
-            "AT",
-            "US"
+            "AT"
           ]
         },
         {
@@ -5295,10 +5276,7 @@
           "mapYear": 1920,
           "mapShowFront": false,
           "mapHighlights": [
-            "DE",
-            "RU",
-            "AT",
-            "US"
+            "RU"
           ]
         }
       ],
@@ -6516,7 +6494,6 @@
           "mapYear": 1938,
           "mapShowFront": false,
           "mapHighlights": [
-            "US",
             "JP"
           ]
         },
@@ -7125,7 +7102,6 @@
           "mapYear": 1938,
           "mapShowFront": false,
           "mapHighlights": [
-            "US",
             "JP"
           ]
         },
@@ -8026,7 +8002,9 @@
           "mapShowFront": false,
           "mapHighlights": [
             "US",
-            "JP"
+            "DE",
+            "JP",
+            "IT"
           ]
         }
       ],
@@ -8556,7 +8534,6 @@
           "mapYear": 1938,
           "mapShowFront": false,
           "mapHighlights": [
-            "US",
             "JP"
           ]
         },
@@ -9977,7 +9954,6 @@
           "mapYear": 1938,
           "mapShowFront": false,
           "mapHighlights": [
-            "US",
             "JP"
           ]
         },
@@ -10961,10 +10937,6 @@
           "mapYear": 1938,
           "mapShowFront": false,
           "mapHighlights": [
-            "US",
-            "GB",
-            "CA",
-            "DE",
             "FR"
           ]
         },
@@ -11465,9 +11437,7 @@
           "mapHighlights": [
             "US",
             "GB",
-            "CA",
-            "DE",
-            "FR"
+            "DE"
           ]
         },
         {
@@ -12015,11 +11985,7 @@
           "mapYear": 1938,
           "mapShowFront": false,
           "mapHighlights": [
-            "US",
-            "GB",
-            "CA",
-            "DE",
-            "FR"
+            "GB"
           ]
         },
         {
@@ -12599,11 +12565,7 @@
           "mapYear": 1938,
           "mapShowFront": false,
           "mapHighlights": [
-            "US",
-            "GB",
-            "CA",
-            "DE",
-            "FR"
+            "DE"
           ]
         },
         {
@@ -12949,10 +12911,6 @@
           "mapYear": 1945,
           "mapShowFront": false,
           "mapHighlights": [
-            "US",
-            "GB",
-            "CA",
-            "DE",
             "FR"
           ]
         }
@@ -13496,8 +13454,7 @@
           "mapShowFront": false,
           "mapHighlights": [
             "US",
-            "GB",
-            "FR"
+            "GB"
           ]
         },
         {
@@ -13977,8 +13934,7 @@
           "mapShowFront": false,
           "mapHighlights": [
             "US",
-            "GB",
-            "FR"
+            "GB"
           ]
         },
         {
@@ -14480,9 +14436,8 @@
           "mapYear": 1783,
           "mapShowFront": false,
           "mapHighlights": [
-            "US",
             "GB",
-            "FR"
+            "US"
           ]
         },
         {
@@ -15070,7 +15025,6 @@
           "mapShowFront": false,
           "mapHighlights": [
             "US",
-            "GB",
             "FR"
           ]
         },
@@ -15957,8 +15911,7 @@
           "mapYear": 1783,
           "mapShowFront": false,
           "mapHighlights": [
-            "FR",
-            "US"
+            "FR"
           ]
         },
         {
@@ -16459,8 +16412,7 @@
           "mapYear": 1783,
           "mapShowFront": false,
           "mapHighlights": [
-            "FR",
-            "US"
+            "FR"
           ]
         },
         {
@@ -16891,8 +16843,7 @@
           "mapYear": 1783,
           "mapShowFront": false,
           "mapHighlights": [
-            "FR",
-            "US"
+            "FR"
           ]
         },
         {
@@ -17432,8 +17383,7 @@
           "mapYear": 1783,
           "mapShowFront": false,
           "mapHighlights": [
-            "FR",
-            "US"
+            "FR"
           ]
         },
         {
@@ -17843,10 +17793,7 @@
           ],
           "mapYear": 1800,
           "mapShowFront": false,
-          "mapHighlights": [
-            "FR",
-            "US"
-          ]
+          "mapHighlights": []
         }
       ],
       "createdAt": "2026-10-09T04:41:44.791Z",
@@ -18435,8 +18382,7 @@
           "mapHighlights": [
             "FR",
             "GB",
-            "PRU",
-            "US"
+            "PRU"
           ]
         },
         {
@@ -18994,10 +18940,7 @@
           "mapYear": 1815,
           "mapShowFront": false,
           "mapHighlights": [
-            "FR",
-            "GB",
-            "PRU",
-            "US"
+            "BE"
           ]
         },
         {
@@ -19555,10 +19498,7 @@
           "mapYear": 1815,
           "mapShowFront": false,
           "mapHighlights": [
-            "FR",
-            "GB",
-            "PRU",
-            "US"
+            "FR"
           ]
         },
         {
@@ -20144,10 +20084,7 @@
           "mapYear": 1815,
           "mapShowFront": false,
           "mapHighlights": [
-            "FR",
-            "GB",
-            "PRU",
-            "US"
+            "FR"
           ]
         },
         {
@@ -20519,10 +20456,7 @@
           "mapYear": 1815,
           "mapShowFront": false,
           "mapHighlights": [
-            "FR",
-            "GB",
-            "PRU",
-            "US"
+            "FR"
           ]
         }
       ],
@@ -21140,7 +21074,6 @@
           "mapYear": 1960,
           "mapShowFront": false,
           "mapHighlights": [
-            "US",
             "RU",
             "CU"
           ]
@@ -21648,8 +21581,6 @@
           "mapYear": 1960,
           "mapShowFront": false,
           "mapHighlights": [
-            "US",
-            "RU",
             "CU"
           ]
         },
@@ -22199,8 +22130,6 @@
           "mapYear": 1960,
           "mapShowFront": false,
           "mapHighlights": [
-            "US",
-            "RU",
             "CU"
           ]
         },
@@ -22741,7 +22670,6 @@
           "mapYear": 1960,
           "mapShowFront": false,
           "mapHighlights": [
-            "US",
             "RU",
             "CU"
           ]
@@ -23714,11 +23642,7 @@
           "mapYear": 1960,
           "mapShowFront": false,
           "mapHighlights": [
-            "DE",
-            "RU",
-            "US",
-            "GB",
-            "FR"
+            "DE"
           ]
         },
         {
@@ -24232,11 +24156,7 @@
           "mapYear": 1960,
           "mapShowFront": false,
           "mapHighlights": [
-            "DE",
-            "RU",
-            "US",
-            "GB",
-            "FR"
+            "DE"
           ]
         },
         {
@@ -24781,11 +24701,7 @@
           "mapYear": 1960,
           "mapShowFront": false,
           "mapHighlights": [
-            "DE",
-            "RU",
-            "US",
-            "GB",
-            "FR"
+            "RU"
           ]
         },
         {
@@ -25343,10 +25259,7 @@
           "mapShowFront": false,
           "mapHighlights": [
             "DE",
-            "RU",
-            "US",
-            "GB",
-            "FR"
+            "RU"
           ]
         },
         {
@@ -25770,11 +25683,7 @@
           "mapYear": 1994,
           "mapShowFront": false,
           "mapHighlights": [
-            "DE",
-            "RU",
-            "US",
-            "GB",
-            "FR"
+            "DE"
           ]
         }
       ],
