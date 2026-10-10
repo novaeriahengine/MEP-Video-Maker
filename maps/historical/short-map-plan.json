@@ -1,0 +1,113 @@
+{
+  "Why the Western Front Froze Into Trenches": {
+    "region": "westernFront",
+    "before": 1914,
+    "during": 1914,
+    "after": 1920,
+    "highlights": [
+      "FR",
+      "DE",
+      "GB",
+      "BE"
+    ]
+  },
+  "Why the Eastern Front Kept Moving": {
+    "region": "easternFront",
+    "before": 1914,
+    "during": 1914,
+    "after": 1920,
+    "highlights": [
+      "DE",
+      "RU",
+      "AT"
+    ]
+  },
+  "Pearl Harbor in Under a Minute: Why Japan Attacked": {
+    "region": "pacific",
+    "before": 1938,
+    "during": 1938,
+    "after": 1945,
+    "highlights": [
+      "US",
+      "JP"
+    ]
+  },
+  "Midway: The Battle That Broke Japan’s Carrier Force": {
+    "region": "pacific",
+    "before": 1938,
+    "during": 1938,
+    "after": 1945,
+    "highlights": [
+      "US",
+      "JP"
+    ]
+  },
+  "D-Day in 45 Seconds: How Normandy Was Breached": {
+    "region": "normandy",
+    "before": 1938,
+    "during": 1938,
+    "after": 1945,
+    "highlights": [
+      "US",
+      "GB",
+      "CA",
+      "DE",
+      "FR"
+    ]
+  },
+  "Why the American Revolution Started": {
+    "region": "americas",
+    "before": 1783,
+    "during": 1783,
+    "after": 1783,
+    "highlights": [
+      "US",
+      "GB",
+      "FR"
+    ]
+  },
+  "French Revolution in Under a Minute": {
+    "region": "europe",
+    "before": 1783,
+    "during": 1783,
+    "after": 1800,
+    "highlights": [
+      "FR"
+    ]
+  },
+  "Waterloo: How Napoleon Lost His Final Battle": {
+    "region": "europe",
+    "before": 1815,
+    "during": 1815,
+    "after": 1815,
+    "highlights": [
+      "FR",
+      "GB",
+      "PRU"
+    ]
+  },
+  "Cuban Missile Crisis: 13 Days Near Nuclear War": {
+    "region": "americas",
+    "before": 1960,
+    "during": 1960,
+    "after": 1960,
+    "highlights": [
+      "US",
+      "RU",
+      "CU"
+    ]
+  },
+  "Why the Berlin Wall Fell": {
+    "region": "europe",
+    "before": 1960,
+    "during": 1960,
+    "after": 1994,
+    "highlights": [
+      "DE",
+      "RU",
+      "US",
+      "GB",
+      "FR"
+    ]
+  }
+}
