@@ -29,6 +29,10 @@ This folder turns the downloaded repository into a local/offline MEP Video Maker
 
 The first setup downloads Python packages and model files, so it can take a while. Later starts reuse `.venv/` and `cache/`.
 
+## Historical map library
+
+The desktop server can cache **28 historical world snapshots** spanning years 1000 through 2010. The editor auto-selects the closest/event-appropriate snapshot and redraws the country borders locally. The catalog and attribution live in `historical-maps/`.
+
 ## Offline use
 
 After the editor, Kokoro, and map pack are cached, the local server, editor, generated WAV files, and historical maps are local. Do not delete:
