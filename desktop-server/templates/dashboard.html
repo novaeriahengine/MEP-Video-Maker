@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MEP Local Voice Server</title>
+<style>
+:root{color-scheme:dark;--bg:#0d1015;--panel:#171c24;--line:#333c49;--text:#edf3fb;--muted:#99a7b8;--accent:#ffb020;--ok:#6bd58d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,sans-serif}.wrap{max-width:1050px;margin:auto;padding:18px}.top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}.brand{font-size:24px;font-weight:900}.brand span{color:var(--accent)}.badge{padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px}.card h2{margin:0 0 10px;font-size:17px}.muted{color:var(--muted)}button,a.btn,select,input,textarea{font:inherit}button,a.btn{display:inline-flex;justify-content:center;align-items:center;text-decoration:none;border:1px solid var(--line);border-radius:9px;padding:10px 12px;background:#252d39;color:var(--text);cursor:pointer}.primary{background:var(--accent)!important;color:#151515!important;font-weight:800}.ok{color:var(--ok)}.row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.row>*{flex:1 1 160px}.stack{display:grid;gap:6px;margin:9px 0}textarea,select,input{width:100%;background:#0f141b;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:9px}textarea{min-height:150px;resize:vertical}.qr{display:grid;place-items:center;background:#fff;border-radius:10px;padding:10px;width:max-content;max-width:100%}.qr img{width:230px;max-width:100%;height:auto}.status{white-space:pre-wrap;background:#0f141b;border:1px solid var(--line);border-radius:9px;padding:10px;min-height:44px}.biglink{font-size:17px;font-weight:800}.note{font-size:13px;color:var(--muted);line-height:1.45}@media(max-width:760px){.grid{grid-template-columns:1fr}.wrap{padding:10px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div><div class="brand"><span>MEP</span> Local Voice Server</div><div class="muted">Kokoro-82M · British narration · local/offline workflow</div></div>
+    <div id="healthBadge" class="badge">Checking server…</div>
+  </div>
+
+  <div class="grid">
+    <section class="card">
+      <h2>1. Local editor</h2>
+      <p class="note">Use this copy from your laptop or phone when you want the local AI voice server. It avoids the HTTPS-to-HTTP browser block that can happen from GitHub Pages.</p>
+      <div class="row"><a class="btn primary biglink" href="/app/">Open MEP Video Maker</a></div>
+      <div class="status">Laptop: http://127.0.0.1:{{ port }}/app/<br>Phone/LAN: http://{{ ip }}:{{ port }}/app/</div>
+    </section>
+
+    <section class="card">
+      <h2>2. Phone QR code</h2>
+      <div class="qr"><img src="/api/qr.png" alt="QR code to local editor"></div>
+      <div class="row"><a class="btn" href="/api/qr.png?download=1" download>Download QR Code PNG</a></div>
+      <p class="note">Your phone and laptop should be on the same Wi‑Fi. The QR points to the local editor hosted by this laptop.</p>
+    </section>
+
+    <section class="card">
+      <h2>3. Prepare for offline use</h2>
+      <p class="note">First setup needs internet so Kokoro and the historical map pack can be cached. After those assets are cached, the local workflow can run without Google Colab.</p>
+      <div class="row">
+        <button id="prepareModel" class="primary">Download / Load Kokoro</button>
+        <button id="prepareMaps">Download Map Pack</button>
+      </div>
+      <div id="prepareStatus" class="status">Nothing downloaded yet.</div>
+    </section>
+
+    <section class="card">
+      <h2>4. Test British narrator</h2>
+      <div class="stack"><label>Voice</label><select id="voice">{% for v in voices %}<option value="{{ v.id }}" {% if v.id == default_voice %}selected{% endif %}>{{ v.name }} — {{ v.description }}</option>{% endfor %}</select></div>
+      <div class="stack"><label>Speed</label><input id="speed" type="range" min=".7" max="1.25" step=".05" value="1"><span id="speedOut">1.00x</span></div>
+      <div class="stack"><label>Text</label><textarea id="text">In 1914, Europe went to war expecting movement. Instead, the Western Front became a line of trenches stretching from the North Sea to Switzerland.</textarea></div>
+      <div class="row"><button id="generate" class="primary">Generate Test Voice</button><a id="downloadAudio" class="btn" hidden download="mep-test.wav">Download WAV</a></div>
+      <audio id="player" controls style="width:100%"></audio>
+      <div id="ttsStatus" class="status">Ready.</div>
+    </section>
+  </div>
+
+  <p class="note">Do not expose port {{ port }} directly to the public internet. This server is intended for your own laptop and local network.</p>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+async function jsonFetch(url,opts={}){const r=await fetch(url,opts);const j=await r.json();if(!r.ok)throw new Error(j.error||"Request failed");return j}
+async function health(){try{const j=await jsonFetch("/api/health");$("#healthBadge").textContent=j.modelLoaded?"Kokoro loaded":"Server ready · model sleeping";$("#healthBadge").classList.toggle("ok",j.modelLoaded);$("#prepareStatus").textContent="Model: "+(j.modelLoaded?"loaded":"not loaded")+"\nOffline maps: "+j.offlineMaps+"/"+j.offlineMapsTotal}catch(e){$("#healthBadge").textContent="Server error";$("#prepareStatus").textContent=e.message}}
+$("#prepareModel").onclick=async()=>{$("#prepareStatus").textContent="Loading Kokoro. First run may download model files…";try{const j=await jsonFetch("/api/prepare",{method:"POST"});$("#prepareStatus").textContent=j.message;health()}catch(e){$("#prepareStatus").textContent="Model error: "+e.message}};
+$("#prepareMaps").onclick=async()=>{$("#prepareStatus").textContent="Downloading historical map pack…";try{const j=await jsonFetch("/api/prepare/maps",{method:"POST"});$("#prepareStatus").textContent="Maps ready: "+j.ready.length+"\nErrors: "+j.errors.length;health()}catch(e){$("#prepareStatus").textContent=e.message}};
+$("#speed").oninput=e=>$("#speedOut").textContent=Number(e.target.value).toFixed(2)+"x";
+$("#generate").onclick=async()=>{const btn=$("#generate");btn.disabled=true;$("#ttsStatus").textContent="Generating…";try{const r=await fetch("/api/tts",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:$("#text").value,voice:$("#voice").value,speed:Number($("#speed").value),title:"mep-test"})});if(!r.ok){const j=await r.json();throw new Error(j.error||"Generation failed")}const blob=await r.blob(),url=URL.createObjectURL(blob);$("#player").src=url;$("#player").play().catch(()=>{});$("#downloadAudio").href=url;$("#downloadAudio").hidden=false;$("#ttsStatus").textContent="Generated with "+(r.headers.get("X-MEP-Voice")||$("#voice").value)+" · "+(r.headers.get("X-MEP-Duration")||"?")+" seconds"}catch(e){$("#ttsStatus").textContent="TTS error: "+e.message}finally{btn.disabled=false}};
+health();
+</script>
+</body>
+</html>
