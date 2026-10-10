@@ -43,5 +43,7 @@ function closeTool(){shell.classList.remove("open");document.body.classList.remo
 opener.onclick=()=>openTool(active);$("#toolClose").onclick=closeTool;$("#toolFloatMode").onclick=()=>openTool(active,"float");$("#toolFullMode").onclick=()=>openTool(active,"full");$$("[data-tool]").forEach(b=>b.onclick=()=>openTool(b.dataset.tool));
 const aliases={voice:"voice",audio:"voice",narration:"voice",photo:"photos",picture:"photos",background:"backgrounds",map:"graphics",graphic:"graphics",character:"characters",flag:"characters",script:"scripts",caption:"scripts",project:"project",save:"project",export:"project"};
 $("#toolChatForm").onsubmit=e=>{e.preventDefault();const raw=$("#toolChatInput").value.toLowerCase();let found="";for(const k of Object.keys(aliases))if(raw.includes(k)){found=aliases[k];break}if(found){openTool(found);$("#toolChatInput").value=""}else $("#toolAssistantStatus").textContent="Try voice, photos, backgrounds, graphics, characters, scripts, or project."};
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeTool()});applyMode();closeTool();window.MEPTools={open:openTool,close:closeTool,panes};
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeTool()});
+(async()=>{const server=localVoiceServer();if(!server)return;try{const r=await fetch(server+"/api/health"),j=await r.json();if(r.ok){const ns=$("#neuralStatus");if(ns)ns.textContent="Local server connected automatically · "+j.engine+" · "+(j.modelLoaded?"Kokoro loaded":"Kokoro ready");const input=$("#neuralApiUrl");if(input&&!input.value)input.value=server}}catch{}})();
+applyMode();closeTool();window.MEPTools={open:openTool,close:closeTool,panes};
 })();
