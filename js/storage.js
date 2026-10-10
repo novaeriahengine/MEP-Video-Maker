@@ -37,7 +37,7 @@ async function saveCloud(p){
  await ensure();save(p);const payload=stripProject(p);await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepProjects",p.id),payload,{merge:false});
  for(const a of p.assets||[])if(a.dataUrl)await saveAssetDoc(p.id,a);p.sync.status="synced";p.sync.lastSyncedAt=payload.sync.lastSyncedAt;save(p);return p.id
 }
-async function hydrateAssets(p){const assets=[];for(const meta of p.assetManifest||p.assets||[]){try{const snap=await cloud.fs.getDoc(cloud.fs.doc(cloud.db,"mepAssets",p.id+"__"+meta.id));if(snap.exists())assets.push({...meta,dataUrl:snap.data().dataUrl})}catch(e){console.warn("Asset load failed",meta.id,e)}}p.assets=assets;return p}
+async function hydrateAssets(p){const assets=[];for(const meta of p.assetManifest||p.assets||[]){try{const snap=await cloud.fs.getDoc(cloud.fs.doc(cloud.db,"mepAssets",p.id+"__"+meta.id));if(snap.exists())assets.push({...meta,dataUrl:snap.data().dataUrl});else if(meta.voiceDbKey)assets.push({...meta})}catch(e){console.warn("Asset load failed",meta.id,e);if(meta.voiceDbKey)assets.push({...meta})}}p.assets=assets;return p}
 async function loadCloud(id){await ensure();const snap=await cloud.fs.getDoc(cloud.fs.doc(cloud.db,"mepProjects",id));if(!snap.exists())throw new Error("Project not found");const p=MEPModel.migrate(await hydrateAssets(snap.data()));save(p);return p}
 async function listCloud(){await ensure();const snap=await cloud.fs.getDocs(cloud.fs.collection(cloud.db,"mepProjects"));return snap.docs.map(d=>({id:d.id,name:d.data().name||"Untitled Project",updatedAt:d.data().updatedAt||"",shortCount:d.data().shorts?.length||1})).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt))}
 async function loadLatestCloud(){const list=await listCloud();return list.length?loadCloud(list[0].id):null}
