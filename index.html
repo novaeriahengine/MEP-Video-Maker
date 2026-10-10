@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Noveria History — MEP Short Maker</title>
-<link rel="stylesheet" href="css/style.css?v=20261010c">
+<link rel="stylesheet" href="css/style.css?v=20261010d">
 </head>
 <body>
 <div id="app">
@@ -126,6 +126,13 @@
     <label>Voice Source <select id="voiceSource"><option value="mic">Recorded Mic Voiceover</option><option value="chrome">British Male Chrome Narrator</option><option value="none">No Voice</option></select></label>
     <div class="voiceActions"><button id="recordVoice" class="primary">Record Full Voiceover</button><button id="stopVoiceRecord">Stop</button><button id="playVoiceover">Play Processed</button><button id="clearVoiceover">Clear</button></div>
     <div id="voiceStatus" class="voiceStatus">No recorded voiceover yet.</div>
+    <h3>Neural AI Narration · Local / Colab</h3>
+    <p class="voiceStatus">Use Chrome for drafts. Generate WAV with your Flask laptop server or the Colab batch notebook, then import WAV for final export.</p>
+    <div class="voiceGrid"><label>Flask HTTPS API URL <input id="neuralApiUrl" type="url" placeholder="https://your-secure-voice-endpoint"></label><label>Private API token <input id="neuralApiToken" type="password" placeholder="Paste token from Flask terminal" autocomplete="off"></label></div>
+    <div class="voiceActions"><button id="neuralConnect">Test Voice Server</button><button id="neuralGenerate">Generate AI Narration</button><button id="neuralBatch">Download Narration Batch JSON</button></div>
+    <label>Import WAV / audio from Colab or laptop <input id="neuralImport" type="file" accept="audio/wav,audio/x-wav,audio/mpeg,audio/ogg,audio/webm,audio/mp4"></label>
+    <div id="neuralStatus" class="voiceStatus">Local server: not connected. Audio imports work offline.</div>
+    <p class="voiceStatus">Desktop setup: <a href="https://github.com/novaeriahengine/MEP-Video-Maker/tree/main/Desktop%20Voice%20Server" target="_blank" rel="noopener">Desktop Voice Server</a> · <a href="https://github.com/novaeriahengine/MEP-Video-Maker/tree/main/Google%20Colab" target="_blank" rel="noopener">Google Colab notebook</a></p>
     <h3>Chrome Auto Voice</h3>
     <label>Chrome Voice <select id="chromeVoice"></select></label>
     <div id="chromeVoiceHint" class="voiceStatus">Detecting the best British male English voice available on this phone…</div>
@@ -178,15 +185,15 @@
 
 <nav id="mobileDock" class="mobileDock"><button data-jump="#stageArea">Canvas</button><button data-jump="#scenePanel">Shorts</button><button data-jump="#characterPanel">Flags</button><button data-jump="#scriptPanel">Script</button><button id="mobileVideo">Preview</button></nav>
 
-<script src="js/firebase-config.js?v=20261010c"></script>
-<script src="js/history-flags.js?v=20261010c"></script>
-<script src="js/historical-maps.js?v=20261010c"></script>
-<script src="js/model.js?v=20261010c"></script>
-<script src="js/ai-config.js?v=20261010c"></script>
-<script src="js/ai-director.js?v=20261010c"></script>
-<script src="js/renderer.js?v=20261010c"></script>
-<script src="js/storage.js?v=20261010c"></script>
+<script src="js/firebase-config.js?v=20261010d"></script>
+<script src="js/history-flags.js?v=20261010d"></script>
+<script src="js/historical-maps.js?v=20261010d"></script>
+<script src="js/model.js?v=20261010d"></script>
+<script src="js/ai-config.js?v=20261010d"></script>
+<script src="js/ai-director.js?v=20261010d"></script>
+<script src="js/renderer.js?v=20261010d"></script>
+<script src="js/storage.js?v=20261010d"></script>
 <script>window.addEventListener("error",e=>{const el=document.getElementById("bootStatus");if(el){el.className="bootStatus error";el.textContent="MEP error: "+(e.message||"Unknown startup error")}});</script>
-<script src="js/app.js?v=20261010c"></script>
+<script src="js/app.js?v=20261010d"></script>
 </body>
 </html>
