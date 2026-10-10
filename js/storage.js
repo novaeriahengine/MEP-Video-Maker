@@ -25,7 +25,7 @@ async function initCloud(){
 }
 async function ensure(){if(!cloud){const r=await initCloud();if(!r.ok)throw new Error(r.reason)}}
 function stripProject(p){
- const out=structuredClone(MEPModel.syncAlias(p)),manifest=[];out.assets=(out.assets||[]).map(a=>{manifest.push({id:a.id,name:a.name||"asset",type:a.type||"image/jpeg",size:a.size||0});return{id:a.id,name:a.name||"asset",type:a.type||"image/jpeg",size:a.size||0}});
+ const out=structuredClone(MEPModel.syncAlias(p)),manifest=[];out.assets=(out.assets||[]).map(a=>{const meta={id:a.id,name:a.name||"asset",type:a.type||"image/jpeg",size:a.size||0,kind:a.kind||"",shortId:a.shortId||"",durationSeconds:a.durationSeconds||0,voiceDbKey:a.voiceDbKey||null};manifest.push(meta);return meta});
  out.assetManifest=manifest;out.sync={...(out.sync||{}),provider:"firestore",status:"synced",lastSyncedAt:new Date().toISOString()};return out
 }
 async function saveAssetDoc(projectId,a){
