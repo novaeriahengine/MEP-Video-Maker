@@ -1,0 +1,220 @@
+{
+  "schema": "mep-historical-map-catalog-v2",
+  "source": {
+    "name": "Historical Basemaps",
+    "repository": "aourednik/historical-basemaps",
+    "license": "GPL-3.0",
+    "geometryPath": "geojson/world_YEAR.geojson",
+    "note": "MEP reads the historical country polygons and redraws them into its own canvas style; the desktop server can cache every snapshot for offline use."
+  },
+  "snapshots": [
+    {
+      "year": 1000,
+      "file": "world_1000.geojson"
+    },
+    {
+      "year": 1100,
+      "file": "world_1100.geojson"
+    },
+    {
+      "year": 1200,
+      "file": "world_1200.geojson"
+    },
+    {
+      "year": 1279,
+      "file": "world_1279.geojson"
+    },
+    {
+      "year": 1300,
+      "file": "world_1300.geojson"
+    },
+    {
+      "year": 1400,
+      "file": "world_1400.geojson"
+    },
+    {
+      "year": 1492,
+      "file": "world_1492.geojson"
+    },
+    {
+      "year": 1500,
+      "file": "world_1500.geojson"
+    },
+    {
+      "year": 1530,
+      "file": "world_1530.geojson"
+    },
+    {
+      "year": 1600,
+      "file": "world_1600.geojson"
+    },
+    {
+      "year": 1650,
+      "file": "world_1650.geojson"
+    },
+    {
+      "year": 1700,
+      "file": "world_1700.geojson"
+    },
+    {
+      "year": 1715,
+      "file": "world_1715.geojson"
+    },
+    {
+      "year": 1783,
+      "file": "world_1783.geojson"
+    },
+    {
+      "year": 1800,
+      "file": "world_1800.geojson"
+    },
+    {
+      "year": 1815,
+      "file": "world_1815.geojson"
+    },
+    {
+      "year": 1878,
+      "file": "world_1878.geojson"
+    },
+    {
+      "year": 1880,
+      "file": "world_1880.geojson"
+    },
+    {
+      "year": 1900,
+      "file": "world_1900.geojson"
+    },
+    {
+      "year": 1914,
+      "file": "world_1914.geojson"
+    },
+    {
+      "year": 1920,
+      "file": "world_1920.geojson"
+    },
+    {
+      "year": 1930,
+      "file": "world_1930.geojson"
+    },
+    {
+      "year": 1938,
+      "file": "world_1938.geojson"
+    },
+    {
+      "year": 1945,
+      "file": "world_1945.geojson"
+    },
+    {
+      "year": 1960,
+      "file": "world_1960.geojson"
+    },
+    {
+      "year": 1994,
+      "file": "world_1994.geojson"
+    },
+    {
+      "year": 2000,
+      "file": "world_2000.geojson"
+    },
+    {
+      "year": 2010,
+      "file": "world_2010.geojson"
+    }
+  ],
+  "focusPresets": {
+    "world": {
+      "bounds": [
+        -180,
+        -62,
+        180,
+        82
+      ]
+    },
+    "europe": {
+      "bounds": [
+        -13,
+        34,
+        45,
+        72
+      ]
+    },
+    "westernFront": {
+      "bounds": [
+        -7,
+        43,
+        15,
+        54
+      ]
+    },
+    "easternFront": {
+      "bounds": [
+        8,
+        40,
+        48,
+        62
+      ]
+    },
+    "normandy": {
+      "bounds": [
+        -7,
+        47,
+        4,
+        52.8
+      ]
+    },
+    "americas": {
+      "bounds": [
+        -135,
+        -58,
+        -28,
+        72
+      ]
+    },
+    "northAmerica": {
+      "bounds": [
+        -130,
+        22,
+        -52,
+        60
+      ]
+    },
+    "africa": {
+      "bounds": [
+        -20,
+        -38,
+        55,
+        38
+      ]
+    },
+    "asia": {
+      "bounds": [
+        25,
+        -12,
+        155,
+        78
+      ]
+    },
+    "pacific": {
+      "bounds": [
+        100,
+        -15,
+        255,
+        72
+      ],
+      "wrap": true
+    }
+  },
+  "majorCountryColors": {
+    "USSR_Russia": "#b53a3f",
+    "Germany_Prussia": "#4e555d",
+    "France": "#4d79bd",
+    "Britain": "#315a8c",
+    "United_States": "#6c8ebf",
+    "Japan": "#a94a4d",
+    "Italy": "#5d8a61",
+    "China": "#c7a44d",
+    "Poland": "#b46d86",
+    "Austria": "#b99a62",
+    "Ottoman_Turkey": "#8d6c55"
+  }
+}
