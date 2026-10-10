@@ -20,18 +20,20 @@ This folder turns the downloaded repository into a local/offline MEP Video Maker
 4. Open this `desktop-server` folder.
 5. Double-click `START_WINDOWS.bat`.
 6. Your browser opens the local dashboard.
-7. Click **Download / Load Kokoro** once while online.
-8. Click **Download Map Pack** once while online.
-9. Use **Open MEP Video Maker** or scan the QR code from your phone.
+7. Click **Cache Offline Editor** once while online. If you downloaded the full repository it copies the editor locally; if you downloaded only this folder it downloads the current editor files into `desktop-server/editor/`.
+8. Click **Download / Load Kokoro** once while online.
+9. Click **Download Map Pack** once while online.
+10. Use **Open MEP Video Maker** or scan the QR code from your phone.
 
 The first setup downloads Python packages and model files, so it can take a while. Later starts reuse `.venv/` and `cache/`.
 
 ## Offline use
 
-After Kokoro and the map pack are cached, the local server, editor, generated WAV files, and cached maps are local. Do not delete:
+After the editor, Kokoro, and map pack are cached, the local server, editor, generated WAV files, and historical maps are local. Do not delete:
 
 - `desktop-server/.venv/`
 - `desktop-server/cache/`
+- `desktop-server/editor/`
 
 Kokoro may need internet again only if a missing model/voice file was never cached.
 
