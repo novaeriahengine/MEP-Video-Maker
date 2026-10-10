@@ -55,3 +55,31 @@ dialog{border:1px solid var(--line);border-radius:13px;background:var(--panel);c
 .voiceStatus.recording{color:#ff8c8c;border-color:#7a3434}
 .scriptPanel h3{margin:8px 0 0;font-size:13px;color:#d9e4f0}
 @media(max-width:760px){.voiceGrid{grid-template-columns:1fr}.voiceGrid label{grid-template-columns:82px minmax(0,1fr) 48px}}
+
+
+/* Focused canvas layout + floating/full Tools assistant */
+.workspace.focus-layout{grid-template-columns:minmax(220px,280px) minmax(0,1fr)}
+.workspace.focus-layout .stageArea{min-width:0}
+.workspace.focus-layout .scenePanel{max-height:calc(100vh - 100px)}
+.toolOpenButton{white-space:nowrap}
+.toolAssistant{display:none;position:fixed;z-index:260;right:12px;top:74px;bottom:14px;width:min(460px,calc(100vw - 24px));background:#121821;border:1px solid var(--line);border-radius:16px;box-shadow:0 24px 70px #000c;overflow:hidden}
+.toolAssistant.open{display:grid;grid-template-rows:auto auto auto minmax(0,1fr) auto}
+.toolAssistant.full{left:10px;right:10px;top:66px;bottom:10px;width:auto;border-radius:12px}
+.toolAssistantHeader{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 12px;background:#171f2a;border-bottom:1px solid var(--line)}
+.toolAssistantHeader>div:first-child{display:grid;gap:2px}.toolAssistantHeader small{color:var(--muted);font-size:11px}.toolWindowActions{display:flex;gap:5px}.toolWindowActions button{padding:5px 8px;min-height:34px}.toolWindowActions button.active{background:var(--accent2);color:#07111f}
+.toolChatIntro{display:flex;gap:9px;padding:10px 12px;background:#0f141b;border-bottom:1px solid #252d39}.toolChatIntro>div{display:grid;gap:2px}.toolChatIntro small{color:var(--muted)}.toolBotFace{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--accent);color:#111;font-weight:900}
+.toolNav{display:flex;gap:5px;overflow-x:auto;padding:7px;background:#10161e;border-bottom:1px solid var(--line)}.toolNavButton{display:grid;gap:1px;min-width:76px;padding:6px}.toolNavButton span{font-size:16px}.toolNavButton small{font-size:10px;color:var(--muted)}.toolNavButton.active{border-color:var(--accent);background:#2d281d}.toolNavButton.active small{color:#f6d383}
+.toolPaneHost{min-height:0;overflow:auto;padding:10px}.toolPane{display:none}.toolPane.active{display:block}.toolPaneTitle{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid var(--line);margin-bottom:9px;padding-bottom:6px}.toolPaneTitle h2{margin:0;font-size:16px}.toolPaneTitle small{color:var(--muted)}
+.toolPane>h2,.toolPane h2{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);border-bottom:1px solid #2b3240;padding-bottom:6px}.toolPane label{display:grid;grid-template-columns:100px minmax(0,1fr);gap:8px;align-items:center;margin:7px 0}.toolPane label.stack{display:grid;grid-template-columns:1fr}.toolPane .miniList,.toolPane .sceneBoard{max-height:240px}.toolProjectActions{display:grid;gap:7px}.toolProjectActions .projectNameLabel{display:grid;grid-template-columns:80px 1fr}.toolProjectActions .projectNameLabel input{width:100%}.toolProjectActions>.fileButton{text-align:center}
+.toolChatBar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;padding:9px;background:#10161e;border-top:1px solid var(--line)}
+.toolChatBar input{width:100%}
+body.tool-full{overflow:hidden}
+body.tool-full .toolAssistant{background:#0f141b}
+.toolCard{display:grid;gap:8px;background:#0f141b;border:1px solid var(--line);border-radius:10px;padding:10px}.toolCard small{color:var(--muted);line-height:1.45}.photoSearchRow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px}
+.historyPhotoResults{display:grid;gap:9px;margin-top:10px}.historyPhotoCard{display:grid;grid-template-columns:130px minmax(0,1fr);gap:9px;border:1px solid var(--line);background:#10151c;border-radius:10px;padding:8px}.historyPhotoCard img{width:130px;height:100px;object-fit:cover;border-radius:7px;background:#222}.historyPhotoCard>div{display:grid;gap:5px;align-content:start}.historyPhotoCard p{margin:0;color:var(--muted);font-size:12px;line-height:1.35}.photoLicense{color:#b9c8d8;font-size:10px}
+@media(max-width:760px){
+ body{padding-bottom:0}.topbar{display:flex;flex-wrap:wrap;align-items:center}.topbar .brand{flex:1 1 auto}.topbar .modeTabs{grid-column:auto}.toolOpenButton{margin-left:auto}.workspace.focus-layout{display:flex;flex-direction:column}.workspace.focus-layout .scenePanel{order:1;max-height:none;border:0;padding:8px}.workspace.focus-layout .stageArea{order:2}.scenePanel #shortList,.scenePanel #sceneBoard{display:flex;overflow-x:auto;max-height:none;padding-bottom:4px}.scenePanel #shortList>*{min-width:160px;max-width:190px}.scenePanel #sceneBoard>*{min-width:170px}.scenePanel h2{margin:8px 0 5px}.scenePanel .buttonGrid,.scenePanel .sceneActions{margin-bottom:5px}.canvasHint{display:none}.timelinePanel{display:none}
+ .toolAssistant{left:6px;right:6px;top:auto;bottom:6px;width:auto;height:min(82dvh,760px);border-radius:18px}.toolAssistant.full{left:0;right:0;top:0;bottom:0;height:100dvh;border-radius:0}.toolAssistantHeader{padding-top:max(10px,env(safe-area-inset-top))}.toolPaneHost{padding:8px}.toolPane label{grid-template-columns:88px minmax(0,1fr)}.historyPhotoCard{grid-template-columns:100px minmax(0,1fr)}.historyPhotoCard img{width:100px;height:86px}.helperAvatar,.helperPanel,.mobileDock{display:none!important}
+ .stageToolbar{position:sticky;top:0}.stageToolbar #addKeyframe,.stageToolbar #exportAllShorts{display:none}.shortCanvasWrap canvas{max-height:calc(100dvh - 245px);object-fit:contain}
+}
+@media(max-width:430px){.toolNavButton{min-width:68px}.historyPhotoCard{grid-template-columns:1fr}.historyPhotoCard img{width:100%;height:180px}.photoSearchRow{grid-template-columns:1fr}.toolPane label{grid-template-columns:1fr}}
