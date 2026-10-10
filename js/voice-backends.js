@@ -1,5 +1,10 @@
 window.MEPVoiceBackends=(()=>{
-const URL_KEY="mep-voice-server-url-v1";
+const URL_KEY="mep-voice-server-url-v1",DB_NAME="mep-voice-audio-v1",STORE="audio";
+function openDb(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB_NAME,1);req.onupgradeneeded=()=>{const db=req.result;if(!db.objectStoreNames.contains(STORE))db.createObjectStore(STORE)};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
+async function putAudio(key,blob){const db=await openDb();return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,"readwrite");tx.objectStore(STORE).put(blob,key);tx.oncomplete=()=>{db.close();resolve(key)};tx.onerror=()=>{db.close();reject(tx.error)}})}
+async function getAudio(key){if(!key)return null;const db=await openDb();return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,"readonly"),req=tx.objectStore(STORE).get(key);req.onsuccess=()=>{db.close();resolve(req.result||null)};req.onerror=()=>{db.close();reject(req.error)}})}
+async function deleteAudio(key){if(!key)return;const db=await openDb();return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,"readwrite");tx.objectStore(STORE).delete(key);tx.oncomplete=()=>{db.close();resolve()};tx.onerror=()=>{db.close();reject(tx.error)}})}
+async function assetArrayBuffer(asset){if(asset?.voiceDbKey){const blob=await getAudio(asset.voiceDbKey);if(blob)return blob.arrayBuffer()}if(asset?.dataUrl)return fetch(asset.dataUrl).then(r=>r.arrayBuffer());throw new Error("Voice audio is missing from this browser.")}
 function normalizeUrl(url=""){return String(url||"").trim().replace(/\/+$/,"")}
 function isPrivateHost(host=""){return /^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[0-1])\.)/i.test(host)}
 function defaultServerUrl(){
@@ -27,5 +32,5 @@ function createColabBatch(project){
 }
 function downloadJson(name,data){const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1500)}
 function blobToDataUrl(blob){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(blob)})}
-return{normalizeUrl,defaultServerUrl,setServerUrl,mixedContentRisk,health,voices,synthesize,createColabBatch,downloadJson,blobToDataUrl,narrationForShort};
+return{normalizeUrl,defaultServerUrl,setServerUrl,mixedContentRisk,health,voices,synthesize,createColabBatch,downloadJson,blobToDataUrl,narrationForShort,putAudio,getAudio,deleteAudio,assetArrayBuffer};
 })();
