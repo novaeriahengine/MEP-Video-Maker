@@ -4,7 +4,7 @@ const SHAPES={square:"Square",circle:"Circle",triangle:"Triangle"};
 const EXPRESSIONS=["neutral","happy","angry","sad","surprised","determined","sleepy"];
 const PROPS={none:{name:"None"},sword:{name:"Sword"},rifle:{name:"Rifle"},musket:{name:"Musket"},pointer:{name:"Pointer"},pistol:{name:"Pistol"},binoculars:{name:"Binoculars"},camera:{name:"Camera"},radio:{name:"Field Radio"},document:{name:"Document"},artillery:{name:"Artillery"},tank:{name:"Tank"},jeep:{name:"Jeep / Car"},ship:{name:"Ship"},aircraft:{name:"Aircraft"},missile:{name:"Missile"}};
 const EASINGS={linear:"Linear",easeIn:"Ease In",easeOut:"Ease Out",easeInOut:"Ease In / Out",hold:"Hold"};
-const GRAPHIC_TYPES={label:"Label",arrow:"Arrow",front:"Front Line",route:"Movement Route",plane:"Plane Route",zone:"Highlighted Zone",impact:"Impact Marker",tank:"Tank",ship:"Ship",vehicle:"Vehicle / Jeep",missile:"Missile",cityMarker:"City Marker"};
+const GRAPHIC_TYPES={label:"Label",arrow:"Arrow",front:"Front Line",route:"Movement Route",plane:"Plane Route",zone:"Highlighted Zone",impact:"Impact Marker",tank:"Tank",artillery:"Artillery",ship:"Ship",vehicle:"Vehicle / Jeep",missile:"Missile",cityMarker:"City Marker"};
 const ANIMATION_CLIPS={
  slide:{name:"Slide Across",duration:2,move:160,scale:[1,1],rotation:[0,0]},
  talk:{name:"Narrate / Talk",duration:2.4,move:0,scale:[1,1.04,1,1.04,1],rotation:[0,-2,2,-2,0],mouth:[false,true,false,true,false]},
