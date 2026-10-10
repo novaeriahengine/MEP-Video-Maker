@@ -19,11 +19,13 @@ This folder turns the downloaded repository into a local/offline MEP Video Maker
 3. Download/clone the full MEP Video Maker repository.
 4. Open this `desktop-server` folder.
 5. Double-click `START_WINDOWS.bat`.
-6. Your browser opens the local dashboard.
-7. Click **Cache Offline Editor** once while online. If you downloaded the full repository it copies the editor locally; if you downloaded only this folder it downloads the current editor files into `desktop-server/editor/`.
-8. Click **Download / Load Kokoro** once while online.
-9. Click **Download Map Pack** once while online.
-10. Use **Open MEP Video Maker** or scan the QR code from your phone.
+6. Python starts the server and opens **MEP Video Maker itself** in your default browser. No API URL or token is required when you use this local tab.
+7. Server setup/status is available at `http://127.0.0.1:7860/server/`.
+8. Click **Cache Offline Editor** once while online. If you downloaded the full repository it copies the editor locally; if you downloaded only this folder it downloads the current editor files into `desktop-server/editor/`.
+9. Click **Download / Load Kokoro** once while online.
+10. Click **Download Map Pack** once while online.
+11. Click **Download Historical Photos** if you want a starter cache of license-safe historical images.
+12. Use the browser tab Python opened, or scan the QR code from your phone.
 
 The first setup downloads Python packages and model files, so it can take a while. Later starts reuse `.venv/` and `cache/`.
 
@@ -39,7 +41,7 @@ Kokoro may need internet again only if a missing model/voice file was never cach
 
 ## Phone access
 
-The phone and laptop should be on the same Wi-Fi. The dashboard shows a LAN URL and a QR code. If Windows Firewall asks whether Python may accept private-network connections, allow **Private networks**.
+The phone and laptop should be on the same Wi-Fi. The setup page shows a LAN URL and a QR code. When MEP is opened from this Python server, the Kokoro API connects automatically. If Windows Firewall asks whether Python may accept private-network connections, allow **Private networks**.
 
 ## API
 
@@ -80,3 +82,7 @@ The public GitHub Pages site is HTTPS. Browsers commonly block an HTTPS page fro
 ## Security
 
 This is intended for your private LAN. Do not port-forward 7860 or expose it directly to the public internet.
+
+## Historical photos
+
+The local editor has a **Historical Photos** tool inside MEP Tools. It searches Wikimedia Commons through the Python server, filters results to Public Domain / Creative Commons licenses, caches the selected image locally, and applies it to the current scene. The active background shows the stored license label.
