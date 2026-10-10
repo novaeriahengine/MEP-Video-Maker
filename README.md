@@ -12,8 +12,15 @@ Browser-first vertical history animation editor for 30–60 second YouTube Short
 - Noveria Host is a small American-flag circle intended to sit near the bottom while maps and graphics do most of the explaining.
 - No Haiti-specific character/video preset is bundled.
 
+## Focused mobile workspace
+The default editor now keeps the main screen centered on **Shorts → Scenes → 9:16 Canvas**. Backgrounds, historical photos, map graphics, characters, scripts, voice, and project actions live inside **MEP Tools**. The Tools assistant can open as a floating panel over the canvas or expand into a full main tab.
+
+On phones, Shorts and scenes scroll horizontally above the canvas, the timeline is hidden by default, and the extra sidebars are removed from the front page.
+
 ## Explainer tools
 Scenes support drawn history backgrounds, uploaded historical photos, background keyframes, front lines, arrows, movement routes, plane routes, highlighted zones, impact markers, labels, captions, bubbles, and simple flag-character movement.
+
+The local Python server also exposes a **Historical Photos** search backed by Wikimedia Commons. License-safe results can be cached and applied directly to the current scene with cinematic brightness/contrast/saturation/sepia controls.
 
 Built-in thematic backgrounds include WWI Western Front, WWI Eastern Front, Pearl Harbor/Pacific, Normandy, Cold War Europe, American Revolution, Napoleonic Europe, and general world/continent maps.
 
