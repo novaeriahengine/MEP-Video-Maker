@@ -4,6 +4,7 @@ const NAMES={
  AD:"Andorra",AE:"United Arab Emirates",AF:"Afghanistan",AG:"Antigua and Barbuda",AL:"Albania",AM:"Armenia",AO:"Angola",AR:"Argentina",AT:"Austria",AU:"Australia",AZ:"Azerbaijan",BA:"Bosnia and Herzegovina",BB:"Barbados",BD:"Bangladesh",BE:"Belgium",BF:"Burkina Faso",BG:"Bulgaria",BH:"Bahrain",BI:"Burundi",BJ:"Benin",BN:"Brunei",BO:"Bolivia",BR:"Brazil",BS:"Bahamas",BT:"Bhutan",BW:"Botswana",BY:"Belarus",BZ:"Belize",CA:"Canada",CD:"DR Congo",CF:"Central African Republic",CG:"Republic of the Congo",CH:"Switzerland",CI:"Côte d’Ivoire",CL:"Chile",CM:"Cameroon",CN:"China",CO:"Colombia",CR:"Costa Rica",CU:"Cuba",CV:"Cabo Verde",CY:"Cyprus",CZ:"Czechia",DE:"Germany",DJ:"Djibouti",DK:"Denmark",DM:"Dominica",DO:"Dominican Republic",DZ:"Algeria",EC:"Ecuador",EE:"Estonia",EG:"Egypt",ER:"Eritrea",ES:"Spain",ET:"Ethiopia",FI:"Finland",FJ:"Fiji",FM:"Micronesia",FR:"France",GA:"Gabon",GB:"United Kingdom",GD:"Grenada",GE:"Georgia",GH:"Ghana",GM:"Gambia",GN:"Guinea",GQ:"Equatorial Guinea",GR:"Greece",GT:"Guatemala",GW:"Guinea-Bissau",GY:"Guyana",HN:"Honduras",HR:"Croatia",HT:"Haiti",HU:"Hungary",ID:"Indonesia",IE:"Ireland",IL:"Israel",IN:"India",IQ:"Iraq",IR:"Iran",IS:"Iceland",IT:"Italy",JM:"Jamaica",JO:"Jordan",JP:"Japan",KE:"Kenya",KG:"Kyrgyzstan",KH:"Cambodia",KI:"Kiribati",KM:"Comoros",KN:"Saint Kitts and Nevis",KP:"North Korea",KR:"South Korea",KW:"Kuwait",KZ:"Kazakhstan",LA:"Laos",LB:"Lebanon",LC:"Saint Lucia",LI:"Liechtenstein",LK:"Sri Lanka",LR:"Liberia",LS:"Lesotho",LT:"Lithuania",LU:"Luxembourg",LV:"Latvia",LY:"Libya",MA:"Morocco",MC:"Monaco",MD:"Moldova",ME:"Montenegro",MG:"Madagascar",MH:"Marshall Islands",MK:"North Macedonia",ML:"Mali",MM:"Myanmar",MN:"Mongolia",MR:"Mauritania",MT:"Malta",MU:"Mauritius",MV:"Maldives",MW:"Malawi",MX:"Mexico",MY:"Malaysia",MZ:"Mozambique",NA:"Namibia",NE:"Niger",NG:"Nigeria",NI:"Nicaragua",NL:"Netherlands",NO:"Norway",NP:"Nepal",NR:"Nauru",NZ:"New Zealand",OM:"Oman",PA:"Panama",PE:"Peru",PG:"Papua New Guinea",PH:"Philippines",PK:"Pakistan",PL:"Poland",PS:"Palestine",PT:"Portugal",PW:"Palau",PY:"Paraguay",QA:"Qatar",RO:"Romania",RS:"Serbia",RU:"Russia",RW:"Rwanda",SA:"Saudi Arabia",SB:"Solomon Islands",SC:"Seychelles",SD:"Sudan",SE:"Sweden",SG:"Singapore",SI:"Slovenia",SK:"Slovakia",SL:"Sierra Leone",SM:"San Marino",SN:"Senegal",SO:"Somalia",SR:"Suriname",SS:"South Sudan",ST:"São Tomé and Príncipe",SV:"El Salvador",SY:"Syria",SZ:"Eswatini",TD:"Chad",TG:"Togo",TH:"Thailand",TJ:"Tajikistan",TL:"Timor-Leste",TM:"Turkmenistan",TN:"Tunisia",TO:"Tonga",TR:"Türkiye",TT:"Trinidad and Tobago",TV:"Tuvalu",TW:"Taiwan",TZ:"Tanzania",UA:"Ukraine",UG:"Uganda",US:"United States",UY:"Uruguay",UZ:"Uzbekistan",VA:"Vatican City",VC:"Saint Vincent and the Grenadines",VE:"Venezuela",VN:"Vietnam",VU:"Vanuatu",WS:"Samoa",YE:"Yemen",ZA:"South Africa",ZM:"Zambia",ZW:"Zimbabwe"
 };
 const HISTORICAL={
+ FL:[{from:1845,to:9999,id:"florida",label:"Florida",pattern:"florida"}],
  US:[
   {from:1775,to:1776,id:"grand-union",label:"Thirteen Colonies — Grand Union",pattern:"grandUnion"},
   {from:1777,to:1794,id:"us-13",label:"United States — 13-star flag",pattern:"us13"},
@@ -99,7 +100,7 @@ const HISTORICAL={
   {from:1947,to:9999,id:"india",label:"India",pattern:"india"}
  ]
 };
-const SPECIAL_NAMES={CSA:"Confederate States (historical)",PRU:"Prussia",HRE:"Holy Roman Empire",OTT:"Ottoman Empire",GC:"Gran Colombia"};
+const SPECIAL_NAMES={CSA:"Confederate States (historical)",PRU:"Prussia",HRE:"Holy Roman Empire",OTT:"Ottoman Empire",GC:"Gran Colombia",FL:"Florida"};
 function emoji(code){if(!/^[A-Z]{2}$/.test(code))return "🏳️";return String.fromCodePoint(...code.split("").map(c=>127397+c.charCodeAt(0)))}
 function name(code){return SPECIAL_NAMES[code]||NAMES[code]||code}
 function resolve(code,year=2026,variant="auto"){
@@ -119,7 +120,8 @@ function star(ctx,cx,cy,r,fill="#fff"){ctx.fillStyle=fill;ctx.beginPath();for(le
 function render(ctx,x,y,w,h,flag){
  const p=flag?.pattern||"emoji";ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();ctx.fillStyle="#eee";ctx.fillRect(x,y,w,h);
  if(p==="emoji"){ctx.font=Math.floor(Math.min(w,h)*.72)+"px system-ui";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(flag?.emoji||"🏳️",x+w/2,y+h/2);ctx.restore();return}
- if(p==="france")stripe(ctx,x,y,w,h,["#0055A4","#fff","#EF4135"]);
+ if(p==="florida"){ctx.fillStyle="#fff";ctx.fillRect(x,y,w,h);ctx.strokeStyle="#c8102e";ctx.lineWidth=Math.max(7,Math.min(w,h)*.11);ctx.beginPath();ctx.moveTo(x+w*.08,y+h*.06);ctx.lineTo(x+w*.92,y+h*.94);ctx.moveTo(x+w*.92,y+h*.06);ctx.lineTo(x+w*.08,y+h*.94);ctx.stroke();ctx.fillStyle="#d4af37";ctx.beginPath();ctx.arc(x+w/2,y+h/2,Math.min(w,h)*.19,0,Math.PI*2);ctx.fill();ctx.fillStyle="#fff";ctx.beginPath();ctx.arc(x+w/2,y+h/2,Math.min(w,h)*.145,0,Math.PI*2);ctx.fill();ctx.fillStyle="#2e7d32";ctx.fillRect(x+w*.42,y+h*.51,w*.16,h*.055);ctx.fillStyle="#5aa7d7";ctx.beginPath();ctx.arc(x+w*.5,y+h*.48,Math.min(w,h)*.075,0,Math.PI*2);ctx.fill()}
+ else if(p==="france")stripe(ctx,x,y,w,h,["#0055A4","#fff","#EF4135"]);
  else if(p==="haiti"){ctx.fillStyle="#00209F";ctx.fillRect(x,y,w,h/2);ctx.fillStyle="#D21034";ctx.fillRect(x,y+h/2,w,h/2)}
  else if(p==="netherlands")stripe(ctx,x,y,w,h,["#AE1C28","#fff","#21468B"]);
  else if(p==="prince")stripe(ctx,x,y,w,h,["#F36C21","#fff","#21468B"]);
