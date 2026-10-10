@@ -2,11 +2,13 @@ window.MEPHistoricalMaps=(()=>{
 const LOCAL_MAP_SOURCE=(location.protocol==="http:"&&/^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[0-1])\.)/i.test(location.hostname))?location.origin+"/api/maps/":null;
 const SOURCES=[...(LOCAL_MAP_SOURCE?[LOCAL_MAP_SOURCE]:[]),"https://raw.githubusercontent.com/aourednik/historical-basemaps/master/geojson/","https://cdn.jsdelivr.net/gh/aourednik/historical-basemaps@master/geojson/"];
 const SNAPSHOTS=[
- {year:1600,file:"world_1600.geojson"},{year:1650,file:"world_1650.geojson"},{year:1700,file:"world_1700.geojson"},{year:1715,file:"world_1715.geojson"},
- {year:1783,file:"world_1783.geojson"},{year:1800,file:"world_1800.geojson"},{year:1815,file:"world_1815.geojson"},{year:1878,file:"world_1878.geojson"},
- {year:1880,file:"world_1880.geojson"},{year:1900,file:"world_1900.geojson"},{year:1914,file:"world_1914.geojson"},{year:1920,file:"world_1920.geojson"},
- {year:1930,file:"world_1930.geojson"},{year:1938,file:"world_1938.geojson"},{year:1945,file:"world_1945.geojson"},{year:1960,file:"world_1960.geojson"},
- {year:1994,file:"world_1994.geojson"},{year:2000,file:"world_2000.geojson"},{year:2010,file:"world_2010.geojson"}
+ {year:1000,file:"world_1000.geojson"},{year:1100,file:"world_1100.geojson"},{year:1200,file:"world_1200.geojson"},{year:1279,file:"world_1279.geojson"},
+ {year:1300,file:"world_1300.geojson"},{year:1400,file:"world_1400.geojson"},{year:1492,file:"world_1492.geojson"},{year:1500,file:"world_1500.geojson"},
+ {year:1530,file:"world_1530.geojson"},{year:1600,file:"world_1600.geojson"},{year:1650,file:"world_1650.geojson"},{year:1700,file:"world_1700.geojson"},
+ {year:1715,file:"world_1715.geojson"},{year:1783,file:"world_1783.geojson"},{year:1800,file:"world_1800.geojson"},{year:1815,file:"world_1815.geojson"},
+ {year:1878,file:"world_1878.geojson"},{year:1880,file:"world_1880.geojson"},{year:1900,file:"world_1900.geojson"},{year:1914,file:"world_1914.geojson"},
+ {year:1920,file:"world_1920.geojson"},{year:1930,file:"world_1930.geojson"},{year:1938,file:"world_1938.geojson"},{year:1945,file:"world_1945.geojson"},
+ {year:1960,file:"world_1960.geojson"},{year:1994,file:"world_1994.geojson"},{year:2000,file:"world_2000.geojson"},{year:2010,file:"world_2010.geojson"}
 ];
 const FOCUS={
  world:{minLon:-180,maxLon:180,minLat:-62,maxLat:82,fit:"contain"},
@@ -132,5 +134,5 @@ function draw(ctx,{year=2026,text="",key="worldMap",width=ctx.canvas.width,heigh
  ctx.restore();return{drawn:true,snapshotYear:snap.year,focus:focusName,loading:false}
 }
 function prefetch(year,text,key){const s=resolveSnapshot(year,text);load(s);return{snapshotYear:s.year,focus:focusFor(key,text)}}
-return{SNAPSHOTS,FOCUS,resolveSnapshot,focusFor,load,prefetch,draw};
+return{version:"history-map-system-v2",SNAPSHOTS,FOCUS,resolveSnapshot,focusFor,load,prefetch,draw,source:{name:"Historical Basemaps",repository:"aourednik/historical-basemaps",license:"GPL-3.0"}};
 })();
