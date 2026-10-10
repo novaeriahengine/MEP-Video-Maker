@@ -1,0 +1,6 @@
+Desktop Voice Server/.venv/
+Desktop Voice Server/models/
+Desktop Voice Server/outputs/
+Desktop Voice Server/__pycache__/
+Desktop Voice Server/*.wav
+Google Colab/outputs/
