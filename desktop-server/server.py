@@ -5,6 +5,7 @@ import json
 import os
 import re
 import socket
+import shutil
 import threading
 import time
 import urllib.request
@@ -16,11 +17,11 @@ import numpy as np
 import qrcode
 import soundfile as sf
 from flask import Flask, jsonify, redirect, render_template, request, send_file, send_from_directory
-from flask_cors import CORS
 from waitress import serve
 
 BASE = Path(__file__).resolve().parent
 REPO_ROOT = BASE.parent
+LOCAL_EDITOR = BASE / "editor"
 OUTPUTS = BASE / "outputs"
 CACHE = BASE / "cache"
 MAP_CACHE = CACHE / "maps"
@@ -61,7 +62,6 @@ MAP_SOURCES = [
 ]
 
 app = Flask(__name__, template_folder=str(BASE / "templates"), static_folder=str(BASE / "static"))
-CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 _pipeline = None
 _pipeline_lock = threading.Lock()
@@ -80,6 +80,47 @@ def local_ip() -> str:
             return socket.gethostbyname(socket.gethostname())
         except Exception:
             return "127.0.0.1"
+
+
+def editor_root() -> Path:
+    if (LOCAL_EDITOR / "index.html").exists():
+        return LOCAL_EDITOR
+    if (REPO_ROOT / "index.html").exists():
+        return REPO_ROOT
+    return LOCAL_EDITOR
+
+
+def prepare_editor() -> Path:
+    LOCAL_EDITOR.mkdir(parents=True, exist_ok=True)
+    if (REPO_ROOT / "index.html").exists():
+        shutil.copy2(REPO_ROOT / "index.html", LOCAL_EDITOR / "index.html")
+        for folder in ("css", "js", "presets"):
+            src = REPO_ROOT / folder
+            dst = LOCAL_EDITOR / folder
+            if src.exists():
+                shutil.copytree(src, dst, dirs_exist_ok=True)
+        return LOCAL_EDITOR
+    archive_url = "https://github.com/novaeriahengine/MEP-Video-Maker/archive/refs/heads/main.zip"
+    with urllib.request.urlopen(archive_url, timeout=90) as response:
+        data = io.BytesIO(response.read())
+    with zipfile.ZipFile(data) as z:
+        prefix = "MEP-Video-Maker-main/"
+        wanted = ("index.html", "css/", "js/", "presets/")
+        for name in z.namelist():
+            if not name.startswith(prefix):
+                continue
+            rel = name[len(prefix):]
+            if not rel or not any(rel == w or rel.startswith(w) for w in wanted):
+                continue
+            target = LOCAL_EDITOR / rel
+            if name.endswith("/"):
+                target.mkdir(parents=True, exist_ok=True)
+            else:
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(z.read(name))
+    if not (LOCAL_EDITOR / "index.html").exists():
+        raise RuntimeError("Offline editor download did not contain index.html")
+    return LOCAL_EDITOR
 
 
 def safe_name(value: str, fallback: str = "mep-narration") -> str:
@@ -157,12 +198,17 @@ def dashboard():
 
 @app.get("/app/")
 def local_editor():
-    return send_from_directory(REPO_ROOT, "index.html")
+    root = editor_root()
+    if not (root / "index.html").exists():
+        return redirect("/")
+    return send_from_directory(root, "index.html")
 
 
 @app.get("/app/<path:path>")
 def local_editor_assets(path: str):
-    return send_from_directory(REPO_ROOT, path)
+    if not path.startswith(("css/", "js/", "presets/")):
+        return "Not found", 404
+    return send_from_directory(editor_root(), path)
 
 
 @app.get("/api/health")
@@ -177,6 +223,9 @@ def health():
         outputDir=str(OUTPUTS),
         offlineMaps=sum((MAP_CACHE / f).exists() for f in MAP_FILES.values()),
         offlineMapsTotal=len(MAP_FILES),
+        editorReady=(editor_root() / "index.html").exists(),
+        editorLocalCopy=(LOCAL_EDITOR / "index.html").exists(),
+        espeakAvailable=bool(shutil.which("espeak-ng") or shutil.which("espeak")),
         localEditor=f"http://{local_ip()}:{PORT}/app/",
     )
 
@@ -194,6 +243,15 @@ def prepare():
     except Exception as exc:
         return jsonify(ok=False, error=str(exc)), 500
 
+
+
+@app.post("/api/prepare/editor")
+def prepare_editor_api():
+    try:
+        root = prepare_editor()
+        return jsonify(ok=True, editorReady=True, path=str(root))
+    except Exception as exc:
+        return jsonify(ok=False, error=str(exc)), 500
 
 @app.post("/api/prepare/maps")
 def prepare_maps():
