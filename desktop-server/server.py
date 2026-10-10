@@ -150,6 +150,94 @@ def get_pipeline():
             raise
 
 
+PHOTO_PACK_QUERIES = [
+    "World War I Western Front trenches 1916",
+    "World War I Eastern Front 1915",
+    "Pearl Harbor attack December 1941",
+    "Battle of Midway June 1942",
+    "Normandy landings D-Day 1944",
+    "American Revolution Lexington Concord historical",
+    "French Revolution Bastille 1789 historical",
+    "Battle of Waterloo 1815 painting",
+    "Cuban Missile Crisis 1962 historical",
+    "Berlin Wall 1989 historical",
+]
+
+def clean_text(text: str) -> str:
+    text = re.sub(r"\s+", " ", str(text or "")).strip()
+    return text.replace("—", ", ").replace("–", ", ")
+
+def polish_audio(audio: np.ndarray) -> np.ndarray:
+    audio = np.asarray(audio, dtype=np.float32)
+    if not len(audio):
+        return audio
+    audio = audio - float(np.mean(audio))
+    fade = min(int(24000 * 0.02), len(audio) // 4)
+    if fade > 1:
+        ramp = np.linspace(0.0, 1.0, fade, dtype=np.float32)
+        audio[:fade] *= ramp
+        audio[-fade:] *= ramp[::-1]
+    peak = float(np.max(np.abs(audio))) or 1.0
+    audio *= min(1.0, 0.92 / peak)
+    return np.clip(audio, -0.98, 0.98)
+
+def commons_search(query: str, limit: int = 8):
+    params = {
+        "action": "query", "format": "json", "generator": "search",
+        "gsrsearch": query, "gsrnamespace": "6", "gsrlimit": max(1, min(20, int(limit))),
+        "prop": "imageinfo", "iiprop": "url|extmetadata|mime", "iiurlwidth": "1200",
+    }
+    url = "https://commons.wikimedia.org/w/api.php?" + urllib.parse.urlencode(params)
+    req = urllib.request.Request(url, headers={"User-Agent": "MEP-Video-Maker/1.0 historical-photo-tool"})
+    with urllib.request.urlopen(req, timeout=35) as response:
+        payload = json.loads(response.read().decode("utf-8"))
+    items = []
+    for page in (payload.get("query", {}).get("pages", {}) or {}).values():
+        info = (page.get("imageinfo") or [{}])[0]
+        meta = info.get("extmetadata") or {}
+        mime = info.get("mime") or ""
+        if not mime.startswith("image/"):
+            continue
+        license_name = str((meta.get("LicenseShortName") or {}).get("value") or "")
+        allowed = ("public domain", "cc0", "cc by", "cc-by", "cc by-sa", "cc-by-sa")
+        if not any(x in license_name.lower() for x in allowed):
+            continue
+        thumb = info.get("thumburl") or info.get("url")
+        if not thumb:
+            continue
+        title = str(page.get("title") or "Historical image").replace("File:", "", 1)
+        strip_tags = lambda v: re.sub(r"<[^>]+>", "", str(v or ""))
+        items.append({
+            "title": title,
+            "thumbUrl": thumb,
+            "originalUrl": info.get("url") or thumb,
+            "descriptionUrl": info.get("descriptionurl") or "",
+            "license": license_name or "License listed on Wikimedia Commons",
+            "artist": strip_tags((meta.get("Artist") or {}).get("value"))[:180],
+            "credit": strip_tags((meta.get("Credit") or {}).get("value"))[:180],
+            "description": strip_tags((meta.get("ImageDescription") or {}).get("value"))[:500],
+        })
+    return items
+
+def cached_photo(url: str) -> Path:
+    parsed = urllib.parse.urlparse(url)
+    if parsed.scheme != "https" or parsed.hostname not in {"upload.wikimedia.org", "commons.wikimedia.org"}:
+        raise ValueError("Only Wikimedia Commons image URLs are allowed.")
+    digest = hashlib.sha256(url.encode("utf-8")).hexdigest()[:20]
+    ext = Path(parsed.path).suffix.lower()
+    if ext not in {".jpg", ".jpeg", ".png", ".webp"}:
+        ext = ".jpg"
+    target = PHOTO_CACHE / f"{digest}{ext}"
+    if target.exists() and target.stat().st_size > 1000:
+        return target
+    req = urllib.request.Request(url, headers={"User-Agent": "MEP-Video-Maker/1.0 historical-photo-tool"})
+    with urllib.request.urlopen(req, timeout=60) as response:
+        data = response.read(16 * 1024 * 1024 + 1)
+    if len(data) > 16 * 1024 * 1024:
+        raise ValueError("Historical image is larger than 16 MB.")
+    target.write_bytes(data)
+    return target
+
 def synthesize(text: str, voice: str = DEFAULT_VOICE, speed: float = DEFAULT_SPEED):
     text = clean_text(text)
     if not text:
