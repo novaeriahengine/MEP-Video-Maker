@@ -66,3 +66,13 @@ The `presets/youtube-short-maker.mep.json` project includes:
 8. Waterloo: How Napoleon Lost His Final Battle
 9. Cuban Missile Crisis: 13 Days Near Nuclear War
 10. Why the Berlin Wall Fell
+
+## Export voice sources
+
+Each Short can keep separate final audio tracks for **My Recording**, **Local Kokoro**, and **Google Colab Kokoro**. Voice Studio shows the active source with a check mark. Chrome speech remains a fast preview source only because browser speech synthesis does not expose a capturable audio stream to MediaRecorder.
+
+Custom voice/EQ profiles can be saved and loaded locally. Sentence-gap, continuous-read, tail-trim, and final-voice timing controls help narration flow and keep the exported video from cutting off longer final audio.
+
+## Historical map pack
+
+The map system is cataloged under `maps/historical/`. It supports 19 historical world-boundary snapshots from 1600 through 2010, region/focus definitions, and a map plan for all 10 bundled Shorts. The desktop server's **Download Map Pack** caches all supported GeoJSON snapshots for local use.
