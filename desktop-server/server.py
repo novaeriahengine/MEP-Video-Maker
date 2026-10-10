@@ -51,15 +51,13 @@ BRITISH_VOICES = [
 ]
 
 MAP_FILES = {
-    1783: "world_1783.geojson",
-    1800: "world_1800.geojson",
-    1815: "world_1815.geojson",
-    1914: "world_1914.geojson",
-    1920: "world_1920.geojson",
-    1938: "world_1938.geojson",
-    1945: "world_1945.geojson",
-    1960: "world_1960.geojson",
-    1994: "world_1994.geojson",
+    1600: "world_1600.geojson", 1650: "world_1650.geojson", 1700: "world_1700.geojson",
+    1715: "world_1715.geojson", 1783: "world_1783.geojson", 1800: "world_1800.geojson",
+    1815: "world_1815.geojson", 1878: "world_1878.geojson", 1880: "world_1880.geojson",
+    1900: "world_1900.geojson", 1914: "world_1914.geojson", 1920: "world_1920.geojson",
+    1930: "world_1930.geojson", 1938: "world_1938.geojson", 1945: "world_1945.geojson",
+    1960: "world_1960.geojson", 1994: "world_1994.geojson", 2000: "world_2000.geojson",
+    2010: "world_2010.geojson",
 }
 MAP_SOURCES = [
     "https://raw.githubusercontent.com/aourednik/historical-basemaps/master/geojson/",
@@ -238,7 +236,22 @@ def cached_photo(url: str) -> Path:
     target.write_bytes(data)
     return target
 
-def synthesize(text: str, voice: str = DEFAULT_VOICE, speed: float = DEFAULT_SPEED):
+def trim_trailing_silence(audio: np.ndarray, max_trim_ms: float = 100.0) -> np.ndarray:
+    if audio.size < 10 or max_trim_ms <= 0:
+        return audio
+    max_trim = min(len(audio) - 1, int(24000 * max_trim_ms / 1000.0))
+    if max_trim <= 0:
+        return audio
+    tail = np.abs(audio[-max_trim:])
+    voiced = np.where(tail > 0.0035)[0]
+    if voiced.size == 0:
+        return audio[:-max_trim]
+    keep_from_end = max_trim - int(voiced[-1]) - 1
+    trim = min(max_trim, max(0, keep_from_end - int(24000 * 0.025)))
+    return audio[:-trim] if trim > 0 else audio
+
+
+def synthesize(text: str, voice: str = DEFAULT_VOICE, speed: float = DEFAULT_SPEED, pause_ms: float = 70.0, tail_trim_ms: float = 100.0):
     text = clean_text(text)
     if not text:
         raise ValueError("Text is empty.")
@@ -246,21 +259,26 @@ def synthesize(text: str, voice: str = DEFAULT_VOICE, speed: float = DEFAULT_SPE
     if voice not in voice_ids:
         voice = DEFAULT_VOICE
     speed = max(0.6, min(1.4, float(speed or DEFAULT_SPEED)))
+    pause_ms = max(0.0, min(450.0, float(pause_ms or 0)))
+    tail_trim_ms = max(0.0, min(500.0, float(tail_trim_ms or 0)))
     pipeline = get_pipeline()
     chunks = []
     with _pipeline_lock:
-        for graphemes, _phonemes, audio in pipeline(text, voice=voice, speed=speed):
+        generated = list(pipeline(text, voice=voice, speed=speed))
+        for index, (graphemes, _phonemes, audio) in enumerate(generated):
             arr = np.asarray(audio, dtype=np.float32)
             if not arr.size:
                 continue
             chunks.append(arr)
-            pause = 0.06
-            if re.search(r"[.!?][\"'”’)]?\s*$", str(graphemes or "")):
-                pause = 0.14
-            chunks.append(np.zeros(int(24000 * pause), dtype=np.float32))
+            if index < len(generated) - 1 and pause_ms > 0:
+                punctuation = bool(re.search(r"[.!?][\"'”’)]?\s*$", str(graphemes or "")))
+                pause = pause_ms * (1.25 if punctuation else 0.65)
+                chunks.append(np.zeros(int(24000 * pause / 1000.0), dtype=np.float32))
     if not chunks:
         raise RuntimeError("Kokoro returned no audio.")
-    audio = polish_audio(np.concatenate(chunks))
+    audio = np.concatenate(chunks)
+    audio = trim_trailing_silence(audio, tail_trim_ms)
+    audio = polish_audio(audio)
     duration = len(audio) / 24000.0
     buf = io.BytesIO()
     sf.write(buf, audio, 24000, format="WAV", subtype="PCM_16")
@@ -425,10 +443,12 @@ def tts():
     text = str(data.get("text", "")).strip()
     voice = str(data.get("voice") or DEFAULT_VOICE)
     speed = data.get("speed", DEFAULT_SPEED)
+    pause_ms = data.get("pauseMs", 70)
+    tail_trim_ms = data.get("tailTrimMs", 100)
     title = str(data.get("title") or "MEP narration")
     short_id = str(data.get("shortId") or "")
     try:
-        audio, duration = synthesize(text, voice, speed)
+        audio, duration = synthesize(text, voice, speed, pause_ms, tail_trim_ms)
         filename = safe_name(title) + ".wav"
         saved = OUTPUTS / filename
         saved.write_bytes(audio.getvalue())
@@ -459,7 +479,9 @@ def tts_batch():
                 title = str(item.get("title") or f"short-{index}")
                 voice = str(item.get("voice") or DEFAULT_VOICE)
                 speed = float(item.get("speed") or DEFAULT_SPEED)
-                audio, duration = synthesize(text, voice, speed)
+                pause_ms = float(item.get("pauseMs", 70))
+                tail_trim_ms = float(item.get("tailTrimMs", 100))
+                audio, duration = synthesize(text, voice, speed, pause_ms, tail_trim_ms)
                 filename = f"{index:02d}-{safe_name(title)}.wav"
                 z.writestr(filename, audio.getvalue())
                 manifest["items"].append({"id": item.get("id"), "title": title, "file": filename, "voice": voice, "duration": duration})
