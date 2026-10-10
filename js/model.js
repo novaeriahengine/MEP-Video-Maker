@@ -2,9 +2,9 @@ window.MEPModel=(()=>{
 const id=()=>crypto.randomUUID?crypto.randomUUID():"mep-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2);
 const SHAPES={square:"Square",circle:"Circle",triangle:"Triangle"};
 const EXPRESSIONS=["neutral","happy","angry","sad","surprised","determined","sleepy"];
-const PROPS={none:{name:"None"},sword:{name:"Sword"},rifle:{name:"Rifle"},musket:{name:"Musket"},pointer:{name:"Pointer"}};
+const PROPS={none:{name:"None"},sword:{name:"Sword"},rifle:{name:"Rifle"},musket:{name:"Musket"},pointer:{name:"Pointer"},pistol:{name:"Pistol"},binoculars:{name:"Binoculars"},camera:{name:"Camera"},radio:{name:"Field Radio"},document:{name:"Document"},artillery:{name:"Artillery"},tank:{name:"Tank"},jeep:{name:"Jeep / Car"},ship:{name:"Ship"},aircraft:{name:"Aircraft"},missile:{name:"Missile"}};
 const EASINGS={linear:"Linear",easeIn:"Ease In",easeOut:"Ease Out",easeInOut:"Ease In / Out",hold:"Hold"};
-const GRAPHIC_TYPES={label:"Label",arrow:"Arrow",front:"Front Line",route:"Movement Route",plane:"Plane Route",zone:"Highlighted Zone",impact:"Impact Marker"};
+const GRAPHIC_TYPES={label:"Label",arrow:"Arrow",front:"Front Line",route:"Movement Route",plane:"Plane Route",zone:"Highlighted Zone",impact:"Impact Marker",tank:"Tank",ship:"Ship",vehicle:"Vehicle / Jeep",missile:"Missile",cityMarker:"City Marker"};
 const ANIMATION_CLIPS={
  slide:{name:"Slide Across",duration:2,move:160,scale:[1,1],rotation:[0,0]},
  talk:{name:"Narrate / Talk",duration:2.4,move:0,scale:[1,1.04,1,1.04,1],rotation:[0,-2,2,-2,0],mouth:[false,true,false,true,false]},
@@ -21,7 +21,7 @@ const BACKGROUNDS={
  battleMap:{name:"Military Campaign Map",kind:"map"},countryside:{name:"Countryside",kind:"scene"},farmVillage:{name:"Farm Village",kind:"scene"},forest:{name:"Forest",kind:"scene"},mountainPass:{name:"Mountain Pass",kind:"scene"},riverCrossing:{name:"River Crossing",kind:"scene"},oldTownStreet:{name:"Old Town Street",kind:"scene"},coastalFort:{name:"Coastal Fort",kind:"scene"},royalCourt:{name:"Royal Court",kind:"scene"},governmentHall:{name:"Government Hall",kind:"scene"},lectureHall:{name:"Lecture Hall",kind:"scene"},library:{name:"Library",kind:"scene"},mapRoom:{name:"Map / Strategy Room",kind:"scene"},shipDeck:{name:"Sailing Ship Deck",kind:"scene"},colonialPort:{name:"Colonial Port",kind:"scene"},ocean:{name:"Open Ocean",kind:"scene"},city:{name:"City",kind:"scene"},cityBattleStreet:{name:"Battle-Damaged Street",kind:"scene"},battlefield:{name:"Battlefield",kind:"scene"},battlefieldNight:{name:"Battlefield at Night",kind:"scene"},trench:{name:"Trench",kind:"scene"},militaryCamp:{name:"Military Camp",kind:"scene"},factory:{name:"Factory",kind:"scene"},classroom:{name:"Classroom",kind:"scene"},newspaper:{name:"Newspaper / Headline",kind:"graphic"},desert:{name:"Desert",kind:"scene"},snowField:{name:"Snow Field",kind:"scene"}
 };
 const PRESETS={
- noveriaHost:{name:"Noveria Host",era:"Modern",shape:"circle",countryCode:"US",year:2026,followProjectYear:false,expression:"neutral",prop:"pointer",hairStyle:"side"},
+ noveriaHost:{name:"Noveria Host",era:"Modern",shape:"circle",countryCode:"FL",year:2026,followProjectYear:false,expression:"neutral",prop:"none",hairStyle:"side"},
  unionSquare:{name:"Union",era:"Mid / Late 1800s",shape:"square",countryCode:"US",year:1863,expression:"determined",prop:"rifle"},
  american1776:{name:"American Colonies",era:"1700s",shape:"square",countryCode:"US",year:1776,expression:"determined",hat:"tricorn",prop:"musket"},
  georgeWashington:{name:"George Washington",era:"1700s",shape:"circle",countryCode:"US",year:1777,expression:"determined",hat:"tricorn",prop:"sword"},
@@ -62,7 +62,7 @@ function character(name="Noveria Host",x=360,y=930,preset="noveriaHost"){
 }
 function scene(name="Scene 1",duration=7){return{id:id(),name,duration,background:{preset:"europeMap",mode:"preset",assetId:null,fit:"cover",opacity:1,panX:0,panY:0,scale:1,brightness:1,contrast:1,saturation:1,sepia:0,blur:0,keyframes:[],tags:["history"]},transition:{type:"cut",duration:.3},camera:{x:360,y:640,zoom:1,keyframes:[]},markers:[],notes:"",script:"",caption:"",tags:["history"],characters:[],bubbles:[],graphics:[]}}
 function short(title="Untitled Short"){
- const s=scene("Opening",7);return{id:id(),title,description:"",hashtags:["#History","#Shorts","#NoveriaHistory"],year:1944,era:"World Wars",width:720,height:1280,fps:30,activeSceneId:s.id,scenes:[s],voice:{source:"chrome",voiceProfile:"britishMale",assetId:null,chromeVoice:"",kokoroVoice:"bm_george",kokoroSpeed:1,ttsRate:.90,ttsPitch:.88,pitchSemitones:-.5,speed:.98,lowCut:72,bass:3,warmth:2,mid:-1,clarity:2,presence:4,deEss:3,treble:1,air:2,compression:.58,limiter:.72,echo:0,grit:0,gain:1.06},createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()}
+ const s=scene("Opening",7);return{id:id(),title,description:"",hashtags:["#History","#Shorts","#NoveriaHistory"],year:1944,era:"World Wars",width:720,height:1280,fps:30,activeSceneId:s.id,scenes:[s],voice:{source:"chrome",voiceProfile:"britishMale",assetId:null,chromeVoice:"",kokoroVoice:"bm_george",kokoroSpeed:.95,ttsRate:.90,ttsPitch:.88,continuousRead:true,sentencePauseMs:70,tailTrimMs:100,pitchSemitones:-.5,speed:.98,lowCut:72,bass:3,warmth:2,mid:-1,clarity:2,presence:4,deEss:3,treble:1,air:2,compression:.58,limiter:.72,echo:0,grit:0,gain:1.06},createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()}
 }
 function syncAlias(p){const sh=activeShort(p);if(sh){p.scenes=sh.scenes;p.activeSceneId=sh.activeSceneId;p.year=sh.year;p.era=sh.era;p.width=sh.width;p.height=sh.height;p.fps=sh.fps}return p}
 function project(name="Untitled Project"){
