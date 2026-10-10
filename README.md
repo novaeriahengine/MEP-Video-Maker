@@ -76,3 +76,13 @@ Custom voice/EQ profiles can be saved and loaded locally. Sentence-gap, continuo
 ## Historical map pack
 
 The map system is cataloged under `maps/historical/`. It supports 19 historical world-boundary snapshots from 1600 through 2010, region/focus definitions, and a map plan for all 10 bundled Shorts. The desktop server's **Download Map Pack** caches all supported GeoJSON snapshots for local use.
+
+## Historical world-map engine v2
+
+The editor now has a dedicated `historical-maps/` system. It can use 28 real historical world-border snapshots from year 1000 through 2010, auto-pick the appropriate snapshot for a scene, crop to regional focuses, color major countries consistently, gold-outline countries being discussed, and keep front lines/routes/aircraft/ships/tanks/missiles as separate scene overlays instead of drawing a generic moving red line everywhere.
+
+The 10 bundled Shorts have scene-by-scene map metadata in `historical-maps/short-map-plan.json`. The Noveria narrator now uses the Florida state flag and has no default pointer prop.
+
+## Voice export workflow
+
+Voice Studio keeps separate tracks for **My Recording**, **Local Kokoro**, and **Google Colab**. The selected source gets a visible check mark and is the source used for final WebM audio. Chrome speech remains a fast preview source because browser speech synthesis cannot be captured reliably into the exported MediaStream. Custom EQ/voice profiles can be saved and loaded locally, speech can use a continuous-read mode, tail trim can remove weak trailing audio, and scene timing can be fitted to the final recorded/Kokoro track.
