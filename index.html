@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Noveria History — MEP Short Maker</title>
-<link rel="stylesheet" href="css/style.css?v=20261010o">
+<link rel="stylesheet" href="css/style.css?v=20261010p">
 </head>
 <body>
 <div id="app">
@@ -132,11 +132,11 @@
       <button type="button" data-voice-source="mic"><span>🎙</span><b>My Recording</b><small>Final export audio</small><i>✓</i></button>
       <button type="button" data-voice-source="server"><span>💻</span><b>Local Kokoro</b><small>Laptop AI voice</small><i>✓</i></button>
       <button type="button" data-voice-source="colab"><span>☁</span><b>Google Colab</b><small>Imported Kokoro pack</small><i>✓</i></button>
-      <button type="button" data-voice-source="chrome"><span>▶</span><b>Chrome Preview</b><small>Preview only</small><i>✓</i></button>
+      <button type="button" data-voice-source="chrome"><span>▶</span><b>Chrome Preview</b><small>Preview only · cannot export</small><i>✓</i></button>
       <button type="button" data-voice-source="none"><span>∅</span><b>No Voice</b><small>Silent export</small><i>✓</i></button>
     </div>
     <label>Voice Source <select id="voiceSource"><option value="mic">Recorded Mic Voiceover</option><option value="server">Local Kokoro AI Voice</option><option value="colab">Google Colab Kokoro Voice</option><option value="chrome">British Male Chrome Preview</option><option value="none">No Voice</option></select></label>
-    <div id="voiceExportBadge" class="voiceExportBadge">Export voice: Chrome Preview · preview only</div>
+    <div id="voiceExportBadge" class="voiceExportBadge">Export voice: Chrome Preview · cannot be embedded in WebM</div>
     <div class="voiceActions"><button id="recordVoice" class="primary">Record Full Voiceover</button><button id="stopVoiceRecord">Stop</button><button id="playVoiceover">Play Processed</button><button id="clearVoiceover">Clear</button></div>
     <div id="voiceStatus" class="voiceStatus">No recorded voiceover yet.</div>
     <h3>Final AI Narration · Kokoro</h3>
@@ -146,7 +146,7 @@
       <label>Kokoro Voice <select id="kokoroVoice"><option value="bm_george">George · British male</option><option value="bm_daniel">Daniel · British male</option><option value="bm_fable">Fable · British storyteller</option><option value="bm_lewis">Lewis · Modern British male</option></select></label>
       <label>Kokoro Speed <input id="kokoroSpeed" type="range" min=".70" max="1.25" step=".05" value="1"><output id="kokoroSpeedOut">1.00x</output></label>
     </div>
-    <div class="voiceActions"><button id="neuralConnect">Test Laptop Server</button><button id="neuralGenerate" class="primary">Generate Final Voice</button><button id="neuralBatch">Download Colab Narration Batch</button></div>
+    <div class="voiceActions"><button id="neuralConnect">Test Laptop Server</button><button id="neuralGenerate" class="primary">Generate & Select Final Voice</button><button id="neuralBatch">Download Colab Narration Batch</button></div>
     <label>Import Colab Voice Pack <input id="neuralPackImport" type="file" accept="application/json,.json"></label>
     <label>Import One WAV / Audio <input id="neuralImport" type="file" accept="audio/wav,audio/x-wav,audio/mpeg,audio/ogg,audio/webm,audio/mp4"></label>
     <div id="neuralStatus" class="voiceStatus">Laptop server not tested yet. Colab batch export/import works without a permanent Colab server.</div>
@@ -210,17 +210,17 @@
 
 <nav id="mobileDock" class="mobileDock"><button data-jump="#stageArea">Canvas</button><button data-jump="#scenePanel">Shorts</button><button data-jump="#characterPanel">Flags</button><button data-jump="#scriptPanel">Script</button><button id="mobileVideo">Preview</button></nav>
 
-<script src="js/firebase-config.js?v=20261010o"></script>
-<script src="js/history-flags.js?v=20261010o"></script>
-<script src="js/historical-maps.js?v=20261010o"></script>
-<script src="js/model.js?v=20261010o"></script>
-<script src="js/ai-config.js?v=20261010o"></script>
-<script src="js/ai-director.js?v=20261010o"></script>
-<script src="js/renderer.js?v=20261010o"></script>
-<script src="js/storage.js?v=20261010o"></script>
-<script src="js/voice-backends.js?v=20261010o"></script>
+<script src="js/firebase-config.js?v=20261010p"></script>
+<script src="js/history-flags.js?v=20261010p"></script>
+<script src="js/historical-maps.js?v=20261010p"></script>
+<script src="js/model.js?v=20261010p"></script>
+<script src="js/ai-config.js?v=20261010p"></script>
+<script src="js/ai-director.js?v=20261010p"></script>
+<script src="js/renderer.js?v=20261010p"></script>
+<script src="js/storage.js?v=20261010p"></script>
+<script src="js/voice-backends.js?v=20261010p"></script>
 <script>window.addEventListener("error",e=>{const el=document.getElementById("bootStatus");if(el){el.className="bootStatus error";el.textContent="MEP error: "+(e.message||"Unknown startup error")}});</script>
-<script src="js/app.js?v=20261010o"></script>
-<script src="js/tool-assistant.js?v=20261010o"></script>
+<script src="js/app.js?v=20261010p"></script>
+<script src="js/tool-assistant.js?v=20261010p"></script>
 </body>
 </html>

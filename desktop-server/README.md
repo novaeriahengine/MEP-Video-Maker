@@ -14,7 +14,7 @@ This folder turns the downloaded repository into a local/offline MEP Video Maker
 
 ## Windows quick start
 
-1. Install Python 3.10 or 3.11.
+1. Install 64-bit Python 3.10, 3.11, or 3.12. Kokoro 0.9.4 does not support Python 3.9 or Python 3.13+.
 2. Install **eSpeak-NG for Windows** once. Kokoro's English G2P layer uses it.
 3. Download/clone the full MEP Video Maker repository.
 4. Open this `desktop-server` folder.

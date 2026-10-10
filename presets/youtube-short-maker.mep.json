@@ -26020,7 +26020,7 @@
           "layer": 5,
           "visual": {
             "shape": "circle",
-            "countryCode": "US",
+            "countryCode": "FL",
             "historicalYear": 2026,
             "followProjectYear": false,
             "flagVariant": "auto",
@@ -26033,7 +26033,7 @@
             "hat": "none",
             "accessory": "none"
           },
-          "prop": "pointer",
+          "prop": "none",
           "keyframes": [
             {
               "id": "id-yujnoex1c3d-mv0hah5h",
@@ -26373,7 +26373,7 @@
           "layer": 5,
           "visual": {
             "shape": "circle",
-            "countryCode": "US",
+            "countryCode": "FL",
             "historicalYear": 2026,
             "followProjectYear": false,
             "flagVariant": "auto",
@@ -26386,7 +26386,7 @@
             "hat": "none",
             "accessory": "none"
           },
-          "prop": "pointer",
+          "prop": "none",
           "keyframes": [
             {
               "id": "id-c3bykptju3-mv0hah5i",
@@ -26646,7 +26646,7 @@
           "layer": 5,
           "visual": {
             "shape": "circle",
-            "countryCode": "US",
+            "countryCode": "FL",
             "historicalYear": 2026,
             "followProjectYear": false,
             "flagVariant": "auto",
@@ -26659,7 +26659,7 @@
             "hat": "none",
             "accessory": "none"
           },
-          "prop": "pointer",
+          "prop": "none",
           "keyframes": [
             {
               "id": "id-nncgpu0dxg-mv0hah5i",
@@ -26932,7 +26932,7 @@
           "layer": 5,
           "visual": {
             "shape": "circle",
-            "countryCode": "US",
+            "countryCode": "FL",
             "historicalYear": 2026,
             "followProjectYear": false,
             "flagVariant": "auto",
@@ -26945,7 +26945,7 @@
             "hat": "none",
             "accessory": "none"
           },
-          "prop": "pointer",
+          "prop": "none",
           "keyframes": [
             {
               "id": "id-8l57cwl80oj-mv0hah5i",
@@ -27342,7 +27342,7 @@
           "layer": 5,
           "visual": {
             "shape": "circle",
-            "countryCode": "US",
+            "countryCode": "FL",
             "historicalYear": 2026,
             "followProjectYear": false,
             "flagVariant": "auto",
@@ -27355,7 +27355,7 @@
             "hat": "none",
             "accessory": "none"
           },
-          "prop": "pointer",
+          "prop": "none",
           "keyframes": [
             {
               "id": "id-mjenvell2bn-mv0hah5i",
