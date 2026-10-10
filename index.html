@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Noveria History — MEP Short Maker</title>
-<link rel="stylesheet" href="css/style.css?v=20261010l">
+<link rel="stylesheet" href="css/style.css?v=20261010m">
 </head>
 <body>
 <div id="app">
@@ -160,7 +160,7 @@
     <div class="voicePresetManager"><input id="voicePresetName" placeholder="My documentary voice"><select id="voiceSavedPresets"><option value="">Saved profiles…</option></select></div>
     <div class="voiceActions"><button id="saveVoicePreset">Save Current</button><button id="loadVoicePreset">Load</button><button id="deleteVoicePreset" class="danger">Delete</button></div>
     <h3>Speech Continuity</h3>
-    <label class="voiceToggle"><span>Continuous Chrome read</span><input id="voiceContinuousRead" type="checkbox" checked></label>
+    <label class="voiceToggle"><span>Continuous Chrome read</span><input id="voiceContinuousRead" type="checkbox" checked></label><label class="voiceToggle"><span>Extend export to final voice</span><input id="voiceFitExport" type="checkbox" checked></label><button id="fitScenesToVoice" class="wide">Fit Scene Timing to Final Voice</button>
     <div class="voiceGrid"><label>Sentence Gap <input id="voiceSentencePause" type="range" min="0" max="450" step="10" value="70"><output id="voiceSentencePauseOut">70 ms</output></label><label>Tail Trim <input id="voiceTailTrim" type="range" min="0" max="500" step="10" value="100"><output id="voiceTailTrimOut">100 ms</output></label></div>
     <h3>Voice Changer / EQ</h3>
     <div class="voicePresetRow"><button data-voice-preset="britishDocumentary" class="primary">British Documentary</button><button data-voice-preset="britishDeep">Deep British</button><button data-voice-preset="britishNews">British News</button><button data-voice-preset="natural">Natural</button><button data-voice-preset="radio">Radio</button></div>
@@ -210,17 +210,17 @@
 
 <nav id="mobileDock" class="mobileDock"><button data-jump="#stageArea">Canvas</button><button data-jump="#scenePanel">Shorts</button><button data-jump="#characterPanel">Flags</button><button data-jump="#scriptPanel">Script</button><button id="mobileVideo">Preview</button></nav>
 
-<script src="js/firebase-config.js?v=20261010l"></script>
-<script src="js/history-flags.js?v=20261010l"></script>
-<script src="js/historical-maps.js?v=20261010l"></script>
-<script src="js/model.js?v=20261010l"></script>
-<script src="js/ai-config.js?v=20261010l"></script>
-<script src="js/ai-director.js?v=20261010l"></script>
-<script src="js/renderer.js?v=20261010l"></script>
-<script src="js/storage.js?v=20261010l"></script>
-<script src="js/voice-backends.js?v=20261010l"></script>
+<script src="js/firebase-config.js?v=20261010m"></script>
+<script src="js/history-flags.js?v=20261010m"></script>
+<script src="js/historical-maps.js?v=20261010m"></script>
+<script src="js/model.js?v=20261010m"></script>
+<script src="js/ai-config.js?v=20261010m"></script>
+<script src="js/ai-director.js?v=20261010m"></script>
+<script src="js/renderer.js?v=20261010m"></script>
+<script src="js/storage.js?v=20261010m"></script>
+<script src="js/voice-backends.js?v=20261010m"></script>
 <script>window.addEventListener("error",e=>{const el=document.getElementById("bootStatus");if(el){el.className="bootStatus error";el.textContent="MEP error: "+(e.message||"Unknown startup error")}});</script>
-<script src="js/app.js?v=20261010l"></script>
-<script src="js/tool-assistant.js?v=20261010l"></script>
+<script src="js/app.js?v=20261010m"></script>
+<script src="js/tool-assistant.js?v=20261010m"></script>
 </body>
 </html>
