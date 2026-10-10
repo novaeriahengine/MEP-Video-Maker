@@ -71,7 +71,7 @@ function drawMap(ctx,key,w,h){
 function mapLabel(ctx,text,x,y,size=28){ctx.save();ctx.font="800 "+size+"px system-ui";ctx.textAlign="center";ctx.textBaseline="middle";ctx.lineWidth=5;ctx.strokeStyle="#fff";ctx.strokeText(text,x,y);ctx.fillStyle="#26313a";ctx.fillText(text,x,y);ctx.restore()}
 function drawThematicMap(ctx,key,w,h,options={}){
  const baseKey=key==="pearlHarborMap"?"worldMap":key==="revolutionMap"?"americasMap":"europeMap";
- const hm=window.MEPHistoricalMaps?.draw(ctx,{year:options.year||2026,text:options.text||"",key,width:w,height:h,showLabels:options.showLabels!==false,highlights:options.highlights||[]});
+ const hm=window.MEPHistoricalMaps?.draw(ctx,{year:options.year||2026,text:options.text||"",key,width:w,height:h,time:options.time||0,showLabels:options.showLabels!==false,highlights:options.highlights||[]});
  if(!hm?.drawn)drawMap(ctx,baseKey,w,h);
  ctx.save();
  const title=key==="westernFrontMap"?"WESTERN FRONT":key==="easternFrontMap"?"EASTERN FRONT":key==="pearlHarborMap"?"PACIFIC THEATER":key==="normandyMap"?"NORMANDY · 1944":key==="coldWarMap"?"COLD WAR":key==="revolutionMap"?"AMERICAN REVOLUTION":key==="napoleonicMap"?"EUROPE · 1815":"";
