@@ -99,26 +99,123 @@ function drawMap(ctx,key,w,h){
 // Purpose-built illustrated settings for the American Stories pack. They are
 // intentionally distinct from generic scenery, giving each story its visual hook.
 const STORY_BACKGROUNDS=new Set(["charlestonDocks1862","charlestonHarborMap","cowpensField1781","cowpensTacticalMap","bostonNorthEnd1919","idahoFarm1921","earlyTelevisionLab1927","yorktownSpyCamp1781","revolutionaryCamp1782","clevelandIntersection1923","victorianDiningRoom1880s","dishwasherWorkshop1886","chicagoWorldsFair1893","fortSmithFrontier1875","fortSmithMap","northSeaNaval1779"]);
-function storyHeader(ctx,text,w,h){ctx.save();ctx.fillStyle="rgba(16,25,31,.72)";roundRect(ctx,w*.08,h*.07,w*.84,h*.1,18);ctx.fill();ctx.restore();mapLabel(ctx,text,w*.5,h*.12,Math.max(18,w*.035))}
-function storyShip(ctx,x,y,size=1,flip=1){ctx.save();ctx.translate(x,y);ctx.scale(flip,1);ctx.fillStyle="#313e46";ctx.beginPath();ctx.moveTo(-110*size,0);ctx.lineTo(118*size,0);ctx.lineTo(75*size,38*size);ctx.lineTo(-75*size,38*size);ctx.closePath();ctx.fill();ctx.fillRect(-20*size,-44*size,76*size,44*size);ctx.strokeStyle="#d8d0b9";ctx.lineWidth=5*size;ctx.beginPath();ctx.moveTo(16*size,-45*size);ctx.lineTo(16*size,-160*size);ctx.lineTo(92*size,-32*size);ctx.stroke();ctx.restore()}
+const NH={
+ sky:"#c9d5d8",skyWarm:"#e7d4aa",night:"#273342",paper:"#e9ddbd",ground:"#9b7b59",green:"#77866a",greenDark:"#53644f",
+ ocean:"#7298aa",brick:"#876659",wood:"#6d503c",stone:"#8b8b82",ink:"#273139",cream:"#f5eedb",gold:"#d5a94f",
+ red:"#a14f49",blue:"#58779a",molasses:"#573a2e",smoke:"#697178",white:"#f7f3e8"
+};
+function storyBase(ctx,w,h,{night=false,water=false,ground=NH.ground}={}){
+ ctx.fillStyle=night?NH.night:NH.sky;ctx.fillRect(0,0,w,h);
+ ctx.fillStyle=night?"#384656":NH.skyWarm;ctx.fillRect(0,h*.34,w,h*.2);
+ ctx.fillStyle=water?NH.ocean:ground;ctx.fillRect(0,h*.57,w,h*.43);
+ ctx.strokeStyle="rgba(39,49,57,.12)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,h*.57);ctx.lineTo(w,h*.57);ctx.stroke()
+}
+function storyHeader(ctx,text,w,h){
+ ctx.save();ctx.font="800 "+Math.max(15,w*.027)+"px system-ui";ctx.textAlign="left";ctx.textBaseline="middle";
+ const tw=Math.min(w*.72,ctx.measureText(text).width),x=w*.055,y=h*.065,pad=14,hh=Math.max(34,w*.055);
+ ctx.fillStyle="rgba(39,49,57,.86)";roundRect(ctx,x,y,tw+pad*2,hh,hh*.35);ctx.fill();
+ ctx.fillStyle=NH.cream;ctx.fillText(text,x+pad,y+hh*.5,tw);ctx.restore()
+}
+function storyShip(ctx,x,y,size=1,flip=1,fill=NH.ink){
+ ctx.save();ctx.translate(x,y);ctx.scale(flip,1);ctx.fillStyle=fill;ctx.beginPath();ctx.moveTo(-110*size,0);ctx.lineTo(118*size,0);ctx.lineTo(75*size,38*size);ctx.lineTo(-75*size,38*size);ctx.closePath();ctx.fill();ctx.fillRect(-20*size,-44*size,76*size,44*size);
+ ctx.strokeStyle=NH.cream;ctx.lineWidth=5*size;ctx.beginPath();ctx.moveTo(16*size,-45*size);ctx.lineTo(16*size,-160*size);ctx.lineTo(92*size,-32*size);ctx.stroke();ctx.restore()
+}
+function storyPerson(ctx,x,y,s=1,fill=NH.ink,hat=false){
+ ctx.save();ctx.fillStyle=fill;circle(ctx,x,y-40*s,17*s,fill,fill,0);ctx.fillRect(x-13*s,y-22*s,26*s,55*s);
+ ctx.strokeStyle=fill;ctx.lineWidth=8*s;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x-7*s,y+30*s);ctx.lineTo(x-18*s,y+67*s);ctx.moveTo(x+7*s,y+30*s);ctx.lineTo(x+18*s,y+67*s);ctx.moveTo(x-10*s,y-4*s);ctx.lineTo(x-33*s,y+20*s);ctx.moveTo(x+10*s,y-4*s);ctx.lineTo(x+33*s,y+20*s);ctx.stroke();
+ if(hat){ctx.fillRect(x-23*s,y-62*s,46*s,7*s);ctx.fillRect(x-14*s,y-71*s,28*s,12*s)}ctx.restore()
+}
+function storyCar(ctx,x,y,s=1,fill=NH.blue){
+ ctx.save();ctx.translate(x,y);ctx.fillStyle=fill;roundRect(ctx,-55*s,-22*s,110*s,38*s,10*s);ctx.fill();ctx.fillRect(-25*s,-45*s,52*s,25*s);
+ circle(ctx,-34*s,20*s,12*s,NH.ink,NH.ink,0);circle(ctx,34*s,20*s,12*s,NH.ink,NH.ink,0);ctx.restore()
+}
+function storyDocument(ctx,x,y,w=95,h=120,label=""){
+ ctx.save();ctx.fillStyle=NH.cream;ctx.strokeStyle=NH.ink;ctx.lineWidth=3;roundRect(ctx,x-w/2,y-h/2,w,h,7);ctx.fill();ctx.stroke();
+ ctx.strokeStyle="rgba(39,49,57,.48)";ctx.lineWidth=2;for(let yy=y-h*.24;yy<y+h*.3;yy+=16){ctx.beginPath();ctx.moveTo(x-w*.32,yy);ctx.lineTo(x+w*.32,yy);ctx.stroke()}
+ if(label){ctx.fillStyle=NH.red;ctx.font="800 16px system-ui";ctx.textAlign="center";ctx.fillText(label,x,y+h*.38)}ctx.restore()
+}
+function storyCallout(ctx,text,w,h,{y=.22,color=NH.gold,size=.052}={}){
+ if(!text)return;ctx.save();ctx.font="900 "+Math.max(24,w*size)+"px system-ui";ctx.textAlign="center";ctx.textBaseline="middle";ctx.lineJoin="round";
+ ctx.lineWidth=Math.max(6,w*.009);ctx.strokeStyle="rgba(39,49,57,.9)";ctx.fillStyle=color;ctx.strokeText(text,w*.5,h*y,w*.84);ctx.fillText(text,w*.5,h*y,w*.84);ctx.restore()
+}
 function drawStoryBackground(ctx,key,w,h){
  ctx.save();
- if(key==="charlestonDocks1862"){gradientSky(ctx,w,h,"#171c39","#d48659");ctx.fillStyle="#244d67";ctx.fillRect(0,h*.54,w,h*.46);ctx.fillStyle="#553d32";ctx.fillRect(0,h*.69,w,h*.31);for(let x=0;x<w;x+=100){ctx.fillStyle="#6e4a37";ctx.fillRect(x,h*.51,14,h*.24)}storyShip(ctx,w*.59,h*.64,1.2);storyHeader(ctx,"CHARLESTON · 1862",w,h)}
- else if(key==="charlestonHarborMap"){ctx.fillStyle="#e7d3a0";ctx.fillRect(0,0,w,h);ctx.fillStyle="#78a9ba";ctx.beginPath();ctx.moveTo(w*.16,h*.2);ctx.bezierCurveTo(w*.65,h*.06,w*.88,h*.32,w*.86,h*.83);ctx.lineTo(w*.38,h*.89);ctx.bezierCurveTo(w*.58,h*.62,w*.1,h*.65,w*.16,h*.2);ctx.fill();ctx.fillStyle="#8f9d67";ctx.beginPath();ctx.moveTo(0,h*.2);ctx.lineTo(w*.42,h*.16);ctx.lineTo(w*.53,h*.5);ctx.lineTo(w*.3,h*.73);ctx.lineTo(0,h*.86);ctx.closePath();ctx.fill();ctx.fillStyle="#554438";ctx.fillRect(w*.51,h*.46,50,28);ctx.strokeStyle="#a83432";ctx.lineWidth=9;ctx.beginPath();ctx.moveTo(w*.29,h*.38);ctx.bezierCurveTo(w*.47,h*.46,w*.56,h*.55,w*.75,h*.63);ctx.stroke();drawArrowHead(ctx,{x:w*.65,y:h*.6},{x:w*.75,y:h*.63},26,"#a83432");mapLabel(ctx,"CHARLESTON",w*.25,h*.32,22);mapLabel(ctx,"FORT SUMTER",w*.56,h*.42,18);mapLabel(ctx,"UNION BLOCKADE",w*.73,h*.72,18);storyHeader(ctx,"ESCAPE THROUGH CHARLESTON HARBOR",w,h)}
- else if(key==="cowpensField1781"){gradientSky(ctx,w,h,"#a4c8dc","#e6c889");hills(ctx,w,h,["#78925d","#587447"]);trees(ctx,w,h,.36,"#38523a");ctx.fillStyle="#b08a5e";ctx.fillRect(0,h*.72,w,h*.28);ctx.strokeStyle="#c53d34";ctx.lineWidth=12;for(let x=w*.6;x<w*.92;x+=42){ctx.beginPath();ctx.moveTo(x,h*.57);ctx.lineTo(x,h*.72);ctx.stroke()}ctx.strokeStyle="#345f8c";for(let x=w*.18;x<w*.55;x+=52){ctx.beginPath();ctx.moveTo(x,h*.69);ctx.lineTo(x,h*.78);ctx.stroke()}storyHeader(ctx,"COWPENS · 1781",w,h)}
- else if(key==="cowpensTacticalMap"){ctx.fillStyle="#d9ca9e";ctx.fillRect(0,0,w,h);ctx.fillStyle="#98af78";ctx.fillRect(w*.08,h*.2,w*.84,h*.65);const lines=[[.26,.34,"SHARPSHOOTERS"],[.39,.5,"MILITIA · TWO VOLLEYS"],[.52,.67,"CONTINENTALS HOLD"]];lines.forEach(([x,y,label],i)=>{ctx.strokeStyle=i===2?"#315f94":"#5c7895";ctx.lineWidth=12;ctx.beginPath();ctx.moveTo(w*x,h*y);ctx.lineTo(w*(x+.42),h*y);ctx.stroke();mapLabel(ctx,label,w*(x+.21),h*(y-.07),18)});ctx.strokeStyle="#ad352e";ctx.lineWidth=10;ctx.beginPath();ctx.moveTo(w*.82,h*.25);ctx.lineTo(w*.61,h*.64);ctx.stroke();drawArrowHead(ctx,{x:w*.68,y:h*.5},{x:w*.61,y:h*.64},26,"#ad352e");storyHeader(ctx,"MORGAN'S THREE-LINE TRAP",w,h)}
- else if(key==="bostonNorthEnd1919"){gradientSky(ctx,w,h,"#a8b6c1","#ded4bd");ctx.fillStyle="#67554a";ctx.fillRect(0,h*.68,w,h*.32);for(let x=20;x<w;x+=112){building(ctx,x,h*.23+(x%3)*24,92,h*.48-(x%3)*24,x%2?"#945d4d":"#7d6356")}ctx.fillStyle="#514842";ctx.fillRect(0,h*.35,w,16);for(let x=30;x<w;x+=190){ctx.fillRect(x,h*.27,10,h*.18)}ctx.fillStyle="#4d4a43";ctx.fillRect(w*.58,h*.34,w*.18,h*.34);ctx.strokeStyle="#252724";ctx.lineWidth=6;ctx.strokeRect(w*.58,h*.34,w*.18,h*.34);storyHeader(ctx,"BOSTON NORTH END · 1919",w,h)}
- else if(key==="idahoFarm1921"){gradientSky(ctx,w,h,"#83b8dd","#f0c979");hills(ctx,w,h,["#9fb56d","#759153"]);ctx.fillStyle="#8f613d";ctx.fillRect(0,h*.55,w,h*.45);ctx.strokeStyle="#d5ae62";ctx.lineWidth=7;for(let x=-w;x<w*2;x+=72){ctx.beginPath();ctx.moveTo(w*.5,h*.54);ctx.lineTo(x,h);ctx.stroke()}storyHeader(ctx,"IDAHO FARM · 1921",w,h)}
- else if(key==="earlyTelevisionLab1927"){gradientSky(ctx,w,h,"#202937","#0a1019");ctx.fillStyle="#596371";ctx.fillRect(w*.12,h*.26,w*.76,h*.56);ctx.fillStyle="#2a333d";ctx.fillRect(w*.2,h*.62,w*.6,h*.15);ctx.strokeStyle="#b9d9dc";ctx.lineWidth=9;ctx.beginPath();ctx.arc(w*.53,h*.43,w*.12,0,Math.PI*2);ctx.stroke();ctx.strokeStyle="#7ed0d7";ctx.lineWidth=3;for(let y=h*.33;y<h*.53;y+=14){ctx.beginPath();ctx.moveTo(w*.42,y);ctx.lineTo(w*.64,y);ctx.stroke()}storyHeader(ctx,"ELECTRONIC TELEVISION · 1927",w,h)}
- else if(key==="yorktownSpyCamp1781"||key==="revolutionaryCamp1782"){gradientSky(ctx,w,h,key==="yorktownSpyCamp1781"?"#172035":"#8fb7ce",key==="yorktownSpyCamp1781"?"#6f5139":"#d8bf84");hills(ctx,w,h,["#526448","#354b35"]);tents(ctx,w,h,.7);ctx.fillStyle="#e6dcb8";ctx.fillRect(w*.56,h*.38,w*.15,h*.2);ctx.strokeStyle="#564430";ctx.lineWidth=3;for(let y=h*.43;y<h*.55;y+=18){ctx.beginPath();ctx.moveTo(w*.58,y);ctx.lineTo(w*.69,y);ctx.stroke()}storyHeader(ctx,key==="yorktownSpyCamp1781"?"YORKTOWN · INSIDE THE BRITISH CAMP":"REVOLUTIONARY CAMP · 1782",w,h)}
- else if(key==="clevelandIntersection1923"){gradientSky(ctx,w,h,"#b9c5cb","#e2cba1");for(let x=0;x<w;x+=180)building(ctx,x,h*.18+(x%2)*42,150,h*.53-(x%2)*42,x%2?"#9a7254":"#7d7c75");ctx.fillStyle="#4b5050";ctx.fillRect(0,h*.68,w,h*.32);ctx.fillRect(w*.42,h*.48,w*.18,h*.52);ctx.strokeStyle="#e4d6ae";ctx.lineWidth=7;ctx.setLineDash([18,18]);ctx.beginPath();ctx.moveTo(0,h*.84);ctx.lineTo(w,h*.84);ctx.moveTo(w*.51,h*.49);ctx.lineTo(w*.51,h);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle="#302a25";ctx.fillRect(w*.47,h*.29,20,h*.3);circle(ctx,w*.48,h*.3,12,"#c23731","#222",2);circle(ctx,w*.48,h*.39,12,"#f2c75b","#222",2);storyHeader(ctx,"CLEVELAND INTERSECTION · 1923",w,h)}
- else if(key==="victorianDiningRoom1880s"){ctx.fillStyle="#7a5060";ctx.fillRect(0,0,w,h);ctx.fillStyle="#ead9ad";ctx.fillRect(w*.14,h*.1,w*.72,h*.15);ctx.fillStyle="#5a382e";ctx.fillRect(0,h*.72,w,h*.28);ctx.fillStyle="#866241";ctx.beginPath();ctx.ellipse(w*.5,h*.66,w*.33,h*.15,0,0,Math.PI*2);ctx.fill();for(const x of [.32,.43,.57,.68])circle(ctx,w*x,h*.62,32,"#e9e8dc","#4c4339",3);storyHeader(ctx,"CHIPPED CHINA · 1880s",w,h)}
- else if(key==="dishwasherWorkshop1886"){gradientSky(ctx,w,h,"#473d35","#1c2227");ctx.fillStyle="#704e36";ctx.fillRect(0,h*.72,w,h*.28);ctx.strokeStyle="#af9675";ctx.lineWidth=9;ctx.beginPath();ctx.arc(w*.5,h*.52,w*.18,0,Math.PI*2);ctx.stroke();for(let a=0;a<Math.PI*2;a+=Math.PI/6){ctx.beginPath();ctx.moveTo(w*.5,h*.52);ctx.lineTo(w*.5+Math.cos(a)*w*.18,h*.52+Math.sin(a)*w*.18);ctx.stroke()}ctx.strokeStyle="#b9d7df";ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(w*.18,h*.32);ctx.lineTo(w*.32,h*.54);ctx.lineTo(w*.24,h*.67);ctx.stroke();storyHeader(ctx,"COCHRANE'S WORKSHOP · 1886",w,h)}
- else if(key==="chicagoWorldsFair1893"){gradientSky(ctx,w,h,"#8fc4e0","#f2d6a3");ctx.fillStyle="#e9e6d8";ctx.fillRect(w*.12,h*.38,w*.76,h*.28);for(let x=w*.16;x<w*.83;x+=70){ctx.fillRect(x,h*.27,32,h*.4);ctx.beginPath();ctx.arc(x+16,h*.27,16,Math.PI,0);ctx.fill()}ctx.fillStyle="#95bfce";ctx.fillRect(0,h*.72,w,h*.28);storyHeader(ctx,"CHICAGO WORLD'S FAIR · 1893",w,h)}
- else if(key==="fortSmithFrontier1875"){gradientSky(ctx,w,h,"#e1a76d","#f3d69e");hills(ctx,w,h,["#9cad6b","#708850"]);ctx.fillStyle="#78543d";ctx.fillRect(w*.08,h*.47,w*.32,h*.23);for(let x=w*.1;x<w*.4;x+=58){ctx.fillStyle="#624331";ctx.fillRect(x,h*.38,14,h*.15)}ctx.strokeStyle="#8e5e3c";ctx.lineWidth=10;ctx.beginPath();ctx.moveTo(w*.55,h*.75);ctx.bezierCurveTo(w*.66,h*.56,w*.76,h*.72,w*.9,h*.45);ctx.stroke();storyHeader(ctx,"FORT SMITH FRONTIER · 1875",w,h)}
- else if(key==="fortSmithMap"){ctx.fillStyle="#dfcf9c";ctx.fillRect(0,0,w,h);ctx.fillStyle="#a8bf90";ctx.fillRect(w*.11,h*.24,w*.77,h*.56);ctx.strokeStyle="#9a5a35";ctx.lineWidth=10;ctx.beginPath();ctx.moveTo(w*.3,h*.36);ctx.bezierCurveTo(w*.42,h*.45,w*.56,h*.54,w*.74,h*.68);ctx.stroke();mapLabel(ctx,"FORT SMITH",w*.28,h*.3,22);mapLabel(ctx,"INDIAN TERRITORY",w*.63,h*.74,22);storyHeader(ctx,"THE TERRITORY REEVES PATROLLED",w,h)}
- else if(key==="northSeaNaval1779"){gradientSky(ctx,w,h,"#45576d","#b3a980");ctx.fillStyle="#305b78";ctx.fillRect(0,h*.42,w,h*.58);for(let y=h*.52;y<h;y+=35){ctx.strokeStyle="rgba(240,245,246,.28)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(0,y);for(let x=0;x<w;x+=45)ctx.lineTo(x,y+Math.sin(x*.04+y)*8);ctx.stroke()}storyShip(ctx,w*.36,h*.65,1.25,1);storyShip(ctx,w*.7,h*.59,1.15,-1);circle(ctx,w*.52,h*.55,22,"#e5a54d","#9b4c2d",3);storyHeader(ctx,"NORTH SEA · 1779",w,h)}
+ if(key==="charlestonDocks1862"){storyBase(ctx,w,h,{night:true,water:true});ctx.fillStyle=NH.wood;ctx.fillRect(0,h*.73,w,h*.27);for(let x=20;x<w;x+=115){ctx.fillRect(x,h*.52,12,h*.29)}storyShip(ctx,w*.65,h*.66,1.08);storyHeader(ctx,"CHARLESTON · 1862",w,h)}
+ else if(key==="charlestonHarborMap"){ctx.fillStyle=NH.paper;ctx.fillRect(0,0,w,h);ctx.fillStyle=NH.ocean;ctx.beginPath();ctx.moveTo(w*.17,h*.19);ctx.bezierCurveTo(w*.58,h*.08,w*.87,h*.31,w*.84,h*.84);ctx.lineTo(w*.39,h*.89);ctx.bezierCurveTo(w*.58,h*.64,w*.12,h*.64,w*.17,h*.19);ctx.fill();ctx.fillStyle=NH.green;ctx.beginPath();ctx.moveTo(0,h*.2);ctx.lineTo(w*.42,h*.16);ctx.lineTo(w*.52,h*.5);ctx.lineTo(w*.29,h*.73);ctx.lineTo(0,h*.86);ctx.closePath();ctx.fill();ctx.fillStyle=NH.stone;ctx.fillRect(w*.51,h*.46,50,28);mapLabel(ctx,"CHARLESTON",w*.25,h*.32,22);mapLabel(ctx,"FORT SUMTER",w*.56,h*.42,18);mapLabel(ctx,"UNION BLOCKADE",w*.73,h*.72,18);storyHeader(ctx,"CHARLESTON HARBOR",w,h)}
+ else if(key==="cowpensField1781"){storyBase(ctx,w,h,{ground:"#9a815b"});hills(ctx,w,h,[NH.green,NH.greenDark],.5);trees(ctx,w,h,.39,NH.greenDark);ctx.fillStyle="#b59b6d";ctx.fillRect(0,h*.73,w,h*.27);storyHeader(ctx,"COWPENS · 1781",w,h)}
+ else if(key==="cowpensTacticalMap"){ctx.fillStyle=NH.paper;ctx.fillRect(0,0,w,h);ctx.fillStyle="#9aaa78";ctx.fillRect(w*.08,h*.2,w*.84,h*.66);const lines=[[.24,.35,"SHARPSHOOTERS"],[.36,.51,"MILITIA"],[.49,.68,"CONTINENTALS"]];lines.forEach(([x,y,label],i)=>{ctx.strokeStyle=i===2?NH.blue:"#7087a0";ctx.lineWidth=12;ctx.beginPath();ctx.moveTo(w*x,h*y);ctx.lineTo(w*(x+.43),h*y);ctx.stroke();mapLabel(ctx,label,w*(x+.215),h*(y-.055),18)});storyHeader(ctx,"MORGAN'S THREE-LINE TRAP",w,h)}
+ else if(key==="bostonNorthEnd1919"){storyBase(ctx,w,h,{ground:"#6f5c51"});for(let x=15;x<w;x+=145)building(ctx,x,h*.27+(x%2)*35,120,h*.43-(x%2)*35,x%2?NH.brick:"#79685e");ctx.fillStyle=NH.smoke;ctx.fillRect(0,h*.39,w,14);for(let x=35;x<w;x+=200)ctx.fillRect(x,h*.30,9,h*.16);ctx.fillStyle="#565a58";ctx.fillRect(w*.61,h*.34,w*.18,h*.38);ctx.strokeStyle=NH.ink;ctx.lineWidth=5;ctx.strokeRect(w*.61,h*.34,w*.18,h*.38);storyHeader(ctx,"BOSTON NORTH END · 1919",w,h)}
+ else if(key==="idahoFarm1921"){storyBase(ctx,w,h,{ground:"#8a6847"});hills(ctx,w,h,["#8d9b6b",NH.green],.48);ctx.strokeStyle="#d6b36f";ctx.lineWidth=6;for(let x=-w;x<w*2;x+=72){ctx.beginPath();ctx.moveTo(w*.5,h*.55);ctx.lineTo(x,h);ctx.stroke()}storyHeader(ctx,"IDAHO · 1921",w,h)}
+ else if(key==="earlyTelevisionLab1927"){storyBase(ctx,w,h,{night:true,ground:"#3d454c"});ctx.fillStyle="#59646b";ctx.fillRect(w*.12,h*.28,w*.76,h*.46);ctx.fillStyle=NH.ink;ctx.fillRect(w*.2,h*.63,w*.6,h*.14);ctx.fillStyle="#1a232a";ctx.fillRect(w*.38,h*.35,w*.28,h*.22);ctx.strokeStyle="#9bc8cc";ctx.lineWidth=6;ctx.strokeRect(w*.38,h*.35,w*.28,h*.22);storyHeader(ctx,"SAN FRANCISCO LAB · 1927",w,h)}
+ else if(key==="yorktownSpyCamp1781"||key==="revolutionaryCamp1782"){storyBase(ctx,w,h,{night:key==="yorktownSpyCamp1781",ground:"#72634c"});hills(ctx,w,h,[NH.greenDark,"#3f5043"],.48);tents(ctx,w,h,.72);storyHeader(ctx,key==="yorktownSpyCamp1781"?"YORKTOWN · 1781":"CONTINENTAL ARMY · 1782",w,h)}
+ else if(key==="clevelandIntersection1923"){storyBase(ctx,w,h,{ground:"#555a5a"});for(let x=0;x<w;x+=210)building(ctx,x,h*.2+(x%2)*40,170,h*.45-(x%2)*40,x%2?NH.brick:NH.stone);ctx.fillStyle="#4c5152";ctx.fillRect(0,h*.67,w,h*.33);ctx.fillRect(w*.42,h*.48,w*.17,h*.52);ctx.strokeStyle=NH.cream;ctx.lineWidth=5;ctx.setLineDash([18,18]);ctx.beginPath();ctx.moveTo(0,h*.84);ctx.lineTo(w,h*.84);ctx.moveTo(w*.505,h*.49);ctx.lineTo(w*.505,h);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=NH.ink;ctx.fillRect(w*.47,h*.29,17,h*.3);storyHeader(ctx,"CLEVELAND · 1923",w,h)}
+ else if(key==="victorianDiningRoom1880s"){ctx.fillStyle="#d4c5ad";ctx.fillRect(0,0,w,h);ctx.fillStyle="#8f715c";ctx.fillRect(0,h*.72,w,h*.28);ctx.fillStyle=NH.wood;ctx.beginPath();ctx.ellipse(w*.5,h*.66,w*.32,h*.14,0,0,Math.PI*2);ctx.fill();for(const x of [.34,.45,.56,.67])circle(ctx,w*x,h*.62,29,NH.cream,NH.ink,3);storyHeader(ctx,"SHELBYVILLE · 1880s",w,h)}
+ else if(key==="dishwasherWorkshop1886"){storyBase(ctx,w,h,{ground:"#5b4a3d"});ctx.strokeStyle="#9e8a6c";ctx.lineWidth=8;ctx.beginPath();ctx.arc(w*.5,h*.53,w*.18,0,Math.PI*2);ctx.stroke();for(let a=0;a<Math.PI*2;a+=Math.PI/6){ctx.beginPath();ctx.moveTo(w*.5,h*.53);ctx.lineTo(w*.5+Math.cos(a)*w*.18,h*.53+Math.sin(a)*w*.18);ctx.stroke()}storyHeader(ctx,"COCHRAN'S WORKSHOP · 1886",w,h)}
+ else if(key==="chicagoWorldsFair1893"){storyBase(ctx,w,h,{water:true});ctx.fillStyle="#dedbd0";ctx.fillRect(w*.12,h*.36,w*.76,h*.3);for(let x=w*.16;x<w*.83;x+=70){ctx.fillRect(x,h*.25,32,h*.42);ctx.beginPath();ctx.arc(x+16,h*.25,16,Math.PI,0);ctx.fill()}storyHeader(ctx,"CHICAGO · 1893",w,h)}
+ else if(key==="fortSmithFrontier1875"){storyBase(ctx,w,h,{ground:"#9b7955"});hills(ctx,w,h,["#889466",NH.green],.5);ctx.fillStyle=NH.wood;ctx.fillRect(w*.08,h*.48,w*.33,h*.22);ctx.strokeStyle="#855f41";ctx.lineWidth=8;ctx.beginPath();ctx.moveTo(w*.54,h*.77);ctx.bezierCurveTo(w*.66,h*.56,w*.76,h*.72,w*.92,h*.45);ctx.stroke();storyHeader(ctx,"FORT SMITH · 1875",w,h)}
+ else if(key==="fortSmithMap"){ctx.fillStyle=NH.paper;ctx.fillRect(0,0,w,h);ctx.fillStyle="#a3b587";ctx.fillRect(w*.11,h*.24,w*.77,h*.56);ctx.strokeStyle="#8d6546";ctx.lineWidth=9;ctx.beginPath();ctx.moveTo(w*.3,h*.36);ctx.bezierCurveTo(w*.42,h*.45,w*.56,h*.54,w*.74,h*.68);ctx.stroke();mapLabel(ctx,"FORT SMITH",w*.28,h*.3,22);mapLabel(ctx,"INDIAN TERRITORY",w*.63,h*.74,22);storyHeader(ctx,"REEVES' TERRITORY",w,h)}
+ else if(key==="northSeaNaval1779"){storyBase(ctx,w,h,{night:true,water:true});for(let y=h*.57;y<h;y+=42){ctx.strokeStyle="rgba(245,238,219,.22)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(0,y);for(let x=0;x<w;x+=45)ctx.lineTo(x,y+Math.sin(x*.04+y)*7);ctx.stroke()}storyShip(ctx,w*.35,h*.67,1.18,1);storyShip(ctx,w*.7,h*.61,1.08,-1);storyHeader(ctx,"OFF FLAMBOROUGH HEAD · 1779",w,h)}
  ctx.restore();return null
+}
+function drawStoryNarrativeOverlay(ctx,key,w,h,options={}){
+ const text=String(options.text||"").toLowerCase(),time=Math.max(0,Number(options.time)||0),p=Math.max(0,Math.min(1,time/8));
+ ctx.save();
+ // One light grade keeps all story backgrounds in the same visual family.
+ ctx.fillStyle="rgba(245,238,219,.045)";ctx.fillRect(0,0,w,h);
+ if(key==="charlestonDocks1862"){
+   if(/famil|crew|board|flags/.test(text)){for(let i=0;i<4;i++)storyPerson(ctx,w*(.18+i*.08)+p*w*.12,h*.72,0.72,i%2?NH.blue:NH.ink);storyCallout(ctx,"FAMILIES BOARD THE PLANTER",w,h,{y:.24})}
+   else{storyPerson(ctx,w*(.18+p*.18),h*.71,.9,NH.ink,true);ctx.strokeStyle=NH.gold;ctx.lineWidth=8;ctx.beginPath();ctx.moveTo(w*.31,h*.62);ctx.lineTo(w*.49,h*.62);ctx.stroke();drawArrowHead(ctx,{x:w*.42,y:h*.62},{x:w*.49,y:h*.62},22,NH.gold);storyCallout(ctx,"3:00 A.M.",w,h,{y:.24})}
+ }else if(key==="charlestonHarborMap"){
+   const x=w*(.29+.46*p),y=h*(.38+.25*p);storyShip(ctx,x,y,.22,1,NH.ink);
+   if(/white sheet|union blockade|freedom|intelligence/.test(text)){ctx.fillStyle=NH.white;ctx.fillRect(x-4,y-70,34,24);storyCallout(ctx,"WHITE SHEET → UNION BLOCKADE",w,h,{y:.24})}
+   else storyCallout(ctx,"HE KNEW THE HARBOR SIGNALS",w,h,{y:.24})
+ }else if(key==="cowpensField1781"){
+   for(let i=0;i<4;i++){storyPerson(ctx,w*(.24+i*.075)-p*w*.05,h*.73,.58,NH.blue);storyPerson(ctx,w*(.64+i*.065)-p*w*.13,h*.67,.58,NH.red)}
+   if(/counterattack|cavalry|victory/.test(text)){ctx.strokeStyle=NH.blue;ctx.lineWidth=10;ctx.beginPath();ctx.moveTo(w*.16,h*.55);ctx.quadraticCurveTo(w*.42,h*.42,w*.61,h*.62);ctx.stroke();drawArrowHead(ctx,{x:w*.52,y:h*.54},{x:w*.61,y:h*.62},24,NH.blue);storyCallout(ctx,"COUNTERATTACK",w,h,{y:.24})}
+   else storyCallout(ctx,"RETREAT WAS PART OF THE PLAN",w,h,{y:.24})
+ }else if(key==="cowpensTacticalMap"){
+   if(/two volleys|sharpshooters|fall back/.test(text)){ctx.strokeStyle=NH.blue;ctx.lineWidth=8;for(const yy of [.35,.51]){ctx.beginPath();ctx.moveTo(w*.6,h*yy);ctx.lineTo(w*(.48-.08*p),h*(yy+.08*p));ctx.stroke();drawArrowHead(ctx,{x:w*.54,y:h*yy},{x:w*(.48-.08*p),y:h*(yy+.08*p)},20,NH.blue)}storyCallout(ctx,"TWO VOLLEYS — THEN FALL BACK",w,h,{y:.24})}
+   else{ctx.strokeStyle=NH.red;ctx.lineWidth=10;ctx.beginPath();ctx.moveTo(w*.82,h*.28);ctx.lineTo(w*(.67-.10*p),h*(.61+.03*p));ctx.stroke();drawArrowHead(ctx,{x:w*.72,y:h*.5},{x:w*(.67-.10*p),y:h*(.61+.03*p)},24,NH.red);storyCallout(ctx,"THE BRITISH TOOK THE BAIT",w,h,{y:.24})}
+ }else if(key==="bostonNorthEnd1919"){
+   const tankX=w*.70,tankY=h*.53;if(/burst|tank/.test(text)){ctx.strokeStyle=NH.red;ctx.lineWidth=8;ctx.beginPath();ctx.moveTo(tankX-15,tankY-90);ctx.lineTo(tankX+10,tankY-50);ctx.lineTo(tankX-8,tankY-18);ctx.stroke();storyCallout(ctx,"2.3 MILLION GALLONS",w,h,{y:.24})}
+   if(/wave|damage|trapped|died|injured/.test(text)){const reach=w*(.05+.62*p);ctx.fillStyle=NH.molasses;ctx.beginPath();ctx.moveTo(tankX,h*.64);ctx.quadraticCurveTo(w*.52,h*(.56-.08*p),reach,h*.69);ctx.lineTo(reach,h*.86);ctx.lineTo(tankX,h*.86);ctx.closePath();ctx.fill();storyCallout(ctx,/21|one hundred fifty|150/.test(text)?"21 DEAD · ABOUT 150 INJURED":"A 15-FOOT MOLASSES WAVE",w,h,{y:.24,color:NH.white})}
+ }else if(key==="idahoFarm1921"){
+   ctx.strokeStyle=NH.ink;ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(w*(.28+.28*p),h*.73);ctx.lineTo(w*(.38+.28*p),h*.73);ctx.stroke();ctx.strokeRect(w*(.31+.28*p),h*.69,54,28);storyPerson(ctx,w*(.27+.28*p),h*.69,.55,NH.ink);
+   if(/lines|picture|mechanical|scan/.test(text)){ctx.strokeStyle="#79b9c2";ctx.lineWidth=3;for(let y=h*.36;y<h*.56;y+=14){ctx.beginPath();ctx.moveTo(w*.58,y);ctx.lineTo(w*.84,y);ctx.stroke()}storyCallout(ctx,"FARM ROWS → SCAN LINES",w,h,{y:.24})}
+ }else if(key==="earlyTelevisionLab1927"){
+   const flicker=.65+.35*Math.sin(time*7);ctx.fillStyle="rgba(121,185,194,"+(.18*flicker)+")";ctx.fillRect(w*.4,h*.37,w*.24,h*.18);ctx.strokeStyle="#92c7cc";ctx.lineWidth=2;for(let y=h*.39;y<h*.53;y+=12){ctx.beginPath();ctx.moveTo(w*.41,y);ctx.lineTo(w*.63,y);ctx.stroke()}
+   storyCallout(ctx,/twenty-one|only 21/.test(text)?"HE WAS ONLY 21":"A FULLY ELECTRONIC IMAGE",w,h,{y:.24})
+ }else if(key==="yorktownSpyCamp1781"){
+   storyPerson(ctx,w*.31,h*.72,.82,NH.ink);storyPerson(ctx,w*.67,h*.7,.82,NH.red,true);
+   if(/information|troop|supplies|strategy|lafayette|misleading/.test(text)){storyDocument(ctx,w*(.58-.22*p),h*.54,78,96,"INTEL");ctx.strokeStyle=NH.gold;ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(w*.62,h*.59);ctx.lineTo(w*.39,h*.59);ctx.stroke();drawArrowHead(ctx,{x:w*.46,y:h*.59},{x:w*.39,y:h*.59},20,NH.gold);storyCallout(ctx,"BRITISH INTEL → LAFAYETTE",w,h,{y:.24})}
+   else storyCallout(ctx,"HE ENTERED THE BRITISH CAMP",w,h,{y:.24})
+ }else if(key==="revolutionaryCamp1782"){
+   if(/deborah|shurtleff|woman|disguis/.test(text)){storyPerson(ctx,w*.45,h*.72,.9,NH.blue,true);storyDocument(ctx,w*.69,h*.5,90,110,"ROBERT");storyCallout(ctx,"ROBERT SHURTLEFF",w,h,{y:.24})}
+   else if(/emancipat|freedom/.test(text)){storyDocument(ctx,w*.5,h*.52,130,165,"1787");storyCallout(ctx,"FREEDOM CAME LATER",w,h,{y:.24})}
+   else{storyPerson(ctx,w*.36,h*.72,.78,NH.blue,true);storyPerson(ctx,w*.65,h*.72,.78,NH.ink);storyCallout(ctx,"CONTINENTAL ARMY",w,h,{y:.24})}
+ }else if(key==="clevelandIntersection1923"){
+   const stop=/all directions|all-stop|safe pause|three-position/.test(text);storyCar(ctx,w*(.12+.42*(stop?.35:p)),h*.82,.7,NH.blue);ctx.save();ctx.translate(w*.52,h*(.58+.31*(stop?.35:p)));ctx.rotate(Math.PI/2);storyCar(ctx,0,0,.7,NH.red);ctx.restore();
+   ctx.fillStyle=NH.ink;ctx.fillRect(w*.69,h*.44,16,h*.25);circle(ctx,w*.70,h*.45,13,stop?NH.red:"#5f6a63",NH.ink,2);circle(ctx,w*.70,h*.52,13,stop?NH.gold:"#5f6a63",NH.ink,2);
+   storyCallout(ctx,stop?"ALL DIRECTIONS STOP":"CROWDED STREETS, ONE CROSSING",w,h,{y:.24})
+ }else if(key==="victorianDiningRoom1880s"){
+   ctx.strokeStyle=NH.red;ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(w*.47,h*.6);ctx.lineTo(w*.5,h*.64);ctx.lineTo(w*.46,h*.68);ctx.stroke();storyCallout(ctx,"HAND-WASHING CHIPPED THE DISHES",w,h,{y:.24})
+ }else if(key==="dishwasherWorkshop1886"){
+   ctx.strokeStyle="#8fc2cc";ctx.lineWidth=5;for(let a=-1.2;a<=1.2;a+=.3){ctx.beginPath();ctx.moveTo(w*.5,h*.53);ctx.lineTo(w*.5+Math.sin(a)*w*.2,h*.53-Math.cos(a)*h*.18);ctx.stroke()}storyCallout(ctx,/hotel|restaurant|home/.test(text)?"HOTELS USED IT FIRST":"PRESSURIZED WATER + WIRE RACKS",w,h,{y:.24})
+ }else if(key==="chicagoWorldsFair1893"){
+   storyDocument(ctx,w*.5,h*.55,130,165,"PATENT");storyCallout(ctx,"WORLD'S COLUMBIAN EXPOSITION · 1893",w,h,{y:.24})
+ }else if(key==="fortSmithFrontier1875"){
+   if(/disguise|tracking|arrest|fugitives/.test(text)){storyDocument(ctx,w*.28,h*.48,110,140,"WANTED");storyPerson(ctx,w*(.68-.18*p),h*.73,.88,NH.ink,true);storyCallout(ctx,"TRACK · DISGUISE · ARREST",w,h,{y:.24})}
+   else{storyPerson(ctx,w*.55,h*.73,.9,NH.ink,true);storyCallout(ctx,"DEPUTY U.S. MARSHAL",w,h,{y:.24})}
+ }else if(key==="fortSmithMap"){
+   const x=w*(.3+.43*p),y=h*(.36+.31*p);circle(ctx,x,y,12,NH.gold,NH.ink,3);ctx.strokeStyle=NH.gold;ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(w*.3,h*.36);ctx.lineTo(x,y);ctx.stroke();storyCallout(ctx,"FORT SMITH → INDIAN TERRITORY",w,h,{y:.24})
+ }else if(key==="northSeaNaval1779"){
+   const flash=.5+.5*Math.sin(time*7);if(flash>.65){circle(ctx,w*.52,h*.61,22,NH.gold,NH.red,4);circle(ctx,w*.57,h*.58,15,NH.gold,NH.red,3)}
+   ctx.fillStyle="rgba(105,113,120,.45)";for(let i=0;i<4;i++)circle(ctx,w*(.47+i*.035),h*(.47-i*.025),24+i*4,"rgba(105,113,120,.45)","#0000",0);
+   if(/sank|too damaged|final twist/.test(text))storyCallout(ctx,"HE WON — THEN HIS SHIP SANK",w,h,{y:.24});
+   else if(/together|point-blank|surrender/.test(text))storyCallout(ctx,"THE SHIPS LOCKED TOGETHER",w,h,{y:.24});
+   else storyCallout(ctx,"POINT-BLANK NAVAL BATTLE",w,h,{y:.24})
+ }
+ ctx.restore()
 }
 
 function mapLabel(ctx,text,x,y,size=28){ctx.save();ctx.font="800 "+size+"px system-ui";ctx.textAlign="center";ctx.textBaseline="middle";ctx.lineWidth=5;ctx.strokeStyle="#fff";ctx.strokeText(text,x,y);ctx.fillStyle="#26313a";ctx.fillText(text,x,y);ctx.restore()}
@@ -198,7 +295,7 @@ function drawSceneDetails(ctx,key,w,h){
  const vg=ctx.createRadialGradient(w/2,h/2,Math.min(w,h)*.18,w/2,h/2,Math.max(w,h)*.72);vg.addColorStop(0,"rgba(0,0,0,0)");vg.addColorStop(1,"rgba(0,0,0,.18)");ctx.fillStyle=vg;ctx.fillRect(0,0,w,h);ctx.restore()
 }
 function drawBackground(ctx,key,w=1280,h=720,options={}){
- if(STORY_BACKGROUNDS.has(key))return drawStoryBackground(ctx,key,w,h);
+ if(STORY_BACKGROUNDS.has(key)){drawStoryBackground(ctx,key,w,h);drawStoryNarrativeOverlay(ctx,key,w,h,options);return null;}
  if(["westernFrontMap","easternFrontMap","pearlHarborMap","normandyMap","coldWarMap","revolutionMap","napoleonicMap"].includes(key))return drawThematicMap(ctx,key,w,h,options);
  if(["parchment","worldMap","americasMap","europeMap","africaMap","asiaMap","battleMap"].includes(key)){const hm=window.MEPHistoricalMaps?.draw(ctx,{year:options.year||2026,text:options.text||"",key,width:w,height:h,showLabels:options.showLabels!==false,highlights:options.highlights||[]});if(!hm?.drawn)drawHistoricalMapPlaceholder(ctx,key,w,h,hm?.snapshotYear||options.year);return hm}
  if(key==="countryside"||key==="farmVillage"){gradientSky(ctx,w,h,"#8fc3e3","#f1c782");hills(ctx,w,h,["#8ca46b","#6f8758"]);trees(ctx,w,h,.5);if(key==="farmVillage"){ctx.fillStyle="#a87a4f";for(let x=120;x<w;x+=280){ctx.fillRect(x,420,130,100);ctx.fillStyle="#6c4731";ctx.beginPath();ctx.moveTo(x-12,420);ctx.lineTo(x+65,360);ctx.lineTo(x+142,420);ctx.closePath();ctx.fill();ctx.fillStyle="#a87a4f"}}}
