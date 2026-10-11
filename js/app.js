@@ -67,7 +67,7 @@ async function buildVoiceGraph(sh,{monitor=false}={}){
  return{ac,src,track:dest.stream.getAudioTracks()[0],duration:buf.duration,playDuration,outputDuration,start}
 }
 function refreshRefs(){MEPModel.syncAlias(project);short=MEPModel.activeShort(project);scene=MEPModel.activeScene(project);selectedId=scene?.characters?.some(c=>c.id===selectedId)?selectedId:(scene?.characters?.[0]?.id||null);selectedBubbleId=null;time=0;playing=false;editPreview=null;applyCanvasSize()}
-function applyCanvasSize(){if(!short)return;for(const c of [canvas,videoCanvas]){c.width=short.width||720;c.height=short.height||1280}document.documentElement.style.setProperty("--stage-ratio",(short.width||720)+"/"+(short.height||1280))}
+function applyCanvasSize(){if(!short)return;const w=short.width||720,h=short.height||1280;canvas.width=w;canvas.height=h;const previewScale=short.flagsEpisode?.index!==undefined?.67:1;videoCanvas.width=Math.max(2,Math.round(w*previewScale));videoCanvas.height=Math.max(2,Math.round(h*previewScale));document.documentElement.style.setProperty("--stage-ratio",w+"/"+h)}
 refreshRefs();
 
 const selected=()=>scene?.characters?.find(c=>c.id===selectedId)||null;
@@ -76,14 +76,13 @@ const assetById=id=>(project.assets||[]).find(a=>a.id===id)||null;
 const visibleBubbles=(s,t)=>(s.bubbles||[]).filter(b=>t>=(b.startTime??0)&&t<=(b.endTime??s.duration));
 const shortIndex=()=>Math.max(0,project.shorts.findIndex(s=>s.id===short.id));
 const sceneIndex=()=>Math.max(0,short.scenes.findIndex(s=>s.id===scene.id));
-function drawOverlayBrand(context){
- const w=context.canvas.width;context.save();context.font="800 "+Math.max(13,w*.024)+"px system-ui";context.textAlign="left";context.textBaseline="middle";
+function drawOverlayBrand(context,w=context.canvas.width){context.save();context.font="800 "+Math.max(13,w*.024)+"px system-ui";context.textAlign="left";context.textBaseline="middle";
  const text="NOVERIA HISTORY",tw=context.measureText(text).width;context.fillStyle="rgba(39,49,57,.82)";context.fillRect(18,20,tw+24,30);
  context.fillStyle="#d5a94f";context.fillText(text,30,35);context.restore()
 }
-function drawBurnedCaption(context,text){
+function drawBurnedCaption(context,text,w=context.canvas.width,h=context.canvas.height){
  if(!text)return;
- const w=context.canvas.width,h=context.canvas.height,maxW=w*.84,font=Math.max(24,w*.047);
+ const maxW=w*.84,font=Math.max(24,w*.047);
  context.save();context.font="850 "+font+"px system-ui";context.textAlign="center";context.textBaseline="middle";context.lineJoin="round";
  const words=String(text).split(/\s+/),lines=[];let line="";
  for(const word of words){const test=line?line+" "+word:word;if(context.measureText(test).width>maxW&&line){lines.push(line);line=word}else line=test}
@@ -97,9 +96,43 @@ function drawBurnedCaption(context,text){
 
 function imageForAsset(asset){if(!asset?.dataUrl)return null;if(imageCache.has(asset.id))return imageCache.get(asset.id);const im=new Image();im.src=asset.dataUrl;imageCache.set(asset.id,im);im.onload=()=>render();return im}
 function drawImageFit(context,img,bg={}){if(!img?.complete)return;const cw=context.canvas.width,ch=context.canvas.height,iw=img.naturalWidth||img.width,ih=img.naturalHeight||img.height;if(!iw||!ih)return;const fit=bg.fit||"cover",opacity=bg.opacity??1,userScale=Math.max(.25,Number(bg.scale)||1),panX=Number(bg.panX)||0,panY=Number(bg.panY)||0,brightness=Math.max(.2,Number(bg.brightness)||1),contrast=Math.max(.5,Number(bg.contrast)||1),saturation=Math.max(0,Number(bg.saturation)||1),sepia=Math.max(0,Math.min(1,Number(bg.sepia)||0)),blur=Math.max(0,Number(bg.blur)||0);context.save();context.globalAlpha=Math.max(0,Math.min(1,opacity));context.filter="brightness("+brightness+") contrast("+contrast+") saturate("+saturation+") sepia("+sepia+") blur("+blur+"px)";if(fit==="stretch"){const w=cw*userScale,h=ch*userScale;context.drawImage(img,(cw-w)/2+panX,(ch-h)/2+panY,w,h)}else{const base=fit==="contain"?Math.min(cw/iw,ch/ih):Math.max(cw/iw,ch/ih),scale=base*userScale,w=iw*scale,h=ih*scale;context.drawImage(img,(cw-w)/2+panX,(ch-h)/2+panY,w,h)}context.restore()}
-function renderBackground(context,s,t,sh=short){if(s.flagBeat&&window.MEPFlagSeries?.draw){MEPFlagSeries.draw(context,s.flagBeat,t,s.duration);return s.background||{}}const bg=MEPModel.backgroundAt(s,t),mapText=[sh?.title||"",s.name||"",s.caption||"",s.script||""].join(" "),mapYear=Number(s.mapYear||sh?.year||project.year||2026);MEPRenderer.drawBackground(context,bg.preset||"europeMap",context.canvas.width,context.canvas.height,{year:mapYear,text:mapText,time:t,duration:Number(s.duration)||3.2,shot:s.visualShot||"",intent:s.visualIntent||"",showLabels:bg.showCountryLabels!==false,highlights:s.mapHighlights||[],showFront:s.mapShowFront===true});if(bg.mode==="image"&&bg.assetId){const im=imageForAsset(assetById(bg.assetId));if(im)drawImageFit(context,im,bg)}return bg}
+function renderBackground(context,s,t,sh=short,viewport={}){
+ const w=viewport.width||context.canvas.width,h=viewport.height||context.canvas.height;
+ if(s.flagBeat&&window.MEPFlagSeries?.draw){MEPFlagSeries.draw(context,s.flagBeat,t,s.duration,{width:w,height:h});return s.background||{}}
+ const bg=MEPModel.backgroundAt(s,t),mapText=[sh?.title||"",s.name||"",s.caption||"",s.script||""].join(" ");
+ const mapYear=Number(s.mapYear||sh?.year||project.year||2026);
+ MEPRenderer.drawBackground(context,bg.preset||"europeMap",w,h,{
+  year:mapYear,text:mapText,time:t,duration:Number(s.duration)||3.2,shot:s.visualShot||"",
+  intent:s.visualIntent||"",showLabels:bg.showCountryLabels!==false,
+  highlights:s.mapHighlights||[],showFront:s.mapShowFront===true
+ });
+ if(bg.mode==="image"&&bg.assetId){const im=imageForAsset(assetById(bg.assetId));if(im)drawImageFit(context,im,bg)}
+ return bg
+}
 function stateFor(ch){if(!playing&&editPreview?.id===ch.id&&Math.abs(editPreview.time-time)<.001)return MEPModel.capture(ch);return(time>0||playing)?MEPModel.stateAt(ch,time):MEPModel.capture(ch)}
-function renderScene(context,s,t,{selectable=false,shortContext=short}={}){context.save();context.clearRect(0,0,context.canvas.width,context.canvas.height);const cam=s.camera||{x:context.canvas.width/2,y:context.canvas.height/2,zoom:1};context.translate(context.canvas.width/2,context.canvas.height/2);context.scale(cam.zoom||1,cam.zoom||1);context.translate(-(cam.x??context.canvas.width/2),-(cam.y??context.canvas.height/2));renderBackground(context,s,t,shortContext);MEPRenderer.drawGraphics(context,s.graphics||[],t);[...(s.characters||[])].sort((a,b)=>(a.layer||0)-(b.layer||0)).forEach(ch=>MEPRenderer.drawCharacter(context,selectable&&s.id===scene.id?stateFor(ch):MEPModel.stateAt(ch,t),ch,selectable&&ch.id===selectedId));context.restore();visibleBubbles(s,t).forEach(b=>MEPRenderer.drawBubble(context,b));drawOverlayBrand(context);if(!window.MEPCaptions?.draw(context,s,t,shortContext))drawBurnedCaption(context,s.caption||"")}
+function renderScene(context,s,t,{selectable=false,shortContext=short}={}){
+ const logicalWidth=shortContext?.width||720,logicalHeight=shortContext?.height||1280;
+ const sx=context.canvas.width/logicalWidth,sy=context.canvas.height/logicalHeight;
+ context.save();
+ context.clearRect(0,0,context.canvas.width,context.canvas.height);
+ context.scale(sx,sy);
+ const cam=s.camera||{x:logicalWidth/2,y:logicalHeight/2,zoom:1};
+ context.translate(logicalWidth/2,logicalHeight/2);
+ context.scale(cam.zoom||1,cam.zoom||1);
+ context.translate(-(cam.x??logicalWidth/2),-(cam.y??logicalHeight/2));
+ renderBackground(context,s,t,shortContext,{width:logicalWidth,height:logicalHeight});
+ MEPRenderer.drawGraphics(context,s.graphics||[],t);
+ [...(s.characters||[])].sort((a,b)=>(a.layer||0)-(b.layer||0)).forEach(ch=>
+  MEPRenderer.drawCharacter(context,selectable&&s.id===scene.id?stateFor(ch):MEPModel.stateAt(ch,t),ch,selectable&&ch.id===selectedId));
+ context.restore();
+ context.save();context.scale(sx,sy);
+ visibleBubbles(s,t).forEach(b=>MEPRenderer.drawBubble(context,b));
+ drawOverlayBrand(context,logicalWidth);
+ if(!window.MEPCaptions?.draw(context,s,t,shortContext,{width:logicalWidth,height:logicalHeight})){
+  drawBurnedCaption(context,s.caption||"",logicalWidth,logicalHeight)
+ }
+ context.restore()
+}
 function render(){renderScene(ctx,scene,time,{selectable:true});setText("#timeLabel",time.toFixed(2)+" / "+scene.duration.toFixed(2)+"s");setVal("#scrubber",time)}
 
 function changed({cloud=true}={}){short.updatedAt=new Date().toISOString();MEPModel.syncAlias(project);MEPStorage.save(project);setText("#saveStatus",cloudReady?"Local changes · Save Firestore to sync":"Local ✓");drawTimeline();render();syncBuddy()}
