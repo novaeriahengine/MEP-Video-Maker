@@ -44,11 +44,11 @@ window.MEPCaptions=(()=>{
   if(st.background==="box"){ctx.fillStyle="rgba(24,30,37,.8)";const boxW=maxW+28,boxH=lines.length*lh+22;ctx.beginPath();ctx.roundRect(-boxW/2,-boxH/2,boxW,boxH,12);ctx.fill()}
   if(st.shadow){ctx.shadowColor="rgba(0,0,0,.65)";ctx.shadowBlur=10;ctx.shadowOffsetY=3}
   lines.forEach((line,i)=>{
-   const yy=top+i*lh,words=line.split(/\\s+/),full=ctx.measureText(line).width;
+   const yy=top+i*lh,words=line.split(/\s+/),full=ctx.measureText(line).width;
    let cursor=-full/2;
    for(let j=0;j<words.length;j++){
     const word=words[j],wordW=ctx.measureText(word).width,spaceW=j<words.length-1?ctx.measureText(" ").width:0;
-    const important=/\\d|patent|invent|freedom|victor|first|stop|saf|signal|fiber|strong|light|escape|breakthrough|machine|wiper|bag|electric|intelligen|filament/i.test(word);
+    const important=/\d|patent|invent|freedom|victor|first|stop|saf|signal|fiber|strong|light|escape|breakthrough|machine|wiper|bag|electric|intelligen|filament/i.test(word);
     const caution=/dead|injur|danger|burst|crash|fire|attack|sank|destroy|failure/i.test(word);
     ctx.lineWidth=Math.max(3,fs*.13);ctx.strokeStyle=st.stroke||defaults.stroke;ctx.strokeText(word,cursor+wordW/2,yy,Math.min(wordW,maxW));
     ctx.fillStyle=st.highlight&&caution?"#e78478":st.highlight&&important?(st.accent||defaults.accent):(st.color||defaults.color);
