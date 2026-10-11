@@ -140,3 +140,15 @@ body.tool-full .toolAssistant{background:#0f141b}
 .flagStateRow img{width:43px;height:28px;object-fit:contain;background:#e9e2d4;border-radius:2px}
 .flagStateRow strong{font-size:13px}.flagStateRow small{font-size:10px;color:var(--muted)}
 @media(max-width:600px){.flagsSeriesPanel{padding:8px}.flagActivePreview img{width:91px;height:58px}}
+
+/* One-owner Firestore account dialog */
+.ownerAccountDialog{max-width:min(96vw,570px);width:min(96vw,570px);max-height:90dvh;overflow:auto;border-radius:16px}
+.ownerAccountDialog .dialogShell{display:flex;flex-direction:column;gap:12px;max-height:none;min-width:0}
+.ownerAccountDialog .dialogShell header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.ownerAccountDialog #ownerAccountStatus{padding:10px 12px;border-left:3px solid #c9a85a;background:rgba(95,105,118,.13);border-radius:5px;overflow-wrap:anywhere;font-size:13px;line-height:1.5}
+.ownerAccountDialog .ownerHint{font-size:12px;line-height:1.6;color:var(--muted);margin:4px 0 0}
+.ownerAccountDialog input{min-width:0;width:100%}
+.ownerAccountDialog input[readonly]{opacity:.85}
+.ownerAccountDialog .buttonGrid{display:flex;flex-wrap:wrap;gap:7px}
+.ownerAccountDialog .buttonGrid button{flex:1 1 130px}
+@media(max-width:480px){.ownerAccountDialog{width:96vw;padding:5px}.ownerAccountDialog .dialogShell{padding:12px}.ownerAccountDialog .buttonGrid button{min-height:44px}}
