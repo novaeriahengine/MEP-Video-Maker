@@ -69,12 +69,27 @@ window.MEPFlagSeries=(()=>{
  function text(ctx,str,x,y,size=32,color=theme.cream,{align="center",bold=true,max=660}={}){
   ctx.font=(bold?"900 ":"600 ")+size+"px system-ui";ctx.textAlign=align;ctx.textBaseline="middle";ctx.lineWidth=Math.max(3,size*.14);ctx.lineJoin="round";ctx.strokeStyle="rgba(30,37,45,.7)";ctx.strokeText(str,x,y,max);ctx.fillStyle=color;ctx.fillText(str,x,y,max)
  }
- function bg(ctx,w,h){
+ const backdropCache=new Map();
+ function drawBackdrop(ctx,w,h){
   ctx.fillStyle=theme.dark;ctx.fillRect(0,0,w,h);ctx.fillStyle="#344a5a";ctx.fillRect(0,h*.12,w,h*.76);
   ctx.strokeStyle="rgba(249,240,217,.08)";ctx.lineWidth=2;
   for(let x=0;x<w;x+=w/7){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke()}
   for(let y=0;y<h;y+=h/12){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}
   ctx.fillStyle=theme.gold;ctx.fillRect(0,0,w,h*.009)
+ }
+ function bg(ctx,w,h){
+  if(typeof document==="undefined"){drawBackdrop(ctx,w,h);return}
+  const key=w+"x"+h;
+  let raster=backdropCache.get(key);
+  if(!raster){
+   const canvas=document.createElement("canvas");canvas.width=w;canvas.height=h;
+   const off=canvas.getContext("2d");
+   if(!off){drawBackdrop(ctx,w,h);return}
+   drawBackdrop(off,w,h);raster=canvas;
+   backdropCache.set(key,raster);
+   if(backdropCache.size>2)backdropCache.delete(backdropCache.keys().next().value);
+  }
+  ctx.drawImage(raster,0,0)
  }
  function gradeColor(g){return({A:"#55bc83",B:"#84b6da",C:"#e6c05f",D:"#d99655",F:"#db6868"})[g]||theme.mute}
  function flagCard(ctx,code,x,y,w,h,progress=1,{variant="current",title=true}={}){
