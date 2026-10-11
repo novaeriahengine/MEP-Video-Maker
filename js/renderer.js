@@ -78,6 +78,17 @@ function gradientSky(ctx,w,h,top,bottom){const g=ctx.createLinearGradient(0,0,0,
 function hills(ctx,w,h,colors,base=.56){colors.forEach((c,i)=>{ctx.fillStyle=c;ctx.beginPath();ctx.moveTo(0,h*(base+i*.07));for(let x=0;x<=w;x+=70)ctx.lineTo(x,h*(base+i*.07)+Math.sin(x*.012+i)*24);ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();ctx.fill()})}
 function trees(ctx,w,h,start=.45,color="#344834"){ctx.fillStyle=color;for(let x=30;x<w;x+=145){ctx.fillRect(x,h*start,9,h*.17);ctx.beginPath();ctx.arc(x+4,h*(start-.02),38,0,Math.PI*2);ctx.fill()}}
 function building(ctx,x,y,w,h,fill="#8a7768"){ctx.fillStyle=fill;ctx.fillRect(x,y,w,h);ctx.fillStyle="#b8d3e5";for(let yy=y+25;yy<y+h-25;yy+=55)for(let xx=x+18;xx<x+w-18;xx+=48)ctx.fillRect(xx,yy,25,30)}
+function drawHistoricalMapPlaceholder(ctx,key,w,h,year=0){
+ const g=ctx.createLinearGradient(0,0,0,h);g.addColorStop(0,"#aecddb");g.addColorStop(1,"#6b9eb8");ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+ ctx.save();ctx.strokeStyle="rgba(255,255,255,.17)";ctx.lineWidth=1;
+ for(let x=0;x<w;x+=Math.max(40,w/10)){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke()}
+ for(let y=0;y<h;y+=Math.max(40,h/14)){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}
+ ctx.fillStyle="rgba(19,36,51,.76)";ctx.fillRect(w*.08,h*.40,w*.84,h*.16);
+ ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle="#fff";
+ ctx.font="800 "+Math.max(20,w*.037)+"px system-ui";ctx.fillText("LOADING HISTORICAL BORDERS",w*.5,h*.465);
+ ctx.font="600 "+Math.max(13,w*.023)+"px system-ui";ctx.fillText((year?year+" · ":"")+"Map downloads automatically",w*.5,h*.52);
+ ctx.restore()
+}
 function drawMap(ctx,key,w,h){
  ctx.fillStyle=key==="parchment"?"#e6d7a8":"#9cc3d6";ctx.fillRect(0,0,w,h);ctx.fillStyle=key==="parchment"?"#9f8b5d":"#6e8e62";
  const blobs=key==="europeMap"?[[.48,.34,.16,.16],[.58,.24,.09,.16],[.39,.27,.08,.08]]:key==="africaMap"?[[.52,.44,.16,.26],[.6,.66,.05,.09]]:key==="asiaMap"?[[.58,.33,.29,.21],[.8,.52,.1,.12]]:key==="americasMap"?[[.32,.25,.15,.2],[.4,.52,.09,.26],[.28,.12,.08,.1]]:[[.2,.28,.12,.19],[.33,.52,.08,.22],[.53,.29,.2,.17],[.6,.53,.12,.2],[.82,.58,.08,.09]];
@@ -89,7 +100,7 @@ function mapLabel(ctx,text,x,y,size=28){ctx.save();ctx.font="800 "+size+"px syst
 function drawThematicMap(ctx,key,w,h,options={}){
  const baseKey=key==="pearlHarborMap"?"worldMap":key==="revolutionMap"?"americasMap":"europeMap";
  const hm=window.MEPHistoricalMaps?.draw(ctx,{year:options.year||2026,text:options.text||"",key,width:w,height:h,time:options.time||0,showLabels:options.showLabels!==false,highlights:options.highlights||[]});
- if(!hm?.drawn)drawMap(ctx,baseKey,w,h);
+ if(!hm?.drawn)drawHistoricalMapPlaceholder(ctx,baseKey,w,h,hm?.snapshotYear||options.year);
  ctx.save();
  const title=key==="westernFrontMap"?"WESTERN FRONT":key==="easternFrontMap"?"EASTERN FRONT":key==="pearlHarborMap"?"PACIFIC THEATER":key==="normandyMap"?"NORMANDY · 1944":key==="coldWarMap"?"COLD WAR":key==="revolutionMap"?"AMERICAN REVOLUTION":key==="napoleonicMap"?"EUROPE · 1815":"";
  if(title)mapLabel(ctx,title,w*.5,h*.105,Math.max(20,w*.046));
@@ -163,7 +174,7 @@ function drawSceneDetails(ctx,key,w,h){
 }
 function drawBackground(ctx,key,w=1280,h=720,options={}){
  if(["westernFrontMap","easternFrontMap","pearlHarborMap","normandyMap","coldWarMap","revolutionMap","napoleonicMap"].includes(key))return drawThematicMap(ctx,key,w,h,options);
- if(["parchment","worldMap","americasMap","europeMap","africaMap","asiaMap","battleMap"].includes(key)){const hm=window.MEPHistoricalMaps?.draw(ctx,{year:options.year||2026,text:options.text||"",key,width:w,height:h,showLabels:options.showLabels!==false,highlights:options.highlights||[]});if(!hm?.drawn)drawMap(ctx,key,w,h);return hm}
+ if(["parchment","worldMap","americasMap","europeMap","africaMap","asiaMap","battleMap"].includes(key)){const hm=window.MEPHistoricalMaps?.draw(ctx,{year:options.year||2026,text:options.text||"",key,width:w,height:h,showLabels:options.showLabels!==false,highlights:options.highlights||[]});if(!hm?.drawn)drawHistoricalMapPlaceholder(ctx,key,w,h,hm?.snapshotYear||options.year);return hm}
  if(key==="countryside"||key==="farmVillage"){gradientSky(ctx,w,h,"#8fc3e3","#f1c782");hills(ctx,w,h,["#8ca46b","#6f8758"]);trees(ctx,w,h,.5);if(key==="farmVillage"){ctx.fillStyle="#a87a4f";for(let x=120;x<w;x+=280){ctx.fillRect(x,420,130,100);ctx.fillStyle="#6c4731";ctx.beginPath();ctx.moveTo(x-12,420);ctx.lineTo(x+65,360);ctx.lineTo(x+142,420);ctx.closePath();ctx.fill();ctx.fillStyle="#a87a4f"}}}
  else if(key==="forest"||key==="jungle"){gradientSky(ctx,w,h,key==="jungle"?"#86b9a4":"#9cc6d6","#d8c693");hills(ctx,w,h,[key==="jungle"?"#4a714d":"#5f7950","#405a3d"]);trees(ctx,w,h,.32,key==="jungle"?"#294e34":"#344834");trees(ctx,w,h,.54,key==="jungle"?"#1f3d29":"#2f4933")}
  else if(key==="mountainPass"||key==="snowField"){gradientSky(ctx,w,h,"#8fb6d7","#d9e4ea");ctx.fillStyle=key==="snowField"?"#dce7ee":"#6b7074";for(let i=0;i<4;i++){ctx.beginPath();ctx.moveTo(i*330-150,h*.68);ctx.lineTo(i*330+170,h*.19);ctx.lineTo(i*330+480,h*.68);ctx.closePath();ctx.fill()}ctx.fillStyle=key==="snowField"?"#f4f7f9":"#8b806c";ctx.fillRect(0,h*.68,w,h*.32)}
