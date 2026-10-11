@@ -323,14 +323,36 @@ on("#videoScrubber","input",e=>{videoPlaying=false;stopVideoPreviewVoice();video
 on("#videoPrevScene","click",()=>{videoPlaying=false;stopVideoPreviewVoice();const x=sceneAtGlobal(short,videoTime);videoTime=sceneAtGlobal(short,Math.max(0,x.offset-.01)).offset;renderVideo()});
 on("#videoNextScene","click",()=>{videoPlaying=false;stopVideoPreviewVoice();const x=sceneAtGlobal(short,videoTime);videoTime=Math.min(MEPModel.shortDuration(short),x.offset+x.scene.duration+.001);renderVideo()});
 
-async function warmAssets(){await Promise.all((project.assets||[]).filter(a=>a.dataUrl).map(a=>new Promise(resolve=>{const im=imageForAsset(a);if(!im||im.complete)return resolve();im.addEventListener("load",resolve,{once:true});im.addEventListener("error",resolve,{once:true})})))}
+async function warmAssets(sh){
+ const usedIds=new Set();
+ for(const s of sh?.scenes||[]){
+  const bg=s.background||{};if(bg.assetId)usedIds.add(bg.assetId);
+  for(const frame of bg.keyframes||[])if(frame.assetId)usedIds.add(frame.assetId)
+ }
+ const images=(project.assets||[]).filter(a=>usedIds.has(a.id)&&a.dataUrl&&/^image\//i.test(a.type||""));
+ await Promise.all(images.map(a=>new Promise((resolve,reject)=>{
+  const im=imageForAsset(a);if(!im)return resolve();
+  if(im.complete)return im.naturalWidth>0?resolve():reject(new Error("Cannot load image: "+a.name));
+  im.addEventListener("load",resolve,{once:true});
+  im.addEventListener("error",()=>reject(new Error("Cannot load image: "+a.name)),{once:true})
+ })))
+}
 async function warmHistoricalMaps(sh){
  if(!window.MEPHistoricalMaps)return;
- const jobs=[];for(const s of sh?.scenes||[]){const bg=MEPModel.backgroundAt(s,0),meta=MEPModel.BACKGROUNDS[bg.preset];if(meta?.kind!=="map")continue;const text=[sh.title,s.name,s.caption,s.script].join(" "),snap=MEPHistoricalMaps.resolveSnapshot(Number(s.mapYear||sh.year),text);jobs.push(MEPHistoricalMaps.load(snap))}
- await Promise.all(jobs)
+ const required=new Map();
+ for(const s of sh?.scenes||[]){
+  const bg=MEPModel.backgroundAt(s,0),meta=MEPModel.BACKGROUNDS[bg.preset];
+  if(meta?.kind!=="map"||bg.mode==="image")continue;
+  const text=[sh.title,s.name,s.caption,s.script].join(" ");
+  const snap=MEPHistoricalMaps.resolveSnapshot(Number(s.mapYear||sh.year),text);
+  required.set(snap.year,snap)
+ }
+ const results=await Promise.all([...required.values()].map(snap=>MEPHistoricalMaps.load(snap)));
+ const missing=[...required.keys()].filter((year,i)=>!results[i]);
+ if(missing.length)throw new Error("The historical map data for "+missing.join(", ")+" could not load. Connect to the internet or open your Python server and download the map pack. Export was stopped instead of saving a fake map.")
 }
 
- async function prepareChromePreviewForExport(sh){
+async function prepareChromePreviewForExport(sh){
   if(sh?.voice?.source!=="chrome")return;const script=wholeNarration(sh);if(!script.trim())throw new Error("Chrome Preview has no narration text to convert. Write a narration or choose No Voice for a silent export.");const url=(location.protocol==="http:"&&/^(localhost|127\\.|10\\.|192\\.168\\.|172\\.(1[6-9]|2\\d|3[0-1])\\.)/i.test(location.hostname)?location.origin:($("#neuralApiUrl")?.value||window.MEPVoiceBackends?.defaultServerUrl?.()||"")).trim();if(!url)throw new Error("Chrome voice is preview-only. Start desktop-server on the laptop, then open the editor tab or scan its QR code. That local editor automatically generates Kokoro narration when you export.");if(!window.MEPVoiceBackends?.synthesize)throw new Error("The Local Kokoro export helper is unavailable. Reload the local MEP editor and try again.");setText("#exportStatus","Chrome Preview selected · generating an exportable Local Kokoro narration…");MEPVoiceBackends.setServerUrl(url);
  try{await MEPVoiceBackends.health(url)}catch(e){throw new Error("Your Kokoro server is not reachable from this page: "+e.message+". Open the Python desktop editor or configure a secure HTTPS endpoint.")}
  const v=sh.voice||{},exportRate=Math.max(.70,Math.min(1.25,Number(v.ttsRate??v.kokoroSpeed??.95))),blob=await MEPVoiceBackends.synthesize(url,{text:script,voice:v.kokoroVoice||"bm_george",speed:exportRate,pauseMs:Number(v.sentencePauseMs??70),tailTrimMs:Number(v.tailTrimMs??100),title:sh.title,shortId:sh.id});await attachNeuralAudio(blob,(sh.title||"mep-short").replace(/[^a-z0-9]+/gi,"-")+"-kokoro.wav",sh,{quiet:true,voice:v.kokoroVoice||"bm_george",speed:exportRate,source:"server"});selectVoiceSource(sh,"server");changed();syncVoiceUI();setText("#exportStatus","Local Kokoro narration attached · mixing it into the WebM…")
@@ -340,7 +362,7 @@ async function warmHistoricalMaps(sh){
  await prepareChromePreviewForExport(sh);
  const voiceInfo=voiceSourceInfo(sh);
  setText("#exportStatus","Preparing historical maps and media…");
- await Promise.all([warmAssets(),warmHistoricalMaps(sh)]);
+ await Promise.all([warmAssets(sh),warmHistoricalMaps(sh)]);
  const canvas=document.createElement("canvas");
  canvas.width=sh.width||720;
  canvas.height=sh.height||1280;
