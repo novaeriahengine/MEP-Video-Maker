@@ -2,6 +2,7 @@
 window.MEP_FIREBASE_CONFIG = {
   apiKey: "AIzaSyDta5CspYbrde9MNft5F_OOIs_zSMdS_24",
   authDomain: "mep-video-maker.firebaseapp.com",
+  databaseURL: "https://mep-video-maker-default-rtdb.firebaseio.com",
   projectId: "mep-video-maker",
   storageBucket: "mep-video-maker.firebasestorage.app",
   messagingSenderId: "266398441656",
