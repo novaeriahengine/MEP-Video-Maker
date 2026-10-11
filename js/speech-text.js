@@ -9,5 +9,12 @@ window.MEPSpeech=(()=>{
     .replace(/\b(?:First\s+World\s+War)\b/gi,"World War One")
     .replace(/\b(?:Second\s+World\s+War)\b/gi,"World War Two");
  }
- return {normalize};
+ function display(text){
+  return String(text||"")
+   .replace(/\bWorld War II\b/gi,"World War 2")
+   .replace(/\bWorld War I\b/gi,"World War 1")
+   .replace(/\bWWII\b/g,"World War 2")
+   .replace(/\bWWI\b/g,"World War 1");
+ }
+ return {normalize,display};
 })();
