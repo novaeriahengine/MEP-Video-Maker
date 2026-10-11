@@ -1,7 +1,7 @@
 {
   "schema": "mep-video-project",
   "version": 8,
-  "name": "Noveria American Stories · Batch 2",
+  "name": "Noveria American Stories + Inventors · Batches 2 and 3",
   "category": "YouTube Shorts",
   "tags": [
     "Noveria History",
@@ -11,7 +11,10 @@
     "noveria-history-v2",
     "animated-storytelling",
     "rapid-3-second-beats",
-    "visual-storytelling-v3"
+    "visual-storytelling-v3",
+    "american-inventions",
+    "animated-captions",
+    "15-shorts"
   ],
   "shorts": [
     {
@@ -1122,10 +1125,27 @@
           "markers": []
         }
       ],
-      "visualStyle": "noveria-history-v3-rapid-cuts",
+      "visualStyle": "noveria-history-v4",
       "fps": 30,
       "width": 720,
-      "height": 1280
+      "height": 1280,
+      "captionStyle": {
+        "enabled": true,
+        "source": "narration",
+        "position": "bottom",
+        "x": 50,
+        "y": 84,
+        "fontSize": 40,
+        "color": "#fff8e7",
+        "accent": "#f1c35f",
+        "stroke": "#202832",
+        "background": "none",
+        "animationIn": "rise",
+        "animationOut": "fade",
+        "wordsPerCaption": 5,
+        "uppercase": false,
+        "shadow": true
+      }
     },
     {
       "title": "Daniel Morgan Told His Soldiers to Retreat on Purpose",
@@ -2226,10 +2246,27 @@
           "markers": []
         }
       ],
-      "visualStyle": "noveria-history-v3-rapid-cuts",
+      "visualStyle": "noveria-history-v4",
       "fps": 30,
       "width": 720,
-      "height": 1280
+      "height": 1280,
+      "captionStyle": {
+        "enabled": true,
+        "source": "narration",
+        "position": "bottom",
+        "x": 50,
+        "y": 84,
+        "fontSize": 40,
+        "color": "#fff8e7",
+        "accent": "#f1c35f",
+        "stroke": "#202832",
+        "background": "none",
+        "animationIn": "rise",
+        "animationOut": "fade",
+        "wordsPerCaption": 5,
+        "uppercase": false,
+        "shadow": true
+      }
     },
     {
       "title": "Boston Was Hit by a Flood of Molasses",
@@ -3092,10 +3129,27 @@
           "markers": []
         }
       ],
-      "visualStyle": "noveria-history-v3-rapid-cuts",
+      "visualStyle": "noveria-history-v4",
       "fps": 30,
       "width": 720,
-      "height": 1280
+      "height": 1280,
+      "captionStyle": {
+        "enabled": true,
+        "source": "narration",
+        "position": "bottom",
+        "x": 50,
+        "y": 84,
+        "fontSize": 40,
+        "color": "#fff8e7",
+        "accent": "#f1c35f",
+        "stroke": "#202832",
+        "background": "none",
+        "animationIn": "rise",
+        "animationOut": "fade",
+        "wordsPerCaption": 5,
+        "uppercase": false,
+        "shadow": true
+      }
     },
     {
       "title": "A 14-Year-Old Got the Idea for Electronic Television While Plowing",
@@ -4072,10 +4126,27 @@
           "markers": []
         }
       ],
-      "visualStyle": "noveria-history-v3-rapid-cuts",
+      "visualStyle": "noveria-history-v4",
       "fps": 30,
       "width": 720,
-      "height": 1280
+      "height": 1280,
+      "captionStyle": {
+        "enabled": true,
+        "source": "narration",
+        "position": "bottom",
+        "x": 50,
+        "y": 84,
+        "fontSize": 40,
+        "color": "#fff8e7",
+        "accent": "#f1c35f",
+        "stroke": "#202832",
+        "background": "none",
+        "animationIn": "rise",
+        "animationOut": "fade",
+        "wordsPerCaption": 5,
+        "uppercase": false,
+        "shadow": true
+      }
     },
     {
       "title": "The Enslaved Spy Who Fooled the British at Yorktown",
@@ -5212,10 +5283,27 @@
           "markers": []
         }
       ],
-      "visualStyle": "noveria-history-v3-rapid-cuts",
+      "visualStyle": "noveria-history-v4",
       "fps": 30,
       "width": 720,
-      "height": 1280
+      "height": 1280,
+      "captionStyle": {
+        "enabled": true,
+        "source": "narration",
+        "position": "bottom",
+        "x": 50,
+        "y": 84,
+        "fontSize": 40,
+        "color": "#fff8e7",
+        "accent": "#f1c35f",
+        "stroke": "#202832",
+        "background": "none",
+        "animationIn": "rise",
+        "animationOut": "fade",
+        "wordsPerCaption": 5,
+        "uppercase": false,
+        "shadow": true
+      }
     },
     {
       "title": "The Woman Who Served in Washington's Army as Robert Shurtleff",
@@ -6195,10 +6283,27 @@
           "markers": []
         }
       ],
-      "visualStyle": "noveria-history-v3-rapid-cuts",
+      "visualStyle": "noveria-history-v4",
       "fps": 30,
       "width": 720,
-      "height": 1280
+      "height": 1280,
+      "captionStyle": {
+        "enabled": true,
+        "source": "narration",
+        "position": "bottom",
+        "x": 50,
+        "y": 84,
+        "fontSize": 40,
+        "color": "#fff8e7",
+        "accent": "#f1c35f",
+        "stroke": "#202832",
+        "background": "none",
+        "animationIn": "rise",
+        "animationOut": "fade",
+        "wordsPerCaption": 5,
+        "uppercase": false,
+        "shadow": true
+      }
     },
     {
       "title": "Garrett Morgan Added the Missing Pause Between Stop and Go",
@@ -7059,10 +7164,27 @@
           "markers": []
         }
       ],
-      "visualStyle": "noveria-history-v3-rapid-cuts",
+      "visualStyle": "noveria-history-v4",
       "fps": 30,
       "width": 720,
-      "height": 1280
+      "height": 1280,
+      "captionStyle": {
+        "enabled": true,
+        "source": "narration",
+        "position": "bottom",
+        "x": 50,
+        "y": 84,
+        "fontSize": 40,
+        "color": "#fff8e7",
+        "accent": "#f1c35f",
+        "stroke": "#202832",
+        "background": "none",
+        "animationIn": "rise",
+        "animationOut": "fade",
+        "wordsPerCaption": 5,
+        "uppercase": false,
+        "shadow": true
+      }
     },
     {
       "title": "Josephine Cochrane Built the Practical Dishwasher Because Hand-Washing Damaged Her Dishes",
@@ -7910,10 +8032,27 @@
           "markers": []
         }
       ],
-      "visualStyle": "noveria-history-v3-rapid-cuts",
+      "visualStyle": "noveria-history-v4",
       "fps": 30,
       "width": 720,
-      "height": 1280
+      "height": 1280,
+      "captionStyle": {
+        "enabled": true,
+        "source": "narration",
+        "position": "bottom",
+        "x": 50,
+        "y": 84,
+        "fontSize": 40,
+        "color": "#fff8e7",
+        "accent": "#f1c35f",
+        "stroke": "#202832",
+        "background": "none",
+        "animationIn": "rise",
+        "animationOut": "fade",
+        "wordsPerCaption": 5,
+        "uppercase": false,
+        "shadow": true
+      }
     },
     {
       "title": "Bass Reeves Was a Real-Life Frontier Lawman Before Hollywood Cowboys",
@@ -8870,10 +9009,27 @@
           "markers": []
         }
       ],
-      "visualStyle": "noveria-history-v3-rapid-cuts",
+      "visualStyle": "noveria-history-v4",
       "fps": 30,
       "width": 720,
-      "height": 1280
+      "height": 1280,
+      "captionStyle": {
+        "enabled": true,
+        "source": "narration",
+        "position": "bottom",
+        "x": 50,
+        "y": 84,
+        "fontSize": 40,
+        "color": "#fff8e7",
+        "accent": "#f1c35f",
+        "stroke": "#202832",
+        "background": "none",
+        "animationIn": "rise",
+        "animationOut": "fade",
+        "wordsPerCaption": 5,
+        "uppercase": false,
+        "shadow": true
+      }
     },
     {
       "title": "John Paul Jones Won a Naval Battle—Then His Own Ship Sank",
@@ -9715,10 +9871,3887 @@
           "markers": []
         }
       ],
-      "visualStyle": "noveria-history-v3-rapid-cuts",
+      "visualStyle": "noveria-history-v4",
       "fps": 30,
       "width": 720,
-      "height": 1280
+      "height": 1280,
+      "captionStyle": {
+        "enabled": true,
+        "source": "narration",
+        "position": "bottom",
+        "x": 50,
+        "y": 84,
+        "fontSize": 40,
+        "color": "#fff8e7",
+        "accent": "#f1c35f",
+        "stroke": "#202832",
+        "background": "none",
+        "animationIn": "rise",
+        "animationOut": "fade",
+        "wordsPerCaption": 5,
+        "uppercase": false,
+        "shadow": true
+      }
+    },
+    {
+      "title": "The Woman Who Invented the Windshield Wiper Was Rejected",
+      "description": "A snowy 1902 New York streetcar ride inspired Mary Anderson's 1903 windshield-wiper patent—a lever-operated rubber blade that eventually changed vehicle safety.",
+      "hashtags": [
+        "#MaryAnderson",
+        "#WindshieldWiper",
+        "#AmericanInventions",
+        "#History",
+        "#Shorts"
+      ],
+      "year": 1903,
+      "era": "World Wars",
+      "researchNotes": [
+        "Historical facts cross-checked against the National Inventors Hall of Fame or American Chemical Society."
+      ],
+      "researchSources": [
+        "https://www.invent.org/inductees/mary-anderson",
+        "https://www.invent.org/blog/inventors/mary-anderson-windshield-wipers"
+      ],
+      "visualStyle": "noveria-history-v4",
+      "category": "American Inventions",
+      "captionStyle": {
+        "enabled": true,
+        "source": "narration",
+        "position": "bottom",
+        "x": 50,
+        "y": 84,
+        "fontSize": 40,
+        "color": "#fff8e7",
+        "accent": "#f1c35f",
+        "stroke": "#202832",
+        "background": "none",
+        "animationIn": "rise",
+        "animationOut": "fade",
+        "wordsPerCaption": 5,
+        "uppercase": false,
+        "shadow": true
+      },
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "workflow": {
+        "checklist": {
+          "research": true,
+          "script": true,
+          "visuals": true,
+          "voice": false,
+          "exported": false
+        },
+        "history": [
+          {
+            "at": "2026-10-11T08:00:00.000Z",
+            "message": "Added as American Inventions Batch 3; custom rapid-cut illustrated scenes and synced captions."
+          }
+        ]
+      },
+      "scenes": [
+        {
+          "name": "The problem nobody fixed",
+          "script": "Imagine driving in snow with no windshield wipers.",
+          "caption": "NO WINDSHIELD WIPERS",
+          "duration": 3.2,
+          "visualIntent": "snow storm driver",
+          "visualShot": "wide",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 0.96
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "snowyTrolley1902",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "NO WINDSHIELD WIPERS",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1903,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "A snowy streetcar",
+          "script": "In 1902, Mary Anderson rode a snowy New York streetcar.",
+          "caption": "NEW YORK · 1902",
+          "duration": 3.2,
+          "visualIntent": "mary snow watch",
+          "visualShot": "close",
+          "camera": {
+            "x": 365,
+            "y": 650,
+            "zoom": 1.2
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "snowyTrolley1902",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "NEW YORK · 1902",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1903,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Driver's struggle",
+          "script": "She watched the driver struggle to see ahead.",
+          "caption": "THE DRIVER CAN'T SEE",
+          "duration": 3.2,
+          "visualIntent": "driver snow struggle",
+          "visualShot": "right",
+          "camera": {
+            "x": 425,
+            "y": 655,
+            "zoom": 1.13
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "snowyTrolley1902",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "THE DRIVER CAN'T SEE",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Trolley driver",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1903,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Stopping in the cold",
+          "script": "Drivers sometimes stopped and cleared the windshield themselves.",
+          "caption": "STOP. WIPE. REPEAT.",
+          "duration": 3.2,
+          "visualIntent": "driver cold clear snow",
+          "visualShot": "medium",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 1.04
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "snowyTrolley1902",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "STOP. WIPE. REPEAT.",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1903,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Mary sees a solution",
+          "script": "Anderson wondered why nobody could clean the glass inside.",
+          "caption": "SHE HAD AN IDEA",
+          "duration": 3.2,
+          "visualIntent": "mary notice idea",
+          "visualShot": "left",
+          "camera": {
+            "x": 305,
+            "y": 655,
+            "zoom": 1.13
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "snowyTrolley1902",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "SHE HAD AN IDEA",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1903,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Draw the device",
+          "script": "Back in Alabama, she sketched a new device.",
+          "caption": "A BETTER WIPER",
+          "duration": 3.2,
+          "visualIntent": "mary sketch",
+          "visualShot": "close",
+          "camera": {
+            "x": 365,
+            "y": 650,
+            "zoom": 1.2
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "wiperWorkshop1903",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "A BETTER WIPER",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1903,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Lever inside",
+          "script": "A lever would sit within the driver's reach.",
+          "caption": "LEVER INSIDE",
+          "duration": 3.2,
+          "visualIntent": "lever",
+          "visualShot": "detail",
+          "camera": {
+            "x": 370,
+            "y": 650,
+            "zoom": 1.26
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "wiperWorkshop1903",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "LEVER INSIDE",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Blade outside",
+          "script": "Outside, a rubber blade would sweep across the glass.",
+          "caption": "RUBBER BLADE OUTSIDE",
+          "duration": 3.2,
+          "visualIntent": "wiper sweep blade",
+          "visualShot": "medium",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 1.04
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "wiperWorkshop1903",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "RUBBER BLADE OUTSIDE",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            },
+            {
+              "type": "arrow",
+              "x": 235,
+              "y": 820,
+              "x2": 505,
+              "y2": 765,
+              "color": "#d5a94f",
+              "width": 8,
+              "startTime": 0.15,
+              "endTime": 3.15,
+              "size": 24
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Spring mechanism",
+          "script": "A spring kept the blade against the windshield.",
+          "caption": "SPRING-LOADED ARM",
+          "duration": 3.2,
+          "visualIntent": "spring",
+          "visualShot": "detail",
+          "camera": {
+            "x": 370,
+            "y": 650,
+            "zoom": 1.26
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "wiperWorkshop1903",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "SPRING-LOADED ARM",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "It sweeps the glass",
+          "script": "The driver could clear rain without stepping outside.",
+          "caption": "WIPE WITHOUT STOPPING",
+          "duration": 3.2,
+          "visualIntent": "wiper sweep test",
+          "visualShot": "wide",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 0.96
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "wiperWorkshop1903",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "WIPE WITHOUT STOPPING",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            },
+            {
+              "type": "arrow",
+              "x": 235,
+              "y": 820,
+              "x2": 505,
+              "y2": 765,
+              "color": "#d5a94f",
+              "width": 8,
+              "startTime": 0.15,
+              "endTime": 3.15,
+              "size": 24
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Patent approved",
+          "script": "Anderson received a United States patent in 1903.",
+          "caption": "PATENTED · 1903",
+          "duration": 3.2,
+          "visualIntent": "patent mary",
+          "visualShot": "close",
+          "camera": {
+            "x": 365,
+            "y": 650,
+            "zoom": 1.2
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "wiperWorkshop1903",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "PATENTED · 1903",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1903,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Manufacturers declined",
+          "script": "But companies initially showed little interest in her idea.",
+          "caption": "THEY SAID NO",
+          "duration": 3.2,
+          "visualIntent": "rejected patent",
+          "visualShot": "medium",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 1.04
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "wiperWorkshop1903",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "THEY SAID NO",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "An idea becomes standard",
+          "script": "Later, windshield wipers became standard equipment on automobiles.",
+          "caption": "EVERY CAR NEEDS ONE",
+          "duration": 3.2,
+          "visualIntent": "standard car wiper sweep",
+          "visualShot": "wide",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 0.96
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "snowyTrolley1902",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "EVERY CAR NEEDS ONE",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            },
+            {
+              "type": "arrow",
+              "x": 235,
+              "y": 820,
+              "x2": 505,
+              "y2": 765,
+              "color": "#d5a94f",
+              "width": 8,
+              "startTime": 0.15,
+              "endTime": 3.15,
+              "size": 24
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        }
+      ]
+    },
+    {
+      "title": "The Woman Who Made Grocery Bags Stand Up Had to Defend Her Invention",
+      "description": "Margaret E. Knight created an automatic flat-bottom paper bag machine by 1868, then successfully defended her design and patented it in 1871.",
+      "hashtags": [
+        "#MargaretKnight",
+        "#PaperBag",
+        "#WomenInventors",
+        "#AmericanHistory",
+        "#Shorts"
+      ],
+      "year": 1871,
+      "era": "Mid / Late 1800s",
+      "researchNotes": [
+        "Historical facts cross-checked against the National Inventors Hall of Fame or American Chemical Society."
+      ],
+      "researchSources": [
+        "https://www.invent.org/inductees/margaret-e-knight",
+        "https://www.invent.org/blog/inventors/margaret-e-knight-paper-pag"
+      ],
+      "visualStyle": "noveria-history-v4",
+      "category": "American Inventions",
+      "captionStyle": {
+        "enabled": true,
+        "source": "narration",
+        "position": "bottom",
+        "x": 50,
+        "y": 84,
+        "fontSize": 40,
+        "color": "#fff8e7",
+        "accent": "#f1c35f",
+        "stroke": "#202832",
+        "background": "none",
+        "animationIn": "rise",
+        "animationOut": "fade",
+        "wordsPerCaption": 5,
+        "uppercase": false,
+        "shadow": true
+      },
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "workflow": {
+        "checklist": {
+          "research": true,
+          "script": true,
+          "visuals": true,
+          "voice": false,
+          "exported": false
+        },
+        "history": [
+          {
+            "at": "2026-10-11T08:00:00.000Z",
+            "message": "Added as American Inventions Batch 3; custom rapid-cut illustrated scenes and synced captions."
+          }
+        ]
+      },
+      "scenes": [
+        {
+          "name": "An everyday mystery",
+          "script": "Why can a grocery bag stand upright?",
+          "caption": "HOW DOES A BAG STAND?",
+          "duration": 3.2,
+          "visualIntent": "old cone unstable",
+          "visualShot": "wide",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 0.96
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "paperBagFactory1868",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "HOW DOES A BAG STAND?",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "The old bag",
+          "script": "Early paper bags often resembled narrow envelopes.",
+          "caption": "EARLY BAGS TIPPED OVER",
+          "duration": 3.2,
+          "visualIntent": "cone old",
+          "visualShot": "close",
+          "camera": {
+            "x": 365,
+            "y": 650,
+            "zoom": 1.2
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "paperBagFactory1868",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "EARLY BAGS TIPPED OVER",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "A young machine worker",
+          "script": "In 1867, Margaret Knight worked at a Massachusetts paper company.",
+          "caption": "MARGARET KNIGHT · 1867",
+          "duration": 3.2,
+          "visualIntent": "knight factory",
+          "visualShot": "medium",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 1.04
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "paperBagFactory1868",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "MARGARET KNIGHT · 1867",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1871,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "A better shape",
+          "script": "She envisioned a bag with a flat bottom.",
+          "caption": "FLAT BOTTOM",
+          "duration": 3.2,
+          "visualIntent": "knight idea",
+          "visualShot": "detail",
+          "camera": {
+            "x": 370,
+            "y": 650,
+            "zoom": 1.26
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "paperBagFactory1868",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "FLAT BOTTOM",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1871,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Make bags automatically",
+          "script": "But folding each bag by hand was expensive.",
+          "caption": "HAND FOLDING WAS SLOW",
+          "duration": 3.2,
+          "visualIntent": "fold old",
+          "visualShot": "left",
+          "camera": {
+            "x": 305,
+            "y": 655,
+            "zoom": 1.13
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "paperBagFactory1868",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "HAND FOLDING WAS SLOW",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            },
+            {
+              "type": "arrow",
+              "x": 235,
+              "y": 820,
+              "x2": 505,
+              "y2": 765,
+              "color": "#d5a94f",
+              "width": 8,
+              "startTime": 0.15,
+              "endTime": 3.15,
+              "size": 24
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Build the machine",
+          "script": "Knight designed machinery that fed sheets of paper.",
+          "caption": "FEED THE PAPER",
+          "duration": 3.2,
+          "visualIntent": "feed machine",
+          "visualShot": "medium",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 1.04
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "paperBagFactory1868",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "FEED THE PAPER",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            },
+            {
+              "type": "arrow",
+              "x": 235,
+              "y": 820,
+              "x2": 505,
+              "y2": 765,
+              "color": "#d5a94f",
+              "width": 8,
+              "startTime": 0.15,
+              "endTime": 3.15,
+              "size": 24
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Cut the paper",
+          "script": "It cut the paper into the needed shapes.",
+          "caption": "CUT THE SHEETS",
+          "duration": 3.2,
+          "visualIntent": "cut machine",
+          "visualShot": "detail",
+          "camera": {
+            "x": 370,
+            "y": 650,
+            "zoom": 1.26
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "paperBagFactory1868",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "CUT THE SHEETS",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            },
+            {
+              "type": "arrow",
+              "x": 235,
+              "y": 820,
+              "x2": 505,
+              "y2": 765,
+              "color": "#d5a94f",
+              "width": 8,
+              "startTime": 0.15,
+              "endTime": 3.15,
+              "size": 24
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Fold the bottom",
+          "script": "Gears and mechanisms folded the squared base.",
+          "caption": "FOLD THE BOTTOM",
+          "duration": 3.2,
+          "visualIntent": "fold machine",
+          "visualShot": "right",
+          "camera": {
+            "x": 425,
+            "y": 655,
+            "zoom": 1.13
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "paperBagFactory1868",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "FOLD THE BOTTOM",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            },
+            {
+              "type": "arrow",
+              "x": 235,
+              "y": 820,
+              "x2": 505,
+              "y2": 765,
+              "color": "#d5a94f",
+              "width": 8,
+              "startTime": 0.15,
+              "endTime": 3.15,
+              "size": 24
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Seal the bag",
+          "script": "Then glue secured the finished bag.",
+          "caption": "GLUE + SEAL",
+          "duration": 3.2,
+          "visualIntent": "glue machine",
+          "visualShot": "close",
+          "camera": {
+            "x": 365,
+            "y": 650,
+            "zoom": 1.2
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "paperBagFactory1868",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "GLUE + SEAL",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            },
+            {
+              "type": "arrow",
+              "x": 235,
+              "y": 820,
+              "x2": 505,
+              "y2": 765,
+              "color": "#d5a94f",
+              "width": 8,
+              "startTime": 0.15,
+              "endTime": 3.15,
+              "size": 24
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Working by 1868",
+          "script": "Her practical machine was operating by 1868.",
+          "caption": "WORKING BY 1868",
+          "duration": 3.2,
+          "visualIntent": "automatic machine",
+          "visualShot": "wide",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 0.96
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "paperBagFactory1868",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "WORKING BY 1868",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            },
+            {
+              "type": "arrow",
+              "x": 235,
+              "y": 820,
+              "x2": 505,
+              "y2": 765,
+              "color": "#d5a94f",
+              "width": 8,
+              "startTime": 0.15,
+              "endTime": 3.15,
+              "size": 24
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "A patent dispute",
+          "script": "Another man tried claiming her design as his.",
+          "caption": "SOMEONE STOLE HER DESIGN",
+          "duration": 3.2,
+          "visualIntent": "copy patent",
+          "visualShot": "medium",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 1.04
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "paperBagPatent1871",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "SOMEONE STOLE HER DESIGN",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Blueprint evidence",
+          "script": "Knight used her drawings to defend her invention.",
+          "caption": "BLUEPRINTS PROVED IT",
+          "duration": 3.2,
+          "visualIntent": "blueprint evidence",
+          "visualShot": "detail",
+          "camera": {
+            "x": 370,
+            "y": 650,
+            "zoom": 1.26
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "paperBagPatent1871",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "BLUEPRINTS PROVED IT",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Patent and legacy",
+          "script": "She won, patented it in 1871, and transformed paper bags.",
+          "caption": "PATENTED · 1871",
+          "duration": 3.2,
+          "visualIntent": "knight win patent 1871",
+          "visualShot": "wide",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 0.96
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "paperBagPatent1871",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "PATENTED · 1871",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1871,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        }
+      ]
+    },
+    {
+      "title": "Lewis Latimer Helped Electric Light Bulbs Last Longer",
+      "description": "Lewis Latimer improved carbon filament manufacture for incandescent light bulbs. His 1882 patent helped make durable electric lighting more practical and accessible.",
+      "hashtags": [
+        "#LewisLatimer",
+        "#LightBulb",
+        "#BlackInventors",
+        "#AmericanInventions",
+        "#Shorts"
+      ],
+      "year": 1882,
+      "era": "Mid / Late 1800s",
+      "researchNotes": [
+        "Historical facts cross-checked against the National Inventors Hall of Fame or American Chemical Society."
+      ],
+      "researchSources": [
+        "https://www.invent.org/inductees/lewis-latimer"
+      ],
+      "visualStyle": "noveria-history-v4",
+      "category": "American Inventions",
+      "captionStyle": {
+        "enabled": true,
+        "source": "narration",
+        "position": "bottom",
+        "x": 50,
+        "y": 84,
+        "fontSize": 40,
+        "color": "#fff8e7",
+        "accent": "#f1c35f",
+        "stroke": "#202832",
+        "background": "none",
+        "animationIn": "rise",
+        "animationOut": "fade",
+        "wordsPerCaption": 5,
+        "uppercase": false,
+        "shadow": true
+      },
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "workflow": {
+        "checklist": {
+          "research": true,
+          "script": true,
+          "visuals": true,
+          "voice": false,
+          "exported": false
+        },
+        "history": [
+          {
+            "at": "2026-10-11T08:00:00.000Z",
+            "message": "Added as American Inventions Batch 3; custom rapid-cut illustrated scenes and synced captions."
+          }
+        ]
+      },
+      "scenes": [
+        {
+          "name": "The burning problem",
+          "script": "Early electric light bulbs had a serious problem.",
+          "caption": "THE BULBS DIDN'T LAST",
+          "duration": 3.2,
+          "visualIntent": "before gas old light",
+          "visualShot": "wide",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 0.96
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "lightbulbLab1882",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "THE BULBS DIDN'T LAST",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Fragile filaments",
+          "script": "Their tiny carbon filaments could fail too quickly.",
+          "caption": "FRAGILE FILAMENTS",
+          "duration": 3.2,
+          "visualIntent": "carbon weak",
+          "visualShot": "close",
+          "camera": {
+            "x": 365,
+            "y": 650,
+            "zoom": 1.2
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "lightbulbLab1882",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "FRAGILE FILAMENTS",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Meet the inventor",
+          "script": "Lewis Latimer helped make those filaments more durable.",
+          "caption": "LEWIS LATIMER",
+          "duration": 3.2,
+          "visualIntent": "latimer draft",
+          "visualShot": "medium",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 1.04
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "draftingOffice1876",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "LEWIS LATIMER",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1882,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "A self-taught draftsman",
+          "script": "He taught himself technical drawing after the Civil War.",
+          "caption": "SELF-TAUGHT DRAFTSMAN",
+          "duration": 3.2,
+          "visualIntent": "latimer drawing",
+          "visualShot": "detail",
+          "camera": {
+            "x": 370,
+            "y": 650,
+            "zoom": 1.26
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "draftingOffice1876",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "SELF-TAUGHT DRAFTSMAN",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1882,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "The telephone drawings",
+          "script": "He prepared drawings for Alexander Graham Bell's telephone patent.",
+          "caption": "DRAWING THE TELEPHONE",
+          "duration": 3.2,
+          "visualIntent": "bell telephone draft",
+          "visualShot": "right",
+          "camera": {
+            "x": 425,
+            "y": 655,
+            "zoom": 1.13
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "draftingOffice1876",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "DRAWING THE TELEPHONE",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1882,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "A move into lighting",
+          "script": "Later, Latimer worked on electric lighting technology.",
+          "caption": "INTO ELECTRIC LIGHTING",
+          "duration": 3.2,
+          "visualIntent": "latimer electric",
+          "visualShot": "medium",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 1.04
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "lightbulbLab1882",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "INTO ELECTRIC LIGHTING",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1882,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Carbon filament method",
+          "script": "He developed a better process for making carbon filaments.",
+          "caption": "BETTER CARBON FILAMENT",
+          "duration": 3.2,
+          "visualIntent": "carbon treat",
+          "visualShot": "close",
+          "camera": {
+            "x": 365,
+            "y": 650,
+            "zoom": 1.2
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "lightbulbLab1882",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "BETTER CARBON FILAMENT",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "A stronger filament",
+          "script": "The improved filament could withstand use much longer.",
+          "caption": "LASTS LONGER",
+          "duration": 3.2,
+          "visualIntent": "carbon lasting",
+          "visualShot": "detail",
+          "camera": {
+            "x": 370,
+            "y": 650,
+            "zoom": 1.26
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "lightbulbLab1882",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "LASTS LONGER",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "The glow",
+          "script": "That helped lamps shine more dependably.",
+          "caption": "STEADY ELECTRIC LIGHT",
+          "duration": 3.2,
+          "visualIntent": "bright glow",
+          "visualShot": "wide",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 0.96
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "lightbulbLab1882",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "STEADY ELECTRIC LIGHT",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "The patent",
+          "script": "His important carbon-filament patent issued in 1882.",
+          "caption": "PATENTED · 1882",
+          "duration": 3.2,
+          "visualIntent": "latimer patent",
+          "visualShot": "detail",
+          "camera": {
+            "x": 370,
+            "y": 650,
+            "zoom": 1.26
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "draftingOffice1876",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "PATENTED · 1882",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1882,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "A safer alternative",
+          "script": "Electric lamps offered an alternative to indoor gas lighting.",
+          "caption": "LESS NEED FOR GAS FLAMES",
+          "duration": 3.2,
+          "visualIntent": "gas before",
+          "visualShot": "medium",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 1.04
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "lightbulbLab1882",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "LESS NEED FOR GAS FLAMES",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Lighting spreads",
+          "script": "Latimer helped install electric lighting systems abroad.",
+          "caption": "ELECTRIC LIGHT SPREADS",
+          "duration": 3.2,
+          "visualIntent": "latimer work",
+          "visualShot": "left",
+          "camera": {
+            "x": 305,
+            "y": 655,
+            "zoom": 1.13
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "lightbulbLab1882",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "ELECTRIC LIGHT SPREADS",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1882,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Important distinction",
+          "script": "He didn't invent the bulb; he helped improve it.",
+          "caption": "HE HELPED MAKE IT PRACTICAL",
+          "duration": 3.2,
+          "visualIntent": "carbon bright lasting",
+          "visualShot": "wide",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 0.96
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "lightbulbLab1882",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "HE HELPED MAKE IT PRACTICAL",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        }
+      ]
+    },
+    {
+      "title": "Granville Woods Let Moving Trains Send Messages",
+      "description": "Granville T. Woods invented an induction telegraph system in 1887 that let moving trains communicate with stations, advancing railway communications and safety.",
+      "hashtags": [
+        "#GranvilleWoods",
+        "#RailwayTelegraph",
+        "#BlackInventors",
+        "#History",
+        "#Shorts"
+      ],
+      "year": 1887,
+      "era": "Mid / Late 1800s",
+      "researchNotes": [
+        "Historical facts cross-checked against the National Inventors Hall of Fame or American Chemical Society."
+      ],
+      "researchSources": [
+        "https://www.invent.org/inductees/granville-woods",
+        "https://www.invent.org/blog/inventors/granville-woods-help-trains-communicate"
+      ],
+      "visualStyle": "noveria-history-v4",
+      "category": "American Inventions",
+      "captionStyle": {
+        "enabled": true,
+        "source": "narration",
+        "position": "bottom",
+        "x": 50,
+        "y": 84,
+        "fontSize": 40,
+        "color": "#fff8e7",
+        "accent": "#f1c35f",
+        "stroke": "#202832",
+        "background": "none",
+        "animationIn": "rise",
+        "animationOut": "fade",
+        "wordsPerCaption": 5,
+        "uppercase": false,
+        "shadow": true
+      },
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "workflow": {
+        "checklist": {
+          "research": true,
+          "script": true,
+          "visuals": true,
+          "voice": false,
+          "exported": false
+        },
+        "history": [
+          {
+            "at": "2026-10-11T08:00:00.000Z",
+            "message": "Added as American Inventions Batch 3; custom rapid-cut illustrated scenes and synced captions."
+          }
+        ]
+      },
+      "scenes": [
+        {
+          "name": "The impossible message",
+          "script": "Imagine two moving trains unable to send warnings.",
+          "caption": "TRAINS CAN'T COMMUNICATE",
+          "duration": 3.2,
+          "visualIntent": "train danger risk",
+          "visualShot": "wide",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 0.96
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "railway1887",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "TRAINS CAN'T COMMUNICATE",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            },
+            {
+              "type": "arrow",
+              "x": 235,
+              "y": 820,
+              "x2": 505,
+              "y2": 765,
+              "color": "#d5a94f",
+              "width": 8,
+              "startTime": 0.15,
+              "endTime": 3.15,
+              "size": 24
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Danger on the rails",
+          "script": "Without timely messages, railway operations could become dangerous.",
+          "caption": "DANGEROUS SILENCE",
+          "duration": 3.2,
+          "visualIntent": "train collision risk",
+          "visualShot": "close",
+          "camera": {
+            "x": 365,
+            "y": 650,
+            "zoom": 1.2
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "railway1887",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "DANGEROUS SILENCE",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            },
+            {
+              "type": "arrow",
+              "x": 235,
+              "y": 820,
+              "x2": 505,
+              "y2": 765,
+              "color": "#d5a94f",
+              "width": 8,
+              "startTime": 0.15,
+              "endTime": 3.15,
+              "size": 24
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Meet Woods",
+          "script": "Inventor Granville Woods took on that problem.",
+          "caption": "GRANVILLE WOODS",
+          "duration": 3.2,
+          "visualIntent": "woods inventor",
+          "visualShot": "medium",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 1.04
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "telegraphStation1887",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "GRANVILLE WOODS",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Granville Woods",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1887,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Earlier invention",
+          "script": "He had already worked on voice-and-telegraph communication.",
+          "caption": "TELEGRAPHONY",
+          "duration": 3.2,
+          "visualIntent": "woods telegraph",
+          "visualShot": "detail",
+          "camera": {
+            "x": 370,
+            "y": 650,
+            "zoom": 1.26
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "telegraphStation1887",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "TELEGRAPHONY",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1887,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "The breakthrough",
+          "script": "In 1887, he invented the induction telegraph.",
+          "caption": "1887 · INDUCTION TELEGRAPH",
+          "duration": 3.2,
+          "visualIntent": "train telegraph",
+          "visualShot": "wide",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 0.96
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "railway1887",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "1887 · INDUCTION TELEGRAPH",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            },
+            {
+              "type": "arrow",
+              "x": 235,
+              "y": 820,
+              "x2": 505,
+              "y2": 765,
+              "color": "#d5a94f",
+              "width": 8,
+              "startTime": 0.15,
+              "endTime": 3.15,
+              "size": 24
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Telegraph wires",
+          "script": "Existing telegraph lines ran alongside the tracks.",
+          "caption": "WIRES ALONG THE RAILS",
+          "duration": 3.2,
+          "visualIntent": "train wire",
+          "visualShot": "low",
+          "camera": {
+            "x": 360,
+            "y": 735,
+            "zoom": 1.13
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "railway1887",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "WIRES ALONG THE RAILS",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            },
+            {
+              "type": "arrow",
+              "x": 235,
+              "y": 820,
+              "x2": 505,
+              "y2": 765,
+              "color": "#d5a94f",
+              "width": 8,
+              "startTime": 0.15,
+              "endTime": 3.15,
+              "size": 24
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Signals travel",
+          "script": "His system let messages reach moving trains.",
+          "caption": "MESSAGES ON THE MOVE",
+          "duration": 3.2,
+          "visualIntent": "train signal message",
+          "visualShot": "medium",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 1.04
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "railway1887",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "MESSAGES ON THE MOVE",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            },
+            {
+              "type": "arrow",
+              "x": 235,
+              "y": 820,
+              "x2": 505,
+              "y2": 765,
+              "color": "#d5a94f",
+              "width": 8,
+              "startTime": 0.15,
+              "endTime": 3.15,
+              "size": 24
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Station sends signal",
+          "script": "A railway station could send a message.",
+          "caption": "STATION → TRAIN",
+          "duration": 3.2,
+          "visualIntent": "operator send signal",
+          "visualShot": "right",
+          "camera": {
+            "x": 425,
+            "y": 655,
+            "zoom": 1.13
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "telegraphStation1887",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "STATION → TRAIN",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            },
+            {
+              "type": "arrow",
+              "x": 235,
+              "y": 820,
+              "x2": 505,
+              "y2": 765,
+              "color": "#d5a94f",
+              "width": 8,
+              "startTime": 0.15,
+              "endTime": 3.15,
+              "size": 24
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Moving train receives",
+          "script": "The moving train could receive that information.",
+          "caption": "TRAIN RECEIVES MESSAGE",
+          "duration": 3.2,
+          "visualIntent": "train receive signal",
+          "visualShot": "close",
+          "camera": {
+            "x": 365,
+            "y": 650,
+            "zoom": 1.2
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "railway1887",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "TRAIN RECEIVES MESSAGE",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            },
+            {
+              "type": "arrow",
+              "x": 235,
+              "y": 820,
+              "x2": 505,
+              "y2": 765,
+              "color": "#d5a94f",
+              "width": 8,
+              "startTime": 0.15,
+              "endTime": 3.15,
+              "size": 24
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Communication improves",
+          "script": "Later systems also helped dispatchers locate trains.",
+          "caption": "BETTER RAILWAY DISPATCH",
+          "duration": 3.2,
+          "visualIntent": "dispatch operator",
+          "visualShot": "detail",
+          "camera": {
+            "x": 370,
+            "y": 650,
+            "zoom": 1.26
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "telegraphStation1887",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "BETTER RAILWAY DISPATCH",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Patent challenges",
+          "script": "Thomas Edison challenged Woods in patent disputes.",
+          "caption": "PATENT DISPUTES",
+          "duration": 3.2,
+          "visualIntent": "woods edison patent legal",
+          "visualShot": "medium",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 1.04
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "telegraphStation1887",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "PATENT DISPUTES",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1887,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Independent inventor",
+          "script": "Woods built an independent electrical invention business.",
+          "caption": "WOODS ELECTRIC COMPANY",
+          "duration": 3.2,
+          "visualIntent": "woods company",
+          "visualShot": "left",
+          "camera": {
+            "x": 305,
+            "y": 655,
+            "zoom": 1.13
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "telegraphStation1887",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "WOODS ELECTRIC COMPANY",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1887,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Safer railway future",
+          "script": "His inventions improved communication across the railroad system.",
+          "caption": "TRAINS COULD TALK",
+          "duration": 3.2,
+          "visualIntent": "train communicate signal",
+          "visualShot": "wide",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 0.96
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "railway1887",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "TRAINS COULD TALK",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            },
+            {
+              "type": "arrow",
+              "x": 235,
+              "y": 820,
+              "x2": 505,
+              "y2": 765,
+              "color": "#d5a94f",
+              "width": 8,
+              "startTime": 0.15,
+              "endTime": 3.15,
+              "size": 24
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        }
+      ]
+    },
+    {
+      "title": "The Strange Cloudy Liquid That Led to Kevlar",
+      "description": "In 1965, DuPont chemist Stephanie Kwolek investigated an unusual cloudy polymer solution that yielded exceptionally strong fibers, leading to Kevlar.",
+      "hashtags": [
+        "#StephanieKwolek",
+        "#Kevlar",
+        "#Inventions",
+        "#WomenInScience",
+        "#Shorts"
+      ],
+      "year": 1965,
+      "era": "Cold War",
+      "researchNotes": [
+        "Historical facts cross-checked against the National Inventors Hall of Fame or American Chemical Society."
+      ],
+      "researchSources": [
+        "https://www.acs.org/explore/women-scientists/stephanie-kwolek.html",
+        "https://www.invent.org/inductees/stephanie-louise-kwolek"
+      ],
+      "visualStyle": "noveria-history-v4",
+      "category": "American Inventions",
+      "captionStyle": {
+        "enabled": true,
+        "source": "narration",
+        "position": "bottom",
+        "x": 50,
+        "y": 84,
+        "fontSize": 40,
+        "color": "#fff8e7",
+        "accent": "#f1c35f",
+        "stroke": "#202832",
+        "background": "none",
+        "animationIn": "rise",
+        "animationOut": "fade",
+        "wordsPerCaption": 5,
+        "uppercase": false,
+        "shadow": true
+      },
+      "width": 720,
+      "height": 1280,
+      "fps": 30,
+      "workflow": {
+        "checklist": {
+          "research": true,
+          "script": true,
+          "visuals": true,
+          "voice": false,
+          "exported": false
+        },
+        "history": [
+          {
+            "at": "2026-10-11T08:00:00.000Z",
+            "message": "Added as American Inventions Batch 3; custom rapid-cut illustrated scenes and synced captions."
+          }
+        ]
+      },
+      "scenes": [
+        {
+          "name": "A strange laboratory mistake",
+          "script": "A cloudy laboratory liquid helped lead to an incredible fiber.",
+          "caption": "CLOUDY LIQUID → KEVLAR",
+          "duration": 3.2,
+          "visualIntent": "cloudy solution",
+          "visualShot": "wide",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 0.96
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "polymerLab1965",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "CLOUDY LIQUID → KEVLAR",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Meet Kwolek",
+          "script": "In 1965, chemist Stephanie Kwolek researched tougher synthetic materials.",
+          "caption": "STEPHANIE KWOLEK · 1965",
+          "duration": 3.2,
+          "visualIntent": "kwolek chemist",
+          "visualShot": "medium",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 1.04
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "polymerLab1965",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "STEPHANIE KWOLEK · 1965",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Stephanie Kwolek",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1965,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Material challenge",
+          "script": "Her team wanted fibers that were stronger and lighter.",
+          "caption": "STRONGER. LIGHTER.",
+          "duration": 3.2,
+          "visualIntent": "kwolek strong",
+          "visualShot": "close",
+          "camera": {
+            "x": 365,
+            "y": 650,
+            "zoom": 1.2
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "polymerLab1965",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "STRONGER. LIGHTER.",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1965,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Something strange appears",
+          "script": "One experimental polymer solution looked unusually cloudy.",
+          "caption": "THE CLOUDY SOLUTION",
+          "duration": 3.2,
+          "visualIntent": "cloudy odd solution",
+          "visualShot": "detail",
+          "camera": {
+            "x": 370,
+            "y": 650,
+            "zoom": 1.26
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "polymerLab1965",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "THE CLOUDY SOLUTION",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Ordinary expectation",
+          "script": "Scientists often expected polymer spinning solutions to look clear.",
+          "caption": "THIS LOOKED WRONG",
+          "duration": 3.2,
+          "visualIntent": "cloudy liquid odd",
+          "visualShot": "right",
+          "camera": {
+            "x": 425,
+            "y": 655,
+            "zoom": 1.13
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "polymerLab1965",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "THIS LOOKED WRONG",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Try anyway",
+          "script": "Kwolek persisted and had the solution spun into fiber.",
+          "caption": "SPIN IT ANYWAY",
+          "duration": 3.2,
+          "visualIntent": "kwolek fiber spin",
+          "visualShot": "medium",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 1.04
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "polymerLab1965",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "SPIN IT ANYWAY",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [
+            {
+              "name": "Inventor",
+              "x": 178,
+              "y": 825,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1965,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#26323a",
+                "mouthEnabled": true
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Unbelievable strands",
+          "script": "The resulting fibers had remarkable strength and stiffness.",
+          "caption": "EXCEPTIONALLY STRONG",
+          "duration": 3.2,
+          "visualIntent": "fiber strong",
+          "visualShot": "close",
+          "camera": {
+            "x": 365,
+            "y": 650,
+            "zoom": 1.2
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "polymerLab1965",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "EXCEPTIONALLY STRONG",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Light for their strength",
+          "script": "And they were unusually lightweight for that strength.",
+          "caption": "LIGHTWEIGHT FIBER",
+          "duration": 3.2,
+          "visualIntent": "fiber light",
+          "visualShot": "detail",
+          "camera": {
+            "x": 370,
+            "y": 650,
+            "zoom": 1.26
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "polymerLab1965",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "LIGHTWEIGHT FIBER",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "A striking comparison",
+          "script": "Kevlar has about five times steel's strength by weight.",
+          "caption": "FIVE TIMES BY WEIGHT",
+          "duration": 3.2,
+          "visualIntent": "steel weight five",
+          "visualShot": "wide",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 0.96
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "kevlarApplications",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "FIVE TIMES BY WEIGHT",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "The name Kevlar",
+          "script": "That research led to the synthetic fiber Kevlar.",
+          "caption": "THE FIBER: KEVLAR",
+          "duration": 3.2,
+          "visualIntent": "fiber spin",
+          "visualShot": "medium",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 1.04
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "kevlarApplications",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "THE FIBER: KEVLAR",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Protective equipment",
+          "script": "Kevlar eventually became useful for bullet-resistant vests.",
+          "caption": "PROTECTIVE VESTS",
+          "duration": 3.2,
+          "visualIntent": "vest protect",
+          "visualShot": "close",
+          "camera": {
+            "x": 365,
+            "y": 650,
+            "zoom": 1.2
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "kevlarApplications",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "PROTECTIVE VESTS",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "Many other uses",
+          "script": "It also found uses in cables and aircraft parts.",
+          "caption": "CABLES + AIRCRAFT",
+          "duration": 3.2,
+          "visualIntent": "rope cable",
+          "visualShot": "detail",
+          "camera": {
+            "x": 370,
+            "y": 650,
+            "zoom": 1.26
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "kevlarApplications",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "CABLES + AIRCRAFT",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        },
+        {
+          "name": "An ordinary-looking breakthrough",
+          "script": "An unusual cloudy liquid helped create life-saving materials.",
+          "caption": "A DISCOVERY THAT PROTECTS",
+          "duration": 3.2,
+          "visualIntent": "vest protect",
+          "visualShot": "wide",
+          "camera": {
+            "x": 360,
+            "y": 640,
+            "zoom": 0.96
+          },
+          "transition": {
+            "type": "cut",
+            "duration": 0.12
+          },
+          "background": {
+            "preset": "kevlarApplications",
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.94,
+            "sepia": 0.02,
+            "blur": 0,
+            "keyframes": []
+          },
+          "notes": "Animate the mechanism, object, or human action named by this narration beat. Do not substitute unrelated scenery.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "A DISCOVERY THAT PROTECTS",
+              "x": 360,
+              "y": 405,
+              "size": 27,
+              "color": "#d5a94f",
+              "startTime": 0,
+              "endTime": 3.2
+            }
+          ],
+          "characters": [],
+          "bubbles": [],
+          "markers": []
+        }
+      ]
     }
   ],
   "updatedAt": "2026-10-11T08:05:00.000Z"
