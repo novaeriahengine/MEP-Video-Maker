@@ -312,7 +312,7 @@ function videoTick(now){
  renderVideo();if(videoPlaying)requestAnimationFrame(videoTick)
 }
 function setVideoMode(v){
- if(!v)stopVideoPreviewVoice();
+ videoPlaying=false;stopVideoPreviewVoice();
  document.body.classList.toggle("video-mode",v);$("#editorMode").classList.toggle("active",!v);$("#videoMode").classList.toggle("active",v);
  if(v){videoTime=0;renderVideo()}
 }
