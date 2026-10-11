@@ -369,7 +369,7 @@ on("#scrubber","input",e=>{playing=false;editPreview=null;time=Number(e.target.v
 let videoPlaying=false,videoTime=0,videoLast=0;
 function sceneAtGlobal(sh,t){let off=0;for(let i=0;i<sh.scenes.length;i++){const s=sh.scenes[i];if(t<=off+s.duration||i===sh.scenes.length-1)return{scene:s,index:i,local:Math.max(0,t-off),offset:off};off+=s.duration}return{scene:sh.scenes[0],index:0,local:0,offset:0}}
 function renderShortFrame(context,sh,t){const a=sceneAtGlobal(sh,t);renderScene(context,a.scene,a.local,{selectable:false,shortContext:sh});return a}
-function renderVideo(){const a=renderShortFrame(videoCtx,short,videoTime),total=MEPModel.shortDuration(short);setText("#videoCaption","");setText("#videoClock",fmt(videoTime)+" / "+fmt(total));setVal("#videoScrubber",videoTime);$("#videoScrubber").max=total;setText("#videoScript",a.scene.script||"");$("#sceneStrip").innerHTML=short.scenes.map((s,i)=>'<button class="'+(i===a.index?"active":"")+'" data-vscene="'+i+'">'+(i+1)+'. '+esc(s.name)+'</button>').join("");$$("[data-vscene]").forEach(b=>on(b,"click",()=>{videoTime=short.scenes.slice(0,Number(b.dataset.vscene)).reduce((n,s)=>n+s.duration,0);renderVideo()}))}
+let lastSceneStripSignature="";function renderVideo(){const a=renderShortFrame(videoCtx,short,videoTime),total=MEPModel.shortDuration(short);setText("#videoCaption","");setText("#videoClock",fmt(videoTime)+" / "+fmt(total));setVal("#videoScrubber",videoTime);$("#videoScrubber").max=total;setText("#videoScript",a.scene.script||"");const signature=short.id+":"+short.scenes.length+":"+a.index;if(signature!==lastSceneStripSignature){lastSceneStripSignature=signature;$("#sceneStrip").innerHTML=short.scenes.map((s,i)=>'<button class="'+(i===a.index?"active":"")+'" data-vscene="'+i+'">'+(i+1)+'. '+esc(s.name)+'</button>').join("");$("[data-vscene]").forEach(b=>on(b,"click",()=>{videoTime=short.scenes.slice(0,Number(b.dataset.vscene)).reduce((n,s)=>n+s.duration,0);renderVideo()}))}}
 let localLlmLastAnswer="",localLlmDownloadTimer=null;
 function localServerUrl(){const entered=$("#neuralApiUrl")?.value.trim();return (entered||location.origin).replace(/\/$/,"")}
 async function localLlmRequest(path,options={}){const response=await fetch(localServerUrl()+path,options);const data=await response.json().catch(()=>({}));if(!response.ok||data.ok===false)throw Error(data.error||"Local GGUF request failed.");return data}
@@ -462,7 +462,7 @@ async function prepareChromePreviewForExport(sh,position=1,totalCount=1){
  await prepareChromePreviewForExport(sh,position,totalCount);
  const voiceInfo=voiceSourceInfo(sh);
  updateExportProgress(43,"Preparing video · short "+position+"/"+totalCount,"Loading images and historical maps…",{indeterminate:true});
- await Promise.all([warmAssets(sh),warmHistoricalMaps(sh)]);
+ await Promise.all([warmAssets(sh),warmHistoricalMaps(sh),sh.flagsEpisode&&window.MEPFlagSeries?MEPFlagSeries.warm(sh):Promise.resolve()]);
  const canvas=document.createElement("canvas");
  canvas.width=sh.width||720;
  canvas.height=sh.height||1280;
