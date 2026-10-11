@@ -20,9 +20,23 @@ function resetLocalToProject(p){
 }
 async function initCloud(){
  if(cloud)return{ok:true};const cfg=window.MEP_FIREBASE_CONFIG;if(!cfg?.projectId)return{ok:false,reason:"Firebase config missing"};
- try{const [appMod,fs]=await Promise.all([import("https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"),import("https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js")]);const app=appMod.initializeApp(cfg);cloud={app,fs,db:fs.getFirestore(app)};return{ok:true}}catch(e){return{ok:false,reason:e.message}}
+ try{const [appMod,fs,authMod]=await Promise.all([import("https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"),import("https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js"),import("https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js")]);const app=appMod.getApps().length?appMod.getApp():appMod.initializeApp(cfg);cloud={app,fs,db:fs.getFirestore(app),auth:authMod.getAuth(app),authMod};return{ok:true}}catch(e){return{ok:false,reason:e.message}}
 }
 async function ensure(){if(!cloud){const r=await initCloud();if(!r.ok)throw new Error(r.reason)}}
+function currentEditor(){return cloud?.auth?.currentUser?.email||null}
+async function signInEditor(){await ensure();const provider=new cloud.authMod.GoogleAuthProvider();const r=await cloud.authMod.signInWithPopup(cloud.auth,provider);return{email:r.user.email,uid:r.user.uid}}
+async function signOutEditor(){if(cloud?.auth)await cloud.authMod.signOut(cloud.auth)}
+async function saveFlagRating(code,item){
+ await ensure();if(!currentEditor())throw Error("Sign in with your authorized Google editor account before saving shared grades.");
+ const doc={schema:"mep-flag-rating-v1",code:String(code).toUpperCase(),grade:item.grade||"",done:!!item.done,episode:Number(item.episode)||1,notes:String(item.notes||"").slice(0,2000),updatedAt:new Date().toISOString()};
+ await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepFlagRatings",doc.code),doc,{merge:true});return doc;
+}
+async function subscribeFlagRatings(callback){
+ await ensure();
+ return cloud.fs.onSnapshot(cloud.fs.collection(cloud.db,"mepFlagRatings"),snapshot=>{
+   const result={};snapshot.docs.forEach(d=>{result[d.id]=d.data()});callback(result);
+ },error=>console.warn("Flag ranking sync:",error.message));
+}
 function stripProject(p){
  const out=structuredClone(MEPModel.syncAlias(p)),manifest=[];out.assets=(out.assets||[]).map(a=>{const meta={id:a.id,name:a.name||"asset",type:a.type||"image/jpeg",size:a.size||0,kind:a.kind||"",shortId:a.shortId||"",durationSeconds:a.durationSeconds||0,voiceDbKey:a.voiceDbKey||null};manifest.push(meta);return meta});
  out.assetManifest=manifest;out.sync={...(out.sync||{}),provider:"firestore",status:"synced",lastSyncedAt:new Date().toISOString()};return out
@@ -33,7 +47,7 @@ async function saveAssetDoc(projectId,a){
  await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepAssets",projectId+"__"+a.id),doc,{merge:true})
 }
 async function saveCloud(p){
- await ensure();save(p);const payload=stripProject(p);await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepProjects",p.id),payload,{merge:false});
+ await ensure();if(!currentEditor())throw Error("Sign in with the authorized editor account to save shared Firestore projects.");save(p);const payload=stripProject(p);await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepProjects",p.id),payload,{merge:false});
  for(const a of p.assets||[])if(a.dataUrl)await saveAssetDoc(p.id,a);p.sync.status="synced";p.sync.lastSyncedAt=payload.sync.lastSyncedAt;save(p);return p.id
 }
 async function hydrateAssets(p){const assets=[];for(const meta of p.assetManifest||p.assets||[]){try{const snap=await cloud.fs.getDoc(cloud.fs.doc(cloud.db,"mepAssets",p.id+"__"+meta.id));if(snap.exists())assets.push({...meta,dataUrl:snap.data().dataUrl});else if(meta.voiceDbKey)assets.push({...meta})}catch(e){console.warn("Asset load failed",meta.id,e);if(meta.voiceDbKey)assets.push({...meta})}}p.assets=assets;return p}
@@ -45,5 +59,5 @@ function isHaitiLegacy(data,id=""){const raw=(id+" "+JSON.stringify(data||{})).t
 async function deleteLegacyHaitiCloud(){return{deletedProjects:[],disabled:true,reason:"Automatic cloud deletion removed for project preservation"}}
 async function saveCharacter(c){await ensure();const doc={schema:"mep-character-v3",id:c.id,name:c.name,tags:c.tags||[],visual:c.visual,prop:c.prop||"none",updatedAt:new Date().toISOString()};await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepCharacters",c.id),doc,{merge:true});return c.id}
 function download(p){const blob=new Blob([JSON.stringify(MEPModel.syncAlias(p),null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=(p.name||"mep-project").replace(/[^a-z0-9-_]+/gi,"-").toLowerCase()+".mep.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
-return{save,load,hasLocal,listLocal,removeLocal,needsShortMakerReset,resetLocalToProject,deleteLegacyHaitiCloud,download,initCloud,saveCloud,loadCloud,listCloud,loadLatestCloud,seedLibrary,saveCharacter};
+return{save,load,hasLocal,listLocal,removeLocal,needsShortMakerReset,resetLocalToProject,deleteLegacyHaitiCloud,download,initCloud,saveCloud,loadCloud,listCloud,loadLatestCloud,seedLibrary,saveCharacter,currentEditor,signInEditor,signOutEditor,saveFlagRating,subscribeFlagRatings};
 })();
