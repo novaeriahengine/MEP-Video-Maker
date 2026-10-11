@@ -8,6 +8,7 @@ This folder turns the downloaded repository into a local/offline MEP Video Maker
 - Phone/LAN editor at `http://YOUR-LAPTOP-IP:7860/app/`
 - British Kokoro voices: George, Daniel, Fable, Lewis
 - Background narration jobs with segment-level progress for the web editor, so long local generations remain visible instead of blocking the page
+- Completed narrations are cached by text and voice settings, so repeating an export reuses the WAV instead of running Kokoro again
 - WAV narration generation
 - A local dashboard with model status, a TTS tester, and a downloadable QR code
 - Optional GGUF director: Windows folder selection, model scanning, approved Qwen downloads with progress, and a separately managed llama.cpp chat process
@@ -62,6 +63,14 @@ The phone and laptop should be on the same Wi-Fi. The setup page shows a LAN URL
 ### Generate one WAV
 
 `POST /api/tts`
+
+The web editor uses the background job API for long generations:
+
+- `POST /api/tts/jobs` starts a job and returns its `jobId`
+- `GET /api/tts/jobs/<jobId>` returns live progress
+- `GET /api/tts/jobs/<jobId>/audio` downloads the finished WAV
+
+The older synchronous endpoint remains available for compatibility.
 
 Example JSON:
 

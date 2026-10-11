@@ -267,16 +267,29 @@ def _tts_segment_estimate(text: str) -> int:
     return max(1, (words + 11) // 12)
 
 
-def synthesize(text: str, voice: str = DEFAULT_VOICE, speed: float = DEFAULT_SPEED, pause_ms: float = 70.0, tail_trim_ms: float = 100.0, progress=None):
+def _tts_parameters(text: str, voice: str = DEFAULT_VOICE, speed: float = DEFAULT_SPEED, pause_ms: float = 70.0, tail_trim_ms: float = 100.0):
     text = clean_text(text)
-    if not text:
-        raise ValueError("Text is empty.")
     voice_ids = {v["id"] for v in BRITISH_VOICES}
-    if voice not in voice_ids:
-        voice = DEFAULT_VOICE
+    voice = voice if voice in voice_ids else DEFAULT_VOICE
     speed = max(0.6, min(1.4, float(speed or DEFAULT_SPEED)))
     pause_ms = max(0.0, min(450.0, float(pause_ms or 0)))
     tail_trim_ms = max(0.0, min(500.0, float(tail_trim_ms or 0)))
+    return text, voice, speed, pause_ms, tail_trim_ms
+
+
+def _tts_cache_filename(text: str, voice: str, speed: float, pause_ms: float, tail_trim_ms: float) -> str:
+    key = json.dumps(
+        {"text": text, "voice": voice, "speed": speed, "pauseMs": pause_ms, "tailTrimMs": tail_trim_ms},
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return "tts-cache-" + hashlib.sha256(key).hexdigest()[:40] + ".wav"
+
+
+def synthesize(text: str, voice: str = DEFAULT_VOICE, speed: float = DEFAULT_SPEED, pause_ms: float = 70.0, tail_trim_ms: float = 100.0, progress=None):
+    text, voice, speed, pause_ms, tail_trim_ms = _tts_parameters(text, voice, speed, pause_ms, tail_trim_ms)
+    if not text:
+        raise ValueError("Text is empty.")
     estimated_segments = _tts_segment_estimate(text)
     if progress:
         progress({"stage": "loading", "progress": 4, "segment": 0, "segments": estimated_segments, "message": "Loading Kokoro voice model…"})
@@ -624,13 +637,17 @@ def _update_tts_job(job_id: str, **updates):
 
 
 def _run_tts_job(job_id: str, data: dict):
-    text = str(data.get("text", "")).strip()
-    voice = str(data.get("voice") or DEFAULT_VOICE)
-    speed = data.get("speed", DEFAULT_SPEED)
-    pause_ms = data.get("pauseMs", 70)
-    tail_trim_ms = data.get("tailTrimMs", 100)
+    text, voice, speed, pause_ms, tail_trim_ms = _tts_parameters(
+        data.get("text", ""),
+        data.get("voice") or DEFAULT_VOICE,
+        data.get("speed", DEFAULT_SPEED),
+        data.get("pauseMs", 70),
+        data.get("tailTrimMs", 100),
+    )
     title = str(data.get("title") or "MEP narration")
     short_id = str(data.get("shortId") or "")
+    filename = _tts_cache_filename(text, voice, speed, pause_ms, tail_trim_ms)
+    saved = OUTPUTS / filename
 
     def progress(update):
         _update_tts_job(job_id, **update, updatedAt=time.time())
@@ -638,10 +655,8 @@ def _run_tts_job(job_id: str, data: dict):
     try:
         _update_tts_job(job_id, state="running", stage="starting", progress=1, message="Starting local voice generation…", startedAt=time.time(), updatedAt=time.time())
         audio, duration = synthesize(text, voice, speed, pause_ms, tail_trim_ms, progress=progress)
-        filename = safe_name(title) + "-" + job_id[:8] + ".wav"
-        saved = OUTPUTS / filename
         saved.write_bytes(audio.getvalue())
-        _update_tts_job(job_id, state="complete", stage="complete", progress=100, message="Narration ready to mix into the video.", duration=duration, filename=filename, shortId=short_id, updatedAt=time.time(), completedAt=time.time())
+        _update_tts_job(job_id, state="complete", stage="complete", progress=100, message="Narration ready to mix into the video.", duration=duration, filename=filename, cached=True, shortId=short_id, updatedAt=time.time(), completedAt=time.time())
     except Exception as exc:
         _update_tts_job(job_id, state="error", stage="error", progress=0, message=str(exc), error=str(exc), updatedAt=time.time(), completedAt=time.time())
 
@@ -649,33 +664,54 @@ def _run_tts_job(job_id: str, data: dict):
 @app.post("/api/tts/jobs")
 def start_tts_job():
     data = request.get_json(silent=True) or {}
-    if not str(data.get("text", "")).strip():
+    text, voice, speed, pause_ms, tail_trim_ms = _tts_parameters(
+        data.get("text", ""),
+        data.get("voice") or DEFAULT_VOICE,
+        data.get("speed", DEFAULT_SPEED),
+        data.get("pauseMs", 70),
+        data.get("tailTrimMs", 100),
+    )
+    if not text:
         return jsonify(error="Text is empty."), 400
     now = time.time()
+    cache_filename = _tts_cache_filename(text, voice, speed, pause_ms, tail_trim_ms)
+    cached_file = OUTPUTS / cache_filename
+    cached_duration = 0.0
+    if cached_file.is_file():
+        try:
+            cached_duration = float(sf.info(cached_file).duration)
+        except Exception:
+            cached_duration = 0.0
     with _tts_jobs_lock:
         expired = [key for key, value in _tts_jobs.items() if now - float(value.get("updatedAt", now)) > _tts_job_ttl]
         for key in expired:
-            filename = _tts_jobs[key].get("filename")
-            if filename:
+            expired_filename = _tts_jobs[key].get("filename")
+            if expired_filename and not _tts_jobs[key].get("cached"):
                 try:
-                    (OUTPUTS / filename).unlink(missing_ok=True)
+                    (OUTPUTS / expired_filename).unlink(missing_ok=True)
                 except OSError:
                     pass
             del _tts_jobs[key]
         job_id = uuid.uuid4().hex
         _tts_jobs[job_id] = {
             "jobId": job_id,
-            "voice": str(data.get("voice") or DEFAULT_VOICE),
-            "state": "queued",
-            "stage": "queued",
-            "progress": 0,
+            "voice": voice,
+            "state": "complete" if cached_file.is_file() else "queued",
+            "stage": "cached" if cached_file.is_file() else "queued",
+            "progress": 100 if cached_file.is_file() else 0,
             "segment": 0,
-            "segments": _tts_segment_estimate(str(data.get("text", ""))),
-            "message": "Queued for the local Kokoro engine…",
+            "segments": _tts_segment_estimate(text),
+            "message": "Using cached narration." if cached_file.is_file() else "Queued for the local Kokoro engine…",
+            "duration": cached_duration if cached_file.is_file() else None,
+            "filename": cache_filename if cached_file.is_file() else None,
+            "cached": cached_file.is_file(),
+            "shortId": str(data.get("shortId") or ""),
             "createdAt": now,
             "updatedAt": now,
+            "completedAt": now if cached_file.is_file() else None,
         }
-    threading.Thread(target=_run_tts_job, args=(job_id, data), daemon=True, name=f"mep-tts-{job_id[:8]}").start()
+    if not cached_file.is_file():
+        threading.Thread(target=_run_tts_job, args=(job_id, data), daemon=True, name=f"mep-tts-{job_id[:8]}").start()
     return jsonify(_tts_job_snapshot(job_id)), 202
 
 

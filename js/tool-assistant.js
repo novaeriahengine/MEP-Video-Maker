@@ -45,19 +45,26 @@ opener.onclick=()=>openTool(active);$("#toolClose").onclick=closeTool;$("#toolFl
 const aliases={voice:"voice",audio:"voice",narration:"voice",photo:"photos",picture:"photos",background:"backgrounds",map:"graphics",graphic:"graphics",character:"characters",flag:"characters",script:"scripts",caption:"scripts",project:"project",save:"project",export:"project"};
 $("#toolChatForm").onsubmit=e=>{e.preventDefault();const raw=$("#toolChatInput").value.toLowerCase();let found="";for(const k of Object.keys(aliases))if(raw.includes(k)){found=aliases[k];break}if(found){openTool(found);$("#toolChatInput").value=""}else $("#toolAssistantStatus").textContent="Try voice, photos, backgrounds, graphics, characters, scripts, or project."};
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeTool()});
-async function checkVoiceServer(){
- const server=localVoiceServer();serverChip.classList.remove("connected","disconnected");
- if(!server){serverChip.textContent="Voice: not connected";serverChip.classList.add("disconnected");return}
+let voiceCheckTimer=null,voiceCheckInFlight=false;
+function scheduleVoiceCheck(){clearTimeout(voiceCheckTimer);voiceCheckTimer=setTimeout(()=>checkVoiceServer({quiet:true}),4000)}
+async function checkVoiceServer({quiet=false}={}){
+ if(voiceCheckInFlight)return;
+ voiceCheckInFlight=true;
+ const server=localVoiceServer(),wasConnected=serverChip.classList.contains("connected");serverChip.classList.remove("connected","disconnected");
+ if(!server){serverChip.textContent="Voice: not connected";serverChip.classList.add("disconnected");serverChip.title="Open the editor from the local desktop server, or enter its URL in Voice Studio.";voiceCheckInFlight=false;scheduleVoiceCheck();return}
+ if(!quiet||!wasConnected)serverChip.textContent="Voice: checking…";
  try{
   if(window.MEPVoiceBackends?.mixedContentRisk(server))throw Error("HTTPS site cannot use an HTTP laptop API; open the local editor.");
   const j=await MEPVoiceBackends.health(server);if(!j.ok)throw Error("Voice server unavailable");
-  serverChip.textContent="Voice: connected ✓";serverChip.classList.add("connected");
-  const ns=$("#neuralStatus");if(ns)ns.textContent="Local server connected automatically · "+j.engine+" · "+(j.modelLoaded?"Kokoro loaded":"Kokoro ready");
-  const input=$("#neuralApiUrl");if(input&&!input.value)input.value=server;
- }catch(e){serverChip.textContent="Voice: offline";serverChip.classList.add("disconnected");serverChip.title=e.message}
+  serverChip.textContent="Voice: connected ✓";serverChip.classList.add("connected");serverChip.title="Local Kokoro server connected at "+server;
+  const ns=$("#neuralStatus");if(ns&&!/Generating|Checking/i.test(ns.textContent||""))ns.textContent="Local server connected automatically · "+j.engine+" · "+(j.modelLoaded?"Kokoro loaded":"Kokoro ready");
+  const input=$("#neuralApiUrl");if(input&&(!input.value.trim()||server===location.origin))input.value=server;
+ }catch(e){serverChip.textContent=quiet?"Voice: retrying…":"Voice: offline";serverChip.classList.add("disconnected");serverChip.title=e.message+" · Retrying automatically."}
+ voiceCheckInFlight=false;scheduleVoiceCheck();
 }
 serverChip.onclick=()=>{openTool("voice");checkVoiceServer()};
 checkVoiceServer();
-window.addEventListener("focus",checkVoiceServer);
+window.addEventListener("focus",()=>checkVoiceServer({quiet:true}));
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)checkVoiceServer({quiet:true})});
 applyMode();closeTool();window.MEPTools={open:openTool,close:closeTool,panes};
 })();

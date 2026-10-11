@@ -11,8 +11,12 @@ function updateExportProgress(progress,phase,detail,{indeterminate=false,state="
  panel.hidden=false;panel.classList.toggle("complete",state==="complete");panel.classList.toggle("error",state==="error");
  if(bar){bar.value=pct;bar.classList.toggle("indeterminate",indeterminate)}
  setText("#exportProgressPhase",phase||"Exporting…");setText("#exportProgressPercent",Math.round(pct)+"%");
- const elapsed=exportStartedAt?" · "+fmt((performance.now()-exportStartedAt)/1000):"";
- setText("#exportProgressDetail",String(detail||"")+elapsed);setText("#exportStatus",phase+(detail?" · "+detail:""));
+ const elapsedSeconds=exportStartedAt?Math.max(0,(performance.now()-exportStartedAt)/1000):0;
+ const elapsed=exportStartedAt?" · elapsed "+fmt(elapsedSeconds):"";
+ const hasEta=exportStartedAt&&state==="active"&&!indeterminate&&pct>=5&&pct<100;
+ const remaining=hasEta?elapsedSeconds*((100-pct)/Math.max(pct,1)):0;
+ const eta=hasEta?" · about "+fmt(remaining)+" left":"";
+ setText("#exportProgressDetail",String(detail||"")+elapsed+eta);setText("#exportStatus",phase+(detail?" · "+detail:""));
 }
 
 const canvas=$("#stage"),ctx=canvas.getContext("2d"),videoCanvas=$("#videoStage"),videoCtx=videoCanvas.getContext("2d");
@@ -418,7 +422,7 @@ async function prepareChromePreviewForExport(sh,position=1,totalCount=1){
    document.body.appendChild(link);link.click();link.remove();
    // A long-lived URL helps mobile browsers finish the save dialog.
    setTimeout(()=>URL.revokeObjectURL(url),120000);
-   updateExportProgress(100,"Downloaded · short "+position+"/"+totalCount,sh.title+" is ready.",{state:"complete"});
+    updateExportProgress(100,"Download ready · short "+position+"/"+totalCount,sh.title+" is complete and the browser download has started.",{state:"complete"});
    resolve()
   };
   try{renderShortFrame(ctx,sh,0);rec.start(1000)}

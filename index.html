@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Noveria History — MEP Short Maker</title>
 <link rel="icon" type="image/svg+xml" href="assets/brand/mep-kokoro-florida-mark.svg">
-<link rel="stylesheet" href="css/style.css?v=20261010x">
+<link rel="stylesheet" href="css/style.css?v=20261011x">
 </head>
 <body>
 <div id="app">
@@ -23,6 +23,12 @@
   <span id="saveStatus"></span>
 </header>
 <div id="bootStatus" class="bootStatus">Starting Noveria History…</div>
+
+<div id="exportProgress" class="exportProgress" hidden aria-live="polite">
+  <div class="exportProgressHeader"><strong id="exportProgressPhase">Export ready</strong><span id="exportProgressPercent">0%</span></div>
+  <progress id="exportProgressBar" max="100" value="0"></progress>
+  <div id="exportProgressDetail" class="exportProgressDetail">The editor will show voice-generation and video-render progress here.</div>
+</div>
 
 <main class="workspace">
   <aside id="scenePanel" class="panel scenePanel">
@@ -81,11 +87,6 @@
       <button id="exportCurrentShort" class="primary">⬇ Export This Short</button>
       <button id="exportAllShorts">⬇ Export All</button>
       <span id="exportStatus"></span>
-    </div>
-    <div id="exportProgress" class="exportProgress" hidden aria-live="polite">
-      <div class="exportProgressHeader"><strong id="exportProgressPhase">Export ready</strong><span id="exportProgressPercent">0%</span></div>
-      <progress id="exportProgressBar" max="100" value="0"></progress>
-      <div id="exportProgressDetail" class="exportProgressDetail">The editor will show voice-generation and video-render progress here.</div>
     </div>
     <div class="canvasWrap shortCanvasWrap"><canvas id="stage" width="720" height="1280"></canvas></div>
     <div class="canvasHint">9:16 YouTube Short canvas. Flag characters stay simple; maps, arrows, fronts, routes, photos, captions, and narration do the explaining.</div>
@@ -234,18 +235,18 @@
 
 <nav id="mobileDock" class="mobileDock"><button data-jump="#stageArea">Canvas</button><button data-jump="#scenePanel">Shorts</button><button data-jump="#characterPanel">Flags</button><button data-jump="#scriptPanel">Script</button><button id="mobileVideo">Preview</button></nav>
 
-<script src="js/firebase-config.js?v=20261010x"></script>
-<script src="js/history-flags.js?v=20261010x"></script>
-<script src="js/historical-maps.js?v=20261010x"></script>
-<script src="js/model.js?v=20261010x"></script>
-<script src="js/ai-config.js?v=20261010x"></script>
-<script src="js/ai-director.js?v=20261010x"></script>
-<script src="js/renderer.js?v=20261010x"></script>
-<script src="js/storage.js?v=20261010x"></script>
-<script src="js/voice-backends.js?v=20261010x"></script>
+<script src="js/firebase-config.js?v=20261011x"></script>
+<script src="js/history-flags.js?v=20261011x"></script>
+<script src="js/historical-maps.js?v=20261011x"></script>
+<script src="js/model.js?v=20261011x"></script>
+<script src="js/ai-config.js?v=20261011x"></script>
+<script src="js/ai-director.js?v=20261011x"></script>
+<script src="js/renderer.js?v=20261011x"></script>
+<script src="js/storage.js?v=20261011x"></script>
+<script src="js/voice-backends.js?v=20261011x"></script>
 <script>window.addEventListener("error",e=>{const el=document.getElementById("bootStatus");if(el){el.className="bootStatus error";el.textContent="MEP error: "+(e.message||"Unknown startup error")}});</script>
-<script src="js/app.js?v=20261010x"></script>
-<script src="js/tool-assistant.js?v=20261010x"></script>
+<script src="js/app.js?v=20261011x"></script>
+<script src="js/tool-assistant.js?v=20261011x"></script>
 </body>
 </html>
 
