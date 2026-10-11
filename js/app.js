@@ -329,6 +329,62 @@ on("#saveFlagRating","click",async()=>{
  }catch(e){$("#flagCloudStatus").textContent="Saved locally. Cloud: "+e.message}
 });
 on("#refreshFlagRatings","click",async()=>{try{await connectFlagRatings();syncFlagsUI()}catch(e){$("#flagCloudStatus").textContent=e.message}});
+
+async function upgradeFlagStoryboard({replaceScripts=false}={}){
+ if(project?.series?.type!=="state-flags")throw Error("Open your 50 State Flags project first.");
+ const question=replaceScripts
+  ?"Replace the generated Flags narration and upgrade linked visuals? A separate LOCAL backup will be saved first. Your grades, completed checkmarks, audio assets and non-template scenes will remain."
+  :"Upgrade the Flags scene illustrations and captions only? Your written scripts and grades will not be changed.";
+ if(!confirm(question))return;
+ const response=await fetch("flags/flags-series.mep.json",{cache:"no-store"});
+ if(!response.ok)throw Error("Could not load updated flag storyboard.");
+ const template=MEPModel.migrate(await response.json());
+ if(template.series?.type!=="state-flags"||template.shorts.length!==18)throw Error("Invalid updated Flags project.");
+ const backup=structuredClone(project);backup.id=project.id+"-backup-"+Date.now();
+ backup.name=project.name+" · Before storyboard upgrade";
+ backup.sync={provider:"firestore",status:"local",revision:0,lastSyncedAt:null};
+ MEPStorage.save(backup);
+ const grades=MEPFlagSeries.getRatings();let sceneCount=0,scriptCount=0;
+ const existingShorts=new Map(project.shorts.map(sh=>[sh.id,sh]));
+ for(const nextShort of template.shorts){
+  const currentShort=existingShorts.get(nextShort.id);
+  if(!currentShort){project.shorts.push(nextShort);sceneCount+=nextShort.scenes.length;continue}
+  const currentScenes=new Map((currentShort.scenes||[]).map(sc=>[sc.id,sc]));
+  for(const nextScene of nextShort.scenes||[]){
+   const current=currentScenes.get(nextScene.id);
+   if(!current){currentShort.scenes.push(nextScene);sceneCount++;continue}
+   current.flagBeat={...(current.flagBeat||{}),...(nextScene.flagBeat||{})};
+   current.visualIntent=nextScene.visualIntent||current.visualIntent;
+   sceneCount++;
+   if(replaceScripts){
+    let text=nextScene.script||"";
+    const code=nextScene.flagBeat?.stateCode,grade=grades[code]?.grade;
+    if(nextScene.flagBeat?.mode==="rate"&&grade){
+     const name=MEPFlagSeries.flagInfo(code)?.name||code;
+     text="My grade for "+name+" is "+grade+". That's my verdict.";
+    }else if(nextScene.flagBeat?.mode==="rate"&&/My grade for /.test(current.script||"")){
+     text=current.script;
+    }
+    if(current.script!==text){current.script=text;scriptCount++;}
+    current.notes=nextScene.notes||current.notes;
+    project.scripts=project.scripts||{sceneById:{}};
+    project.scripts.sceneById=project.scripts.sceneById||{};
+    project.scripts.sceneById[current.id]=current.script;
+   }
+  }
+  currentShort.flagsStoryboardRevision=2;
+  if(replaceScripts&&scriptCount){currentShort.workflow=currentShort.workflow||{checklist:{},history:[]};
+    currentShort.workflow.checklist=currentShort.workflow.checklist||{};
+    currentShort.workflow.checklist.voice=false;
+  }
+ }
+ project.series={...project.series,...template.series,storyboardRevision:2};
+ MEPStorage.save(project);refreshRefs();syncUI();
+ setText("#flagUpgradeStatus","Updated "+sceneCount+" visual beats"+(replaceScripts?", "+scriptCount+" narration lines":"; scripts preserved")+". Local backup created. Review and click Save Firestore when ready.");
+}
+on("#flagUpgradeVisuals","click",()=>upgradeFlagStoryboard({replaceScripts:false}).catch(e=>{setText("#flagUpgradeStatus","Upgrade failed: "+e.message);console.error(e)}));
+on("#flagUpgradeAll","click",()=>upgradeFlagStoryboard({replaceScripts:true}).catch(e=>{setText("#flagUpgradeStatus","Upgrade failed: "+e.message);console.error(e)}));
+
 let flagsUnsubscribe=null;
 async function connectFlagRatings(){
  if(!cloudReady||flagsUnsubscribe)return;
