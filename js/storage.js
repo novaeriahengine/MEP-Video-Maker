@@ -66,12 +66,69 @@ async function saveAssetDoc(projectId,a){
  const doc={schema:"mep-asset-v1",projectId,assetId:a.id,name:a.name||"asset",type:a.type||"image/jpeg",size:a.size||0,dataUrl:a.dataUrl,updatedAt:new Date().toISOString()};
  await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepAssets",projectId+"__"+a.id),doc,{merge:true})
 }
+
+function byteSize(x){return new TextEncoder().encode(JSON.stringify(x)).length}
+function videoId(pid,sid){return pid+"__"+sid}
 async function saveCloud(p){
- await ensure();requireEditor();save(p);const payload=stripProject(p);await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepProjects",p.id),payload,{merge:false});
- for(const a of p.assets||[])if(a.dataUrl)await saveAssetDoc(p.id,a);p.sync.status="synced";p.sync.lastSyncedAt=payload.sync.lastSyncedAt;save(p);return p.id
+ await ensure();requireEditor();
+ const payload=stripProject(p);
+ const summaries=(p.shorts||[]).map(sh=>({id:sh.id,title:sh.title||"Untitled",year:sh.year||2026,sceneCount:sh.scenes?.length||0,updatedAt:sh.updatedAt||""}));
+ const metadata={...payload,shorts:summaries,scripts:{project:p.scripts?.project||"",sceneById:{}},storageFormat:"mep-project-sharded-v1",shortCount:summaries.length,videoDocumentIds:summaries.map(sh=>videoId(p.id,sh.id)),historyPreservedIn:"mepVideos"};
+ const batch=cloud.fs.writeBatch(cloud.db);
+ for(const sh of p.shorts||[]){
+  const doc={schema:"mep-video-short-v1",projectId:p.id,shortId:sh.id,title:sh.title||"Untitled",payload:structuredClone(sh),updatedAt:new Date().toISOString()};
+  if(byteSize(doc)>900000)throw Error("Video is too large for one Firestore document: "+sh.title);
+  batch.set(cloud.fs.doc(cloud.db,"mepVideos",videoId(p.id,sh.id)),doc);
+ }
+ if(byteSize(metadata)>900000)throw Error("Project metadata is too large to store.");
+ batch.set(cloud.fs.doc(cloud.db,"mepProjects",p.id),metadata);
+ await batch.commit();
+ for(const a of p.assets||[])if(a.dataUrl)await saveAssetDoc(p.id,a);
+ p.sync=p.sync||{};p.sync.status="synced";p.sync.lastSyncedAt=metadata.updatedAt;save(p);
+ return {id:p.id,videos:summaries.length}
+}
+async function saveAllLocalProjects(onProgress=()=>{}){
+ await ensure();requireEditor();const items=listLocal(),result={saved:[],failed:[]};
+ for(let i=0;i<items.length;i++){
+  const item=items[i],p=load(item.id);if(!p)continue;
+  try{const r=await saveCloud(p);result.saved.push({name:item.name,videos:r.videos})}
+  catch(e){result.failed.push({name:item.name,error:e.message})}
+  onProgress(i+1,items.length,item.name);
+ }
+ return result
+}
+async function seedBundledProjects(onProgress=()=>{}){
+ await ensure();requireEditor();
+ const bundles=[["presets/american-history-stories.mep.json","American History Stories"],["presets/youtube-short-maker.mep.json","Ready Shorts"],["flags/flags-series.mep.json","50 State Flags"]],result={saved:[],skipped:[],failed:[]};
+ for(let i=0;i<bundles.length;i++){
+  const [path,name]=bundles[i];
+  try{
+   const response=await fetch(path,{cache:"no-store"});if(!response.ok)throw Error("Fetch failed: "+response.status);
+   const p=MEPModel.migrate(await response.json());
+   const ref=cloud.fs.doc(cloud.db,"mepProjects",p.id);
+   if((await cloud.fs.getDoc(ref)).exists())result.skipped.push(name);
+   else{await saveCloud(p);result.saved.push(name)}
+  }catch(e){result.failed.push({name,error:e.message})}
+  onProgress(i+1,bundles.length,name);
+ }
+ return result
 }
 async function hydrateAssets(p){const assets=[];for(const meta of p.assetManifest||p.assets||[]){try{const snap=await cloud.fs.getDoc(cloud.fs.doc(cloud.db,"mepAssets",p.id+"__"+meta.id));if(snap.exists())assets.push({...meta,dataUrl:snap.data().dataUrl});else if(meta.voiceDbKey)assets.push({...meta})}catch(e){console.warn("Asset load failed",meta.id,e);if(meta.voiceDbKey)assets.push({...meta})}}p.assets=assets;return p}
-async function loadCloud(id){await ensure();const snap=await cloud.fs.getDoc(cloud.fs.doc(cloud.db,"mepProjects",id));if(!snap.exists())throw new Error("Project not found");const p=MEPModel.migrate(await hydrateAssets(snap.data()));save(p);return p}
+
+async function loadCloud(id){
+ await ensure();const snap=await cloud.fs.getDoc(cloud.fs.doc(cloud.db,"mepProjects",id));
+ if(!snap.exists())throw Error("Project not found");
+ const meta=snap.data();let data=meta;
+ if(meta.storageFormat==="mep-project-sharded-v1"){
+  const ids=meta.videoDocumentIds||[];
+  const docs=await Promise.all(ids.map(key=>cloud.fs.getDoc(cloud.fs.doc(cloud.db,"mepVideos",key))));
+  if(docs.some(d=>!d.exists()))throw Error("Missing cloud video(s). Existing local projects were left intact.");
+  const videos=docs.map(d=>d.data().payload),scripts={};
+  for(const sh of videos)for(const sc of sh.scenes||[])scripts[sc.id]=sc.script||"";
+  data={...meta,shorts:videos,scripts:{project:meta.scripts?.project||"",sceneById:scripts}}
+ }
+ const p=MEPModel.migrate(await hydrateAssets(data));save(p);return p
+}
 async function listCloud(){await ensure();const snap=await cloud.fs.getDocs(cloud.fs.collection(cloud.db,"mepProjects"));return snap.docs.map(d=>({id:d.id,name:d.data().name||"Untitled Project",updatedAt:d.data().updatedAt||"",shortCount:d.data().shorts?.length||1})).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt))}
 async function loadLatestCloud(){const list=await listCloud();return list.length?loadCloud(list[0].id):null}
 async function seedLibrary(snapshot){await ensure();requireEditor();await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepLibrary","default"),structuredClone(snapshot),{merge:false});return true}
@@ -79,5 +136,5 @@ function isHaitiLegacy(data,id=""){const raw=(id+" "+JSON.stringify(data||{})).t
 async function deleteLegacyHaitiCloud(){return{deletedProjects:[],disabled:true,reason:"Automatic cloud deletion removed for project preservation"}}
 async function saveCharacter(c){await ensure();requireEditor();const doc={schema:"mep-character-v3",id:c.id,name:c.name,tags:c.tags||[],visual:c.visual,prop:c.prop||"none",updatedAt:new Date().toISOString()};await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepCharacters",c.id),doc,{merge:true});return c.id}
 function download(p){const blob=new Blob([JSON.stringify(MEPModel.syncAlias(p),null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=(p.name||"mep-project").replace(/[^a-z0-9-_]+/gi,"-").toLowerCase()+".mep.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
-return{save,load,hasLocal,listLocal,removeLocal,needsShortMakerReset,resetLocalToProject,deleteLegacyHaitiCloud,download,initCloud,saveCloud,loadCloud,listCloud,loadLatestCloud,seedLibrary,saveCharacter,currentEditor,signInEditor,signOutEditor,saveFlagRating,subscribeFlagRatings,signedInAccount,sendEditorReset,sendEditorVerification,refreshEditor,changeEditorPassword,watchEditor};
+return{save,load,hasLocal,listLocal,removeLocal,needsShortMakerReset,resetLocalToProject,deleteLegacyHaitiCloud,download,initCloud,saveCloud,saveAllLocalProjects,seedBundledProjects,loadCloud,listCloud,loadLatestCloud,seedLibrary,saveCharacter,currentEditor,signInEditor,signOutEditor,saveFlagRating,subscribeFlagRatings,signedInAccount,sendEditorReset,sendEditorVerification,refreshEditor,changeEditorPassword,watchEditor};
 })();
