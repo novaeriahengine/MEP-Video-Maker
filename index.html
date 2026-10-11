@@ -138,6 +138,24 @@
     <h2>Narration</h2>
     <label class="stack">Current Scene Script<textarea id="sceneScript" rows="9"></textarea></label>
     <label class="stack">On-screen Caption<textarea id="sceneCaption" rows="3"></textarea></label>
+    <details id="captionEditor" open><summary>Animated Narration Captions</summary>
+      <div class="captionEditorGrid">
+        <label>Captions <select id="captionEnabled"><option value="on">On</option><option value="off">Off</option></select></label>
+        <label>Text Source <select id="captionSource"><option value="narration">Follow Narration</option><option value="scene">Scene Caption</option></select></label>
+        <label>Position <select id="captionPosition"><option value="bottom">Bottom</option><option value="middle">Center</option><option value="top">Top</option><option value="custom">Custom X / Y</option></select></label>
+        <label>Animate In <select id="captionAnimationIn"><option value="rise">Rise</option><option value="fade">Fade In</option><option value="slide-left">Slide from Right</option><option value="slide-right">Slide from Left</option><option value="pop">Pop</option><option value="typewriter">Typewriter</option><option value="none">None</option></select></label>
+        <label>Animate Out <select id="captionAnimationOut"><option value="fade">Fade Out</option><option value="rise">Rise</option><option value="slide-left">Slide Left</option><option value="slide-right">Slide Right</option><option value="pop">Shrink</option><option value="none">None</option></select></label>
+        <label>Size <input id="captionFontSize" type="range" min="20" max="72" value="40"></label>
+        <label>Words / Caption <input id="captionWordsPerCaption" type="range" min="2" max="12" value="5"></label>
+        <label>X Position % <input id="captionX" type="range" min="8" max="92" value="50"></label>
+        <label>Y Position % <input id="captionY" type="range" min="10" max="92" value="84"></label>
+        <label>Text Color <input id="captionColor" type="color" value="#fff8e7"></label>
+        <label>Outline <input id="captionStroke" type="color" value="#202832"></label>
+        <label>Background <select id="captionBackground"><option value="none">No Box</option><option value="box">Dark Box</option></select></label>
+        <label>Uppercase <select id="captionUppercase"><option value="off">Off</option><option value="on">On</option></select></label>
+      </div>
+      <p class="captionEditorHint">Settings apply to the selected Short. Captions are timed to each scene's narration and appear in Preview and Export. Scene Caption is the custom text option.</p>
+    </details>
     <label class="stack">Scene Notes<textarea id="sceneNotes" rows="4"></textarea></label>
 
     <h2>Voice Studio</h2>
@@ -252,6 +270,8 @@
 <script src="js/storage.js?v=20261011y"></script>
 <script src="js/voice-backends.js?v=20261011y"></script>
 <script>window.addEventListener("error",e=>{const el=document.getElementById("bootStatus");if(el){el.className="bootStatus error";el.textContent="MEP error: "+(e.message||"Unknown startup error")}});</script>
+<script src="js/speech-text.js?v=20261011z"></script>
+<script src="js/captions.js?v=20261011z"></script>
 <script src="js/app.js?v=20261011y"></script>
 <script src="js/tool-assistant.js?v=20261011y"></script>
 </body>
