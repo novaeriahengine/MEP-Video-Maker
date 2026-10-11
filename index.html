@@ -19,7 +19,9 @@
   <button id="loadStoryPack">Load 15 American Stories</button>
   <button id="createFlagsProject" class="primary">Open / Create 50 State Flags</button>
   <button id="saveProject">Save Local</button>
-  <button id="cloudSignIn">Sign In to Edit Cloud</button>
+  <button id="cloudSignIn">Owner Account / Log In</button>
+  <button id="cloudBackupAll">Back Up All Local Projects</button>
+  <button id="cloudSeedBundles">Add Bundled Projects to Firestore</button>
   <button id="saveCloud">Save Firestore</button>
   <button id="exportProject">Export JSON</button>
   <label class="fileButton">Import JSON<input id="importProject" type="file" accept=".json,application/json"></label>
@@ -277,6 +279,34 @@
 </aside>
 
 <dialog id="characterGalleryDialog"><div class="dialogShell"><header><div><h2>Flag Character Gallery</h2><p>Square, circle, or triangle flag characters only.</p></div><button id="closeCharacterGallery">Close</button></header><div id="characterGalleryList" class="characterGalleryList"></div></div></dialog>
+
+<dialog id="ownerAccountDialog" class="ownerAccountDialog">
+ <form method="dialog" class="dialogShell ownerAuthForm">
+  <header><div><h2>Engine Owner Account</h2><p>Email/Password access for the one shared Firebase workspace.</p></div><button type="button" id="closeOwnerAccount" aria-label="Close">×</button></header>
+  <p id="ownerAccountStatus" role="status">Not signed in. All public projects remain viewable.</p>
+  <label class="stack">Owner email
+   <input id="ownerEmail" type="email" autocomplete="username" value="MoVaeRiahHistory@gmail.com" readonly>
+  </label>
+  <label class="stack">Password
+   <input id="ownerPassword" type="password" autocomplete="current-password" placeholder="Enter your Firebase password">
+  </label>
+  <div class="buttonGrid">
+   <button type="button" id="ownerLogin" class="primary">Sign In</button>
+   <button type="button" id="ownerReset">Forgot Password</button>
+   <button type="button" id="ownerSignOut">Sign Out</button>
+  </div>
+  <div class="buttonGrid">
+   <button type="button" id="ownerVerify">Send Verification Email</button>
+   <button type="button" id="ownerRefresh">I Verified My Email</button>
+  </div>
+  <h3>Change Password</h3>
+  <label class="stack">Current password<input id="ownerOldPassword" type="password" autocomplete="current-password"></label>
+  <label class="stack">New password (12+ characters)<input id="ownerNewPassword" type="password" autocomplete="new-password" minlength="12"></label>
+  <label class="stack">Confirm new password<input id="ownerConfirmPassword" type="password" autocomplete="new-password" minlength="12"></label>
+  <button type="button" id="ownerChangePassword" class="primary">Update Password</button>
+  <p class="ownerHint">No password is ever saved in this project or Firestore. Create the owner account once in Firebase Authentication → Users → Add user, then verify your email.</p>
+ </form>
+</dialog>
 
 <dialog id="projectDialog"><div class="dialogShell"><header><div><h2>Projects</h2><p>Recent local projects appear first. Firestore projects appear when cloud access is available.</p></div><button id="closeProjectDialog">Close</button></header><h3>Recent Local</h3><div id="localProjectList" class="cloudProjectList"></div><h3>Firestore</h3><div id="cloudProjectList" class="cloudProjectList"></div></div></dialog>
 
