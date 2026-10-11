@@ -286,6 +286,7 @@ def synthesize(text: str, voice: str = DEFAULT_VOICE, speed: float = DEFAULT_SPE
         if progress:
             progress({"stage": "generating", "progress": 8, "segment": 0, "segments": estimated_segments, "message": "Generating narration segments…"})
         generated = pipeline(text, voice=voice, speed=speed)
+        previous_graphemes = None
         for index, (graphemes, _phonemes, audio) in enumerate(generated):
             if progress:
                 segment = index + 1
@@ -294,11 +295,12 @@ def synthesize(text: str, voice: str = DEFAULT_VOICE, speed: float = DEFAULT_SPE
             arr = np.asarray(audio, dtype=np.float32)
             if not arr.size:
                 continue
-            chunks.append(arr)
-            if index < len(generated) - 1 and pause_ms > 0:
-                punctuation = bool(re.search(r"[.!?][\"'”’)]?\s*$", str(graphemes or "")))
+            if previous_graphemes is not None and pause_ms > 0:
+                punctuation = bool(re.search(r"[.!?][\"'”’)]?\s*$", str(previous_graphemes or "")))
                 pause = pause_ms * (1.25 if punctuation else 0.65)
                 chunks.append(np.zeros(int(24000 * pause / 1000.0), dtype=np.float32))
+            chunks.append(arr)
+            previous_graphemes = graphemes
     if not chunks:
         raise RuntimeError("Kokoro returned no audio.")
     if progress:
