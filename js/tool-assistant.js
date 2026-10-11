@@ -36,6 +36,7 @@ async function runPhotoSearch(){
 $("#historyPhotoSearch").onclick=runPhotoSearch;$("#historyPhotoAuto").onclick=()=>{syncPhotoQuery(true);runPhotoSearch()};
 const workspace=$(".workspace");if(workspace)workspace.classList.add("focus-layout");
 const opener=make("button","primary toolOpenButton");opener.id="openTools";opener.textContent="Tools";const topbar=$(".topbar"),modeTabs=$(".modeTabs");if(topbar)topbar.insertBefore(opener,modeTabs?.nextSibling||topbar.firstChild);
+const serverChip=make("button","toolServerChip");serverChip.id="toolServerStatus";serverChip.textContent="Voice: checking…";serverChip.title="Check the local Kokoro server";if(topbar)topbar.insertBefore(serverChip,opener.nextSibling);
 let active="backgrounds",mode=localStorage.getItem("mep-tool-window-mode")||"float";
 function applyMode(){document.body.classList.toggle("tool-full",mode==="full");shell.classList.toggle("full",mode==="full");$("#toolFloatMode").classList.toggle("active",mode==="float");$("#toolFullMode").classList.toggle("active",mode==="full")}
 function openTool(id=active,nextMode=null){if(!panes[id])id="backgrounds";active=id;if(nextMode){mode=nextMode;localStorage.setItem("mep-tool-window-mode",mode)}shell.classList.add("open");applyMode();$$("[data-tool]").forEach(b=>b.classList.toggle("active",b.dataset.tool===id));$$("[data-tool-pane]").forEach(p=>p.classList.toggle("active",p.dataset.toolPane===id));$("#toolAssistantStatus").textContent=(mode==="full"?"Main tab · ":"Floating · ")+defs.find(x=>x[0]===id)[1];if(id==="photos")syncPhotoQuery(false)}
@@ -44,6 +45,19 @@ opener.onclick=()=>openTool(active);$("#toolClose").onclick=closeTool;$("#toolFl
 const aliases={voice:"voice",audio:"voice",narration:"voice",photo:"photos",picture:"photos",background:"backgrounds",map:"graphics",graphic:"graphics",character:"characters",flag:"characters",script:"scripts",caption:"scripts",project:"project",save:"project",export:"project"};
 $("#toolChatForm").onsubmit=e=>{e.preventDefault();const raw=$("#toolChatInput").value.toLowerCase();let found="";for(const k of Object.keys(aliases))if(raw.includes(k)){found=aliases[k];break}if(found){openTool(found);$("#toolChatInput").value=""}else $("#toolAssistantStatus").textContent="Try voice, photos, backgrounds, graphics, characters, scripts, or project."};
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeTool()});
-(async()=>{const server=localVoiceServer();if(!server)return;try{const r=await fetch(server+"/api/health"),j=await r.json();if(r.ok){const ns=$("#neuralStatus");if(ns)ns.textContent="Local server connected automatically · "+j.engine+" · "+(j.modelLoaded?"Kokoro loaded":"Kokoro ready");const input=$("#neuralApiUrl");if(input&&!input.value)input.value=server}}catch{}})();
+async function checkVoiceServer(){
+ const server=localVoiceServer();serverChip.classList.remove("connected","disconnected");
+ if(!server){serverChip.textContent="Voice: not connected";serverChip.classList.add("disconnected");return}
+ try{
+  if(window.MEPVoiceBackends?.mixedContentRisk(server))throw Error("HTTPS site cannot use an HTTP laptop API; open the local editor.");
+  const j=await MEPVoiceBackends.health(server);if(!j.ok)throw Error("Voice server unavailable");
+  serverChip.textContent="Voice: connected ✓";serverChip.classList.add("connected");
+  const ns=$("#neuralStatus");if(ns)ns.textContent="Local server connected automatically · "+j.engine+" · "+(j.modelLoaded?"Kokoro loaded":"Kokoro ready");
+  const input=$("#neuralApiUrl");if(input&&!input.value)input.value=server;
+ }catch(e){serverChip.textContent="Voice: offline";serverChip.classList.add("disconnected");serverChip.title=e.message}
+}
+serverChip.onclick=()=>{openTool("voice");checkVoiceServer()};
+checkVoiceServer();
+window.addEventListener("focus",checkVoiceServer);
 applyMode();closeTool();window.MEPTools={open:openTool,close:closeTool,panes};
 })();
