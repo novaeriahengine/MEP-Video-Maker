@@ -1144,7 +1144,8 @@
         "animationOut": "fade",
         "wordsPerCaption": 5,
         "uppercase": false,
-        "shadow": true
+        "shadow": true,
+        "highlight": true
       }
     },
     {
@@ -2265,7 +2266,8 @@
         "animationOut": "fade",
         "wordsPerCaption": 5,
         "uppercase": false,
-        "shadow": true
+        "shadow": true,
+        "highlight": true
       }
     },
     {
@@ -3148,7 +3150,8 @@
         "animationOut": "fade",
         "wordsPerCaption": 5,
         "uppercase": false,
-        "shadow": true
+        "shadow": true,
+        "highlight": true
       }
     },
     {
@@ -4145,7 +4148,8 @@
         "animationOut": "fade",
         "wordsPerCaption": 5,
         "uppercase": false,
-        "shadow": true
+        "shadow": true,
+        "highlight": true
       }
     },
     {
@@ -5302,7 +5306,8 @@
         "animationOut": "fade",
         "wordsPerCaption": 5,
         "uppercase": false,
-        "shadow": true
+        "shadow": true,
+        "highlight": true
       }
     },
     {
@@ -6302,7 +6307,8 @@
         "animationOut": "fade",
         "wordsPerCaption": 5,
         "uppercase": false,
-        "shadow": true
+        "shadow": true,
+        "highlight": true
       }
     },
     {
@@ -7183,7 +7189,8 @@
         "animationOut": "fade",
         "wordsPerCaption": 5,
         "uppercase": false,
-        "shadow": true
+        "shadow": true,
+        "highlight": true
       }
     },
     {
@@ -8051,7 +8058,8 @@
         "animationOut": "fade",
         "wordsPerCaption": 5,
         "uppercase": false,
-        "shadow": true
+        "shadow": true,
+        "highlight": true
       }
     },
     {
@@ -9028,7 +9036,8 @@
         "animationOut": "fade",
         "wordsPerCaption": 5,
         "uppercase": false,
-        "shadow": true
+        "shadow": true,
+        "highlight": true
       }
     },
     {
@@ -9890,7 +9899,8 @@
         "animationOut": "fade",
         "wordsPerCaption": 5,
         "uppercase": false,
-        "shadow": true
+        "shadow": true,
+        "highlight": true
       }
     },
     {
@@ -9929,7 +9939,8 @@
         "animationOut": "fade",
         "wordsPerCaption": 5,
         "uppercase": false,
-        "shadow": true
+        "shadow": true,
+        "highlight": true
       },
       "width": 720,
       "height": 1280,
@@ -10742,7 +10753,8 @@
         "animationOut": "fade",
         "wordsPerCaption": 5,
         "uppercase": false,
-        "shadow": true
+        "shadow": true,
+        "highlight": true
       },
       "width": 720,
       "height": 1280,
@@ -11514,7 +11526,8 @@
         "animationOut": "fade",
         "wordsPerCaption": 5,
         "uppercase": false,
-        "shadow": true
+        "shadow": true,
+        "highlight": true
       },
       "width": 720,
       "height": 1280,
@@ -12272,7 +12285,8 @@
         "animationOut": "fade",
         "wordsPerCaption": 5,
         "uppercase": false,
-        "shadow": true
+        "shadow": true,
+        "highlight": true
       },
       "width": 720,
       "height": 1280,
@@ -13088,7 +13102,8 @@
         "animationOut": "fade",
         "wordsPerCaption": 5,
         "uppercase": false,
-        "shadow": true
+        "shadow": true,
+        "highlight": true
       },
       "width": 720,
       "height": 1280,
