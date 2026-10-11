@@ -14,3 +14,4 @@ echo Install Python 3.12 from https://www.python.org/downloads/ then run this fi
 echo.
 :done
 pause
+

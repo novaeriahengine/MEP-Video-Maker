@@ -87,3 +87,4 @@ The 10 bundled Shorts have scene-by-scene map metadata in `historical-maps/short
 ## Voice export workflow
 
 Voice Studio keeps separate tracks for **My Recording**, **Local Kokoro**, and **Google Colab**. The selected source gets a visible check mark and is the source used for final WebM audio. Chrome speech remains a fast preview source because browser speech synthesis cannot be captured reliably into the exported MediaStream. Custom EQ/voice profiles can be saved and loaded locally, speech can use a continuous-read mode, tail trim can remove weak trailing audio, and scene timing can be fitted to the final recorded/Kokoro track.
+

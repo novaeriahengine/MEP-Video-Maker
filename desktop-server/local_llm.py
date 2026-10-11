@@ -254,3 +254,4 @@ class LocalLLM:
             os.startfile(str(folder))  # type: ignore[attr-defined]
         else:
             subprocess.Popen(["xdg-open", str(folder)])
+

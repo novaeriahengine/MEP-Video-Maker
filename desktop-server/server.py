@@ -763,3 +763,4 @@ if __name__ == "__main__":
     print("=" * 68)
     threading.Thread(target=open_editor_tab, daemon=True).start()
     serve(app, host=HOST, port=PORT, threads=4)
+

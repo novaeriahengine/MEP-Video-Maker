@@ -33,7 +33,19 @@ function drawAccessory(ctx,cx,cy,size,v={}){
 }
 function drawProp(ctx,cx,cy,size,prop="none",face=1){
  if(!prop||prop==="none")return;ctx.save();ctx.translate(cx+size*.56*face,cy+size*.02);ctx.scale(face,1);ctx.strokeStyle="#553b2a";ctx.fillStyle="#745036";ctx.lineCap="round";ctx.lineJoin="round";
- if(["spear","staff","rifle","musket","pointer"].includes(prop)){ctx.lineWidth=Math.max(4,size*.042);ctx.beginPath();ctx.moveTo(-size*.12,size*.36);ctx.lineTo(size*.18,-size*.48);ctx.stroke();if(prop==="spear"){ctx.fillStyle="#aeb5ba";ctx.beginPath();ctx.moveTo(size*.18,-size*.48);ctx.lineTo(size*.1,-size*.31);ctx.lineTo(size*.25,-size*.36);ctx.closePath();ctx.fill()}if(prop==="rifle"||prop==="musket"){ctx.strokeStyle="#2b2d30";ctx.lineWidth=Math.max(3,size*.027);ctx.beginPath();ctx.moveTo(size*.12,-size*.31);ctx.lineTo(size*.34,-size*.42);ctx.stroke();ctx.fillStyle="#4c3527";ctx.fillRect(-size*.08,size*.20,size*.14,size*.10)}}
+ if(["spear","staff","pointer"].includes(prop)){
+  ctx.lineWidth=Math.max(4,size*.042);ctx.beginPath();ctx.moveTo(-size*.12,size*.36);ctx.lineTo(size*.18,-size*.48);ctx.stroke();
+  if(prop==="spear"){ctx.fillStyle="#aeb5ba";ctx.beginPath();ctx.moveTo(size*.18,-size*.48);ctx.lineTo(size*.1,-size*.31);ctx.lineTo(size*.25,-size*.36);ctx.closePath();ctx.fill()}
+ }
+ else if(prop==="rifle"||prop==="musket"){
+  ctx.save();ctx.rotate(-.65);
+  ctx.fillStyle="#6b4935";ctx.beginPath();ctx.moveTo(-size*.34,size*.08);ctx.lineTo(size*.24,size*.08);ctx.lineTo(size*.24,size*.20);ctx.lineTo(-size*.13,size*.20);ctx.lineTo(-size*.22,size*.35);ctx.lineTo(-size*.39,size*.27);ctx.closePath();ctx.fill();
+  ctx.fillStyle="#30363b";ctx.fillRect(-size*.06,size*.065,size*.44,size*.055);
+  ctx.fillRect(size*.29,size*.08,size*.19,size*.026);
+  ctx.fillStyle="#36383a";ctx.fillRect(-size*.035,size*.14,size*.12,size*.1);
+  if(prop==="rifle"){ctx.fillStyle="#59604f";ctx.fillRect(size*.03,size*.02,size*.15,size*.055)}
+  ctx.restore()
+ }
  else if(prop==="sword"){ctx.strokeStyle="#c4c9ce";ctx.lineWidth=Math.max(4,size*.038);ctx.beginPath();ctx.moveTo(0,size*.12);ctx.lineTo(size*.3,-size*.45);ctx.stroke();ctx.strokeStyle="#63452f";ctx.lineWidth=Math.max(6,size*.055);ctx.beginPath();ctx.moveTo(-size*.07,size*.05);ctx.lineTo(size*.12,size*.12);ctx.stroke()}
  else if(prop==="pistol"){ctx.fillStyle="#30343a";ctx.fillRect(-size*.02,-size*.16,size*.26,size*.09);ctx.fillRect(size*.01,-size*.07,size*.08,size*.19)}
  else if(prop==="binoculars"){ctx.strokeStyle="#252b2d";ctx.lineWidth=Math.max(7,size*.07);ctx.beginPath();ctx.moveTo(-size*.06,-size*.1);ctx.lineTo(size*.08,-size*.2);ctx.moveTo(size*.08,-size*.1);ctx.lineTo(size*.22,-size*.2);ctx.stroke()}
@@ -52,7 +64,12 @@ function drawCharacter(ctx,state,ch,selected=false){
  const v=ch.visual||{},shape=v.shape||"square",size=114*(state.scale||1),cx=state.x,cy=state.y;ctx.save();ctx.translate(cx,cy);ctx.rotate(rad(state.rotation||0));ctx.translate(-cx,-cy);
  shapePath(ctx,shape,cx,cy,size);ctx.save();ctx.clip();const flag=window.MEPHistoryFlags?MEPHistoryFlags.resolve(v.countryCode||"US",v.historicalYear||1863,v.flagVariant||"auto"):null;if(flag&&window.MEPHistoryFlags)MEPHistoryFlags.render(ctx,cx-size/2,cy-size/2,size,size,flag);else{ctx.fillStyle="#e6e6e6";ctx.fillRect(cx-size/2,cy-size/2,size,size)}ctx.restore();
  shapePath(ctx,shape,cx,cy,size);ctx.strokeStyle=selected?"#ffb020":v.stroke||"#17191d";ctx.lineWidth=selected?6:4;ctx.stroke();
- drawEyes(ctx,cx,cy,size,v.expression||"neutral",v.eyeColor||"#111");drawMouth(ctx,cx,cy,size,v,state);drawAccessory(ctx,cx,cy,size,v);drawProp(ctx,cx,cy,size,ch.prop||"none",state.facing||1);
+ drawEyes(ctx,cx,cy,size,v.expression||"neutral",v.eyeColor||"#111");drawMouth(ctx,cx,cy,size,v,state);drawAccessory(ctx,cx,cy,size,v);
+ // A pointing stick is reserved for the Florida presenter; saved country characters
+ // with the old pointer default are displayed empty-handed without losing their data.
+ const isFloridaHost=v.countryCode==="FL"||/noveria host/i.test(ch.name||"");
+ const prop=(ch.prop==="pointer"||ch.prop==="staff")&&!isFloridaHost?"none":(ch.prop||"none");
+ drawProp(ctx,cx,cy,size,prop,state.facing||1);
  if(selected){ctx.setLineDash([7,5]);ctx.strokeStyle="#ffb020";ctx.lineWidth=2;ctx.strokeRect(cx-size*.67,cy-size*.67,size*1.34,size*1.34);ctx.setLineDash([])}ctx.restore()
 }
 function bounds(state,ch){const s=114*(state.scale||1);return{x:state.x-s*.7,y:state.y-s*.7,w:s*1.4,h:s*1.4}}
@@ -61,6 +78,17 @@ function gradientSky(ctx,w,h,top,bottom){const g=ctx.createLinearGradient(0,0,0,
 function hills(ctx,w,h,colors,base=.56){colors.forEach((c,i)=>{ctx.fillStyle=c;ctx.beginPath();ctx.moveTo(0,h*(base+i*.07));for(let x=0;x<=w;x+=70)ctx.lineTo(x,h*(base+i*.07)+Math.sin(x*.012+i)*24);ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();ctx.fill()})}
 function trees(ctx,w,h,start=.45,color="#344834"){ctx.fillStyle=color;for(let x=30;x<w;x+=145){ctx.fillRect(x,h*start,9,h*.17);ctx.beginPath();ctx.arc(x+4,h*(start-.02),38,0,Math.PI*2);ctx.fill()}}
 function building(ctx,x,y,w,h,fill="#8a7768"){ctx.fillStyle=fill;ctx.fillRect(x,y,w,h);ctx.fillStyle="#b8d3e5";for(let yy=y+25;yy<y+h-25;yy+=55)for(let xx=x+18;xx<x+w-18;xx+=48)ctx.fillRect(xx,yy,25,30)}
+function drawHistoricalMapPlaceholder(ctx,key,w,h,year=0){
+ const g=ctx.createLinearGradient(0,0,0,h);g.addColorStop(0,"#aecddb");g.addColorStop(1,"#6b9eb8");ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+ ctx.save();ctx.strokeStyle="rgba(255,255,255,.17)";ctx.lineWidth=1;
+ for(let x=0;x<w;x+=Math.max(40,w/10)){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke()}
+ for(let y=0;y<h;y+=Math.max(40,h/14)){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}
+ ctx.fillStyle="rgba(19,36,51,.76)";ctx.fillRect(w*.08,h*.40,w*.84,h*.16);
+ ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle="#fff";
+ ctx.font="800 "+Math.max(20,w*.037)+"px system-ui";ctx.fillText("LOADING HISTORICAL BORDERS",w*.5,h*.465);
+ ctx.font="600 "+Math.max(13,w*.023)+"px system-ui";ctx.fillText((year?year+" · ":"")+"Map downloads automatically",w*.5,h*.52);
+ ctx.restore()
+}
 function drawMap(ctx,key,w,h){
  ctx.fillStyle=key==="parchment"?"#e6d7a8":"#9cc3d6";ctx.fillRect(0,0,w,h);ctx.fillStyle=key==="parchment"?"#9f8b5d":"#6e8e62";
  const blobs=key==="europeMap"?[[.48,.34,.16,.16],[.58,.24,.09,.16],[.39,.27,.08,.08]]:key==="africaMap"?[[.52,.44,.16,.26],[.6,.66,.05,.09]]:key==="asiaMap"?[[.58,.33,.29,.21],[.8,.52,.1,.12]]:key==="americasMap"?[[.32,.25,.15,.2],[.4,.52,.09,.26],[.28,.12,.08,.1]]:[[.2,.28,.12,.19],[.33,.52,.08,.22],[.53,.29,.2,.17],[.6,.53,.12,.2],[.82,.58,.08,.09]];
@@ -72,7 +100,7 @@ function mapLabel(ctx,text,x,y,size=28){ctx.save();ctx.font="800 "+size+"px syst
 function drawThematicMap(ctx,key,w,h,options={}){
  const baseKey=key==="pearlHarborMap"?"worldMap":key==="revolutionMap"?"americasMap":"europeMap";
  const hm=window.MEPHistoricalMaps?.draw(ctx,{year:options.year||2026,text:options.text||"",key,width:w,height:h,time:options.time||0,showLabels:options.showLabels!==false,highlights:options.highlights||[]});
- if(!hm?.drawn)drawMap(ctx,baseKey,w,h);
+ if(!hm?.drawn)drawHistoricalMapPlaceholder(ctx,baseKey,w,h,hm?.snapshotYear||options.year);
  ctx.save();
  const title=key==="westernFrontMap"?"WESTERN FRONT":key==="easternFrontMap"?"EASTERN FRONT":key==="pearlHarborMap"?"PACIFIC THEATER":key==="normandyMap"?"NORMANDY · 1944":key==="coldWarMap"?"COLD WAR":key==="revolutionMap"?"AMERICAN REVOLUTION":key==="napoleonicMap"?"EUROPE · 1815":"";
  if(title)mapLabel(ctx,title,w*.5,h*.105,Math.max(20,w*.046));
@@ -146,7 +174,7 @@ function drawSceneDetails(ctx,key,w,h){
 }
 function drawBackground(ctx,key,w=1280,h=720,options={}){
  if(["westernFrontMap","easternFrontMap","pearlHarborMap","normandyMap","coldWarMap","revolutionMap","napoleonicMap"].includes(key))return drawThematicMap(ctx,key,w,h,options);
- if(["parchment","worldMap","americasMap","europeMap","africaMap","asiaMap","battleMap"].includes(key)){const hm=window.MEPHistoricalMaps?.draw(ctx,{year:options.year||2026,text:options.text||"",key,width:w,height:h,showLabels:options.showLabels!==false,highlights:options.highlights||[]});if(!hm?.drawn)drawMap(ctx,key,w,h);return hm}
+ if(["parchment","worldMap","americasMap","europeMap","africaMap","asiaMap","battleMap"].includes(key)){const hm=window.MEPHistoricalMaps?.draw(ctx,{year:options.year||2026,text:options.text||"",key,width:w,height:h,showLabels:options.showLabels!==false,highlights:options.highlights||[]});if(!hm?.drawn)drawHistoricalMapPlaceholder(ctx,key,w,h,hm?.snapshotYear||options.year);return hm}
  if(key==="countryside"||key==="farmVillage"){gradientSky(ctx,w,h,"#8fc3e3","#f1c782");hills(ctx,w,h,["#8ca46b","#6f8758"]);trees(ctx,w,h,.5);if(key==="farmVillage"){ctx.fillStyle="#a87a4f";for(let x=120;x<w;x+=280){ctx.fillRect(x,420,130,100);ctx.fillStyle="#6c4731";ctx.beginPath();ctx.moveTo(x-12,420);ctx.lineTo(x+65,360);ctx.lineTo(x+142,420);ctx.closePath();ctx.fill();ctx.fillStyle="#a87a4f"}}}
  else if(key==="forest"||key==="jungle"){gradientSky(ctx,w,h,key==="jungle"?"#86b9a4":"#9cc6d6","#d8c693");hills(ctx,w,h,[key==="jungle"?"#4a714d":"#5f7950","#405a3d"]);trees(ctx,w,h,.32,key==="jungle"?"#294e34":"#344834");trees(ctx,w,h,.54,key==="jungle"?"#1f3d29":"#2f4933")}
  else if(key==="mountainPass"||key==="snowField"){gradientSky(ctx,w,h,"#8fb6d7","#d9e4ea");ctx.fillStyle=key==="snowField"?"#dce7ee":"#6b7074";for(let i=0;i<4;i++){ctx.beginPath();ctx.moveTo(i*330-150,h*.68);ctx.lineTo(i*330+170,h*.19);ctx.lineTo(i*330+480,h*.68);ctx.closePath();ctx.fill()}ctx.fillStyle=key==="snowField"?"#f4f7f9":"#8b806c";ctx.fillRect(0,h*.68,w,h*.32)}

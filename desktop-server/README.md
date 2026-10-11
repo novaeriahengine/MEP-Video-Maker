@@ -98,3 +98,4 @@ This is intended for your private LAN. Do not port-forward 7860 or expose it dir
 ## Historical photos
 
 The local editor has a **Historical Photos** tool inside MEP Tools. It searches Wikimedia Commons through the Python server, filters results to Public Domain / Creative Commons licenses, caches the selected image locally, and applies it to the current scene. The active background shows the stored license label.
+
