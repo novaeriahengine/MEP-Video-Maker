@@ -9,6 +9,7 @@ assert.equal(new Set(manifest.states.map(s=>s.code)).size,50);
 assert.equal(project.schema,"mep-video-project");
 assert.equal(project.id,"flags-50-states-series");
 assert.equal(project.series.type,"state-flags");
+assert.ok(project.series.storyboardRevision>=2,"Flag storyboard must be upgraded.");
 assert.equal(project.shorts.length,18);
 let episodeCodes=[];
 for(const [index,sh] of project.shorts.entries()){
@@ -20,6 +21,9 @@ for(const [index,sh] of project.shorts.entries()){
  for(const sc of sh.scenes){
   assert.ok(sc.script?.trim(),sh.title);
   assert.ok(sc.flagBeat?.mode,sc.name);
+  assert.ok(sc.flagBeat?.heading,sc.name+" visual heading is missing");
+  assert.equal(project.scripts.sceneById[sc.id],sc.script,sc.name+" narration is disconnected from scene ID");
+  assert.ok(sc.script.trim().split(/\s+/).length<=15,sc.name+" script is too long for the scene");
   assert.ok(sc.duration>0 && sc.duration<=4,sc.name);
  }
  if(index){
@@ -40,3 +44,10 @@ console.log("PASS 50 current SVG state flags + U.S. intro flag");
 console.log("PASS 18 episodes, 540 nonempty visual beats, each 99 seconds");
 console.log("PASS 50 distinct graded states, 3 per video except 2 in the finale");
 console.log("PASS caption metadata and historical-asset manifest structure");
+
+const code=readFileSync("js/flag-series.js","utf8");
+assert.ok(code.includes('if(mode==="tiers")'),"Tier definitions must have their own visual scene");
+assert.ok(code.includes('if(mode==="contrast")'),"Distance testing must have an actual thumbnail scene");
+assert.ok(code.includes("getFlagRaster("),"Flag preview must avoid decoding SVGs every frame");
+assert.equal(project.shorts[0].scenes[3].flagBeat.mode,"tiers");
+console.log("PASS 540 linked visual headings, short narration beats, tier legend and SVG raster cache");
