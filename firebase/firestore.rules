@@ -2,12 +2,11 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     // Shared data: all visitors read the same projects and rankings.
-    // Only the verified Google account below may edit. This is not per-user storage.
-    // REPLACE the email with your own verified editor Google account before publishing.
+    // Shared site-wide documents, one verified Email/Password owner can write.
     function isEditor() {
       return request.auth != null
         && request.auth.token.email_verified == true
-        && request.auth.token.email == "REPLACE_WITH_EDITOR_EMAIL@example.com";
+        && request.auth.token.email == "movaeriahhistory@gmail.com";
     }
     function validProject() {
       return request.resource.data.schema == "mep-video-project"
@@ -18,6 +17,22 @@ service cloud.firestore {
       allow read: if true;
       allow create, update: if isEditor() && validProject();
       allow delete: if false; // Never delete past projects from the public editor.
+    }
+    // One video document per Short; contains scenes, scripts, captions and production workflow history.
+    match /mepVideos/{videoId} {
+      allow read: if true;
+      allow create, update: if isEditor()
+        && request.resource.data.schema == "mep-video-short-v1"
+        && request.resource.data.projectId is string
+        && request.resource.data.shortId is string
+        && request.resource.data.payload is map;
+      allow delete: if false;
+    }
+    match /mepProjectHistory/{historyId} {
+      allow read: if true;
+      allow create: if isEditor()
+        && request.resource.data.schema == "mep-project-activity-v1";
+      allow update, delete: if false;
     }
     match /mepFlagRatings/{stateCode} {
       allow read: if true;
