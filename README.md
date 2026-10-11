@@ -9,7 +9,8 @@ Browser-first vertical history animation editor for 30–60 second YouTube Short
 - **Open / Recent** lists saved local projects and Firestore projects.
 - The bundled **YouTube Short Maker** project contains 10 finished history Shorts with titles, descriptions, hashtags, narration, scenes, country flags, map graphics, and timing.
 - Character bodies are flag-filled Square, Circle, or Triangle shapes only.
-- Noveria Host is a small American-flag circle intended to sit near the bottom while maps and graphics do most of the explaining.
+- Noveria Host is a small Florida-state-flag circle intended to sit near the bottom while maps and graphics do most of the explaining.
+- The shared Florida/history/playback logo lives at `assets/brand/mep-kokoro-florida-mark.png`; the public editor and local Python server use the same mark.
 - No Haiti-specific character/video preset is bundled.
 
 ## Focused mobile workspace
@@ -69,7 +70,7 @@ The `presets/youtube-short-maker.mep.json` project includes:
 
 ## Export voice sources
 
-Each Short can keep separate final audio tracks for **My Recording**, **Local Kokoro**, and **Google Colab Kokoro**. Voice Studio shows the active source with a check mark. Chrome speech remains a fast preview source only because browser speech synthesis does not expose a capturable audio stream to MediaRecorder.
+Each Short can keep separate final audio tracks for **My Recording**, **Local Kokoro**, and **Google Colab Kokoro**. Voice Studio shows the active source with a check mark. Chrome speech remains a fast preview source only because browser speech synthesis does not expose a capturable audio stream to MediaRecorder; export now stops with an explicit explanation rather than downloading a silent video.
 
 Custom voice/EQ profiles can be saved and loaded locally. Sentence-gap, continuous-read, tail-trim, and final-voice timing controls help narration flow and keep the exported video from cutting off longer final audio.
 
@@ -86,3 +87,4 @@ The 10 bundled Shorts have scene-by-scene map metadata in `historical-maps/short
 ## Voice export workflow
 
 Voice Studio keeps separate tracks for **My Recording**, **Local Kokoro**, and **Google Colab**. The selected source gets a visible check mark and is the source used for final WebM audio. Chrome speech remains a fast preview source because browser speech synthesis cannot be captured reliably into the exported MediaStream. Custom EQ/voice profiles can be saved and loaded locally, speech can use a continuous-read mode, tail trim can remove weak trailing audio, and scene timing can be fitted to the final recorded/Kokoro track.
+
