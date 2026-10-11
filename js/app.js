@@ -219,7 +219,7 @@ function syncFlagsUI(){
  $("#flagTierBoard").innerHTML=["A","B","C","D","F"].map(g=>'<div class="tierRow tier'+g+'"><b>'+g+'</b><span>'+(codes.filter(c=>rank[c]?.grade===g).map(c=>'<span class="tierCode">'+c+'</span>').join("")||"—")+'</span></div>').join("");
  $("#flagAllStates").innerHTML=codes.map(code=>{const r=rank[code]||{};return'<button class="flagStateRow" data-flag-code="'+code+'"><span>'+(r.done?"✓":"○")+'</span><img loading="lazy" src="flags/current/'+code.toLowerCase()+'.svg" alt=""><strong>'+code+'</strong><span>'+(r.grade||"—")+'</span><small>Ep '+MEPFlagSeries.episodeOf(code)+'</small></button>'}).join("");
  $("[data-flag-code]").forEach(b=>on(b,"click",()=>{selectedFlagCode=b.dataset.flagCode;const target=project.shorts.find(sh=>sh.flagsEpisode?.stateCodes?.includes(selectedFlagCode));if(target&&target.id!==short.id){MEPModel.setActiveShort(project,target.id);refreshRefs();syncUI()}else syncFlagsUI()}));
- $("#flagCloudStatus").textContent=MEPStorage.currentEditor()?"Shared editing enabled · "+MEPStorage.currentEditor():"Shared board · sign in to publish updates; local ratings still work offline";
+ $("#flagCloudStatus").textContent=MEPStorage.currentEditor()?"Signed in · Firestore rules determine write access · "+MEPStorage.currentEditor():"Shared board · sign in to publish updates; local ratings still work offline";
 }
 
 on("#newProject","click",()=>{MEPStorage.save(project);project=MEPModel.project("Untitled Project");refreshRefs();changed({cloud:false});syncUI()});
@@ -245,6 +245,7 @@ on("#cloudSignIn","click",async()=>{try{const info=await MEPStorage.signInEditor
 on("#flagStateSelect","change",e=>{selectedFlagCode=e.target.value;syncFlagsUI()});
 on("#saveFlagRating","click",async()=>{
  const code=selectedFlagCode,grade=$("#flagGradeSelect").value,done=$("#flagDone").checked,notes=$("#flagRatingNotes").value;
+ if(done&&!grade){alert("Choose an A–F grade before marking this state completed.");return}
  const rating=MEPFlagSeries.updateRating(code,{grade,done,notes,episode:MEPFlagSeries.episodeOf(code)});
  syncFlagsUI();render();if(document.body.classList.contains("video-mode"))renderVideo();
  try{await MEPStorage.saveFlagRating(code,rating);$("#flagCloudStatus").textContent="Published "+code+" rating to the shared Firestore board ✓"}
