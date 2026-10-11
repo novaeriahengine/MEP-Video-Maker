@@ -43,7 +43,7 @@ const loop=code.slice(t0,t1);
 const clock=new Function("sh",
  `const short=sh,project={shorts:[sh]},MEPModel={shortDuration(sh){return sh.scenes.reduce((n,x)=>n+x.duration,0)}};
   let videoPlaying=true,videoTime=0,videoLast=0,videoFrameLast=0,videoUiLast=0,videoRaf=0,videoStartAt=1000,videoStartPosition=0,lastVideoSceneIndex=-1,voiceRecorder=null;
-  const $=()=>({checked:false,value:"12"}),requestAnimationFrame=()=>1,stopVideoPreviewVoice=()=>{},stopVoiceRecording=()=>{};
+  const $=()=>({checked:false,value:"12"}),requestAnimationFrame=()=>1,stopVideoPreviewVoice=()=>{},stopVoiceRecording=()=>{},performance={now:()=>0};
   const renderVideo=()=>{lastVideoSceneIndex=sceneAtGlobal(short,videoTime).index},stopPreviewPlayback=()=>{videoPlaying=false},setText=()=>{},console={error(){}},window={MEPFlagSeries:null};
   ${code.slice(start,end)}
   ${loop}
