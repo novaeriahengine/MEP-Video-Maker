@@ -10,6 +10,32 @@ window.MEPFlagSeries=(()=>{
  function getRatings(){return ratings}
  function updateRating(code,changes){if(!codes.includes(code))throw Error("Invalid state");const prev=ratings[code]||{};const next={...prev,...changes};if(next.grade&&!goodGrade(next.grade))throw Error("Grade must be A, B, C, D or F");next.updatedAt=new Date().toISOString();setRatings({[code]:next});return next}
  async function load(){try{const r=await fetch("flags/manifest.json",{cache:"no-store"});if(!r.ok)throw Error("Flag manifest returned "+r.status);manifest=await r.json();byCode=new Map((manifest.states||[]).map(s=>[s.code,s]));window.dispatchEvent(new Event("mep-flags-ready"));}catch(e){console.warn("Flag manifest unavailable",e)}return manifest}
+
+ async function warm(sh){
+  if(!byCode.size)await load();
+  const needed=new Set();
+  for(const scene of sh?.scenes||[]){
+    const b=scene.flagBeat;if(!b)continue;
+    if(b.stateCode==="US")needed.add("flags/current/us.svg");
+    else if(byCode.has(b.stateCode))needed.add(byCode.get(b.stateCode).current.art);
+    if((b.mode==="timeline"||b.mode==="compare")&&byCode.get(b.stateCode)?.history?.length)needed.add(byCode.get(b.stateCode).history.at(-1).art);
+    if(b.mode==="montage")for(const code of ["AL","AK","AZ","CA","CO","FL","TX","MN","UT","MS","MD","SC"])needed.add(byCode.get(code)?.current.art);
+  }
+  const loadOne=url=>new Promise(resolve=>{
+    if(!url){resolve(false);return}
+    const cached=assetCache.get(url);
+    if(cached?.status==="ready"){resolve(true);return}
+    if(cached?.status==="error"){resolve(false);return}
+    getImage(url);const row=assetCache.get(url);
+    if(row.status==="ready"){resolve(true);return}
+    const done=()=>resolve(row.status==="ready");
+    row.img.addEventListener("load",done,{once:true});row.img.addEventListener("error",done,{once:true});
+    setTimeout(done,8000);
+  });
+  const result=await Promise.all([...needed].map(loadOne));
+  return{requested:needed.size,ready:result.filter(Boolean).length,missing:result.filter(x=>!x).length};
+ }
+
  function flagInfo(code){return byCode.get(code)||null}
  function episodeOf(code){const i=codes.indexOf(code);return i<0?0:Math.floor(i/3)+1}
  function getImage(url){
@@ -111,5 +137,5 @@ window.MEPFlagSeries=(()=>{
   ctx.restore();return true
  }
  loadLocal();
- return{SERIES_ID,codes,load,draw,getRatings,setRatings,updateRating,flagInfo,episodeOf,gradeColor};
+ return{SERIES_ID,codes,load,warm,draw,getRatings,setRatings,updateRating,flagInfo,episodeOf,gradeColor};
 })();
