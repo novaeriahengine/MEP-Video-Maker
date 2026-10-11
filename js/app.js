@@ -37,7 +37,14 @@ async function buildVoiceGraph(sh,{monitor=false}={}){
  const dest=ac.createMediaStreamDestination(),dry=ac.createGain();dry.gain.value=1;gain.connect(dry).connect(dest);if(monitor)dry.connect(ac.destination);
  const echo=Math.max(0,Math.min(.65,Number(v.echo)||0));if(echo>0){const delay=ac.createDelay(.7),feedback=ac.createGain(),wet=ac.createGain();delay.delayTime.value=.14;feedback.gain.value=Math.min(.38,echo*.55);wet.gain.value=echo*.55;gain.connect(delay);delay.connect(wet).connect(dest);delay.connect(feedback).connect(delay);if(monitor)wet.connect(ac.destination)}
  const trimMs=Math.max(0,Math.min(500,Number(v.tailTrimMs)||0)),playDuration=Math.max(.08,buf.duration-trimMs/1000),effectiveRate=Math.max(.1,(Number(v.speed)||1)*Math.pow(2,(Number(v.pitchSemitones)||0)/12)),outputDuration=playDuration/effectiveRate,baseGain=Number(v.gain)||1;
- function start(delay=.02){const when=ac.currentTime+delay,fadeAt=Math.max(.03,outputDuration-.025);gain.gain.cancelScheduledValues(when);gain.gain.setValueAtTime(baseGain,when);if(outputDuration>.05){gain.gain.setValueAtTime(baseGain,when+fadeAt);gain.gain.linearRampToValueAtTime(0,when+outputDuration)}src.start(when,0,playDuration)}
+ function start(delay=.02,atVideoTime=0){
+ const when=ac.currentTime+delay,offset=Math.max(0,Number(atVideoTime)||0)*effectiveRate;
+ if(offset>=playDuration-.025)return;
+ const remaining=playDuration-offset,remainingOutput=remaining/effectiveRate,fadeAt=Math.max(0,remainingOutput-.025);
+ gain.gain.cancelScheduledValues(when);gain.gain.setValueAtTime(baseGain,when);
+ if(remainingOutput>.05){gain.gain.setValueAtTime(baseGain,when+fadeAt);gain.gain.linearRampToValueAtTime(0,when+remainingOutput)}
+ src.start(when,offset,remaining)
+}
  return{ac,src,track:dest.stream.getAudioTracks()[0],duration:buf.duration,playDuration,outputDuration,start}
 }
 function refreshRefs(){MEPModel.syncAlias(project);short=MEPModel.activeShort(project);scene=MEPModel.activeScene(project);selectedId=scene?.characters?.some(c=>c.id===selectedId)?selectedId:(scene?.characters?.[0]?.id||null);selectedBubbleId=null;time=0;playing=false;editPreview=null;applyCanvasSize()}
@@ -273,9 +280,48 @@ function localLlmOptions(items,current,empty){const html=(items||[]).map(item=>'
 async function refreshLocalLlm({quiet=false}={}){const status=$("#localLlmStatus");try{if(!quiet)setText("#localLlmStatus","Checking the separate local GGUF service…");const data=await localLlmRequest("/api/local-llm/status");setVal("#localLlmFolder",data.modelsFolder||"");setVal("#localLlmRunner",data.configuredRunner||data.runner||"");setVal("#localLlmContext",data.context||4096);setVal("#localLlmGpuLayers",data.gpuLayers??0);const model=$("#localLlmModel");if(model){const before=model.value;model.innerHTML=localLlmOptions(data.models,data.model||before,"No GGUF files found");model.value=(data.models||[]).some(x=>x.path===(data.model||before))?(data.model||before):model.value}const catalog=$("#localLlmCatalog");if(catalog)catalog.innerHTML=localLlmOptions(data.catalog,catalog.value,"No approved models available");const modelName=(data.model||"").split(/[\\/]/).pop()||"no model selected";setText("#localLlmStatus",data.running?"✓ Local GGUF server running · "+modelName+" · port "+data.port:(data.runner?"Ready to start · "+(data.models||[]).length+" GGUF file(s) found":"Install llama.cpp once: winget install llama.cpp. Voice remains independent."));const jobs=data.downloads||[];if(jobs.length){const job=jobs[jobs.length-1],pct=job.total?Math.round(job.downloaded/job.total*100):0;setText("#localLlmDownloadStatus",job.name+" · "+job.state+(job.state==="downloading"?" · "+pct+"% · "+localLlmBytes(job.downloaded):job.error?" · "+job.error:""));if(["queued","downloading"].includes(job.state)){clearTimeout(localLlmDownloadTimer);localLlmDownloadTimer=setTimeout(()=>refreshLocalLlm({quiet:true}),1400)}}}catch(error){setText("#localLlmStatus","Local GGUF unavailable: "+error.message+". Voice tools are unaffected.")}}
 on("#localLlmRefresh","click",()=>refreshLocalLlm());on("#localLlmPickFolder","click",async()=>{try{setText("#localLlmStatus","Opening the Windows folder chooser…");await localLlmRequest("/api/local-llm/folder/pick",{method:"POST"});await refreshLocalLlm()}catch(error){setText("#localLlmStatus",error.message)}});on("#localLlmOpenFolder","click",async()=>{try{await localLlmRequest("/api/local-llm/folder/open",{method:"POST"})}catch(error){setText("#localLlmStatus",error.message)}});on("#localLlmDownload","click",async()=>{try{const catalogId=$("#localLlmCatalog")?.value;if(!catalogId)throw Error("Choose a model first.");const result=await localLlmRequest("/api/local-llm/download",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({catalogId})});setText("#localLlmDownloadStatus","Starting "+result.download.name+"…");refreshLocalLlm({quiet:true})}catch(error){setText("#localLlmDownloadStatus",error.message)}});on("#localLlmStart","click",async()=>{try{const model=$("#localLlmModel")?.value;if(!model)throw Error("Choose a GGUF model first.");setText("#localLlmStatus","Starting local model in its own process…");await localLlmRequest("/api/local-llm/start",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model,runner:$("#localLlmRunner")?.value.trim()||"",context:Number($("#localLlmContext")?.value)||4096,gpuLayers:Number($("#localLlmGpuLayers")?.value)||0})});setTimeout(()=>refreshLocalLlm(),700)}catch(error){setText("#localLlmStatus",error.message)}});on("#localLlmStop","click",async()=>{try{await localLlmRequest("/api/local-llm/stop",{method:"POST"});refreshLocalLlm()}catch(error){setText("#localLlmStatus",error.message)}});
 on("#localLlmResearch","click",async()=>{try{const query=$("#localResearchQuery")?.value.trim();if(!query)throw Error("Enter a topic to research.");setText("#localResearchResults","Checking sources…");const response=await fetch(localServerUrl()+"/api/research?q="+encodeURIComponent(query)),data=await response.json();if(!response.ok)throw Error(data.error||"Research failed.");const notes=(data.items||[]).map((item,index)=>(index+1)+". "+item.title+" — "+item.snippet+"\n"+item.url).join("\n\n");setText("#localResearchResults",notes||"No source results found.");const prompt=$("#localLlmPrompt");if(prompt)prompt.value=(prompt.value?prompt.value+"\n\n":"")+"Use only these research notes and flag uncertainty:\n"+notes}catch(error){setText("#localResearchResults",error.message)}});on("#localLlmAsk","click",async()=>{try{const prompt=$("#localLlmPrompt")?.value.trim();if(!prompt)throw Error("Write a request for the local model.");setText("#localLlmAnswer","Local model is writing…");const result=await localLlmRequest("/api/local-llm/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:[{role:"system",content:"You are a concise historical-video writing assistant. Do not invent sources. Produce a strong vertical-video script when asked."},{role:"user",content:prompt}]})});localLlmLastAnswer=result.text||"";setText("#localLlmAnswer",localLlmLastAnswer||"The local model returned no text.")}catch(error){setText("#localLlmAnswer",error.message)}});on("#localLlmUseScript","click",()=>{if(!localLlmLastAnswer)return alert("Ask the local model first.");scene.script=localLlmLastAnswer;changed();syncScripts();setText("#localLlmAnswer","Inserted into the current scene script. Review and trim it before narration.")});
-function videoTick(now){if(!videoPlaying)return;videoTime+=(now-videoLast)/1000;videoLast=now;const total=MEPModel.shortDuration(short);if(videoTime>=total){videoTime=total;videoPlaying=false;if(voiceRecorder?.state==="recording")setTimeout(stopVoiceRecording,450)}renderVideo();if(videoPlaying)requestAnimationFrame(videoTick)}
-function setVideoMode(v){document.body.classList.toggle("video-mode",v);$("#editorMode").classList.toggle("active",!v);$("#videoMode").classList.toggle("active",v);if(v){videoTime=0;renderVideo()}}
-on("#editorMode","click",()=>setVideoMode(false));on("#videoMode","click",()=>setVideoMode(true));on("#mobileVideo","click",()=>setVideoMode(true));on("#videoPlayPause","click",()=>{videoPlaying=!videoPlaying;if(videoPlaying){if(videoTime>=MEPModel.shortDuration(short))videoTime=0;videoLast=performance.now();requestAnimationFrame(videoTick)}});on("#videoStop","click",()=>{videoPlaying=false;videoTime=0;renderVideo()});on("#previewStopVoice","click",stopVoiceRecording);on("#videoScrubber","input",e=>{videoPlaying=false;videoTime=Number(e.target.value);renderVideo()});on("#videoPrevScene","click",()=>{const a=sceneAtGlobal(short,videoTime);videoTime=Math.max(0,a.offset-.01);videoTime=sceneAtGlobal(short,videoTime).offset;renderVideo()});on("#videoNextScene","click",()=>{const a=sceneAtGlobal(short,videoTime);videoTime=Math.min(MEPModel.shortDuration(short),a.offset+a.scene.duration+.001);renderVideo()});
+let videoPreviewVoice=null,videoPreviewSerial=0;
+function stopVideoPreviewVoice(){
+ videoPreviewSerial++;
+ if(videoPreviewVoice){try{videoPreviewVoice.src.stop()}catch{}try{videoPreviewVoice.ac.close()}catch{}videoPreviewVoice=null}
+ window.__mepChromeVoiceCancel?.();window.speechSynthesis?.cancel()
+}
+async function startVideoPreviewVoice(){
+ const token=++videoPreviewSerial,source=short.voice?.source||"chrome";
+ if(source==="chrome"){
+  const sceneInfo=sceneAtGlobal(short,videoTime),text=short.scenes.slice(sceneInfo.index).map(s=>s.script||"").filter(Boolean).join(" ");
+  if(text)chromeSpeak(text);return
+ }
+ if(!["mic","server","colab","ai"].includes(source))return;
+ try{
+  const graph=await buildVoiceGraph(short,{monitor:true});
+  if(token!==videoPreviewSerial){graph?.ac?.close();return}
+  if(!graph){setText("#exportStatus",voiceSourceInfo(short).label+" has no audio attached. Record or generate it first.");return}
+  if(videoTime>=graph.outputDuration){graph.ac.close();return}
+  videoPreviewVoice=graph;await graph.ac.resume();
+  if(token!==videoPreviewSerial){graph.ac.close();return}
+  graph.src.onended=()=>{if(videoPreviewVoice===graph){videoPreviewVoice=null;graph.ac.close().catch(()=>{})}};
+  graph.start(.03,videoTime)
+ }catch(e){if(token===videoPreviewSerial)setText("#exportStatus","Voice preview: "+e.message)}
+}
+function videoTick(now){
+ if(!videoPlaying)return;videoTime+=(now-videoLast)/1000;videoLast=now;
+ const total=MEPModel.shortDuration(short);
+ if(videoTime>=total){videoTime=total;videoPlaying=false;stopVideoPreviewVoice();if(voiceRecorder?.state==="recording")setTimeout(stopVoiceRecording,450)}
+ renderVideo();if(videoPlaying)requestAnimationFrame(videoTick)
+}
+function setVideoMode(v){
+ if(!v)stopVideoPreviewVoice();
+ document.body.classList.toggle("video-mode",v);$("#editorMode").classList.toggle("active",!v);$("#videoMode").classList.toggle("active",v);
+ if(v){videoTime=0;renderVideo()}
+}
+on("#editorMode","click",()=>setVideoMode(false));on("#videoMode","click",()=>setVideoMode(true));on("#mobileVideo","click",()=>setVideoMode(true));
+on("#videoPlayPause","click",()=>{videoPlaying=!videoPlaying;if(videoPlaying){if(videoTime>=MEPModel.shortDuration(short))videoTime=0;videoLast=performance.now();startVideoPreviewVoice();requestAnimationFrame(videoTick)}else stopVideoPreviewVoice()});
+on("#videoStop","click",()=>{videoPlaying=false;stopVideoPreviewVoice();videoTime=0;renderVideo()});
+on("#previewStopVoice","click",()=>{stopVoiceRecording();videoPlaying=false;stopVideoPreviewVoice()});
+on("#videoScrubber","input",e=>{videoPlaying=false;stopVideoPreviewVoice();videoTime=Number(e.target.value);renderVideo()});
+on("#videoPrevScene","click",()=>{videoPlaying=false;stopVideoPreviewVoice();const x=sceneAtGlobal(short,videoTime);videoTime=sceneAtGlobal(short,Math.max(0,x.offset-.01)).offset;renderVideo()});
+on("#videoNextScene","click",()=>{videoPlaying=false;stopVideoPreviewVoice();const x=sceneAtGlobal(short,videoTime);videoTime=Math.min(MEPModel.shortDuration(short),x.offset+x.scene.duration+.001);renderVideo()});
 
 async function warmAssets(){await Promise.all((project.assets||[]).filter(a=>a.dataUrl).map(a=>new Promise(resolve=>{const im=imageForAsset(a);if(!im||im.complete)return resolve();im.addEventListener("load",resolve,{once:true});im.addEventListener("error",resolve,{once:true})})))}
 async function warmHistoricalMaps(sh){
@@ -357,8 +403,8 @@ async function warmHistoricalMaps(sh){
   },Math.max(16,1000/fps))
  })
 }
-async function doExportOne(){if(exporting)return;exporting=true;try{await exportShort(short);setText("#exportStatus","Downloaded: "+short.title)}catch(e){alert("Export failed: "+e.message)}finally{exporting=false}}
-async function doExportAll(){if(exporting)return;exporting=true;try{for(let i=0;i<project.shorts.length;i++)await exportShort(project.shorts[i],i+1,project.shorts.length);setText("#exportStatus","All "+project.shorts.length+" Shorts exported.")}catch(e){alert("Export stopped: "+e.message)}finally{exporting=false}}
+async function doExportOne(){if(exporting)return;stopVideoPreviewVoice();videoPlaying=false;exporting=true;try{await exportShort(short);setText("#exportStatus","Downloaded: "+short.title)}catch(e){alert("Export failed: "+e.message)}finally{exporting=false}}
+async function doExportAll(){if(exporting)return;stopVideoPreviewVoice();videoPlaying=false;exporting=true;try{for(let i=0;i<project.shorts.length;i++)await exportShort(project.shorts[i],i+1,project.shorts.length);setText("#exportStatus","All "+project.shorts.length+" Shorts exported.")}catch(e){alert("Export stopped: "+e.message)}finally{exporting=false}}
 on("#exportCurrentShort","click",doExportOne);on("#previewExport","click",doExportOne);on("#exportAllShorts","click",doExportAll);
 
 let buddyPets=Number(localStorage.getItem("mep-buddy-pets")||0),buddyPetting=false,buddyMoved=false,buddyTimer=null,lastPetAt=0;
