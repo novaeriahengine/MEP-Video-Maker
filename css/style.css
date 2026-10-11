@@ -105,3 +105,12 @@ body.tool-full .toolAssistant{background:#0f141b}
 .toolServerChip.connected{background:#153a2a;border-color:#408a62;color:#b7f3cd}
 .toolServerChip.disconnected{background:#3b2925;border-color:#8c5a43;color:#ffd6c3}
 @media(max-width:760px){.toolServerChip{padding:5px 8px;font-size:10px}}
+
+/* Compact phone-friendly caption styling editor. */
+.captionEditorGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:10px 2px}
+.captionEditorGrid label{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:5px!important;min-width:0;color:var(--muted);font-size:12px}
+.captionEditorGrid select,.captionEditorGrid input{width:100%;min-width:0}
+.captionEditorGrid input[type=color]{height:42px;padding:4px}
+.captionEditorGrid input[type=range]{accent-color:#f1c35f}
+.captionEditorHint{font-size:12px;line-height:1.5;color:var(--muted)}
+@media(max-width:430px){.captionEditorGrid{grid-template-columns:1fr 1fr}}
