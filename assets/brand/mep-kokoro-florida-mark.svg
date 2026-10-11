@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">MEP Florida local studio mark</title>
+  <desc id="desc">A Florida flag cross behind a navy film frame and gold narration wave.</desc>
+  <rect width="256" height="256" rx="48" fill="#f7f2e8"/>
+  <path d="M15 15 241 241M241 15 15 241" stroke="#b33939" stroke-width="27"/>
+  <rect x="50" y="61" width="156" height="134" rx="20" fill="#13233b" stroke="#e5ad42" stroke-width="9"/>
+  <g fill="#f7f2e8"><rect x="64" y="77" width="15" height="16" rx="3"/><rect x="64" y="112" width="15" height="16" rx="3"/><rect x="64" y="147" width="15" height="16" rx="3"/><rect x="177" y="77" width="15" height="16" rx="3"/><rect x="177" y="112" width="15" height="16" rx="3"/><rect x="177" y="147" width="15" height="16" rx="3"/></g>
+  <path d="M89 138c10 0 10-28 20-28s10 42 20 42 10-64 20-64 10 47 20 47" fill="none" stroke="#ffd15c" stroke-linecap="round" stroke-linejoin="round" stroke-width="10"/>
+  <circle cx="128" cy="44" r="12" fill="#e5ad42"/>
+</svg>
+
