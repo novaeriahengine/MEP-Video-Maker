@@ -158,7 +158,7 @@ function drawStoryBackground(ctx,key,w,h){
  ctx.restore();return null
 }
 function drawStoryNarrativeOverlay(ctx,key,w,h,options={}){
- const text=String(options.text||"").toLowerCase(),time=Math.max(0,Number(options.time)||0),p=Math.max(0,Math.min(1,time/8));
+ const text=String(options.text||"").toLowerCase(),time=Math.max(0,Number(options.time)||0),duration=Math.max(.8,Number(options.duration)||3.2),p=Math.max(0,Math.min(1,time/duration)),shot=String(options.shot||"");
  ctx.save();
  // One light grade keeps all story backgrounds in the same visual family.
  ctx.fillStyle="rgba(245,238,219,.045)";ctx.fillRect(0,0,w,h);
