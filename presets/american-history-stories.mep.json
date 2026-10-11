@@ -7,7 +7,9 @@
     "Noveria History",
     "American history",
     "story-driven",
-    "Shorts"
+    "Shorts",
+    "noveria-history-v2",
+    "animated-storytelling"
   ],
   "shorts": [
     {
@@ -45,39 +47,468 @@
           "name": "Before dawn at the docks",
           "duration": 10,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "charlestonDocks1862"
           },
           "script": "At about three in the morning on May 13, 1862, Robert Smalls took control of the Confederate steamer Planter in Charleston Harbor. The white officers had gone ashore.",
-          "caption": "HE STOLE A CONFEDERATE SHIP"
+          "caption": "HE TAKES THE PLANTER",
+          "notes": "Robert Smalls approaches and takes control of the steamer before dawn.",
+          "graphics": [
+            {
+              "type": "arrow",
+              "x": 170,
+              "y": 760,
+              "x2": 420,
+              "y2": 760,
+              "startTime": 1,
+              "endTime": 8,
+              "color": "#d5a94f",
+              "width": 9
+            },
+            {
+              "type": "label",
+              "label": "3:00 A.M.",
+              "x": 360,
+              "y": 320,
+              "startTime": 0,
+              "endTime": 5,
+              "size": 34,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [
+            {
+              "name": "Robert Smalls",
+              "x": 180,
+              "y": 790,
+              "scale": 0.56,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1862,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "none",
+              "keyframes": [
+                {
+                  "id": "kf-0-180-790",
+                  "time": 0,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 180,
+                    "y": 790,
+                    "scale": 0.56,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                },
+                {
+                  "id": "kf-8-390-790",
+                  "time": 8,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 390,
+                    "y": 790,
+                    "scale": 0.56,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                }
+              ]
+            }
+          ],
+          "bubbles": [
+            {
+              "text": "Officers ashore.",
+              "style": "speech",
+              "x": 380,
+              "y": 510,
+              "width": 210,
+              "height": 68,
+              "fontSize": 24,
+              "bold": true,
+              "startTime": 2,
+              "endTime": 5,
+              "tailX": 453.5,
+              "tailY": 606
+            }
+          ]
         },
         {
           "name": "Families board",
           "duration": 10,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "charlestonDocks1862"
           },
           "script": "Smalls and the Black crew picked up their families, raised Confederate and South Carolina flags, and headed into the harbor as if nothing were wrong.",
-          "caption": "Crew + families board the Planter"
+          "caption": "THE FAMILIES BOARD",
+          "notes": "Crew and family members converge on Planter; the ship then leaves the dock.",
+          "graphics": [
+            {
+              "type": "arrow",
+              "x": 170,
+              "y": 830,
+              "x2": 470,
+              "y2": 720,
+              "startTime": 0,
+              "endTime": 8,
+              "color": "#d5a94f",
+              "width": 9
+            },
+            {
+              "type": "label",
+              "label": "PLANTER",
+              "x": 520,
+              "y": 615,
+              "startTime": 0,
+              "endTime": 10,
+              "size": 30,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [
+            {
+              "name": "Crew",
+              "x": 170,
+              "y": 850,
+              "scale": 0.45,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1862,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "none",
+              "keyframes": [
+                {
+                  "id": "kf-0-170-850",
+                  "time": 0,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 170,
+                    "y": 850,
+                    "scale": 0.45,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                },
+                {
+                  "id": "kf-8-430-740",
+                  "time": 8,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 430,
+                    "y": 740,
+                    "scale": 0.45,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Family",
+              "x": 250,
+              "y": 880,
+              "scale": 0.42,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1862,
+                "followProjectYear": false,
+                "expression": "neutral",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "none",
+              "keyframes": [
+                {
+                  "id": "kf-0-250-880",
+                  "time": 0,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 250,
+                    "y": 880,
+                    "scale": 0.42,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                },
+                {
+                  "id": "kf-8-470-755",
+                  "time": 8,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 470,
+                    "y": 755,
+                    "scale": 0.42,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                }
+              ]
+            }
+          ],
+          "bubbles": [
+            {
+              "text": "Everyone aboard.",
+              "style": "speech",
+              "x": 190,
+              "y": 600,
+              "width": 225,
+              "height": 68,
+              "fontSize": 24,
+              "bold": true,
+              "startTime": 2,
+              "endTime": 5,
+              "tailX": 268.75,
+              "tailY": 696
+            }
+          ]
         },
         {
           "name": "Past Fort Sumter",
           "duration": 12,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "charlestonHarborMap"
           },
           "script": "Smalls knew the harbor signals. He even used the captain's straw hat to help sell the disguise as the ship passed Fort Sumter.",
-          "caption": "Charleston → Fort Sumter → Union blockade"
+          "caption": "PAST FORT SUMTER",
+          "notes": "Animate the Planter route from Charleston toward Fort Sumter; checkpoint passes because Smalls knows the signals.",
+          "graphics": [
+            {
+              "type": "route",
+              "points": [
+                {
+                  "x": 205,
+                  "y": 490
+                },
+                {
+                  "x": 360,
+                  "y": 565
+                },
+                {
+                  "x": 485,
+                  "y": 625
+                },
+                {
+                  "x": 610,
+                  "y": 700
+                }
+              ],
+              "startTime": 0,
+              "endTime": 12,
+              "color": "#d5a94f",
+              "width": 9,
+              "label": "PLANTER"
+            },
+            {
+              "type": "label",
+              "label": "FORT SUMTER",
+              "x": 410,
+              "y": 510,
+              "startTime": 0,
+              "endTime": 12,
+              "size": 24,
+              "color": "#d5a94f"
+            },
+            {
+              "type": "ship",
+              "x": 360,
+              "y": 610,
+              "startTime": 2,
+              "endTime": 10,
+              "size": 58,
+              "color": "#273139",
+              "label": "PLANTER"
+            }
+          ],
+          "characters": [],
+          "bubbles": [
+            {
+              "text": "Signal correct.",
+              "style": "speech",
+              "x": 410,
+              "y": 690,
+              "width": 205,
+              "height": 66,
+              "fontSize": 24,
+              "bold": true,
+              "startTime": 4,
+              "endTime": 7,
+              "tailX": 481.75,
+              "tailY": 784
+            }
+          ]
         },
         {
           "name": "Freedom and intelligence",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "charlestonHarborMap"
           },
           "script": "Beyond the fort, the crew lowered the Confederate flags, raised a white sheet, and sailed to the Union blockade. Smalls escaped slavery and delivered the ship and military intelligence.",
-          "caption": "FROM ENSLAVED PILOT → WAR HERO"
+          "caption": "A WHITE SHEET. THEN FREEDOM.",
+          "notes": "The ship clears the fort, raises a white sheet, and reaches the Union blockade with intelligence.",
+          "graphics": [
+            {
+              "type": "route",
+              "points": [
+                {
+                  "x": 365,
+                  "y": 585
+                },
+                {
+                  "x": 520,
+                  "y": 680
+                },
+                {
+                  "x": 635,
+                  "y": 785
+                }
+              ],
+              "startTime": 0,
+              "endTime": 10,
+              "color": "#d5a94f",
+              "width": 10,
+              "label": ""
+            },
+            {
+              "type": "ship",
+              "x": 555,
+              "y": 735,
+              "startTime": 2,
+              "endTime": 9,
+              "size": 58,
+              "color": "#273139",
+              "label": "PLANTER"
+            },
+            {
+              "type": "label",
+              "label": "UNION BLOCKADE",
+              "x": 540,
+              "y": 850,
+              "startTime": 3,
+              "endTime": 11,
+              "size": 26,
+              "color": "#d5a94f"
+            },
+            {
+              "type": "label",
+              "label": "MILITARY INTELLIGENCE",
+              "x": 360,
+              "y": 430,
+              "startTime": 6,
+              "endTime": 11,
+              "size": 28,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [
+            {
+              "name": "Union Blockade",
+              "x": 620,
+              "y": 820,
+              "scale": 0.42,
+              "layer": 5,
+              "visual": {
+                "shape": "square",
+                "countryCode": "US",
+                "historicalYear": 1862,
+                "followProjectYear": false,
+                "expression": "neutral",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [
+            {
+              "text": "Don't fire!",
+              "style": "speech",
+              "x": 290,
+              "y": 520,
+              "width": 190,
+              "height": 66,
+              "fontSize": 24,
+              "bold": true,
+              "startTime": 3,
+              "endTime": 6,
+              "tailX": 356.5,
+              "tailY": 614
+            }
+          ]
         }
-      ]
+      ],
+      "visualStyle": "noveria-history-v2"
     },
     {
       "title": "Daniel Morgan Told His Soldiers to Retreat on Purpose",
@@ -114,39 +545,434 @@
           "name": "Morgan's risky plan",
           "duration": 10,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "cowpensField1781"
           },
           "script": "At Cowpens in 1781, Daniel Morgan knew Patriot militia could break when British troops charged. So he built a controlled withdrawal into his plan.",
-          "caption": "HE ORDERED HIS MEN TO RETREAT"
+          "caption": "RETREAT WAS THE PLAN",
+          "notes": "Show Morgan setting a trap between American and British positions.",
+          "graphics": [
+            {
+              "type": "arrow",
+              "x": 560,
+              "y": 720,
+              "x2": 390,
+              "y2": 720,
+              "startTime": 1,
+              "endTime": 9,
+              "color": "#a14f49",
+              "width": 9
+            },
+            {
+              "type": "arrow",
+              "x": 270,
+              "y": 790,
+              "x2": 210,
+              "y2": 860,
+              "startTime": 2,
+              "endTime": 9,
+              "color": "#58779a",
+              "width": 8
+            }
+          ],
+          "characters": [
+            {
+              "name": "American Militia",
+              "x": 260,
+              "y": 790,
+              "scale": 0.48,
+              "layer": 5,
+              "visual": {
+                "shape": "square",
+                "countryCode": "US",
+                "historicalYear": 1781,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "musket",
+              "keyframes": []
+            },
+            {
+              "name": "British Infantry",
+              "x": 580,
+              "y": 720,
+              "scale": 0.48,
+              "layer": 5,
+              "visual": {
+                "shape": "square",
+                "countryCode": "GB",
+                "historicalYear": 1781,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "musket",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [
+            {
+              "text": "Fall back on my signal.",
+              "style": "speech",
+              "x": 165,
+              "y": 520,
+              "width": 285,
+              "height": 78,
+              "fontSize": 24,
+              "bold": true,
+              "startTime": 2,
+              "endTime": 6,
+              "tailX": 264.75,
+              "tailY": 626
+            }
+          ]
         },
         {
           "name": "Three American lines",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "cowpensTacticalMap"
           },
           "script": "His sharpshooters would fire and fall back. The militia behind them were ordered to fire two volleys, then withdraw behind the Continental regulars.",
-          "caption": "SHOOT TWICE → FALL BACK"
+          "caption": "TWO VOLLEYS — THEN FALL BACK",
+          "notes": "Sharpshooters and militia fire, then withdraw behind the Continental line.",
+          "graphics": [
+            {
+              "type": "arrow",
+              "x": 455,
+              "y": 455,
+              "x2": 320,
+              "y2": 540,
+              "startTime": 1,
+              "endTime": 10,
+              "color": "#58779a",
+              "width": 8
+            },
+            {
+              "type": "arrow",
+              "x": 500,
+              "y": 645,
+              "x2": 360,
+              "y2": 735,
+              "startTime": 2,
+              "endTime": 10,
+              "color": "#58779a",
+              "width": 8
+            },
+            {
+              "type": "impact",
+              "x": 505,
+              "y": 515,
+              "startTime": 1,
+              "endTime": 4,
+              "size": 30,
+              "color": "#d5a94f"
+            },
+            {
+              "type": "impact",
+              "x": 545,
+              "y": 515,
+              "startTime": 3,
+              "endTime": 6,
+              "size": 30,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [],
+          "bubbles": [
+            {
+              "text": "Two volleys. Then move!",
+              "style": "speech",
+              "x": 180,
+              "y": 805,
+              "width": 310,
+              "height": 78,
+              "fontSize": 24,
+              "bold": true,
+              "startTime": 1,
+              "endTime": 5,
+              "tailX": 288.5,
+              "tailY": 911
+            }
+          ]
         },
         {
           "name": "The British rush in",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "cowpensTacticalMap"
           },
           "script": "British troops charged forward, thinking the Americans were collapsing. Instead, they ran into a solid Continental line that held.",
-          "caption": "The trap closes"
+          "caption": "THE BRITISH TOOK THE BAIT",
+          "notes": "British advance arrow follows retreating militia and stops at Continental line.",
+          "graphics": [
+            {
+              "type": "route",
+              "points": [
+                {
+                  "x": 610,
+                  "y": 390
+                },
+                {
+                  "x": 545,
+                  "y": 510
+                },
+                {
+                  "x": 470,
+                  "y": 650
+                }
+              ],
+              "startTime": 0,
+              "endTime": 9,
+              "color": "#a14f49",
+              "width": 10,
+              "label": "BRITISH ADVANCE"
+            },
+            {
+              "type": "label",
+              "label": "CONTINENTALS HOLD",
+              "x": 360,
+              "y": 820,
+              "startTime": 4,
+              "endTime": 11,
+              "size": 30,
+              "color": "#f5eedb"
+            }
+          ],
+          "characters": [
+            {
+              "name": "British Infantry",
+              "x": 600,
+              "y": 410,
+              "scale": 0.43,
+              "layer": 5,
+              "visual": {
+                "shape": "square",
+                "countryCode": "GB",
+                "historicalYear": 1781,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "musket",
+              "keyframes": [
+                {
+                  "id": "kf-0-600-410",
+                  "time": 0,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 600,
+                    "y": 410,
+                    "scale": 0.43,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                },
+                {
+                  "id": "kf-9-475-640",
+                  "time": 9,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 475,
+                    "y": 640,
+                    "scale": 0.43,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                }
+              ]
+            }
+          ],
+          "bubbles": [
+            {
+              "text": "They're running!",
+              "style": "speech",
+              "x": 430,
+              "y": 300,
+              "width": 215,
+              "height": 68,
+              "fontSize": 24,
+              "bold": true,
+              "startTime": 2,
+              "endTime": 5,
+              "tailX": 505.25,
+              "tailY": 396
+            }
+          ]
         },
         {
           "name": "The counterattack",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "cowpensField1781"
           },
           "script": "Then American cavalry and returning militia struck from the sides and rear. Morgan had turned an apparent retreat into a famous tactical victory.",
-          "caption": "A controlled withdrawal becomes victory"
+          "caption": "THE COUNTERATTACK",
+          "notes": "American cavalry and militia attack from the sides and rear.",
+          "graphics": [
+            {
+              "type": "arrow",
+              "x": 130,
+              "y": 760,
+              "x2": 390,
+              "y2": 650,
+              "startTime": 0,
+              "endTime": 10,
+              "color": "#58779a",
+              "width": 11
+            },
+            {
+              "type": "arrow",
+              "x": 600,
+              "y": 880,
+              "x2": 430,
+              "y2": 680,
+              "startTime": 1,
+              "endTime": 10,
+              "color": "#58779a",
+              "width": 11
+            },
+            {
+              "type": "label",
+              "label": "TRAP CLOSED",
+              "x": 360,
+              "y": 420,
+              "startTime": 4,
+              "endTime": 11,
+              "size": 38,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [
+            {
+              "name": "American Militia",
+              "x": 150,
+              "y": 790,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "square",
+                "countryCode": "US",
+                "historicalYear": 1781,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "musket",
+              "keyframes": [
+                {
+                  "id": "kf-0-150-790",
+                  "time": 0,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 150,
+                    "y": 790,
+                    "scale": 0.44,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                },
+                {
+                  "id": "kf-9-390-680",
+                  "time": 9,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 390,
+                    "y": 680,
+                    "scale": 0.44,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                }
+              ]
+            },
+            {
+              "name": "British Infantry",
+              "x": 470,
+              "y": 675,
+              "scale": 0.46,
+              "layer": 5,
+              "visual": {
+                "shape": "square",
+                "countryCode": "GB",
+                "historicalYear": 1781,
+                "followProjectYear": false,
+                "expression": "surprised",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "musket",
+              "keyframes": []
+            }
+          ],
+          "bubbles": []
         }
-      ]
+      ],
+      "visualStyle": "noveria-history-v2"
     },
     {
       "title": "Boston Was Hit by a Flood of Molasses",
@@ -183,39 +1009,271 @@
           "name": "A tank over the neighborhood",
           "duration": 10,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "bostonNorthEnd1919"
           },
           "script": "Shortly after noon on January 15, 1919, a huge storage tank burst in Boston's North End. It held more than 2.3 million gallons of molasses.",
-          "caption": "BOSTON WAS HIT BY A MOLASSES WAVE"
+          "caption": "2.3 MILLION GALLONS",
+          "notes": "Establish the giant tank over Boston's North End, then show the rupture beginning.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "2.3 MILLION GALLONS",
+              "x": 500,
+              "y": 500,
+              "startTime": 0,
+              "endTime": 10,
+              "size": 34,
+              "color": "#d5a94f"
+            },
+            {
+              "type": "impact",
+              "x": 500,
+              "y": 620,
+              "startTime": 6,
+              "endTime": 10,
+              "size": 46,
+              "color": "#a14f49"
+            }
+          ],
+          "characters": [],
+          "bubbles": []
         },
         {
           "name": "The wave",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "bostonNorthEnd1919"
           },
           "script": "A dark wave reported as high as about fifteen feet rushed through nearby streets at roughly thirty-five miles per hour.",
-          "caption": "A DEADLY MOLASSES WAVE"
+          "caption": "A 15-FOOT WAVE",
+          "notes": "The molasses wave expands from the tank across the street.",
+          "graphics": [
+            {
+              "type": "zone",
+              "points": [
+                {
+                  "x": 470,
+                  "y": 700
+                },
+                {
+                  "x": 620,
+                  "y": 650
+                },
+                {
+                  "x": 620,
+                  "y": 960
+                },
+                {
+                  "x": 300,
+                  "y": 980
+                }
+              ],
+              "startTime": 1,
+              "endTime": 11,
+              "color": "#573a2e",
+              "fill": "#573a2ecc",
+              "width": 4
+            },
+            {
+              "type": "arrow",
+              "x": 560,
+              "y": 760,
+              "x2": 250,
+              "y2": 860,
+              "startTime": 1,
+              "endTime": 10,
+              "color": "#573a2e",
+              "width": 14
+            },
+            {
+              "type": "label",
+              "label": "~35 MPH",
+              "x": 350,
+              "y": 610,
+              "startTime": 2,
+              "endTime": 10,
+              "size": 32,
+              "color": "#f5eedb"
+            }
+          ],
+          "characters": [],
+          "bubbles": []
         },
         {
           "name": "The damage",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "bostonNorthEnd1919"
           },
           "script": "Buildings were smashed. People and horses were trapped. Twenty-one people died, and around one hundred fifty were injured.",
-          "caption": "21 DEAD · ABOUT 150 INJURED"
+          "caption": "21 DEAD · ABOUT 150 INJURED",
+          "notes": "Show the wave filling the street with impact markers and trapped silhouettes.",
+          "graphics": [
+            {
+              "type": "zone",
+              "points": [
+                {
+                  "x": 120,
+                  "y": 710
+                },
+                {
+                  "x": 610,
+                  "y": 690
+                },
+                {
+                  "x": 610,
+                  "y": 990
+                },
+                {
+                  "x": 90,
+                  "y": 990
+                }
+              ],
+              "startTime": 0,
+              "endTime": 11,
+              "color": "#573a2e",
+              "fill": "#573a2ed9",
+              "width": 3
+            },
+            {
+              "type": "impact",
+              "x": 270,
+              "y": 820,
+              "startTime": 1,
+              "endTime": 8,
+              "size": 48,
+              "color": "#a14f49"
+            },
+            {
+              "type": "impact",
+              "x": 430,
+              "y": 880,
+              "startTime": 2,
+              "endTime": 9,
+              "size": 42,
+              "color": "#a14f49"
+            }
+          ],
+          "characters": [
+            {
+              "name": "Pedestrian",
+              "x": 250,
+              "y": 820,
+              "scale": 0.38,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1919,
+                "followProjectYear": false,
+                "expression": "surprised",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "none",
+              "keyframes": []
+            },
+            {
+              "name": "Pedestrian 2",
+              "x": 430,
+              "y": 860,
+              "scale": 0.36,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1919,
+                "followProjectYear": false,
+                "expression": "surprised",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": []
         },
         {
           "name": "Aftermath",
           "duration": 10,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "bostonNorthEnd1919"
           },
           "script": "Cleanup took weeks. Investigators blamed structural weakness in the tank, and the disaster helped push stronger construction standards.",
-          "caption": "A strange disaster with real consequences"
+          "caption": "THE CLEANUP TOOK WEEKS",
+          "notes": "Aftermath: tank gone, street marked with debris and structural-failure callout.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "STRUCTURAL FAILURE",
+              "x": 360,
+              "y": 520,
+              "startTime": 1,
+              "endTime": 9,
+              "size": 32,
+              "color": "#d5a94f"
+            },
+            {
+              "type": "label",
+              "label": "CLEANUP: WEEKS",
+              "x": 360,
+              "y": 690,
+              "startTime": 4,
+              "endTime": 10,
+              "size": 32,
+              "color": "#f5eedb"
+            }
+          ],
+          "characters": [],
+          "bubbles": []
         }
-      ]
+      ],
+      "visualStyle": "noveria-history-v2"
     },
     {
       "title": "A 14-Year-Old Got the Idea for Electronic Television While Plowing",
@@ -252,39 +1310,333 @@
           "name": "Rows in an Idaho field",
           "duration": 10,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "idahoFarm1921"
           },
           "script": "In 1921, fourteen-year-old Philo Farnsworth was plowing a field in Idaho when its straight rows gave him an idea.",
-          "caption": "TELEVISION STARTED WITH FARM ROWS?"
+          "caption": "FARM ROWS → TELEVISION",
+          "notes": "A young Farnsworth moves beside the furrows; camera language points from rows toward an idea.",
+          "graphics": [
+            {
+              "type": "arrow",
+              "x": 170,
+              "y": 910,
+              "x2": 500,
+              "y2": 610,
+              "startTime": 2,
+              "endTime": 9,
+              "color": "#d5a94f",
+              "width": 8
+            },
+            {
+              "type": "label",
+              "label": "AGE 14",
+              "x": 185,
+              "y": 735,
+              "startTime": 0,
+              "endTime": 8,
+              "size": 30,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [
+            {
+              "name": "Philo Farnsworth",
+              "x": 170,
+              "y": 835,
+              "scale": 0.5,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1921,
+                "followProjectYear": false,
+                "expression": "neutral",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "none",
+              "keyframes": [
+                {
+                  "id": "kf-0-170-835",
+                  "time": 0,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 170,
+                    "y": 835,
+                    "scale": 0.5,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                },
+                {
+                  "id": "kf-8-390-790",
+                  "time": 8,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 390,
+                    "y": 790,
+                    "scale": 0.5,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                }
+              ]
+            }
+          ],
+          "bubbles": [
+            {
+              "text": "What if pictures used lines?",
+              "style": "speech",
+              "x": 290,
+              "y": 530,
+              "width": 320,
+              "height": 84,
+              "fontSize": 24,
+              "bold": true,
+              "startTime": 3,
+              "endTime": 7,
+              "tailX": 402,
+              "tailY": 642
+            }
+          ]
         },
         {
           "name": "Break a picture into lines",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "idahoFarm1921"
           },
           "script": "What if a picture could be broken into lines, transmitted electronically, then rebuilt on a screen? Existing experiments often used mechanical scanning.",
-          "caption": "Could an image travel line by line?"
+          "caption": "BREAK THE IMAGE INTO LINES",
+          "notes": "Use parallel line graphics on the right, connected visually to the farm rows.",
+          "graphics": [
+            {
+              "type": "arrow",
+              "x": 410,
+              "y": 470,
+              "x2": 610,
+              "y2": 470,
+              "startTime": 0,
+              "endTime": 11,
+              "color": "#79b9c2",
+              "width": 4
+            },
+            {
+              "type": "arrow",
+              "x": 410,
+              "y": 512,
+              "x2": 610,
+              "y2": 512,
+              "startTime": 0.25,
+              "endTime": 11,
+              "color": "#79b9c2",
+              "width": 4
+            },
+            {
+              "type": "arrow",
+              "x": 410,
+              "y": 554,
+              "x2": 610,
+              "y2": 554,
+              "startTime": 0.5,
+              "endTime": 11,
+              "color": "#79b9c2",
+              "width": 4
+            },
+            {
+              "type": "arrow",
+              "x": 410,
+              "y": 596,
+              "x2": 610,
+              "y2": 596,
+              "startTime": 0.75,
+              "endTime": 11,
+              "color": "#79b9c2",
+              "width": 4
+            },
+            {
+              "type": "arrow",
+              "x": 410,
+              "y": 638,
+              "x2": 610,
+              "y2": 638,
+              "startTime": 1,
+              "endTime": 11,
+              "color": "#79b9c2",
+              "width": 4
+            },
+            {
+              "type": "arrow",
+              "x": 410,
+              "y": 680,
+              "x2": 610,
+              "y2": 680,
+              "startTime": 1.25,
+              "endTime": 11,
+              "color": "#79b9c2",
+              "width": 4
+            },
+            {
+              "type": "arrow",
+              "x": 410,
+              "y": 722,
+              "x2": 610,
+              "y2": 722,
+              "startTime": 1.5,
+              "endTime": 11,
+              "color": "#79b9c2",
+              "width": 4
+            },
+            {
+              "type": "label",
+              "label": "SCAN LINES",
+              "x": 510,
+              "y": 800,
+              "startTime": 2,
+              "endTime": 11,
+              "size": 34,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [],
+          "bubbles": []
         },
         {
           "name": "The electronic lab",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "earlyTelevisionLab1927"
           },
           "script": "Farnsworth wanted a fully electronic system. In 1927, his San Francisco team transmitted a simple electronic image using an image dissector.",
-          "caption": "1927 · A FULLY ELECTRONIC IMAGE"
+          "caption": "A FULLY ELECTRONIC IMAGE",
+          "notes": "Lab scene: scanning lines light up on the display and a signal arrow enters the screen.",
+          "graphics": [
+            {
+              "type": "arrow",
+              "x": 170,
+              "y": 650,
+              "x2": 330,
+              "y2": 650,
+              "startTime": 1,
+              "endTime": 8,
+              "color": "#d5a94f",
+              "width": 8
+            },
+            {
+              "type": "label",
+              "label": "IMAGE DISSECTOR",
+              "x": 360,
+              "y": 800,
+              "startTime": 2,
+              "endTime": 11,
+              "size": 30,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [
+            {
+              "name": "Farnsworth",
+              "x": 190,
+              "y": 760,
+              "scale": 0.45,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1927,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": []
         },
         {
           "name": "A field becomes a screen",
           "duration": 10,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "earlyTelevisionLab1927"
           },
           "script": "He was only twenty-one. An idea inspired by furrows in a farm field became one of the foundations of electronic television.",
-          "caption": "THE FARM-ROW IDEA CHANGED TELEVISION"
+          "caption": "HE WAS ONLY 21",
+          "notes": "The electronic display becomes the payoff, with the farm-row idea recalled in a small arrow.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "1927",
+              "x": 360,
+              "y": 470,
+              "startTime": 0,
+              "endTime": 10,
+              "size": 44,
+              "color": "#d5a94f"
+            },
+            {
+              "type": "label",
+              "label": "FARM FURROWS → ELECTRONIC SCAN",
+              "x": 360,
+              "y": 700,
+              "startTime": 3,
+              "endTime": 10,
+              "size": 26,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [],
+          "bubbles": []
         }
-      ]
+      ],
+      "visualStyle": "noveria-history-v2"
     },
     {
       "title": "The Enslaved Spy Who Fooled the British at Yorktown",
@@ -321,39 +1673,395 @@
           "name": "A secret mission",
           "duration": 10,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "yorktownSpyCamp1781"
           },
           "script": "In 1781, an enslaved Virginian named James Armistead began working for the Marquis de Lafayette during the American Revolution.",
-          "caption": "THE BRITISH TRUSTED THEIR OWN SPY"
+          "caption": "A SPY INSIDE BRITISH LINES",
+          "notes": "James approaches the British camp while the British officer watches.",
+          "graphics": [
+            {
+              "type": "arrow",
+              "x": 180,
+              "y": 830,
+              "x2": 430,
+              "y2": 760,
+              "startTime": 1,
+              "endTime": 9,
+              "color": "#d5a94f",
+              "width": 8
+            }
+          ],
+          "characters": [
+            {
+              "name": "James Armistead",
+              "x": 185,
+              "y": 835,
+              "scale": 0.48,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1781,
+                "followProjectYear": false,
+                "expression": "neutral",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "none",
+              "keyframes": [
+                {
+                  "id": "kf-0-185-835",
+                  "time": 0,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 185,
+                    "y": 835,
+                    "scale": 0.48,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                },
+                {
+                  "id": "kf-8-410-780",
+                  "time": 8,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 410,
+                    "y": 780,
+                    "scale": 0.48,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                }
+              ]
+            },
+            {
+              "name": "British Officer",
+              "x": 540,
+              "y": 760,
+              "scale": 0.5,
+              "layer": 5,
+              "visual": {
+                "shape": "square",
+                "countryCode": "GB",
+                "historicalYear": 1781,
+                "followProjectYear": false,
+                "expression": "neutral",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "document",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [
+            {
+              "text": "Looking for work?",
+              "style": "speech",
+              "x": 420,
+              "y": 540,
+              "width": 230,
+              "height": 70,
+              "fontSize": 24,
+              "bold": true,
+              "startTime": 3,
+              "endTime": 6,
+              "tailX": 500.5,
+              "tailY": 638
+            }
+          ]
         },
         {
           "name": "Inside British lines",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "yorktownSpyCamp1781"
           },
           "script": "James entered British lines pretending to be a runaway seeking work. He gained the confidence of senior British officers.",
-          "caption": "He made the British trust him"
+          "caption": "THE BRITISH TRUST HIM",
+          "notes": "James and a British officer interact; information is shown as a document.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "BRITISH CAMP",
+              "x": 500,
+              "y": 480,
+              "startTime": 0,
+              "endTime": 11,
+              "size": 28,
+              "color": "#d5a94f"
+            },
+            {
+              "type": "arrow",
+              "x": 500,
+              "y": 650,
+              "x2": 330,
+              "y2": 690,
+              "startTime": 4,
+              "endTime": 10,
+              "color": "#d5a94f",
+              "width": 7
+            }
+          ],
+          "characters": [
+            {
+              "name": "James Armistead",
+              "x": 320,
+              "y": 760,
+              "scale": 0.48,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1781,
+                "followProjectYear": false,
+                "expression": "neutral",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "document",
+              "keyframes": []
+            },
+            {
+              "name": "British Officer",
+              "x": 520,
+              "y": 740,
+              "scale": 0.5,
+              "layer": 5,
+              "visual": {
+                "shape": "square",
+                "countryCode": "GB",
+                "historicalYear": 1781,
+                "followProjectYear": false,
+                "expression": "neutral",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "document",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [
+            {
+              "text": "Take this.",
+              "style": "speech",
+              "x": 430,
+              "y": 540,
+              "width": 175,
+              "height": 64,
+              "fontSize": 24,
+              "bold": true,
+              "startTime": 2,
+              "endTime": 5,
+              "tailX": 491.25,
+              "tailY": 632
+            }
+          ]
         },
         {
           "name": "Information moves",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "yorktownSpyCamp1781"
           },
           "script": "He carried information on troop movements, supplies, and strategy back to Lafayette while giving misleading information to the British.",
-          "caption": "BRITISH CAMP → LAFAYETTE"
+          "caption": "INTELLIGENCE → LAFAYETTE",
+          "notes": "A document/intelligence marker moves from British side to Lafayette's side.",
+          "graphics": [
+            {
+              "type": "route",
+              "points": [
+                {
+                  "x": 535,
+                  "y": 700
+                },
+                {
+                  "x": 430,
+                  "y": 650
+                },
+                {
+                  "x": 300,
+                  "y": 700
+                }
+              ],
+              "startTime": 0,
+              "endTime": 10,
+              "color": "#d5a94f",
+              "width": 9,
+              "label": "INTEL"
+            },
+            {
+              "type": "label",
+              "label": "TROOPS · SUPPLIES · STRATEGY",
+              "x": 360,
+              "y": 470,
+              "startTime": 1,
+              "endTime": 11,
+              "size": 26,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [
+            {
+              "name": "British Command",
+              "x": 560,
+              "y": 760,
+              "scale": 0.42,
+              "layer": 5,
+              "visual": {
+                "shape": "square",
+                "countryCode": "GB",
+                "historicalYear": 1781,
+                "followProjectYear": false,
+                "expression": "neutral",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "document",
+              "keyframes": []
+            },
+            {
+              "name": "Lafayette",
+              "x": 270,
+              "y": 760,
+              "scale": 0.46,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1781,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "document",
+              "keyframes": []
+            }
+          ],
+          "bubbles": []
         },
         {
           "name": "Freedom delayed",
           "duration": 10,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "revolutionaryCamp1782"
           },
           "script": "His intelligence helped commanders understand Cornwallis's movements at Yorktown. After helping win a war about liberty, James still had to fight for his own freedom. He was emancipated in 1787.",
-          "caption": "EMANCIPATED · 1787"
+          "caption": "EMANCIPATED · 1787",
+          "notes": "End with freedom document, not a battlefield claim.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "1787",
+              "x": 360,
+              "y": 545,
+              "startTime": 1,
+              "endTime": 10,
+              "size": 54,
+              "color": "#d5a94f"
+            },
+            {
+              "type": "label",
+              "label": "FREEDOM CAME AFTER THE WAR",
+              "x": 360,
+              "y": 690,
+              "startTime": 3,
+              "endTime": 10,
+              "size": 28,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [
+            {
+              "name": "James Armistead Lafayette",
+              "x": 360,
+              "y": 800,
+              "scale": 0.55,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1787,
+                "followProjectYear": false,
+                "expression": "happy",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "document",
+              "keyframes": []
+            }
+          ],
+          "bubbles": []
         }
-      ]
+      ],
+      "visualStyle": "noveria-history-v2"
     },
     {
       "title": "The Woman Who Served in Washington's Army as Robert Shurtleff",
@@ -390,39 +2098,353 @@
           "name": "Robert Shurtleff enlists",
           "duration": 10,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "revolutionaryCamp1782"
           },
           "script": "In 1782, Deborah Sampson disguised herself as a man, used the name Robert Shurtleff, and joined the Fourth Massachusetts Regiment.",
-          "caption": "THE ARMY THOUGHT SHE WAS A MAN"
+          "caption": "ROBERT SHURTLEFF ENLISTS",
+          "notes": "Deborah, disguised as Robert Shurtleff, enters the Continental camp with enlistment paper.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "ROBERT SHURTLEFF",
+              "x": 360,
+              "y": 510,
+              "startTime": 1,
+              "endTime": 10,
+              "size": 36,
+              "color": "#d5a94f"
+            },
+            {
+              "type": "arrow",
+              "x": 180,
+              "y": 830,
+              "x2": 420,
+              "y2": 770,
+              "startTime": 1,
+              "endTime": 9,
+              "color": "#d5a94f",
+              "width": 8
+            }
+          ],
+          "characters": [
+            {
+              "name": "Deborah Sampson",
+              "x": 180,
+              "y": 835,
+              "scale": 0.48,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1782,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "document",
+              "keyframes": [
+                {
+                  "id": "kf-0-180-835",
+                  "time": 0,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 180,
+                    "y": 835,
+                    "scale": 0.48,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                },
+                {
+                  "id": "kf-8-410-780",
+                  "time": 8,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 410,
+                    "y": 780,
+                    "scale": 0.48,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                }
+              ]
+            }
+          ],
+          "bubbles": [
+            {
+              "text": "Robert Shurtleff.",
+              "style": "speech",
+              "x": 290,
+              "y": 585,
+              "width": 235,
+              "height": 68,
+              "fontSize": 24,
+              "bold": true,
+              "startTime": 3,
+              "endTime": 6,
+              "tailX": 372.25,
+              "tailY": 681
+            }
+          ]
         },
         {
           "name": "Light infantry work",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "revolutionaryCamp1782"
           },
           "script": "She served in light infantry and carried out dangerous scouting work around New York during the final years of the Revolution.",
-          "caption": "SCOUTING AROUND NEW YORK"
+          "caption": "LIGHT INFANTRY · NEW YORK",
+          "notes": "Show scouting movement, not Yorktown.",
+          "graphics": [
+            {
+              "type": "route",
+              "points": [
+                {
+                  "x": 170,
+                  "y": 840
+                },
+                {
+                  "x": 300,
+                  "y": 760
+                },
+                {
+                  "x": 480,
+                  "y": 720
+                },
+                {
+                  "x": 585,
+                  "y": 640
+                }
+              ],
+              "startTime": 0,
+              "endTime": 11,
+              "color": "#58779a",
+              "width": 8,
+              "label": "SCOUTING"
+            }
+          ],
+          "characters": [
+            {
+              "name": "Sampson",
+              "x": 180,
+              "y": 830,
+              "scale": 0.44,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1782,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "musket",
+              "keyframes": [
+                {
+                  "id": "kf-0-180-830",
+                  "time": 0,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 180,
+                    "y": 830,
+                    "scale": 0.44,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                },
+                {
+                  "id": "kf-10-560-650",
+                  "time": 10,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 560,
+                    "y": 650,
+                    "scale": 0.44,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                }
+              ]
+            }
+          ],
+          "bubbles": []
         },
         {
           "name": "A dangerous secret",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "revolutionaryCamp1782"
           },
           "script": "After being wounded, she reportedly removed a musket ball herself rather than risk being exposed. The documented service is already extraordinary without adding disputed battles.",
-          "caption": "HER IDENTITY STAYED HIDDEN"
+          "caption": "HER IDENTITY STAYED HIDDEN",
+          "notes": "Wound scene stays abstract: impact and medical secrecy, no disputed battle claim.",
+          "graphics": [
+            {
+              "type": "impact",
+              "x": 360,
+              "y": 720,
+              "startTime": 1,
+              "endTime": 5,
+              "size": 44,
+              "color": "#a14f49"
+            },
+            {
+              "type": "label",
+              "label": "WOUNDED",
+              "x": 360,
+              "y": 535,
+              "startTime": 1,
+              "endTime": 7,
+              "size": 34,
+              "color": "#d5a94f"
+            },
+            {
+              "type": "label",
+              "label": "IDENTITY STILL HIDDEN",
+              "x": 360,
+              "y": 860,
+              "startTime": 4,
+              "endTime": 11,
+              "size": 28,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [
+            {
+              "name": "Sampson",
+              "x": 360,
+              "y": 760,
+              "scale": 0.48,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1782,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "musket",
+              "keyframes": []
+            }
+          ],
+          "bubbles": []
         },
         {
           "name": "An honorable discharge",
           "duration": 10,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "revolutionaryCamp1782"
           },
           "script": "Her identity was discovered after she became seriously ill in Philadelphia. Deborah Sampson received an honorable discharge in October 1783.",
-          "caption": "HONORABLY DISCHARGED · 1783"
+          "caption": "HONORABLE DISCHARGE · 1783",
+          "notes": "Philadelphia illness/discovery resolves into honorable discharge document.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "PHILADELPHIA",
+              "x": 360,
+              "y": 500,
+              "startTime": 0,
+              "endTime": 5,
+              "size": 30,
+              "color": "#d5a94f"
+            },
+            {
+              "type": "label",
+              "label": "HONORABLE DISCHARGE",
+              "x": 360,
+              "y": 680,
+              "startTime": 4,
+              "endTime": 10,
+              "size": 34,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [
+            {
+              "name": "Deborah Sampson",
+              "x": 360,
+              "y": 790,
+              "scale": 0.5,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1783,
+                "followProjectYear": false,
+                "expression": "happy",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "document",
+              "keyframes": []
+            }
+          ],
+          "bubbles": []
         }
-      ]
+      ],
+      "visualStyle": "noveria-history-v2"
     },
     {
       "title": "Garrett Morgan Added the Missing Pause Between Stop and Go",
@@ -459,39 +2481,321 @@
           "name": "Crowded Cleveland streets",
           "duration": 10,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "clevelandIntersection1923"
           },
           "script": "By the early 1920s, crowded streets had cars, trolleys, horses, and pedestrians fighting for the same intersections.",
-          "caption": "STOP. GO. SOMETHING WAS MISSING."
+          "caption": "CARS · HORSES · PEOPLE",
+          "notes": "Two vehicles approach the crossing from different directions, establishing the conflict.",
+          "graphics": [
+            {
+              "type": "vehicle",
+              "x": 210,
+              "y": 900,
+              "startTime": 0,
+              "endTime": 10,
+              "size": 54,
+              "color": "#58779a",
+              "label": "CAR"
+            },
+            {
+              "type": "vehicle",
+              "x": 520,
+              "y": 720,
+              "startTime": 0,
+              "endTime": 10,
+              "size": 54,
+              "color": "#a14f49",
+              "label": "CAR"
+            },
+            {
+              "type": "arrow",
+              "x": 180,
+              "y": 900,
+              "x2": 410,
+              "y2": 900,
+              "startTime": 0,
+              "endTime": 10,
+              "color": "#58779a",
+              "width": 7
+            },
+            {
+              "type": "arrow",
+              "x": 520,
+              "y": 650,
+              "x2": 520,
+              "y2": 860,
+              "startTime": 0,
+              "endTime": 10,
+              "color": "#a14f49",
+              "width": 7
+            }
+          ],
+          "characters": [],
+          "bubbles": []
         },
         {
           "name": "A dangerous collision",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "clevelandIntersection1923"
           },
           "script": "After seeing a serious collision in Cleveland, inventor Garrett Morgan designed a better way to control the crossing.",
-          "caption": "ONE COLLISION INSPIRES A FIX"
+          "caption": "ONE COLLISION INSPIRES A FIX",
+          "notes": "Vehicle paths conflict at center; impact marker sells the danger.",
+          "graphics": [
+            {
+              "type": "vehicle",
+              "x": 300,
+              "y": 850,
+              "startTime": 0,
+              "endTime": 11,
+              "size": 54,
+              "color": "#58779a",
+              "label": ""
+            },
+            {
+              "type": "vehicle",
+              "x": 500,
+              "y": 720,
+              "startTime": 0,
+              "endTime": 11,
+              "size": 54,
+              "color": "#a14f49",
+              "label": ""
+            },
+            {
+              "type": "impact",
+              "x": 430,
+              "y": 820,
+              "startTime": 3,
+              "endTime": 8,
+              "size": 52,
+              "color": "#a14f49"
+            },
+            {
+              "type": "label",
+              "label": "DANGEROUS CROSSING",
+              "x": 360,
+              "y": 560,
+              "startTime": 1,
+              "endTime": 10,
+              "size": 30,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [
+            {
+              "name": "Garrett Morgan",
+              "x": 190,
+              "y": 760,
+              "scale": 0.45,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1923,
+                "followProjectYear": false,
+                "expression": "surprised",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": []
         },
         {
           "name": "The all-stop phase",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "clevelandIntersection1923"
           },
           "script": "His three-position signal created a phase where traffic in all directions stopped before another direction was allowed to move.",
-          "caption": "ALL DIRECTIONS STOP"
+          "caption": "ALL DIRECTIONS STOP",
+          "notes": "Both traffic directions visibly stop while Morgan's third position is highlighted.",
+          "graphics": [
+            {
+              "type": "vehicle",
+              "x": 280,
+              "y": 870,
+              "startTime": 0,
+              "endTime": 11,
+              "size": 54,
+              "color": "#58779a",
+              "label": ""
+            },
+            {
+              "type": "vehicle",
+              "x": 520,
+              "y": 720,
+              "startTime": 0,
+              "endTime": 11,
+              "size": 54,
+              "color": "#a14f49",
+              "label": ""
+            },
+            {
+              "type": "label",
+              "label": "STOP",
+              "x": 280,
+              "y": 775,
+              "startTime": 1,
+              "endTime": 11,
+              "size": 34,
+              "color": "#f5eedb"
+            },
+            {
+              "type": "label",
+              "label": "STOP",
+              "x": 520,
+              "y": 625,
+              "startTime": 1,
+              "endTime": 11,
+              "size": 34,
+              "color": "#f5eedb"
+            }
+          ],
+          "characters": [
+            {
+              "name": "Garrett Morgan",
+              "x": 175,
+              "y": 730,
+              "scale": 0.42,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1923,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "document",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [
+            {
+              "text": "Everybody stops first.",
+              "style": "speech",
+              "x": 165,
+              "y": 520,
+              "width": 275,
+              "height": 72,
+              "fontSize": 24,
+              "bold": true,
+              "startTime": 3,
+              "endTime": 7,
+              "tailX": 261.25,
+              "tailY": 620
+            }
+          ]
         },
         {
           "name": "A safer interval",
           "duration": 10,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "clevelandIntersection1923"
           },
           "script": "Morgan patented it in 1923. It was not exactly today's yellow light, but it tackled the same problem: a safe pause between conflicting movements.",
-          "caption": "PATENTED · 1923"
+          "caption": "PATENTED · 1923",
+          "notes": "Finish on the patent and the safe pause concept, not a modern yellow-light claim.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "SAFE PAUSE",
+              "x": 360,
+              "y": 585,
+              "startTime": 1,
+              "endTime": 9,
+              "size": 38,
+              "color": "#d5a94f"
+            },
+            {
+              "type": "label",
+              "label": "PATENTED · 1923",
+              "x": 360,
+              "y": 715,
+              "startTime": 3,
+              "endTime": 10,
+              "size": 34,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [
+            {
+              "name": "Garrett Morgan",
+              "x": 185,
+              "y": 810,
+              "scale": 0.45,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1923,
+                "followProjectYear": false,
+                "expression": "happy",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "document",
+              "keyframes": []
+            }
+          ],
+          "bubbles": []
         }
-      ]
+      ],
+      "visualStyle": "noveria-history-v2"
     },
     {
       "title": "Josephine Cochrane Built the Practical Dishwasher Because Hand-Washing Damaged Her Dishes",
@@ -528,39 +2832,271 @@
           "name": "Chipped dishware",
           "duration": 10,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "victorianDiningRoom1880s"
           },
           "script": "In the 1880s, Josephine Garis Cochran was frustrated that hand-washing frequently chipped her dishware. So she decided to build a better machine.",
-          "caption": "SHE BUILT A MACHINE TO SAVE HER DISHES"
+          "caption": "THE DISHES KEPT CHIPPING",
+          "notes": "Show chipped plates on the table and Josephine reacting.",
+          "graphics": [
+            {
+              "type": "impact",
+              "x": 330,
+              "y": 800,
+              "startTime": 2,
+              "endTime": 8,
+              "size": 32,
+              "color": "#a14f49"
+            },
+            {
+              "type": "label",
+              "label": "CHIPPED",
+              "x": 430,
+              "y": 700,
+              "startTime": 2,
+              "endTime": 9,
+              "size": 30,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [
+            {
+              "name": "Josephine Cochran",
+              "x": 190,
+              "y": 770,
+              "scale": 0.48,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1886,
+                "followProjectYear": false,
+                "expression": "sad",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [
+            {
+              "text": "There has to be a better way.",
+              "style": "speech",
+              "x": 275,
+              "y": 500,
+              "width": 330,
+              "height": 80,
+              "fontSize": 24,
+              "bold": true,
+              "startTime": 3,
+              "endTime": 7,
+              "tailX": 390.5,
+              "tailY": 608
+            }
+          ]
         },
         {
           "name": "The working mechanism",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "dishwasherWorkshop1886"
           },
           "script": "Working with mechanic George Butters, she made a system that held dishes in wire compartments while pressurized hot soapy water cleaned them.",
-          "caption": "WIRE RACKS + PRESSURIZED WATER"
+          "caption": "WIRE RACKS + PRESSURIZED WATER",
+          "notes": "Mechanism scene highlights rack and sprays rather than another generic room.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "WIRE RACK",
+              "x": 360,
+              "y": 610,
+              "startTime": 0,
+              "endTime": 11,
+              "size": 30,
+              "color": "#d5a94f"
+            },
+            {
+              "type": "arrow",
+              "x": 190,
+              "y": 770,
+              "x2": 330,
+              "y2": 650,
+              "startTime": 1,
+              "endTime": 10,
+              "color": "#79b9c2",
+              "width": 7
+            },
+            {
+              "type": "arrow",
+              "x": 530,
+              "y": 770,
+              "x2": 390,
+              "y2": 650,
+              "startTime": 1,
+              "endTime": 10,
+              "color": "#79b9c2",
+              "width": 7
+            }
+          ],
+          "characters": [
+            {
+              "name": "Josephine Cochran",
+              "x": 180,
+              "y": 820,
+              "scale": 0.42,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1886,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": []
         },
         {
           "name": "Patent and fair",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "chicagoWorldsFair1893"
           },
           "script": "Her patent was granted in 1886, and her dishwasher gained attention at Chicago's 1893 World's Columbian Exposition.",
-          "caption": "PATENT · 1886"
+          "caption": "PATENT 1886 · CHICAGO 1893",
+          "notes": "Patent document appears in front of the World's Fair setting.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "PATENT · 1886",
+              "x": 360,
+              "y": 560,
+              "startTime": 0,
+              "endTime": 11,
+              "size": 38,
+              "color": "#d5a94f"
+            },
+            {
+              "type": "label",
+              "label": "WORLD'S FAIR · 1893",
+              "x": 360,
+              "y": 700,
+              "startTime": 2,
+              "endTime": 11,
+              "size": 32,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [
+            {
+              "name": "Josephine Cochran",
+              "x": 180,
+              "y": 820,
+              "scale": 0.43,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1893,
+                "followProjectYear": false,
+                "expression": "happy",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "document",
+              "keyframes": []
+            }
+          ],
+          "bubbles": []
         },
         {
           "name": "From institutions to homes",
           "duration": 10,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "dishwasherWorkshop1886"
           },
           "script": "Hotels and restaurants adopted it before ordinary homes did, because early households often could not supply enough hot water. Her company later became part of KitchenAid.",
-          "caption": "A PRACTICAL KITCHEN MACHINE"
+          "caption": "HOTELS USED IT FIRST",
+          "notes": "Show the machine working as the payoff; household adoption comes later.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "HOTELS + RESTAURANTS",
+              "x": 360,
+              "y": 550,
+              "startTime": 1,
+              "endTime": 9,
+              "size": 32,
+              "color": "#d5a94f"
+            },
+            {
+              "type": "label",
+              "label": "PRACTICAL DISHWASHER",
+              "x": 360,
+              "y": 700,
+              "startTime": 3,
+              "endTime": 10,
+              "size": 34,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [],
+          "bubbles": []
         }
-      ]
+      ],
+      "visualStyle": "noveria-history-v2"
     },
     {
       "title": "Bass Reeves Was a Real-Life Frontier Lawman Before Hollywood Cowboys",
@@ -597,39 +3133,331 @@
           "name": "From enslavement to freedom",
           "duration": 10,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "fortSmithFrontier1875"
           },
           "script": "Bass Reeves was born enslaved in the 1830s. After the Civil War he became free, and in 1875 he was hired as a deputy U.S. marshal out of Fort Smith.",
-          "caption": "BORN ENSLAVED → FRONTIER LAWMAN"
+          "caption": "DEPUTY U.S. MARSHAL · 1875",
+          "notes": "Reeves stands at Fort Smith with a warrant.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "FORT SMITH",
+              "x": 360,
+              "y": 520,
+              "startTime": 0,
+              "endTime": 10,
+              "size": 32,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [
+            {
+              "name": "Bass Reeves",
+              "x": 300,
+              "y": 790,
+              "scale": 0.55,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1875,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "document",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [
+            {
+              "text": "Warrant.",
+              "style": "speech",
+              "x": 390,
+              "y": 575,
+              "width": 155,
+              "height": 62,
+              "fontSize": 24,
+              "bold": true,
+              "startTime": 3,
+              "endTime": 6,
+              "tailX": 444.25,
+              "tailY": 665
+            }
+          ]
         },
         {
           "name": "A huge territory",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "fortSmithMap"
           },
           "script": "His territory included the enormous and dangerous Indian Territory, much of modern Oklahoma. It demanded long travel, tracking, and careful planning.",
-          "caption": "FORT SMITH → INDIAN TERRITORY"
+          "caption": "FORT SMITH → INDIAN TERRITORY",
+          "notes": "The patrol marker moves west into Indian Territory.",
+          "graphics": [
+            {
+              "type": "route",
+              "points": [
+                {
+                  "x": 210,
+                  "y": 510
+                },
+                {
+                  "x": 320,
+                  "y": 590
+                },
+                {
+                  "x": 450,
+                  "y": 690
+                },
+                {
+                  "x": 570,
+                  "y": 780
+                }
+              ],
+              "startTime": 0,
+              "endTime": 11,
+              "color": "#d5a94f",
+              "width": 9,
+              "label": "PATROL"
+            },
+            {
+              "type": "label",
+              "label": "INDIAN TERRITORY",
+              "x": 480,
+              "y": 865,
+              "startTime": 2,
+              "endTime": 11,
+              "size": 28,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [],
+          "bubbles": []
         },
         {
           "name": "Thirty-two years",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "fortSmithFrontier1875"
           },
           "script": "Historical accounts describe Reeves using disguises and tracking skills to make arrests. He spent thirty-two years pursuing fugitives.",
-          "caption": "DISGUISES · TRACKING · ARRESTS"
+          "caption": "TRACK · DISGUISE · ARREST",
+          "notes": "Wanted poster plus Reeves moving toward a target; no invented shootout.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "WANTED",
+              "x": 210,
+              "y": 555,
+              "startTime": 0,
+              "endTime": 11,
+              "size": 34,
+              "color": "#d5a94f"
+            },
+            {
+              "type": "arrow",
+              "x": 300,
+              "y": 820,
+              "x2": 520,
+              "y2": 760,
+              "startTime": 2,
+              "endTime": 10,
+              "color": "#d5a94f",
+              "width": 8
+            }
+          ],
+          "characters": [
+            {
+              "name": "Bass Reeves",
+              "x": 300,
+              "y": 820,
+              "scale": 0.5,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1875,
+                "followProjectYear": false,
+                "expression": "determined",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "pistol",
+              "keyframes": [
+                {
+                  "id": "kf-0-300-820",
+                  "time": 0,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 300,
+                    "y": 820,
+                    "scale": 0.5,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                },
+                {
+                  "id": "kf-9-500-770",
+                  "time": 9,
+                  "easing": "easeInOut",
+                  "state": {
+                    "x": 500,
+                    "y": 770,
+                    "scale": 0.5,
+                    "rotation": 0,
+                    "facing": 1,
+                    "mouthOpen": false
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Fugitive",
+              "x": 565,
+              "y": 760,
+              "scale": 0.42,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1875,
+                "followProjectYear": false,
+                "expression": "surprised",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": [
+            {
+              "text": "You're under arrest.",
+              "style": "speech",
+              "x": 360,
+              "y": 570,
+              "width": 250,
+              "height": 70,
+              "fontSize": 24,
+              "bold": true,
+              "startTime": 5,
+              "endTime": 8,
+              "tailX": 447.5,
+              "tailY": 668
+            }
+          ]
         },
         {
           "name": "The West came after him",
           "duration": 10,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "fortSmithFrontier1875"
           },
           "script": "He stayed in federal service until Oklahoma became a state in 1907, then briefly served as a Muskogee police officer. The lawman came before the Hollywood legend.",
-          "caption": "THE LAWMAN CAME FIRST"
+          "caption": "THE LAWMAN CAME FIRST",
+          "notes": "Statehood and Muskogee service close the story without fictional gunplay.",
+          "graphics": [
+            {
+              "type": "label",
+              "label": "OKLAHOMA STATEHOOD · 1907",
+              "x": 360,
+              "y": 555,
+              "startTime": 1,
+              "endTime": 8,
+              "size": 30,
+              "color": "#d5a94f"
+            },
+            {
+              "type": "label",
+              "label": "MUSKOGEE POLICE",
+              "x": 360,
+              "y": 700,
+              "startTime": 4,
+              "endTime": 10,
+              "size": 30,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [
+            {
+              "name": "Bass Reeves",
+              "x": 360,
+              "y": 820,
+              "scale": 0.5,
+              "layer": 5,
+              "visual": {
+                "shape": "circle",
+                "countryCode": "US",
+                "historicalYear": 1907,
+                "followProjectYear": false,
+                "expression": "happy",
+                "stroke": "#273139",
+                "mouthEnabled": true,
+                "mouthOpen": false,
+                "hairStyle": "none",
+                "hat": "none",
+                "accessory": "none"
+              },
+              "prop": "none",
+              "keyframes": []
+            }
+          ],
+          "bubbles": []
         }
-      ]
+      ],
+      "visualStyle": "noveria-history-v2"
     },
     {
       "title": "John Paul Jones Won a Naval Battle—Then His Own Ship Sank",
@@ -666,39 +3494,234 @@
           "name": "Off the English coast",
           "duration": 10,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "northSeaNaval1779"
           },
           "script": "On September 23, 1779, John Paul Jones fought the British warship Serapis off Flamborough Head aboard Bonhomme Richard.",
-          "caption": "HE WON—THEN HIS SHIP SANK"
+          "caption": "OFF FLAMBOROUGH HEAD · 1779",
+          "notes": "Both ships face each other in the North Sea before closing.",
+          "graphics": [
+            {
+              "type": "ship",
+              "x": 245,
+              "y": 790,
+              "startTime": 0,
+              "endTime": 10,
+              "size": 58,
+              "color": "#58779a",
+              "label": "BONHOMME RICHARD"
+            },
+            {
+              "type": "ship",
+              "x": 500,
+              "y": 720,
+              "startTime": 0,
+              "endTime": 10,
+              "size": 58,
+              "color": "#a14f49",
+              "label": "SERAPIS"
+            },
+            {
+              "type": "arrow",
+              "x": 285,
+              "y": 760,
+              "x2": 430,
+              "y2": 730,
+              "startTime": 2,
+              "endTime": 10,
+              "color": "#d5a94f",
+              "width": 8
+            }
+          ],
+          "characters": [],
+          "bubbles": []
         },
         {
           "name": "A battered ship",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "northSeaNaval1779"
           },
           "script": "The British ship was stronger. Jones's vessel was blasted apart, burning, and taking on water—but he did not surrender.",
-          "caption": "BONHOMME RICHARD IS BREAKING APART"
+          "caption": "BONHOMME RICHARD IS BREAKING APART",
+          "notes": "Repeated impact markers, smoke and damage sell the stronger British broadside.",
+          "graphics": [
+            {
+              "type": "impact",
+              "x": 310,
+              "y": 760,
+              "startTime": 1,
+              "endTime": 10,
+              "size": 45,
+              "color": "#a14f49"
+            },
+            {
+              "type": "impact",
+              "x": 365,
+              "y": 710,
+              "startTime": 3,
+              "endTime": 10,
+              "size": 38,
+              "color": "#a14f49"
+            },
+            {
+              "type": "label",
+              "label": "BURNING + TAKING ON WATER",
+              "x": 360,
+              "y": 520,
+              "startTime": 2,
+              "endTime": 11,
+              "size": 30,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [],
+          "bubbles": []
         },
         {
           "name": "Point-blank battle",
           "duration": 11,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "northSeaNaval1779"
           },
           "script": "Jones forced the two ships together, turning the fight into a brutal point-blank battle. After hours of combat, Serapis surrendered.",
-          "caption": "HE CAPTURED THE ENEMY SHIP"
+          "caption": "THE SHIPS LOCK TOGETHER",
+          "notes": "Two ship icons close until nearly touching, then Serapis surrender callout appears.",
+          "graphics": [
+            {
+              "type": "ship",
+              "x": 315,
+              "y": 760,
+              "startTime": 0,
+              "endTime": 11,
+              "size": 58,
+              "color": "#58779a",
+              "label": "BONHOMME RICHARD"
+            },
+            {
+              "type": "ship",
+              "x": 435,
+              "y": 745,
+              "startTime": 0,
+              "endTime": 11,
+              "size": 58,
+              "color": "#a14f49",
+              "label": "SERAPIS"
+            },
+            {
+              "type": "label",
+              "label": "POINT-BLANK",
+              "x": 360,
+              "y": 540,
+              "startTime": 1,
+              "endTime": 8,
+              "size": 38,
+              "color": "#d5a94f"
+            },
+            {
+              "type": "label",
+              "label": "SERAPIS SURRENDERS",
+              "x": 360,
+              "y": 900,
+              "startTime": 6,
+              "endTime": 11,
+              "size": 32,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [],
+          "bubbles": []
         },
         {
           "name": "The final twist",
           "duration": 10,
           "background": {
+            "mode": "preset",
+            "fit": "cover",
+            "opacity": 1,
+            "brightness": 1,
+            "contrast": 1,
+            "saturation": 0.92,
+            "sepia": 0.04,
+            "blur": 0,
+            "keyframes": [],
             "preset": "northSeaNaval1779"
           },
           "script": "But Bonhomme Richard was too damaged to save. It sank two days later, so Jones sailed away aboard the British ship he had just captured.",
-          "caption": "HE WON—THEN HIS SHIP SANK"
+          "caption": "HE WON — THEN HIS SHIP SANK",
+          "notes": "Bonhomme Richard is marked sinking while the captured Serapis remains afloat.",
+          "graphics": [
+            {
+              "type": "ship",
+              "x": 280,
+              "y": 810,
+              "startTime": 0,
+              "endTime": 7,
+              "size": 58,
+              "color": "#58779a",
+              "label": "BONHOMME RICHARD"
+            },
+            {
+              "type": "impact",
+              "x": 280,
+              "y": 835,
+              "startTime": 2,
+              "endTime": 8,
+              "size": 52,
+              "color": "#a14f49"
+            },
+            {
+              "type": "ship",
+              "x": 520,
+              "y": 720,
+              "startTime": 2,
+              "endTime": 10,
+              "size": 58,
+              "color": "#a14f49",
+              "label": "CAPTURED SERAPIS"
+            },
+            {
+              "type": "label",
+              "label": "SANK TWO DAYS LATER",
+              "x": 290,
+              "y": 940,
+              "startTime": 4,
+              "endTime": 10,
+              "size": 30,
+              "color": "#d5a94f"
+            }
+          ],
+          "characters": [],
+          "bubbles": []
         }
-      ]
+      ],
+      "visualStyle": "noveria-history-v2"
     }
   ]
 }
