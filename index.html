@@ -69,6 +69,32 @@
         <button id="flagUpgradeAll" class="primary">Update Scenes + Scripts</button>
       </div>
       <p id="flagUpgradeStatus" role="status"></p>
+      <details id="flagSceneDirector">
+        <summary>Direct This Scene: Flag + Motion + Headline</summary>
+        <p class="captionEditorHint">Each beat links the narration to a visible flag and shot. Select a scene on the left, edit it here, then preview the same scene immediately. These settings are saved with the project.</p>
+        <label>On-screen state flag <select id="flagSceneState"></select></label>
+        <label>Visual motion / shot <select id="flagSceneShot">
+          <option value="entrance">Slide flag into frame</option>
+          <option value="full">Show full flag</option>
+          <option value="zoom">Zoom toward flag</option>
+          <option value="detail">Focus on symbol / detail</option>
+          <option value="contrast">Small-size recognition test</option>
+          <option value="focus">Color and shape focus</option>
+          <option value="timeline">Historically sourced versions</option>
+          <option value="compare">Old versus current (when verified)</option>
+          <option value="comparisons">Flag beside tier board</option>
+          <option value="board">Full A–F tier board</option>
+          <option value="rate">Reveal chosen rating</option>
+          <option value="montage">Fast multi-flag montage</option>
+          <option value="tiers">Explain A–F grades</option>
+          <option value="intro-title">Intro title / U.S. flag</option>
+          <option value="outro">Closing flag / next episode</option>
+          <option value="closeup">Close-up flag</option>
+        </select></label>
+        <label class="stack">Visual headline <input id="flagSceneHeading" maxlength="72" placeholder="What the viewer sees while this narration plays"></label>
+        <div class="buttonGrid"><button id="applyFlagScene" class="primary">Apply Visual Changes</button><button id="flagSceneJumpScript">Edit Narration</button></div>
+        <div id="flagSceneLinkPreview" class="captionEditorHint"></div>
+      </details>
       <h3>A–F Tier List</h3>
       <div id="flagTierBoard" class="flagTierBoard"></div>
       <h3>50 States · Checklist + Episode</h3>
@@ -260,7 +286,7 @@
   <section id="videoDeck" class="videoDeck">
     <div class="previewShortBar"><label>Short <select id="previewShortSelect"></select></label><label>Final audio <select id="previewVoiceSource"><option value="mic">My Recording</option><option value="server">Local Kokoro</option><option value="colab">Colab / imported audio</option><option value="chrome">Chrome Preview → Local Kokoro</option><option value="none">No Voice</option></select></label><label>Preview Speed <select id="previewQuality"><option value="auto" selected>Auto · adapt to device</option><option value="12">12 fps · low lag</option><option value="18">18 fps · balanced</option><option value="24">24 fps · smooth</option><option value="30">30 fps · full</option></select></label><label>Export FPS <select id="previewFPS"><option value="24">24 · film</option><option value="30">30 · standard</option><option value="48">48 · smooth</option><option value="60">60 · high motion</option></select></label><span id="previewVoiceSourceBadge">✓ Chrome Preview</span></div>
     <div class="videoStage shortPreview"><canvas id="videoStage" width="720" height="1280"></canvas><div id="videoCaption" class="videoCaption"></div></div><div class="previewSceneInfo"><span id="previewSceneCounter">Scene 1 of 1</span><span id="previewSceneScriptHint">Script and visuals are linked to this scene</span></div>
-    <div class="transport"><button id="videoPrevScene">Prev</button><button id="videoPlayPause" class="primary">Play / Pause + Voice</button><button id="videoStop">Stop</button><button id="previewStopVoice">Stop Voice Rec</button><button id="videoNextScene">Next</button><button id="editPlayingScene" title="Open the currently visible scene and its narration in the editor">Edit This Scene</button><label class="autoNextLabel"><input type="checkbox" id="autoNextEpisode"> Next video automatically</label><span id="videoClock">00:00 / 00:00</span><button id="previewExport">Export This Short</button></div>
+    <div class="transport"><button id="videoPrevScene">Prev</button><button id="videoPlayPause" class="primary">Play / Pause + Voice</button><button id="videoStop">Stop</button><button id="previewStopVoice">Stop Voice Rec</button><button id="videoNextScene">Next</button><button id="editPlayingScene" title="Open the currently visible scene and its narration in the editor">Edit This Scene</button><label class="autoNextLabel"><input type="checkbox" id="autoNextEpisode" checked> Next video automatically</label><span id="videoClock">00:00 / 00:00</span><button id="previewExport">Export This Short</button></div>
     <input id="videoScrubber" type="range" min="0" max="1" value="0" step=".01">
     <div id="sceneStrip" class="sceneStrip"></div>
     <div class="teleprompter"><strong>Narration</strong><div id="videoScript"></div></div>
@@ -332,7 +358,7 @@
 <script src="js/renderer.js?v=20261011-final"></script>
 <script src="js/storage.js?v=20261011-flags-script-sync-r6"></script>
 <script src="js/voice-backends.js?v=20261011-final"></script>
-<script>window.addEventListener("error",e=>{const el=document.getElementById("bootStatus");if(el){el.className="bootStatus error";el.textContent="MEP error: "+(e.message||"Unknown startup error")}});</script>
+<script>window.addEventListener("error",e=>{const el=document.getElementById("bootStatus");if(el){el.className="bootStatus error";const where=e.filename?(" · "+e.filename.split("/").pop()+":"+e.lineno+":"+e.colno):"";el.textContent="MEP error: "+(e.message||"Unknown startup error")+where+" · refresh to load the latest patches";}console.error("MEP uncaught error",e.error||e.message)});</script>
 <script src="js/speech-text.js?v=20261011-final"></script>
 <script src="js/captions.js?v=20261011-flags-script-sync-r6"></script>
 <script src="js/app.js?v=20261011-flags-script-sync-r6"></script>
