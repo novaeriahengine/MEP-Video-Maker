@@ -3,6 +3,18 @@ window.MEPFlagSeries=(()=>{
  const theme={bg:"#e9dec0",ink:"#243340",dark:"#25303f",red:"#ae5550",gold:"#e5b850",blue:"#5d849f",cream:"#f9f0d9",mute:"#87939a"};
  const codes=["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"];
  let manifest={states:[]},byCode=new Map(),ratings={},assetCache=new Map();
+ const rasterCache=new Map(),MAX_RASTERS=16;
+ function getFlagRaster(url,img){
+  if(!img||typeof document==="undefined")return img;
+  if(rasterCache.has(url)){const value=rasterCache.get(url);rasterCache.delete(url);rasterCache.set(url,value);return value}
+  try{const width=Math.min(720,Math.max(320,img.naturalWidth||640)),height=Math.max(160,Math.min(520,Math.round(width*(img.naturalHeight||480)/(img.naturalWidth||640))));
+   const bitmap=document.createElement("canvas");bitmap.width=width;bitmap.height=height;
+   const c=bitmap.getContext("2d",{alpha:true});if(!c)return img;
+   c.drawImage(img,0,0,width,height);
+   rasterCache.set(url,bitmap);while(rasterCache.size>MAX_RASTERS)rasterCache.delete(rasterCache.keys().next().value);return bitmap;
+  }catch(e){return img}
+ }
+
  let pendingImageRedraw=false;
  function requestImageRedraw(){
   if(pendingImageRedraw)return;pendingImageRedraw=true;
@@ -75,8 +87,8 @@ window.MEPFlagSeries=(()=>{
   ctx.fillStyle="#d5d5cc";ctx.fillRect(x0+margin,y0+top,availW,availH);
   let art=info?.current?.art;if(code==="US")art="flags/current/us.svg";
   if(variant==="history"&&info?.history?.length)art=info.history[info.history.length-1].art;
-  const img=getImage(art);
-  if(img){const f=Math.min(availW/img.naturalWidth,availH/img.naturalHeight),iw=img.naturalWidth*f,ih=img.naturalHeight*f;ctx.drawImage(img,x0+margin+(availW-iw)/2,y0+top+(availH-ih)/2,iw,ih)}
+  const original=getImage(art),img=original?getFlagRaster(art,original):null;
+  if(img){const iw0=img.naturalWidth||img.width||640,ih0=img.naturalHeight||img.height||480;const f=Math.min(availW/iw0,availH/ih0),iw=iw0*f,ih=ih0*f;ctx.drawImage(img,x0+margin+(availW-iw)/2,y0+top+(availH-ih)/2,iw,ih)}
   else{ctx.fillStyle=theme.dark;ctx.fillRect(x0+margin,y0+top,availW,availH);ctx.fillStyle=theme.cream;ctx.font="700 20px system-ui";ctx.textAlign="center";ctx.fillText("Loading flag art...",0,y0+top+availH*.5)}
   if(title){ctx.fillStyle=theme.dark;ctx.font="800 28px system-ui";ctx.textAlign="center";ctx.fillText(info?.name||"United States",0,y0+42,w-30)}
   ctx.restore()
