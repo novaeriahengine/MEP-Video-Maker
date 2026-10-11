@@ -78,7 +78,7 @@ function resolveSnapshot(year=2026,text=""){
 function focusFor(key="",text=""){
  // An explicitly chosen geographic background takes precedence over
  // the Short title; worldMap must never silently become a Europe-only map.
- const explicit={worldMap:"world",americasMap:"americas",europeMap:"europe",africaMap:"africa",asiaMap:"asia",battleMap:"world"};
+ const explicit={worldMap:"world",americasMap:"americas",europeMap:"europe",africaMap:"africa",asiaMap:"asia"};
  if(explicit[key])return explicit[key];
  const t=(key+" "+text).toLowerCase();
  if(t.includes("westernfront"))return"westernFront";
