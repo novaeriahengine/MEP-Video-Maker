@@ -28,7 +28,7 @@ This folder turns the downloaded repository into a local/offline MEP Video Maker
 11. Click **Download Historical Photos** if you want a starter cache of license-safe historical images.
 12. Use the browser tab Python opened, or scan the QR code from your phone.
 
-The first setup downloads Python packages and model files, so it can take a while. Later starts reuse `.venv/` and `cache/`.
+The first setup downloads Python packages and model files, so it can take a while. Later starts reuse `runtime/` and `cache/`.
 
 ## Historical map library
 
