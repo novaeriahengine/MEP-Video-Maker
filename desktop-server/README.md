@@ -9,12 +9,13 @@ This folder turns the downloaded repository into a local/offline MEP Video Maker
 - British Kokoro voices: George, Daniel, Fable, Lewis
 - WAV narration generation
 - A local dashboard with model status, a TTS tester, and a downloadable QR code
+- Optional GGUF director: Windows folder selection, model scanning, approved Qwen downloads with progress, and a separately managed llama.cpp chat process
 - Historical-map caching for the years used by the 10 ready Shorts
 - Batch TTS endpoint at `POST /api/tts/batch`
 
 ## Windows quick start
 
-1. Install Python 3.10 or 3.11.
+1. Double-click `START_WINDOWS.bat`. It uses Python 3.10, 3.11, or 3.12 when installed and can also use the bundled Codex Python 3.12 when present. Kokoro does not support Python 3.9 or Python 3.13+.
 2. Install **eSpeak-NG for Windows** once. Kokoro's English G2P layer uses it.
 3. Download/clone the full MEP Video Maker repository.
 4. Open this `desktop-server` folder.
@@ -37,7 +38,7 @@ The desktop server can cache **28 historical world snapshots** spanning years 10
 
 After the editor, Kokoro, and map pack are cached, the local server, editor, generated WAV files, and historical maps are local. Do not delete:
 
-- `desktop-server/.venv/`
+- `desktop-server/runtime/`
 - `desktop-server/cache/`
 - `desktop-server/editor/`
 
@@ -79,6 +80,12 @@ Example JSON:
 
 Use the same narration-batch structure exported by MEP Video Maker.
 
+### Optional local GGUF director
+
+Open the local editor and use **Local GGUF Director** in the Tools panel. Click **Choose Windows Folder** to scan the folder where you keep `.gguf` files, or use the Qwen download selector to save a supported model into `desktop-server/models/` with progress reporting. Install the local runner once with `winget install llama.cpp`; then choose a model and click **Start Local Model**. The runner listens only on `127.0.0.1:8081` by default and is completely separate from the Kokoro service, so a failed model never stops voice generation or export.
+
+The research button returns reviewable Wikipedia search links. Check those sources before publishing a historical claim.
+
 ## Important browser note
 
 The public GitHub Pages site is HTTPS. Browsers commonly block an HTTPS page from calling a plain HTTP laptop server. That is why this server hosts a **local copy of the editor at /app/**. Scan the QR or open the local editor when using your laptop backend.
@@ -90,3 +97,4 @@ This is intended for your private LAN. Do not port-forward 7860 or expose it dir
 ## Historical photos
 
 The local editor has a **Historical Photos** tool inside MEP Tools. It searches Wikimedia Commons through the Python server, filters results to Public Domain / Creative Commons licenses, caches the selected image locally, and applies it to the current scene. The active background shows the stored license label.
+

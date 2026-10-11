@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Noveria History — MEP Short Maker</title>
-<link rel="stylesheet" href="css/style.css?v=20261010o">
+<link rel="icon" type="image/svg+xml" href="assets/brand/mep-kokoro-florida-mark.svg">
+<link rel="stylesheet" href="css/style.css?v=20261010q">
 </head>
 <body>
 <div id="app">
 <header class="topbar">
-  <div class="brand"><strong>Noveria History</strong><span>MEP Short Maker</span></div>
+  <div class="brand"><img class="brandMark" src="assets/brand/mep-kokoro-florida-mark.svg" alt="MEP Video Maker mark"><div><strong>Noveria History</strong><span>MEP Short Maker</span></div></div>
   <nav class="modeTabs"><button id="editorMode" class="active">Editor</button><button id="videoMode">Preview Short</button></nav>
   <label class="projectNameLabel">Project <input id="projectName" value="Untitled Project"></label>
   <button id="newProject" class="primary">+ New Project</button>
@@ -132,11 +133,11 @@
       <button type="button" data-voice-source="mic"><span>🎙</span><b>My Recording</b><small>Final export audio</small><i>✓</i></button>
       <button type="button" data-voice-source="server"><span>💻</span><b>Local Kokoro</b><small>Laptop AI voice</small><i>✓</i></button>
       <button type="button" data-voice-source="colab"><span>☁</span><b>Google Colab</b><small>Imported Kokoro pack</small><i>✓</i></button>
-      <button type="button" data-voice-source="chrome"><span>▶</span><b>Chrome Preview</b><small>Preview only</small><i>✓</i></button>
+      <button type="button" data-voice-source="chrome"><span>▶</span><b>Chrome Preview</b><small>Preview only · cannot export</small><i>✓</i></button>
       <button type="button" data-voice-source="none"><span>∅</span><b>No Voice</b><small>Silent export</small><i>✓</i></button>
     </div>
     <label>Voice Source <select id="voiceSource"><option value="mic">Recorded Mic Voiceover</option><option value="server">Local Kokoro AI Voice</option><option value="colab">Google Colab Kokoro Voice</option><option value="chrome">British Male Chrome Preview</option><option value="none">No Voice</option></select></label>
-    <div id="voiceExportBadge" class="voiceExportBadge">Export voice: Chrome Preview · preview only</div>
+    <div id="voiceExportBadge" class="voiceExportBadge">Export voice: Chrome Preview · cannot be embedded in WebM</div>
     <div class="voiceActions"><button id="recordVoice" class="primary">Record Full Voiceover</button><button id="stopVoiceRecord">Stop</button><button id="playVoiceover">Play Processed</button><button id="clearVoiceover">Clear</button></div>
     <div id="voiceStatus" class="voiceStatus">No recorded voiceover yet.</div>
     <h3>Final AI Narration · Kokoro</h3>
@@ -146,7 +147,7 @@
       <label>Kokoro Voice <select id="kokoroVoice"><option value="bm_george">George · British male</option><option value="bm_daniel">Daniel · British male</option><option value="bm_fable">Fable · British storyteller</option><option value="bm_lewis">Lewis · Modern British male</option></select></label>
       <label>Kokoro Speed <input id="kokoroSpeed" type="range" min=".70" max="1.25" step=".05" value="1"><output id="kokoroSpeedOut">1.00x</output></label>
     </div>
-    <div class="voiceActions"><button id="neuralConnect">Test Laptop Server</button><button id="neuralGenerate" class="primary">Generate Final Voice</button><button id="neuralBatch">Download Colab Narration Batch</button></div>
+    <div class="voiceActions"><button id="neuralConnect">Test Laptop Server</button><button id="neuralGenerate" class="primary">Generate & Select Final Voice</button><button id="neuralBatch">Download Colab Narration Batch</button></div>
     <label>Import Colab Voice Pack <input id="neuralPackImport" type="file" accept="application/json,.json"></label>
     <label>Import One WAV / Audio <input id="neuralImport" type="file" accept="audio/wav,audio/x-wav,audio/mpeg,audio/ogg,audio/webm,audio/mp4"></label>
     <div id="neuralStatus" class="voiceStatus">Laptop server not tested yet. Colab batch export/import works without a permanent Colab server.</div>
@@ -167,6 +168,24 @@
     <div class="voiceGrid"><label>Pitch <input id="voicePitch" type="range" min="-6" max="6" step=".5" value="0"><output id="voicePitchOut">0 st</output></label><label>Speed <input id="voiceSpeed" type="range" min=".8" max="1.2" step=".02" value="1"><output id="voiceSpeedOut">1.00x</output></label></div>
     <div class="voiceGrid"><label>Low Cut <input id="eqLowCut" type="range" min="40" max="140" step="5" value="72"><output id="eqLowCutOut">72 Hz</output></label><label>Warmth <input id="eqWarmth" type="range" min="-12" max="12" step="1" value="2"><output id="eqWarmthOut">+2 dB</output></label><label>Clarity <input id="eqClarity" type="range" min="-12" max="12" step="1" value="2"><output id="eqClarityOut">+2 dB</output></label><label>De-ess <input id="eqDeEss" type="range" min="0" max="12" step="1" value="3"><output id="eqDeEssOut">3 dB</output></label><label>Air <input id="eqAir" type="range" min="-12" max="12" step="1" value="2"><output id="eqAirOut">+2 dB</output></label><label>Limiter <input id="voiceLimiter" type="range" min="0" max="1" step=".05" value=".72"><output id="voiceLimiterOut">72%</output></label></div><div class="voiceGrid"><label>Bass <input id="eqBass" type="range" min="-12" max="12" step="1" value="0"><output id="eqBassOut">0 dB</output></label><label>Mid <input id="eqMid" type="range" min="-12" max="12" step="1" value="0"><output id="eqMidOut">0 dB</output></label><label>Treble <input id="eqTreble" type="range" min="-12" max="12" step="1" value="0"><output id="eqTrebleOut">0 dB</output></label><label>Presence <input id="eqPresence" type="range" min="-12" max="12" step="1" value="2"><output id="eqPresenceOut">2 dB</output></label><label>Compression <input id="voiceCompression" type="range" min="0" max="1" step=".05" value=".35"><output id="voiceCompressionOut">35%</output></label><label>Echo <input id="voiceEcho" type="range" min="0" max=".55" step=".05" value="0"><output id="voiceEchoOut">0%</output></label><label>Texture <input id="voiceGrit" type="range" min="0" max="1" step=".05" value="0"><output id="voiceGritOut">0%</output></label><label>Gain <input id="voiceGain" type="range" min=".5" max="1.8" step=".05" value="1"><output id="voiceGainOut">1.00x</output></label></div>
     <p class="voiceNote">British male Chrome narration is auto-selected when available. The full EQ chain applies to recorded mic or Kokoro narration used in final WebM export.</p>
+    <h2>Local GGUF Director</h2>
+    <p class="voiceStatus">Optional and separate from voice. Start a local GGUF model for ideas, research notes, and Short scripts; Kokoro keeps working if this model is stopped.</p>
+    <div id="localLlmStatus" class="voiceStatus">Checking local GGUF service…</div>
+    <label>Model folder <input id="localLlmFolder" readonly placeholder="Choose a Windows folder containing .gguf files"></label>
+    <div class="voiceActions"><button id="localLlmPickFolder">Choose Windows Folder</button><button id="localLlmOpenFolder">Open Model Folder</button><button id="localLlmRefresh">Refresh Models</button></div>
+    <label>Installed GGUF model <select id="localLlmModel"><option value="">No GGUF model found</option></select></label>
+    <label>llama-server.exe (automatic after <code>winget install llama.cpp</code>) <input id="localLlmRunner" placeholder="Optional full path to llama-server.exe"></label>
+    <div class="voiceGrid"><label>Context <input id="localLlmContext" type="number" min="512" max="32768" step="512" value="4096"></label><label>GPU layers <input id="localLlmGpuLayers" type="number" min="0" max="999" value="0"></label></div>
+    <div class="voiceActions"><button id="localLlmStart" class="primary">Start Local Model</button><button id="localLlmStop">Stop Model</button></div>
+    <label>Quick model download <select id="localLlmCatalog"></select></label>
+    <div class="voiceActions"><button id="localLlmDownload">Download Selected Model</button></div>
+    <div id="localLlmDownloadStatus" class="voiceStatus">No model download running.</div>
+    <h3>Research then write</h3>
+    <div class="voicePresetManager"><input id="localResearchQuery" placeholder="e.g. Battle of Midway causes and outcome"><button id="localLlmResearch">Check sources</button></div>
+    <div id="localResearchResults" class="voiceStatus">Research uses source-linked Wikipedia results that you can review before asking the model.</div>
+    <label>Local model prompt<textarea id="localLlmPrompt" rows="5" placeholder="Create a 45-second factual Short with a strong hook, three scenes, map years, and a source note."></textarea></label>
+    <div class="voiceActions"><button id="localLlmAsk" class="primary">Ask Local Model</button><button id="localLlmUseScript">Use as Current Script</button></div>
+    <div id="localLlmAnswer" class="voiceStatus">The local GGUF model is optional. Voice export does not depend on it.</div>
     <h2>Dialogue / Bubble</h2>
     <label class="stack">Text<textarea id="bubbleText" rows="3"></textarea></label>
     <label>Style <select id="bubbleStyle"></select></label>
@@ -176,7 +195,7 @@
   </aside>
 
   <section id="videoDeck" class="videoDeck">
-    <div class="previewShortBar"><label>Short <select id="previewShortSelect"></select></label><span id="previewVoiceSourceBadge">✓ Chrome Preview</span></div>
+    <div class="previewShortBar"><label>Short <select id="previewShortSelect"></select></label><label>Final audio <select id="previewVoiceSource"><option value="mic">My Recording</option><option value="server">Local Kokoro</option><option value="colab">Colab / imported audio</option><option value="chrome">Chrome Preview only</option><option value="none">No Voice</option></select></label><span id="previewVoiceSourceBadge">✓ Chrome Preview</span></div>
     <div class="videoStage shortPreview"><canvas id="videoStage" width="720" height="1280"></canvas><div id="videoCaption" class="videoCaption"></div></div>
     <div class="transport"><button id="videoPrevScene">Prev</button><button id="videoPlayPause" class="primary">Play / Pause</button><button id="videoStop">Stop</button><button id="previewStopVoice">Stop Voice Rec</button><button id="videoNextScene">Next</button><span id="videoClock">00:00 / 00:00</span><button id="previewExport">Export This Short</button></div>
     <input id="videoScrubber" type="range" min="0" max="1" value="0" step=".01">
@@ -210,17 +229,18 @@
 
 <nav id="mobileDock" class="mobileDock"><button data-jump="#stageArea">Canvas</button><button data-jump="#scenePanel">Shorts</button><button data-jump="#characterPanel">Flags</button><button data-jump="#scriptPanel">Script</button><button id="mobileVideo">Preview</button></nav>
 
-<script src="js/firebase-config.js?v=20261010o"></script>
-<script src="js/history-flags.js?v=20261010o"></script>
-<script src="js/historical-maps.js?v=20261010o"></script>
-<script src="js/model.js?v=20261010o"></script>
-<script src="js/ai-config.js?v=20261010o"></script>
-<script src="js/ai-director.js?v=20261010o"></script>
-<script src="js/renderer.js?v=20261010o"></script>
-<script src="js/storage.js?v=20261010o"></script>
-<script src="js/voice-backends.js?v=20261010o"></script>
+<script src="js/firebase-config.js?v=20261010q"></script>
+<script src="js/history-flags.js?v=20261010q"></script>
+<script src="js/historical-maps.js?v=20261010q"></script>
+<script src="js/model.js?v=20261010q"></script>
+<script src="js/ai-config.js?v=20261010q"></script>
+<script src="js/ai-director.js?v=20261010q"></script>
+<script src="js/renderer.js?v=20261010q"></script>
+<script src="js/storage.js?v=20261010q"></script>
+<script src="js/voice-backends.js?v=20261010q"></script>
 <script>window.addEventListener("error",e=>{const el=document.getElementById("bootStatus");if(el){el.className="bootStatus error";el.textContent="MEP error: "+(e.message||"Unknown startup error")}});</script>
-<script src="js/app.js?v=20261010o"></script>
-<script src="js/tool-assistant.js?v=20261010o"></script>
+<script src="js/app.js?v=20261010q"></script>
+<script src="js/tool-assistant.js?v=20261010q"></script>
 </body>
 </html>
+

@@ -2,5 +2,13 @@ Desktop Voice Server/.venv/
 Desktop Voice Server/models/
 Desktop Voice Server/outputs/
 Desktop Voice Server/__pycache__/
+desktop-server/.venv/
+desktop-server/runtime/
+desktop-server/models/
+desktop-server/outputs/
+desktop-server/cache/
+desktop-server/editor/
+desktop-server/__pycache__/
 Desktop Voice Server/*.wav
 Google Colab/outputs/
+

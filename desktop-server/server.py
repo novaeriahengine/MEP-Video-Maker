@@ -22,6 +22,8 @@ import soundfile as sf
 from flask import Flask, jsonify, redirect, render_template, request, send_file, send_from_directory
 from waitress import serve
 
+from local_llm import LocalLLM
+
 BASE = Path(__file__).resolve().parent
 REPO_ROOT = BASE.parent
 LOCAL_EDITOR = BASE / "editor"
@@ -68,6 +70,7 @@ MAP_SOURCES = [
 ]
 
 app = Flask(__name__, template_folder=str(BASE / "templates"), static_folder=str(BASE / "static"))
+local_llm = LocalLLM(BASE)
 
 _pipeline = None
 _pipeline_lock = threading.Lock()
@@ -100,7 +103,7 @@ def prepare_editor() -> Path:
     LOCAL_EDITOR.mkdir(parents=True, exist_ok=True)
     if (REPO_ROOT / "index.html").exists():
         shutil.copy2(REPO_ROOT / "index.html", LOCAL_EDITOR / "index.html")
-        for folder in ("css", "js", "presets", "maps", "historical-maps"):
+        for folder in ("assets", "css", "js", "presets", "maps", "historical-maps"):
             src = REPO_ROOT / folder
             dst = LOCAL_EDITOR / folder
             if src.exists():
@@ -111,7 +114,7 @@ def prepare_editor() -> Path:
         data = io.BytesIO(response.read())
     with zipfile.ZipFile(data) as z:
         prefix = "MEP-Video-Maker-main/"
-        wanted = ("index.html", "css/", "js/", "presets/", "maps/", "historical-maps/")
+        wanted = ("index.html", "assets/", "css/", "js/", "presets/", "maps/", "historical-maps/")
         for name in z.namelist():
             if not name.startswith(prefix):
                 continue
@@ -333,13 +336,14 @@ def local_editor():
 
 @app.get("/app/<path:path>")
 def local_editor_assets(path: str):
-    if not path.startswith(("css/", "js/", "presets/", "maps/", "historical-maps/")):
+    if not path.startswith(("assets/", "css/", "js/", "presets/", "maps/", "historical-maps/")):
         return "Not found", 404
     return send_from_directory(editor_root(), path)
 
 
 @app.get("/api/health")
 def health():
+    llm_status = local_llm.status()
     return jsonify(
         ok=True,
         engine="Kokoro-82M",
@@ -355,7 +359,89 @@ def health():
         editorLocalCopy=(LOCAL_EDITOR / "index.html").exists(),
         espeakAvailable=bool(shutil.which("espeak-ng") or shutil.which("espeak")),
         localEditor=f"http://{local_ip()}:{PORT}/app/",
+        localLlm={"running": llm_status["running"], "port": llm_status["port"]},
     )
+
+
+@app.get("/api/local-llm/status")
+def local_llm_status():
+    return jsonify(ok=True, **local_llm.status())
+
+
+@app.post("/api/local-llm/folder/pick")
+def local_llm_pick_folder():
+    try:
+        return jsonify(ok=True, **local_llm.pick_folder())
+    except Exception as exc:
+        return jsonify(ok=False, error=str(exc)), 400
+
+
+@app.post("/api/local-llm/folder")
+def local_llm_set_folder():
+    try:
+        return jsonify(ok=True, **local_llm.set_folder(str((request.get_json(silent=True) or {}).get("folder") or "")))
+    except Exception as exc:
+        return jsonify(ok=False, error=str(exc)), 400
+
+
+@app.post("/api/local-llm/folder/open")
+def local_llm_open_folder():
+    try:
+        local_llm.open_folder()
+        return jsonify(ok=True)
+    except Exception as exc:
+        return jsonify(ok=False, error=str(exc)), 400
+
+
+@app.post("/api/local-llm/runner")
+def local_llm_runner():
+    try:
+        return jsonify(ok=True, **local_llm.set_runner(str((request.get_json(silent=True) or {}).get("runner") or "")))
+    except Exception as exc:
+        return jsonify(ok=False, error=str(exc)), 400
+
+
+@app.post("/api/local-llm/download")
+def local_llm_download():
+    try:
+        data = request.get_json(silent=True) or {}
+        return jsonify(ok=True, download=local_llm.start_download(str(data.get("catalogId") or "")))
+    except Exception as exc:
+        return jsonify(ok=False, error=str(exc)), 400
+
+
+@app.get("/api/local-llm/download/<job_id>")
+def local_llm_download_status(job_id: str):
+    try:
+        return jsonify(ok=True, download=local_llm.download_status(job_id))
+    except Exception as exc:
+        return jsonify(ok=False, error=str(exc)), 404
+
+
+@app.post("/api/local-llm/start")
+def local_llm_start():
+    try:
+        data = request.get_json(silent=True) or {}
+        return jsonify(ok=True, **local_llm.start(
+            str(data.get("model") or ""), str(data.get("runner") or ""),
+            data.get("port", 8081), data.get("context", 4096), data.get("gpuLayers", 0),
+        ))
+    except Exception as exc:
+        return jsonify(ok=False, error=str(exc)), 400
+
+
+@app.post("/api/local-llm/stop")
+def local_llm_stop():
+    return jsonify(ok=True, **local_llm.stop())
+
+
+@app.post("/api/local-llm/chat")
+def local_llm_chat():
+    try:
+        data = request.get_json(silent=True) or {}
+        return jsonify(ok=True, **local_llm.chat(data.get("messages") or [], data.get("maxTokens", 550), data.get("temperature", 0.7)))
+    except Exception as exc:
+        return jsonify(ok=False, error=str(exc)), 503
 
 
 @app.get("/api/voices")
@@ -411,6 +497,36 @@ def history_photo_search():
         return jsonify(ok=True, query=query, items=commons_search(query, int(request.args.get("limit", "8"))))
     except Exception as exc:
         return jsonify(error=str(exc)), 502
+
+
+@app.get("/api/research")
+def research():
+    """Small, source-linked research helper for the local writing workflow.
+
+    It uses Wikipedia's public search/summary service rather than silently
+    scraping arbitrary pages.  The result stays reviewable before it is sent
+    to a local model or turned into a Short.
+    """
+    query = clean_text(request.args.get("q", ""))[:180]
+    if not query:
+        return jsonify(error="Research query is empty."), 400
+    try:
+        params = {"action": "query", "format": "json", "list": "search", "srsearch": query, "srlimit": 5, "srprop": "snippet"}
+        url = "https://en.wikipedia.org/w/api.php?" + urllib.parse.urlencode(params)
+        req = urllib.request.Request(url, headers={"User-Agent": "MEP-Video-Maker/1.0 research helper"})
+        with urllib.request.urlopen(req, timeout=25) as response:
+            data = json.loads(response.read().decode("utf-8"))
+        items = []
+        for row in data.get("query", {}).get("search", []):
+            title = str(row.get("title") or "")
+            items.append({
+                "title": title,
+                "snippet": re.sub(r"<[^>]+>", "", str(row.get("snippet") or "")),
+                "url": "https://en.wikipedia.org/wiki/" + urllib.parse.quote(title.replace(" ", "_")),
+            })
+        return jsonify(ok=True, query=query, source="Wikipedia search", items=items)
+    except Exception as exc:
+        return jsonify(error=f"Research request failed: {exc}"), 502
 
 
 @app.get("/api/history/photos/proxy")
@@ -526,3 +642,4 @@ if __name__ == "__main__":
     print("=" * 68)
     threading.Thread(target=open_editor_tab, daemon=True).start()
     serve(app, host=HOST, port=PORT, threads=4)
+
