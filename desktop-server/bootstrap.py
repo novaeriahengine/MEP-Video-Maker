@@ -6,7 +6,9 @@ import venv
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent
-VENV = BASE / ".venv"
+# Kept separate from any older .venv left by an interrupted install.  The
+# launcher owns this directory and can reliably resume its own setup.
+VENV = BASE / "runtime"
 REQ = BASE / "requirements.txt"
 MIN_PYTHON = (3, 10)
 MAX_PYTHON = (3, 13)
