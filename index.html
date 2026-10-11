@@ -62,6 +62,13 @@
       <label class="flagDoneLabel"><input type="checkbox" id="flagDone"> Mark flag reviewed / complete</label>
       <label class="stack">My rating notes<textarea id="flagRatingNotes" rows="3" placeholder="Why I gave this flag its grade"></textarea></label>
       <div class="buttonGrid"><button id="saveFlagRating" class="primary">Save Rating to Firestore</button><button id="refreshFlagRatings">Refresh Rankings</button></div>
+      <h3>Scene + Script Upgrades</h3>
+      <p class="captionEditorHint">Update the visuals and narration for this Flags project without deleting rankings or older projects. Upgrades save locally first; review before publishing to Firestore.</p>
+      <div class="buttonGrid">
+        <button id="flagUpgradeVisuals">Improve Scene Visuals</button>
+        <button id="flagUpgradeAll" class="primary">Update Scenes + Scripts</button>
+      </div>
+      <p id="flagUpgradeStatus" role="status"></p>
       <h3>A–F Tier List</h3>
       <div id="flagTierBoard" class="flagTierBoard"></div>
       <h3>50 States · Checklist + Episode</h3>
