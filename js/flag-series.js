@@ -3,6 +3,12 @@ window.MEPFlagSeries=(()=>{
  const theme={bg:"#e9dec0",ink:"#243340",dark:"#25303f",red:"#ae5550",gold:"#e5b850",blue:"#5d849f",cream:"#f9f0d9",mute:"#87939a"};
  const codes=["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"];
  let manifest={states:[]},byCode=new Map(),ratings={},assetCache=new Map();
+ let pendingImageRedraw=false;
+ function requestImageRedraw(){
+  if(pendingImageRedraw)return;pendingImageRedraw=true;
+  requestAnimationFrame(()=>{pendingImageRedraw=false;window.dispatchEvent(new Event("mep-flag-image-ready"))})
+ }
+
  const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
  const goodGrade=g=>/^[ABCDF]$/.test(g||"");
  function loadLocal(){try{ratings=JSON.parse(localStorage.getItem(LOCAL_KEY)||"{}")||{}}catch{ratings={}}return ratings}
@@ -42,8 +48,8 @@ window.MEPFlagSeries=(()=>{
   if(!url)return null;
   if(!assetCache.has(url)){
    const img=new Image();if(/^https?:/i.test(url))img.crossOrigin="anonymous";
-   assetCache.set(url,{img,status:"loading"});img.onload=()=>{assetCache.get(url).status="ready";window.dispatchEvent(new Event("mep-flags-ready"))};
-   img.onerror=()=>{assetCache.get(url).status="error";window.dispatchEvent(new Event("mep-flags-ready"))};img.src=url;
+   assetCache.set(url,{img,status:"loading"});img.onload=()=>{assetCache.get(url).status="ready";requestImageRedraw()};
+   img.onerror=()=>{assetCache.get(url).status="error";requestImageRedraw()};img.src=url;
   }
   const v=assetCache.get(url);return v.status==="ready"?v.img:null
  }
