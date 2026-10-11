@@ -194,7 +194,7 @@ function drawStoryNarrativeOverlay(ctx,key,w,h,options={}){
    else if(/emancipat|freedom/.test(text)){storyDocument(ctx,w*.5,h*.52,130,165,"1787");storyCallout(ctx,"FREEDOM CAME LATER",w,h,{y:.24})}
    else{storyPerson(ctx,w*.36,h*.72,.78,NH.blue,true);storyPerson(ctx,w*.65,h*.72,.78,NH.ink);storyCallout(ctx,"CONTINENTAL ARMY",w,h,{y:.24})}
  }else if(key==="clevelandIntersection1923"){
-   const stop=/all directions|all-stop|safe pause|three-position/.test(text);storyCar(ctx,w*(.12+.42*(stop?.35:p)),h*.82,.7,NH.blue);ctx.save();ctx.translate(w*.52,h*(.58+.31*(stop?.35:p)));ctx.rotate(Math.PI/2);storyCar(ctx,0,0,.7,NH.red);ctx.restore();
+   const stop=/all directions|all-stop|safe pause|three-position/.test(text);storyCar(ctx,w*(.12+.42*(stop?0.35:p)),h*.82,.7,NH.blue);ctx.save();ctx.translate(w*.52,h*(.58+.31*(stop?0.35:p)));ctx.rotate(Math.PI/2);storyCar(ctx,0,0,.7,NH.red);ctx.restore();
    ctx.fillStyle=NH.ink;ctx.fillRect(w*.69,h*.44,16,h*.25);circle(ctx,w*.70,h*.45,13,stop?NH.red:"#5f6a63",NH.ink,2);circle(ctx,w*.70,h*.52,13,stop?NH.gold:"#5f6a63",NH.ink,2);
    storyCallout(ctx,stop?"ALL DIRECTIONS STOP":"CROWDED STREETS, ONE CROSSING",w,h,{y:.24})
  }else if(key==="victorianDiningRoom1880s"){
