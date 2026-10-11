@@ -298,6 +298,7 @@ function drawSceneDetails(ctx,key,w,h){
  const vg=ctx.createRadialGradient(w/2,h/2,Math.min(w,h)*.18,w/2,h/2,Math.max(w,h)*.72);vg.addColorStop(0,"rgba(0,0,0,0)");vg.addColorStop(1,"rgba(0,0,0,.18)");ctx.fillStyle=vg;ctx.fillRect(0,0,w,h);ctx.restore()
 }
 function drawBackground(ctx,key,w=1280,h=720,options={}){
+ if(window.MEPInventionScenes?.has(key)){window.MEPInventionScenes.draw(ctx,key,w,h,options);return null;}
  if(STORY_BACKGROUNDS.has(key)){drawStoryBackground(ctx,key,w,h);drawStoryNarrativeOverlay(ctx,key,w,h,options);return null;}
  if(["westernFrontMap","easternFrontMap","pearlHarborMap","normandyMap","coldWarMap","revolutionMap","napoleonicMap"].includes(key))return drawThematicMap(ctx,key,w,h,options);
  if(["parchment","worldMap","americasMap","europeMap","africaMap","asiaMap","battleMap"].includes(key)){const hm=window.MEPHistoricalMaps?.draw(ctx,{year:options.year||2026,text:options.text||"",key,width:w,height:h,showLabels:options.showLabels!==false,highlights:options.highlights||[]});if(!hm?.drawn)drawHistoricalMapPlaceholder(ctx,key,w,h,hm?.snapshotYear||options.year);return hm}
