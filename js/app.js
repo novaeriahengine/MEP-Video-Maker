@@ -331,7 +331,7 @@ async function connectFlagRatings(){
 }
 window.addEventListener("mep-flags-ready",()=>{try{render();if(document.body.classList.contains("video-mode"))renderVideo();syncFlagsUI()}catch{}});
 window.addEventListener("mep-flag-image-ready",()=>{
- try{if(!videoPlaying){render();if(document.body.classList.contains("video-mode"))renderVideo()}}catch(e){console.warn("Flag image redraw:",e)}
+ try{if(!videoPlaying){if(document.body.classList.contains("video-mode"))renderVideo();else render()}}catch(e){console.warn("Flag image redraw:",e)}
 });
 window.addEventListener("mep-flag-ratings-changed",()=>{try{syncFlagsUI();render();if(document.body.classList.contains("video-mode"))renderVideo()}catch{}});
 MEPFlagSeries.load().then(()=>{try{syncFlagsUI()}catch{}});
