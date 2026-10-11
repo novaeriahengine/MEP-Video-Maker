@@ -55,3 +55,17 @@ assert.equal(clock(24000).index,6);
 assert.equal(clock(90000).time,89);
 assert.equal(clock(100100).index,29);
 console.log("PASS playback stays in real time under skipped frames and links narration to visual beats");
+const allEpisodes=JSON.parse(readFileSync("flags/flags-series.mep.json","utf8")).shorts;
+assert.equal(allEpisodes.length,18);
+assert.equal(allEpisodes.flatMap(sh=>sh.scenes).length,540);
+assert.equal(allEpisodes.every(sh=>sh.scenes.length===30&&sh.captionStyle?.enabled),true);
+assert.equal(allEpisodes.flatMap(sh=>sh.scenes).every(scene=>scene.script?.trim()&&scene.flagBeat?.mode&&scene.flagBeat?.heading&&scene.flagBeat?.stateCode),true);
+assert.ok(code.includes("const previewScale=short.flagsEpisode?.index!==undefined?0.67:1"),"Low-resolution flag preview guard missing.");
+assert.ok(code.includes("MEPCaptions?.draw(context,s,t,shortContext,{width:logicalWidth,height:logicalHeight})"),"Caption and canvas framing have diverged.");
+assert.ok(code.includes("renderBackground(context,s,t,shortContext,{width:logicalWidth,height:logicalHeight})"),"Flag background is not using logical video dimensions.");
+const editorHtml=readFileSync("index.html","utf8");
+assert.ok(editorHtml.includes('id="flagSceneShot"')&&editorHtml.includes('id="flagSceneState"')&&editorHtml.includes('id="applyFlagScene"'),"Flag director missing.");
+assert.ok(code.includes('on("#applyFlagScene","click"'),"Scene to narration editor integration missing.");
+console.log("PASS 18 episodes / 540 linked flag scenes with matching captions and visual shot editor");
+console.log("PASS lightweight preview uses full logical framing; full exports remain native size");
+
