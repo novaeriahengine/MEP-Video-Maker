@@ -150,6 +150,8 @@
         <label>X Position % <input id="captionX" type="range" min="8" max="92" value="50"></label>
         <label>Y Position % <input id="captionY" type="range" min="10" max="92" value="84"></label>
         <label>Text Color <input id="captionColor" type="color" value="#fff8e7"></label>
+        <label>Accent Color <input id="captionAccent" type="color" value="#f1c35f"></label>
+        <label>Auto Highlight <select id="captionHighlight"><option value="on">On</option><option value="off">Off</option></select></label>
         <label>Outline <input id="captionStroke" type="color" value="#202832"></label>
         <label>Background <select id="captionBackground"><option value="none">No Box</option><option value="box">Dark Box</option></select></label>
         <label>Uppercase <select id="captionUppercase"><option value="off">Off</option><option value="on">On</option></select></label>
@@ -265,14 +267,14 @@
 <script src="js/historical-maps.js?v=20261011y"></script>
 <script src="js/model.js?v=20261011z"></script>
 <script src="js/ai-config.js?v=20261011y"></script>
-<script src="js/ai-director.js?v=20261011y"></script>
+<script src="js/ai-director.js?v=20261011z"></script>
 <script src="js/invention-scenes.js?v=20261011z"></script>
 <script src="js/renderer.js?v=20261011z"></script>
 <script src="js/storage.js?v=20261011y"></script>
 <script src="js/voice-backends.js?v=20261011z"></script>
 <script>window.addEventListener("error",e=>{const el=document.getElementById("bootStatus");if(el){el.className="bootStatus error";el.textContent="MEP error: "+(e.message||"Unknown startup error")}});</script>
 <script src="js/speech-text.js?v=20261011z"></script>
-<script src="js/captions.js?v=20261011z"></script>
+<script src="js/captions.js?v=20261011z2"></script>
 <script src="js/app.js?v=20261011z"></script>
 <script src="js/tool-assistant.js?v=20261011y"></script>
 </body>
