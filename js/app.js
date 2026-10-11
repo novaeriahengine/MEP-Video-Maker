@@ -102,7 +102,7 @@ function stateFor(ch){if(!playing&&editPreview?.id===ch.id&&Math.abs(editPreview
 function renderScene(context,s,t,{selectable=false,shortContext=short}={}){context.save();context.clearRect(0,0,context.canvas.width,context.canvas.height);const cam=s.camera||{x:context.canvas.width/2,y:context.canvas.height/2,zoom:1};context.translate(context.canvas.width/2,context.canvas.height/2);context.scale(cam.zoom||1,cam.zoom||1);context.translate(-(cam.x??context.canvas.width/2),-(cam.y??context.canvas.height/2));renderBackground(context,s,t,shortContext);MEPRenderer.drawGraphics(context,s.graphics||[],t);[...(s.characters||[])].sort((a,b)=>(a.layer||0)-(b.layer||0)).forEach(ch=>MEPRenderer.drawCharacter(context,selectable&&s.id===scene.id?stateFor(ch):MEPModel.stateAt(ch,t),ch,selectable&&ch.id===selectedId));context.restore();visibleBubbles(s,t).forEach(b=>MEPRenderer.drawBubble(context,b));drawOverlayBrand(context);if(!window.MEPCaptions?.draw(context,s,t,shortContext))drawBurnedCaption(context,s.caption||"")}
 function render(){renderScene(ctx,scene,time,{selectable:true});setText("#timeLabel",time.toFixed(2)+" / "+scene.duration.toFixed(2)+"s");setVal("#scrubber",time)}
 
-function changed({cloud=true}={}){short.updatedAt=new Date().toISOString();MEPModel.syncAlias(project);MEPStorage.save(project);setText("#saveStatus",cloudReady?"Saving…":"Local ✓");drawTimeline();render();syncBuddy();if(cloud&&cloudReady&&MEPStorage.currentEditor()){clearTimeout(cloudTimer);cloudTimer=setTimeout(async()=>{try{await MEPStorage.saveCloud(project);setText("#saveStatus","Firestore ✓")}catch(e){console.warn(e);setText("#saveStatus","Local ✓")}},1800)}}
+function changed({cloud=true}={}){short.updatedAt=new Date().toISOString();MEPModel.syncAlias(project);MEPStorage.save(project);setText("#saveStatus",cloudReady?"Local changes · Save Firestore to sync":"Local ✓");drawTimeline();render();syncBuddy()}
 function materializeSelected(){const ch=selected();if(!ch)return null;if(time>0&&!(editPreview?.id===ch.id&&Math.abs(editPreview.time-time)<.001)){const st=MEPModel.stateAt(ch,time);Object.assign(ch,{x:st.x,y:st.y,scale:st.scale,rotation:st.rotation||0,facing:st.facing});ch.visual.mouthOpen=!!st.mouthOpen;editPreview={id:ch.id,time}}return ch}
 function activateShort(id){videoPlaying=false;stopVideoPreviewVoice();MEPModel.setActiveShort(project,id);refreshRefs();syncUI()}
 function activateScene(id){MEPModel.setActiveScene(project,id);scene=MEPModel.activeScene(project);selectedId=scene.characters?.[0]?.id||null;selectedBubbleId=null;time=0;playing=false;editPreview=null;syncUI()}
@@ -233,15 +233,70 @@ on("#loadShortPack","click",()=>loadShortPack().catch(e=>alert(e.message)));
 on("#loadStoryPack","click",()=>loadStoryPack().catch(e=>alert(e.message)));
 
 async function openFlagsProject(){
- MEPStorage.save(project);let next=null;
- if(cloudReady){try{next=await MEPStorage.loadCloud("flags-50-states-series")}catch(e){console.info("Shared series not seeded yet",e.message)}}
- if(!next)next=MEPStorage.load("flags-50-states-series");
+ MEPStorage.save(project);let next=MEPStorage.load("flags-50-states-series");
+ if(!next&&cloudReady){try{next=await MEPStorage.loadCloud("flags-50-states-series")}catch(e){console.info("Shared series not seeded yet",e.message)}}
  if(!next){const r=await fetch("flags/flags-series.mep.json",{cache:"no-store"});if(!r.ok)throw Error("Could not load flag series template");next=MEPModel.migrate(await r.json())}
  project=next;MEPStorage.save(project);refreshRefs();syncUI();MEPFlagSeries.load().then(syncFlagsUI);
- if(cloudReady&&MEPStorage.currentEditor()){try{await MEPStorage.saveCloud(project);setText("#saveStatus","Flags project · Firestore ✓")}catch(e){setText("#saveStatus","Local ✓ · cloud: "+e.message)}}
+ setText("#saveStatus","Flags project opened locally · click Save Firestore to publish changes");
 }
 on("#createFlagsProject","click",()=>openFlagsProject().catch(e=>alert(e.message)));
-on("#cloudSignIn","click",async()=>{try{const info=await MEPStorage.signInEditor();setText("#saveStatus","Signed in: "+info.email);syncFlagsUI()}catch(e){alert("Cloud sign-in failed: "+e.message)}});
+function openOwnerAccount(){refreshOwnerAccountUI();$("#ownerAccountDialog").showModal()}
+function clearPasswordFields(){for(const id of ["ownerPassword","ownerOldPassword","ownerNewPassword","ownerConfirmPassword"])if($("#"+id))$("#"+id).value=""}
+function refreshOwnerAccountUI(){
+ const account=MEPStorage.signedInAccount?.(),editor=MEPStorage.currentEditor?.();
+ setText("#ownerAccountStatus",editor?"Owner verified · shared editing enabled ("+account.email+")":account?"Signed in as "+account.email+" · verify email to unlock Firestore writes":"Not signed in · shared projects remain readable");
+ setText("#cloudSignIn",editor?"Owner ✓":account?"Verify Owner Email":"Owner Account / Log In");
+}
+on("#cloudSignIn","click",openOwnerAccount);
+on("#closeOwnerAccount","click",()=>$("#ownerAccountDialog").close());
+on("#ownerLogin","click",async()=>{
+ try{
+  const r=await MEPStorage.signInEditor($("#ownerEmail").value,$("#ownerPassword").value);
+  clearPasswordFields();refreshOwnerAccountUI();
+  setText("#saveStatus",r.verified?"Owner signed in ✓":"Email verification required");
+  if(!r.verified)setText("#ownerAccountStatus","Signed in, but email is not verified. Click Send Verification Email, check your inbox, then click I Verified My Email.");
+  syncFlagsUI()
+ }catch(e){clearPasswordFields();setText("#ownerAccountStatus","Sign-in failed: "+e.message)}
+});
+on("#ownerReset","click",async()=>{
+ try{await MEPStorage.sendEditorReset($("#ownerEmail").value);setText("#ownerAccountStatus","If the owner account exists, Firebase has sent password recovery instructions.")}
+ catch(e){setText("#ownerAccountStatus","Password recovery: "+e.message)}
+});
+on("#ownerVerify","click",async()=>{
+ try{await MEPStorage.sendEditorVerification();setText("#ownerAccountStatus","Verification email requested. Check your inbox (and spam), click the link, then press I Verified My Email.")}
+ catch(e){setText("#ownerAccountStatus","Email verification: "+e.message)}
+});
+on("#ownerRefresh","click",async()=>{
+ try{const status=await MEPStorage.refreshEditor();refreshOwnerAccountUI();setText("#ownerAccountStatus",status?.verified?"Email verified · you can edit shared Firestore data.":"Still awaiting Firebase email verification.");syncFlagsUI()}
+ catch(e){setText("#ownerAccountStatus",e.message)}
+});
+on("#ownerSignOut","click",async()=>{
+ try{await MEPStorage.signOutEditor();clearPasswordFields();refreshOwnerAccountUI();setText("#saveStatus","Signed out · local editing still available");syncFlagsUI()}
+ catch(e){setText("#ownerAccountStatus",e.message)}
+});
+on("#ownerChangePassword","click",async()=>{
+ const oldPass=$("#ownerOldPassword").value,newPass=$("#ownerNewPassword").value,confirmPass=$("#ownerConfirmPassword").value;
+ if(newPass!==confirmPass){setText("#ownerAccountStatus","New password and confirmation do not match.");return}
+ try{await MEPStorage.changeEditorPassword(oldPass,newPass);clearPasswordFields();setText("#ownerAccountStatus","Password updated successfully. Keep it private.")}
+ catch(e){clearPasswordFields();setText("#ownerAccountStatus","Password change: "+e.message)}
+});
+on("#cloudBackupAll","click",async()=>{
+ if(!MEPStorage.currentEditor()){openOwnerAccount();return}
+ if(!confirm("Upload every locally saved project and all its video scenes to the shared Firestore workspace? Existing cloud projects with the same ID will be updated."))return;
+ setText("#saveStatus","Uploading local project library…");
+ try{const r=await MEPStorage.saveAllLocalProjects((i,n,name)=>setText("#saveStatus","Backing up "+i+"/"+n+" · "+name));MEPStorage.save(project);
+  setText("#saveStatus","Cloud backup: "+r.saved.length+" saved, "+r.failed.length+" failed");
+  if(r.failed.length)alert("Some projects were not backed up:\n"+r.failed.map(x=>x.name+": "+x.error).join("\n"))
+ }catch(e){alert("Backup failed: "+e.message)}
+});
+on("#cloudSeedBundles","click",async()=>{
+ if(!MEPStorage.currentEditor()){openOwnerAccount();return}
+ if(!confirm("Add the bundled history and state-flags projects to shared Firestore? Already-present projects will be preserved."))return;
+ try{const r=await MEPStorage.seedBundledProjects((i,n,name)=>setText("#saveStatus","Seeding "+i+"/"+n+" · "+name));MEPStorage.save(project);
+  setText("#saveStatus","Bundled projects: "+r.saved.length+" added, "+r.skipped.length+" existing, "+r.failed.length+" failed");
+  if(r.failed.length)alert("Some bundles could not upload:\n"+r.failed.map(x=>x.name+": "+x.error).join("\n"))
+ }catch(e){alert("Project seeding failed: "+e.message)}
+});
 on("#flagStateSelect","change",e=>{selectedFlagCode=e.target.value;syncFlagsUI()});
 on("#saveFlagRating","click",async()=>{
  const code=selectedFlagCode,grade=$("#flagGradeSelect").value,done=$("#flagDone").checked,notes=$("#flagRatingNotes").value;
@@ -256,7 +311,7 @@ on("#saveFlagRating","click",async()=>{
    if(beat.script!==newScript){beat.script=newScript;project.scripts=project.scripts||{sceneById:{}};project.scripts.sceneById=project.scripts.sceneById||{};project.scripts.sceneById[beat.id]=newScript;episode.workflow=episode.workflow||{checklist:{},history:[]};episode.workflow.checklist=episode.workflow.checklist||{};episode.workflow.checklist.voice=false;scriptUpdated=true}
   }
  }
- if(scriptUpdated){MEPStorage.save(project);setText("#flagCloudStatus","Grade updated in narration. Regenerate this episode's final voice track before exporting.");if(cloudReady&&MEPStorage.currentEditor()){MEPStorage.saveCloud(project).catch(e=>console.warn("Episode script sync",e.message))}}
+ if(scriptUpdated){MEPStorage.save(project);setText("#flagCloudStatus","Spoken grade updated locally. Regenerate voice and click Save Firestore to share the revised episode.");}
  syncFlagsUI();render();if(document.body.classList.contains("video-mode"))renderVideo();
  try{await MEPStorage.saveFlagRating(code,rating);$("#flagCloudStatus").textContent="Published "+code+" rating to the shared Firestore board ✓"}
  catch(e){$("#flagCloudStatus").textContent="Saved locally. Cloud: "+e.message}
@@ -271,7 +326,7 @@ window.addEventListener("mep-flags-ready",()=>{try{render();if(document.body.cla
 window.addEventListener("mep-flag-ratings-changed",()=>{try{syncFlagsUI();render();if(document.body.classList.contains("video-mode"))renderVideo()}catch{}});
 MEPFlagSeries.load().then(()=>{try{syncFlagsUI()}catch{}});
 
-on("#saveProject","click",()=>{MEPStorage.save(project);setText("#saveStatus","Local ✓")});on("#saveCloud","click",async()=>{try{await MEPStorage.saveCloud(project);cloudReady=true;setText("#saveStatus","Firestore ✓")}catch(e){alert(e.message)}});on("#exportProject","click",()=>MEPStorage.download(project));on("#importProject","change",async e=>{const f=e.target.files?.[0];if(!f)return;try{project=MEPModel.migrate(JSON.parse(await f.text()));const v=MEPModel.validateProject(project);if(!v.ok)throw new Error(v.errors.join("; "));refreshRefs();changed({cloud:false});syncUI()}catch(err){alert("Import failed: "+err.message)}e.target.value=""});
+on("#saveProject","click",()=>{MEPStorage.save(project);setText("#saveStatus","Local ✓")});on("#saveCloud","click",async()=>{if(!MEPStorage.currentEditor()){openOwnerAccount();return}try{setText("#saveStatus","Saving all video scenes to Firestore…");const r=await MEPStorage.saveCloud(project);cloudReady=true;setText("#saveStatus","Firestore ✓ "+r.videos+" videos saved")}catch(e){setText("#saveStatus","Cloud save failed · local copy retained");alert(e.message)}});on("#exportProject","click",()=>MEPStorage.download(project));on("#importProject","change",async e=>{const f=e.target.files?.[0];if(!f)return;try{project=MEPModel.migrate(JSON.parse(await f.text()));const v=MEPModel.validateProject(project);if(!v.ok)throw new Error(v.errors.join("; "));refreshRefs();changed({cloud:false});syncUI()}catch(err){alert("Import failed: "+err.message)}e.target.value=""});
 
 on("#shortSelect","change",e=>activateShort(e.target.value));on("#previewShortSelect","change",e=>{activateShort(e.target.value);setVideoMode(true);renderVideo()});on("#addShort","click",()=>{const sh=MEPModel.short("Untitled Short "+(project.shorts.length+1));project.shorts.push(sh);project.activeShortId=sh.id;refreshRefs();changed();syncUI()});on("#duplicateShort","click",()=>{const sh=cloneShort(short);project.shorts.splice(shortIndex()+1,0,sh);project.activeShortId=sh.id;refreshRefs();changed();syncUI()});on("#deleteShort","click",()=>{if(project.shorts.length<=1)return alert("A project needs at least one short.");if(!confirm("Delete this short?"))return;const i=shortIndex();project.shorts.splice(i,1);project.activeShortId=project.shorts[Math.min(i,project.shorts.length-1)].id;refreshRefs();changed();syncUI()});
 on("#shortTitle","input",e=>{short.title=e.target.value;changed();syncShortUI()});on("#uploadTitle","input",e=>{short.title=e.target.value;changed();syncShortUI()});on("#shortDescription","input",e=>{short.description=e.target.value;changed()});on("#shortHashtags","input",e=>{short.hashtags=e.target.value.split(/\s+/).filter(Boolean);changed()});on("#projectYear","change",e=>setYear(e.target.value));on("#yearSlider","input",e=>setYear(e.target.value));
@@ -552,7 +607,7 @@ on("#helperAvatar","click",()=>{if(buddyMoved){buddyMoved=false;return}$("#helpe
 on("#aiShowContext","click",()=>$("#aiJson").value=JSON.stringify(MEPAIDirector.promptPackage($("#aiPrompt").value,project),null,2));on("#aiGenerate","click",async()=>{try{setText("#aiStatus","Generating…");const plan=await MEPAIDirector.generate($("#aiPrompt").value.trim(),project);$("#aiJson").value=JSON.stringify(plan,null,2);setText("#aiStatus","Plan ready")}catch(e){setText("#aiStatus",e.message)}});on("#aiApply","click",()=>{try{project=MEPModel.migrate(MEPAIDirector.apply(JSON.parse($("#aiJson").value)));refreshRefs();changed();syncUI();$("#aiDialog").close()}catch(e){setText("#aiStatus",e.message)}});
 
 try{syncUI()}catch(e){console.error(e);$("#bootStatus").className="bootStatus error";setText("#bootStatus","Startup error: "+e.message)}
-MEPStorage.initCloud().then(async r=>{if(!r.ok){setText("#saveStatus","Local autosave · "+r.reason);return}cloudReady=true;setText("#saveStatus","Firestore shared read ready · editor sign-in for writes");syncBuddy();try{await connectFlagRatings()}catch(e){console.warn(e)}});
+MEPStorage.initCloud().then(async r=>{if(!r.ok){setText("#saveStatus","Local autosave · "+r.reason);return}cloudReady=true;MEPStorage.watchEditor(()=>{refreshOwnerAccountUI();syncFlagsUI()});refreshOwnerAccountUI();setText("#saveStatus","Firestore shared read ready");syncBuddy();try{await connectFlagRatings()}catch(e){console.warn(e)}});
 
 if(window.speechSynthesis){speechSynthesis.addEventListener?.("voiceschanged",()=>{try{populateChromeVoices()}catch{}})}window.addEventListener("mep-historical-map-ready",()=>{try{render();if(document.body.classList.contains("video-mode"))renderVideo()}catch{}});setTimeout(()=>refreshLocalLlm({quiet:true}),450)
 window.MEP_DEBUG={get project(){return project},get short(){return short},get scene(){return scene},render,syncUI,exportShort};
