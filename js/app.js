@@ -247,6 +247,16 @@ on("#saveFlagRating","click",async()=>{
  const code=selectedFlagCode,grade=$("#flagGradeSelect").value,done=$("#flagDone").checked,notes=$("#flagRatingNotes").value;
  if(done&&!grade){alert("Choose an A–F grade before marking this state completed.");return}
  const rating=MEPFlagSeries.updateRating(code,{grade,done,notes,episode:MEPFlagSeries.episodeOf(code)});
+ const name=MEPFlagSeries.flagInfo(code)?.name||code;
+ let scriptUpdated=false;
+ for(const episode of project.shorts){
+  for(const beat of episode.scenes||[]){
+   if(beat.flagBeat?.mode!=="rate"||beat.flagBeat?.stateCode!==code)continue;
+   const newScript=grade?"My grade for "+name+" is "+grade+". That's my verdict.":"I'm ready to place "+name+" on the tier board.";
+   if(beat.script!==newScript){beat.script=newScript;project.scripts=project.scripts||{sceneById:{}};project.scripts.sceneById=project.scripts.sceneById||{};project.scripts.sceneById[beat.id]=newScript;episode.workflow=episode.workflow||{checklist:{},history:[]};episode.workflow.checklist=episode.workflow.checklist||{};episode.workflow.checklist.voice=false;scriptUpdated=true}
+  }
+ }
+ if(scriptUpdated){MEPStorage.save(project);setText("#flagCloudStatus","Grade updated in narration. Regenerate this episode's final voice track before exporting.");if(cloudReady&&MEPStorage.currentEditor()){MEPStorage.saveCloud(project).catch(e=>console.warn("Episode script sync",e.message))}}
  syncFlagsUI();render();if(document.body.classList.contains("video-mode"))renderVideo();
  try{await MEPStorage.saveFlagRating(code,rating);$("#flagCloudStatus").textContent="Published "+code+" rating to the shared Firestore board ✓"}
  catch(e){$("#flagCloudStatus").textContent="Saved locally. Cloud: "+e.message}
