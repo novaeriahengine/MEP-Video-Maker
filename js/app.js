@@ -480,7 +480,9 @@ function renderVideo({quiet=false}={}){
  if(sceneChanged){
   if(lastVideoSceneIndex>=0)videoStripButtons[lastVideoSceneIndex]?.classList.remove("active");
   videoStripButtons[a.index]?.classList.add("active");lastVideoSceneIndex=a.index;
-  setText("#videoScript",a.scene.script||"")
+  setText("#videoScript",a.scene.script||"");
+  setText("#previewSceneCounter","Scene "+(a.index+1)+" of "+short.scenes.length+" · "+a.scene.name);
+  setText("#previewSceneScriptHint","Narration + visuals linked · "+(Number(a.scene.duration)||0).toFixed(1)+"s beat")
  }
  if(!quiet||sceneChanged||now-videoUiLast>=140){
   videoUiLast=now;
@@ -536,7 +538,19 @@ function videoTick(now){
  videoLast=now;
  const total=MEPModel.shortDuration(short);
  videoTime=Math.min(total,Math.max(0,videoStartPosition+(now-videoStartAt)/1000));
- if(videoTime>=total){videoPlaying=false;stopVideoPreviewVoice();if(voiceRecorder?.state==="recording")setTimeout(stopVoiceRecording,450)}
+ if(videoTime>=total){
+  const position=project.shorts.findIndex(sh=>sh.id===short.id);
+  const next=project.shorts[position+1];
+  if($("#autoNextEpisode")?.checked&&next){
+   stopVideoPreviewVoice();MEPModel.setActiveShort(project,next.id);
+   refreshRefs();syncUI();videoTime=0;videoStartPosition=0;videoStartAt=now;videoFrameLast=0;lastSceneStripSignature="";
+   startVideoPreviewVoice();
+   if(window.MEPFlagSeries&&short.flagsEpisode)MEPFlagSeries.warm(short).catch(e=>console.warn("Flag preload:",e));
+  }else{
+   videoPlaying=false;stopVideoPreviewVoice();
+   if(voiceRecorder?.state==="recording")setTimeout(stopVoiceRecording,450)
+  }
+ }
  const targetFps=Math.max(10,Math.min(30,Number($("#previewQuality")?.value)||18));
  const framePeriod=1000/targetFps;
  const changed=sceneAtGlobal(short,videoTime).index!==lastVideoSceneIndex;
@@ -566,6 +580,14 @@ on("#videoPlayPause","click",()=>{
  videoRaf=requestAnimationFrame(videoTick)
 });
 on("#videoStop","click",()=>stopPreviewPlayback({reset:true}));
+on("#editPlayingScene","click",()=>{
+ const selected=sceneAtGlobal(short,videoTime).scene;
+ if(!selected)return;
+ stopPreviewPlayback();MEPModel.setActiveScene(project,selected.id);
+ refreshRefs();setVideoMode(false);syncUI();
+ $("#sceneScript")?.scrollIntoView({behavior:"smooth",block:"center"});
+ $("#sceneScript")?.focus({preventScroll:true})
+});
 on("#previewStopVoice","click",()=>{stopVoiceRecording();stopPreviewPlayback()});
 on("#videoScrubber","input",e=>{stopPreviewPlayback();videoTime=Number(e.target.value);videoFrameLast=0;renderVideo()});
 on("#videoPrevScene","click",()=>{
