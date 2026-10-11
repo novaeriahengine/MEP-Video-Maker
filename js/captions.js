@@ -1,6 +1,7 @@
 // Canvas captions are part of the same render path for preview AND export.
 window.MEPCaptions=(()=>{
- const defaults={enabled:false,source:"narration",position:"bottom",x:50,y:84,fontSize:40,color:"#fff8e7",accent:"#f1c35f",stroke:"#202832",background:"none",animationIn:"rise",animationOut:"fade",wordsPerCaption:5,uppercase:false,shadow:true,highlight:true};
+ const defaults={enabled:false,source:"narration",position:"bottom",x:50,y:84,fontSize:40,color:"#fff8e7",accent:"#f1c35f",stroke:"#202832",background:"none",animationIn:"rise",animationOut:"fade",wordsPerCaption:5,uppercase:false,shadow:true,highlight:true,template:"classic"};
+ const templates={classic:{background:"none",color:"#fff8e7",stroke:"#202832",accent:"#f1c35f",fontSize:40,animationIn:"rise",animationOut:"fade"},kinetic:{background:"none",color:"#f7f3e8",stroke:"#132132",accent:"#eac352",fontSize:45,animationIn:"pop",animationOut:"fade"},banner:{background:"box",color:"#ffffff",stroke:"#1b222e",accent:"#f5b653",fontSize:38,animationIn:"slide-left",animationOut:"slide-right"},clean:{background:"none",color:"#ffffff",stroke:"#1b222e",accent:"#8ac6dd",fontSize:35,animationIn:"fade",animationOut:"fade"},red:{background:"label",color:"#fff5e8",stroke:"#281920",accent:"#cf5c56",fontSize:40,animationIn:"shake",animationOut:"fade"},bold:{background:"none",color:"#ffffff",stroke:"#15191e",accent:"#ffc454",fontSize:54,animationIn:"wipe",animationOut:"scroll"}};
  const clamp=(n,a,b)=>Math.min(b,Math.max(a,n));
  function style(sh){return {...defaults,...(sh?.captionStyle||{})}}
  function segments(scene,sh){
@@ -29,11 +30,15 @@ window.MEPCaptions=(()=>{
   if(st.animationIn==="slide-right")dx-=w*.19*(1-en);
   if(st.animationIn==="pop")scale*=.78+.22*en;
   if(st.animationIn==="typewriter")a*=Math.max(.12,en);
+  if(st.animationIn==="wipe")a*=Math.max(.18,en);
+  if(st.animationIn==="scroll")dy+=85*(1-en);
+  if(st.animationIn==="shake")dx+=Math.sin(t*39)*22*(1-en);
   if(st.animationOut==="fade")a*=exit;
   if(st.animationOut==="rise")dy-=20*(1-ex);
   if(st.animationOut==="slide-left")dx-=w*.16*(1-ex);
   if(st.animationOut==="slide-right")dx+=w*.16*(1-ex);
   if(st.animationOut==="pop")scale*=.86+.14*ex;
+  if(st.animationOut==="scroll")dy-=80*(1-ex);
   const fs=clamp(Number(st.fontSize)||40,20,72),x=clamp(Number(st.x)||50,8,92)*w/100;
   const baseline=st.position==="top"?h*.21:st.position==="middle"?h*.52:st.position==="custom"?clamp(Number(st.y)||84,10,92)*h/100:h*.83;
   ctx.save();ctx.globalAlpha*=clamp(a,0,1);ctx.translate(x+dx,baseline+dy);ctx.scale(scale,scale);
@@ -41,7 +46,8 @@ window.MEPCaptions=(()=>{
   const maxW=Math.min(w*.86,Math.max(110,2*Math.min(x,w-x)-12)),txt=st.uppercase?cue.text.toLocaleUpperCase():cue.text;
   const actual=st.animationIn==="typewriter"?txt.slice(0,Math.max(1,Math.ceil(txt.length*en))):txt;
   const lines=wrap(ctx,actual,maxW),lh=fs*1.22,top=-(lines.length-1)*lh/2;
-  if(st.background==="box"){ctx.fillStyle="rgba(24,30,37,.8)";const boxW=maxW+28,boxH=lines.length*lh+22;ctx.beginPath();ctx.roundRect(-boxW/2,-boxH/2,boxW,boxH,12);ctx.fill()}
+  if(st.animationIn==="wipe"){ctx.beginPath();ctx.rect(-maxW*.5,(-lines.length*lh*.5)-30,maxW*en,lines.length*lh+60);ctx.clip()}
+  if(st.background==="box"||st.background==="label"){ctx.fillStyle=st.background==="label"?(st.accent||defaults.accent):"rgba(24,30,37,.8)";const boxW=maxW+28,boxH=lines.length*lh+22;ctx.beginPath();ctx.roundRect(-boxW/2,-boxH/2,boxW,boxH,12);ctx.fill()}
   if(st.shadow){ctx.shadowColor="rgba(0,0,0,.65)";ctx.shadowBlur=10;ctx.shadowOffsetY=3}
   lines.forEach((line,i)=>{
    const yy=top+i*lh,words=line.split(/\s+/),full=ctx.measureText(line).width;
@@ -51,11 +57,11 @@ window.MEPCaptions=(()=>{
     const important=/\d|patent|invent|freedom|victor|first|stop|saf|signal|fiber|strong|light|escape|breakthrough|machine|wiper|bag|electric|intelligen|filament/i.test(word);
     const caution=/dead|injur|danger|burst|crash|fire|attack|sank|destroy|failure/i.test(word);
     ctx.lineWidth=Math.max(3,fs*.13);ctx.strokeStyle=st.stroke||defaults.stroke;ctx.strokeText(word,cursor+wordW/2,yy,Math.min(wordW,maxW));
-    ctx.fillStyle=st.highlight&&caution?"#e78478":st.highlight&&important?(st.accent||defaults.accent):(st.color||defaults.color);
+    ctx.fillStyle=st.background==="label"?"#202832":st.highlight&&caution?"#e78478":st.highlight&&important?(st.accent||defaults.accent):(st.color||defaults.color);
     ctx.fillText(word,cursor+wordW/2,yy,Math.min(wordW,maxW));cursor+=wordW+spaceW;
    }
   });
   ctx.restore();return true;
  }
- return{defaults,style,segments,draw};
+ return{defaults,templates,style,segments,draw};
 })();
