@@ -22,7 +22,9 @@ const FOCUS={
  asia:{minLon:25,maxLon:155,minLat:-12,maxLat:78},
  pacific:{minLon:100,maxLon:255,minLat:-15,maxLat:72,wrap:true}
 };
-const cache=new Map(),loading=new Map(),failures=new Map();
+const cache=new Map(),loading=new Map(),failures=new Map(),paintCache=new Map();const PAINT_CACHE_LIMIT=5;
+function paintCachePut(key,canvas){paintCache.delete(key);paintCache.set(key,canvas);while(paintCache.size>PAINT_CACHE_LIMIT)paintCache.delete(paintCache.keys().next().value)}
+
 const palette=["#b7aa8a","#9eae91","#ac9da0","#9fb3b7","#b8a48d","#a7a1b7","#a6b497","#c0b493","#9fa9bd","#b29f8c","#a8aa8e","#9fb0a0"];
 const SIDE_COLORS={allied:"#6f91b5",axis:"#a6534f",central:"#a55e4f",entente:"#6f93b8",west:"#5e87b6",east:"#a94a50",neutral:"#aaa891"};
 const COUNTRY_COLORS=[
@@ -87,7 +89,7 @@ function focusFor(key="",text=""){
 }
 async function load(snapshot){
  if(cache.has(snapshot.year))return cache.get(snapshot.year);if(loading.has(snapshot.year))return loading.get(snapshot.year);
- const p=(async()=>{let last=null;for(const base of SOURCES){try{const r=await fetch(base+snapshot.file,{cache:"force-cache",mode:"cors"});if(!r.ok)throw new Error("HTTP "+r.status);const j=await r.json();cache.set(snapshot.year,j);failures.delete(snapshot.year);window.dispatchEvent(new CustomEvent("mep-historical-map-ready",{detail:{year:snapshot.year}}));return j}catch(e){last=e}}failures.set(snapshot.year,last);console.warn("Historical map load failed",snapshot.file,last);return null})().finally(()=>loading.delete(snapshot.year));loading.set(snapshot.year,p);return p
+ const p=(async()=>{let last=null;for(const base of SOURCES){try{const r=await fetch(base+snapshot.file,{cache:"force-cache",mode:"cors"});if(!r.ok)throw new Error("HTTP "+r.status);const j=await r.json();cache.set(snapshot.year,j);paintCache.clear();failures.delete(snapshot.year);window.dispatchEvent(new CustomEvent("mep-historical-map-ready",{detail:{year:snapshot.year}}));return j}catch(e){last=e}}failures.set(snapshot.year,last);console.warn("Historical map load failed",snapshot.file,last);return null})().finally(()=>loading.delete(snapshot.year));loading.set(snapshot.year,p);return p
 }
 function normalizeLon(lon,focus){if(focus.wrap&&lon<0)return lon+360;return lon}
 function projector(focus,w,h){
@@ -97,10 +99,34 @@ function projector(focus,w,h){
 }
 function ringsOf(geometry){if(!geometry)return[];if(geometry.type==="Polygon")return geometry.coordinates;if(geometry.type==="MultiPolygon")return geometry.coordinates.flat();return[]}
 function featureBounds(f,focus){
- let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity,count=0;for(const ring of ringsOf(f.geometry))for(const c of ring){let lon=normalizeLon(c[0],focus),lat=c[1];if(lon<focus.minLon-8||lon>focus.maxLon+8||lat<focus.minLat-8||lat>focus.maxLat+8)continue;minX=Math.min(minX,lon);maxX=Math.max(maxX,lon);minY=Math.min(minY,lat);maxY=Math.max(maxY,lat);count++}return count?{minX,minY,maxX,maxY,area:(maxX-minX)*(maxY-minY)}:null
+ let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity,count=0;
+ for(const ring of ringsOf(f.geometry))for(const coord of ring){
+  const lon=normalizeLon(coord[0],focus),lat=coord[1];
+  if(!Number.isFinite(lon)||!Number.isFinite(lat))continue;
+  minX=Math.min(minX,lon);maxX=Math.max(maxX,lon);minY=Math.min(minY,lat);maxY=Math.max(maxY,lat);count++
+ }
+ if(!count||maxX<focus.minLon||minX>focus.maxLon||maxY<focus.minLat||minY>focus.maxLat)return null;
+ const clippedMinX=Math.max(minX,focus.minLon),clippedMaxX=Math.min(maxX,focus.maxLon),clippedMinY=Math.max(minY,focus.minLat),clippedMaxY=Math.min(maxY,focus.maxLat);
+ return{minX:clippedMinX,minY:clippedMinY,maxX:clippedMaxX,maxY:clippedMaxY,area:Math.max(0,(clippedMaxX-clippedMinX)*(clippedMaxY-clippedMinY))}
 }
-function pathFeature(ctx,f,project,focus){
- let drawn=false;for(const ring of ringsOf(f.geometry)){let started=false,prev=null;ctx.beginPath();for(const coord of ring){const p=project(coord);if(!p.inside&&started&&prev){prev=p;continue}if(!started){ctx.moveTo(p.x,p.y);started=true}else ctx.lineTo(p.x,p.y);prev=p}if(started){ctx.closePath();ctx.fill();ctx.stroke();drawn=true}}return drawn
+function pathFeature(ctx,f,project){
+ const geometry=f.geometry;if(!geometry)return false;
+ const polygons=geometry.type==="Polygon"?[geometry.coordinates]:geometry.type==="MultiPolygon"?geometry.coordinates:[];
+ let drawn=false;
+ for(const polygon of polygons){
+  ctx.beginPath();let hasRing=false;
+  for(const ring of polygon){
+   if(!ring?.length)continue;
+   let started=false;
+   for(const coord of ring){
+    const p=project(coord);if(!Number.isFinite(p.x)||!Number.isFinite(p.y))continue;
+    if(!started){ctx.moveTo(p.x,p.y);started=true}else ctx.lineTo(p.x,p.y)
+   }
+   if(started){ctx.closePath();hasRing=true}
+  }
+  if(hasRing){ctx.fill("evenodd");ctx.stroke();drawn=true}
+ }
+ return drawn
 }
 function drawLabels(ctx,features,focus,project,w,h,text="",highlights=[]){
  const candidates=[],seen=new Set();for(const f of features){const b=featureBounds(f,focus);if(!b||b.area<.32)continue;const name=nameOf(f),key=name.toLowerCase();if(seen.has(key))continue;const lon=(b.minX+b.maxX)/2,lat=(b.minY+b.maxY)/2,p=project([focus.wrap&&lon>180?lon-360:lon,lat]);if(!p.inside||name.length>28)continue;seen.add(key);candidates.push({name,p,area:b.area,hi:highlighted(name,text,highlights)})}
@@ -124,14 +150,32 @@ function drawLegend(ctx,text,w,h){
 function draw(ctx,{year=2026,text="",key="worldMap",width=ctx.canvas.width,height=ctx.canvas.height,time=0,showLabels=true,highlights=[]}={}){
  const snap=resolveSnapshot(year,text),focusName=focusFor(key,text),focus=FOCUS[focusName]||FOCUS.world,data=cache.get(snap.year);
  if(!data){load(snap);return{drawn:false,snapshotYear:snap.year,focus:focusName,loading:true}}
- ctx.save();const ocean=ctx.createLinearGradient(0,0,0,height);ocean.addColorStop(0,"#b5d7e6");ocean.addColorStop(.5,"#94bfd2");ocean.addColorStop(1,"#6f9eb6");ctx.fillStyle=ocean;ctx.fillRect(0,0,width,height);const project=projector(focus,width,height),features=data.features||[];drawGraticule(ctx,focus,project,width,height);
- ctx.lineJoin="round";ctx.lineCap="round";ctx.lineWidth=Math.max(1,width*.0016);
- for(const f of features){const b=featureBounds(f,focus);if(!b)continue;ctx.fillStyle=fillFor(f,text,highlights);ctx.strokeStyle="rgba(246,242,229,.72)";pathFeature(ctx,f,project,focus)}
- ctx.lineWidth=Math.max(.9,width*.00135);for(const f of features){const b=featureBounds(f,focus);if(!b)continue;const hi=highlighted(nameOf(f),text,highlights);ctx.fillStyle="rgba(0,0,0,0)";const pulse=.72+.28*Math.sin(Number(time||0)*4.4);ctx.strokeStyle=hi?"rgba(255,212,93,"+pulse+")":"rgba(35,43,48,.82)";ctx.lineWidth=hi?Math.max(3,width*.0045):Math.max(.9,width*.00135);pathFeature(ctx,f,project,focus)}
- if(showLabels)drawLabels(ctx,features,focus,project,width,height,text,highlights);drawLegend(ctx,text,width,height);
- const ph=phase(text),badge=(ph==="before"?"BEFORE":ph==="after"?"AFTER":"HISTORICAL")+" · "+snap.year;ctx.font="800 "+Math.max(12,width*.021)+"px system-ui";const tw=ctx.measureText(badge).width;ctx.fillStyle="rgba(18,26,32,.78)";ctx.fillRect(width-tw-34,14,tw+22,30);ctx.fillStyle="#f5d77f";ctx.textAlign="left";ctx.textBaseline="middle";ctx.fillText(badge,width-tw-23,29);
- ctx.fillStyle="rgba(17,27,33,.74)";ctx.font="600 "+Math.max(10,width*.015)+"px system-ui";ctx.textBaseline="bottom";ctx.fillText("Historical borders · auto-selected snapshot",12,height-10);
- ctx.restore();return{drawn:true,snapshotYear:snap.year,focus:focusName,loading:false}
+ const highlightedCountries=(highlights||[]).join("|");
+ const identity=[snap.year,focusName,width,height,showLabels?1:0,highlightedCountries,text].join("::");
+ let layer=paintCache.get(identity);
+ if(!layer){
+  layer=document.createElement("canvas");layer.width=width;layer.height=height;
+  const out=layer.getContext("2d");if(!out)return{drawn:false,snapshotYear:snap.year,focus:focusName};
+  const ocean=out.createLinearGradient(0,0,0,height);ocean.addColorStop(0,"#b5d7e6");ocean.addColorStop(.5,"#94bfd2");ocean.addColorStop(1,"#6f9eb6");out.fillStyle=ocean;out.fillRect(0,0,width,height);
+  const project=projector(focus,width,height),features=data.features||[];
+  // Keep the geographical paths complete. The canvas clip, not point skipping,
+  // determines which coastline/border segments are visible.
+  out.save();out.beginPath();out.rect(0,0,width,height);out.clip();
+  drawGraticule(out,focus,project,width,height);
+  out.lineJoin="round";out.lineCap="round";
+  for(const f of features){if(!featureBounds(f,focus))continue;out.fillStyle=fillFor(f,text,highlights);out.strokeStyle="rgba(246,242,229,.72)";out.lineWidth=Math.max(1,width*.0016);pathFeature(out,f,project)}
+  for(const f of features){if(!featureBounds(f,focus))continue;const hi=highlighted(nameOf(f),text,highlights);out.fillStyle="rgba(0,0,0,0)";out.strokeStyle=hi?"#ffd45d":"rgba(35,43,48,.82)";out.lineWidth=hi?Math.max(3,width*.0045):Math.max(.9,width*.00135);pathFeature(out,f,project)}
+  out.restore();
+  if(showLabels)drawLabels(out,features,focus,project,width,height,text,highlights);
+  drawLegend(out,text,width,height);
+  const ph=phase(text),badge=(ph==="before"?"BEFORE":ph==="after"?"AFTER":"HISTORICAL")+" · "+snap.year;
+  out.font="800 "+Math.max(12,width*.021)+"px system-ui";const tw=out.measureText(badge).width;
+  out.fillStyle="rgba(18,26,32,.78)";out.fillRect(width-tw-34,14,tw+22,30);out.fillStyle="#f5d77f";out.textAlign="left";out.textBaseline="middle";out.fillText(badge,width-tw-23,29);
+  out.fillStyle="rgba(17,27,33,.74)";out.font="600 "+Math.max(10,width*.015)+"px system-ui";out.textBaseline="bottom";out.fillText("Historical borders · "+snap.year+" · vector map",12,height-10);
+  paintCachePut(identity,layer);
+ }else{paintCache.delete(identity);paintCache.set(identity,layer)}
+ ctx.drawImage(layer,0,0,width,height);
+ return{drawn:true,snapshotYear:snap.year,focus:focusName,loading:false,cached:true}
 }
 function prefetch(year,text,key){const s=resolveSnapshot(year,text);load(s);return{snapshotYear:s.year,focus:focusFor(key,text)}}
 return{version:"history-map-system-v2",SNAPSHOTS,FOCUS,resolveSnapshot,focusFor,load,prefetch,draw,source:{name:"Historical Basemaps",repository:"aourednik/historical-basemaps",license:"GPL-3.0"}};
