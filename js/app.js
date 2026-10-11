@@ -644,7 +644,13 @@ function videoTick(now){
 function setVideoMode(v){
  stopPreviewPlayback();
  document.body.classList.toggle("video-mode",v);$("#editorMode").classList.toggle("active",!v);$("#videoMode").classList.toggle("active",v);
- if(v){videoTime=0;videoFrameLast=0;renderVideo()}
+ if(v){
+  videoTime=0;videoFrameLast=0;renderVideo();
+  // Prewarm actual flag artwork as soon as the preview opens, not after Play.
+  if(short?.flagsEpisode&&window.MEPFlagSeries)MEPFlagSeries.warm(short).then(result=>{
+   if(document.body.classList.contains("video-mode")&&!videoPlaying)renderVideo()
+  }).catch(error=>console.warn("Flag artwork prewarm:",error.message))
+ }
 }
 on("#editorMode","click",()=>setVideoMode(false));on("#videoMode","click",()=>setVideoMode(true));on("#mobileVideo","click",()=>setVideoMode(true));
 on("#videoPlayPause","click",()=>{
