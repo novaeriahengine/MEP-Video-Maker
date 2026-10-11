@@ -68,6 +68,12 @@ The `presets/youtube-short-maker.mep.json` project includes:
 9. Cuban Missile Crisis: 13 Days Near Nuclear War
 10. Why the Berlin Wall Fell
 
+## American Stories · Batch 2
+
+**Load 10 American Stories** adds a separate, story-first batch without replacing the original Shorts. It includes Robert Smalls, Cowpens, the Great Molasses Flood, Philo Farnsworth, James Armistead Lafayette, Deborah Sampson, Garrett Morgan, Josephine Cochrane, Bass Reeves, and John Paul Jones.
+
+The batch uses dedicated illustrated settings rather than generic scenery: Charleston Harbor, the Cowpens tactical field, Boston's North End, the Idaho farm and television lab, Yorktown, Cleveland in 1923, Cochrane's workshop, Fort Smith / Indian Territory, and the North Sea. Every imported Short begins with research, script, and visual steps checked; final voice and export remain deliberately unchecked.
+
 ## Export voice sources
 
 Each Short can keep separate final audio tracks for **My Recording**, **Local Kokoro**, and **Google Colab Kokoro**. Voice Studio shows the active source with a check mark. Chrome speech remains a fast preview source only because browser speech synthesis does not expose a capturable audio stream to MediaRecorder; export now stops with an explicit explanation rather than downloading a silent video.

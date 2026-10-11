@@ -1,0 +1,159 @@
+{
+  "schema": "mep-video-project",
+  "version": 8,
+  "name": "Noveria American Stories · Batch 2",
+  "category": "YouTube Shorts",
+  "tags": ["Noveria History", "American history", "story-driven", "Shorts"],
+  "shorts": [
+    {
+      "title": "Robert Smalls Stole a Confederate Ship and Sailed His Family to Freedom",
+      "description": "In 1862, Robert Smalls used his knowledge of Charleston Harbor to escape slavery aboard the Confederate steamer Planter—and deliver intelligence to the Union.",
+      "hashtags": ["#RobertSmalls", "#CivilWar", "#BlackHistory", "#History", "#Shorts"],
+      "year": 1862,
+      "era": "Mid / Late 1800s",
+      "researchNotes": ["National Park Service — Robert Smalls"],
+      "workflow": {"checklist": {"research": true, "script": true, "visuals": true, "voice": false, "exported": false}, "history": [{"at": "2026-10-11T00:00:00.000Z", "message": "Added from the American Stories Batch 2 preset."}]},
+      "scenes": [
+        {"name": "Before dawn at the docks", "duration": 10, "background": {"preset": "charlestonDocks1862"}, "script": "At about three in the morning on May 13, 1862, Robert Smalls took control of the Confederate steamer Planter in Charleston Harbor. The white officers had gone ashore.", "caption": "An enslaved pilot takes a Confederate ship"},
+        {"name": "Families board", "duration": 10, "background": {"preset": "charlestonDocks1862"}, "script": "Smalls and the Black crew picked up their families, raised Confederate and South Carolina flags, and headed into the harbor as if nothing were wrong.", "caption": "Crew + families board the Planter"},
+        {"name": "Past Fort Sumter", "duration": 12, "background": {"preset": "charlestonHarborMap"}, "script": "Smalls knew the harbor signals. He even used the captain's straw hat to help sell the disguise as the ship passed Fort Sumter.", "caption": "Charleston → Fort Sumter → Union blockade"},
+        {"name": "Freedom and intelligence", "duration": 11, "background": {"preset": "charlestonHarborMap"}, "script": "Beyond the fort, the crew lowered the Confederate flags, raised a white sheet, and sailed to the Union blockade. Smalls escaped slavery and delivered the ship and military intelligence.", "caption": "FROM ENSLAVED PILOT → WAR HERO"}
+      ]
+    },
+    {
+      "title": "Daniel Morgan Told His Soldiers to Retreat on Purpose",
+      "description": "At Cowpens in 1781, Daniel Morgan turned a planned withdrawal into one of the American Revolution's smartest battlefield traps.",
+      "hashtags": ["#Cowpens", "#AmericanRevolution", "#MilitaryHistory", "#History", "#Shorts"],
+      "year": 1781,
+      "era": "1700s",
+      "researchNotes": ["National Park Service — Daniel Morgan and Cowpens"],
+      "workflow": {"checklist": {"research": true, "script": true, "visuals": true, "voice": false, "exported": false}, "history": [{"at": "2026-10-11T00:00:00.000Z", "message": "Added from the American Stories Batch 2 preset."}]},
+      "scenes": [
+        {"name": "Morgan's risky plan", "duration": 10, "background": {"preset": "cowpensField1781"}, "script": "At Cowpens in 1781, Daniel Morgan knew Patriot militia could break when British troops charged. So he built a controlled withdrawal into his plan.", "caption": "What if retreat was the trap?"},
+        {"name": "Three American lines", "duration": 11, "background": {"preset": "cowpensTacticalMap"}, "script": "His sharpshooters would fire and fall back. The militia behind them were ordered to fire two volleys, then withdraw behind the Continental regulars.", "caption": "SHOOT TWICE → FALL BACK"},
+        {"name": "The British rush in", "duration": 11, "background": {"preset": "cowpensTacticalMap"}, "script": "British troops charged forward, thinking the Americans were collapsing. Instead, they ran into a solid Continental line that held.", "caption": "The trap closes"},
+        {"name": "The counterattack", "duration": 11, "background": {"preset": "cowpensField1781"}, "script": "Then American cavalry and returning militia struck from the sides and rear. Morgan had turned an apparent retreat into a famous tactical victory.", "caption": "A controlled withdrawal becomes victory"}
+      ]
+    },
+    {
+      "title": "Boston Was Hit by a Flood of Molasses",
+      "description": "The Great Molasses Flood of 1919 turned Boston's North End into a deadly river after a huge storage tank burst.",
+      "hashtags": ["#Boston", "#MolassesFlood", "#History", "#DisasterHistory", "#Shorts"],
+      "year": 1919,
+      "era": "Mid / Late 1800s",
+      "researchNotes": ["Boston Public Library — Boston's Great Molasses Flood"],
+      "workflow": {"checklist": {"research": true, "script": true, "visuals": true, "voice": false, "exported": false}, "history": [{"at": "2026-10-11T00:00:00.000Z", "message": "Added from the American Stories Batch 2 preset."}]},
+      "scenes": [
+        {"name": "A tank over the neighborhood", "duration": 10, "background": {"preset": "bostonNorthEnd1919"}, "script": "Shortly after noon on January 15, 1919, a huge storage tank burst in Boston's North End. It held more than 2.3 million gallons of molasses.", "caption": "BOSTON · JANUARY 15, 1919"},
+        {"name": "The wave", "duration": 11, "background": {"preset": "bostonNorthEnd1919"}, "script": "A dark wave reported as high as about fifteen feet rushed through nearby streets at roughly thirty-five miles per hour.", "caption": "A DEADLY MOLASSES WAVE"},
+        {"name": "The damage", "duration": 11, "background": {"preset": "bostonNorthEnd1919"}, "script": "Buildings were smashed. People and horses were trapped. Twenty-one people died, and around one hundred fifty were injured.", "caption": "21 DEAD · ABOUT 150 INJURED"},
+        {"name": "Aftermath", "duration": 10, "background": {"preset": "bostonNorthEnd1919"}, "script": "Cleanup took weeks. Investigators blamed structural weakness in the tank, and the disaster helped push stronger construction standards.", "caption": "A strange disaster with real consequences"}
+      ]
+    },
+    {
+      "title": "A 14-Year-Old Got the Idea for Electronic Television While Plowing",
+      "description": "Philo Farnsworth's farm-field idea became an early foundation of fully electronic television.",
+      "hashtags": ["#PhiloFarnsworth", "#Television", "#Inventions", "#History", "#Shorts"],
+      "year": 1927,
+      "era": "Mid / Late 1800s",
+      "researchNotes": ["Smithsonian Magazine — Philo Farnsworth"],
+      "workflow": {"checklist": {"research": true, "script": true, "visuals": true, "voice": false, "exported": false}, "history": [{"at": "2026-10-11T00:00:00.000Z", "message": "Added from the American Stories Batch 2 preset."}]},
+      "scenes": [
+        {"name": "Rows in an Idaho field", "duration": 10, "background": {"preset": "idahoFarm1921"}, "script": "In 1921, fourteen-year-old Philo Farnsworth was plowing a field in Idaho when its straight rows gave him an idea.", "caption": "FARM ROWS → SCAN LINES"},
+        {"name": "Break a picture into lines", "duration": 11, "background": {"preset": "idahoFarm1921"}, "script": "What if a picture could be broken into lines, transmitted electronically, then rebuilt on a screen? Existing experiments often used mechanical scanning.", "caption": "Could an image travel line by line?"},
+        {"name": "The electronic lab", "duration": 11, "background": {"preset": "earlyTelevisionLab1927"}, "script": "Farnsworth wanted a fully electronic system. In 1927, his San Francisco team transmitted a simple electronic image using an image dissector.", "caption": "1927 · A FULLY ELECTRONIC IMAGE"},
+        {"name": "A field becomes a screen", "duration": 10, "background": {"preset": "earlyTelevisionLab1927"}, "script": "He was only twenty-one. An idea inspired by furrows in a farm field became one of the foundations of electronic television.", "caption": "THE FARM-ROW IDEA CHANGED TELEVISION"}
+      ]
+    },
+    {
+      "title": "The Enslaved Spy Who Fooled the British at Yorktown",
+      "description": "James Armistead Lafayette secretly gathered intelligence in British lines during the campaign that ended at Yorktown.",
+      "hashtags": ["#JamesArmisteadLafayette", "#Yorktown", "#AmericanRevolution", "#BlackHistory", "#Shorts"],
+      "year": 1781,
+      "era": "1700s",
+      "researchNotes": ["National Park Service — James Lafayette"],
+      "workflow": {"checklist": {"research": true, "script": true, "visuals": true, "voice": false, "exported": false}, "history": [{"at": "2026-10-11T00:00:00.000Z", "message": "Added from the American Stories Batch 2 preset."}]},
+      "scenes": [
+        {"name": "A secret mission", "duration": 10, "background": {"preset": "yorktownSpyCamp1781"}, "script": "In 1781, an enslaved Virginian named James Armistead began working for the Marquis de Lafayette during the American Revolution.", "caption": "A SPY INSIDE THE BRITISH CAMP"},
+        {"name": "Inside British lines", "duration": 11, "background": {"preset": "yorktownSpyCamp1781"}, "script": "James entered British lines pretending to be a runaway seeking work. He gained the confidence of senior British officers.", "caption": "He made the British trust him"},
+        {"name": "Information moves", "duration": 11, "background": {"preset": "yorktownSpyCamp1781"}, "script": "He carried information on troop movements, supplies, and strategy back to Lafayette while giving misleading information to the British.", "caption": "BRITISH CAMP → LAFAYETTE"},
+        {"name": "Freedom delayed", "duration": 10, "background": {"preset": "revolutionaryCamp1782"}, "script": "His intelligence helped commanders understand Cornwallis's movements at Yorktown. After helping win a war about liberty, James still had to fight for his own freedom. He was emancipated in 1787.", "caption": "EMANCIPATED · 1787"}
+      ]
+    },
+    {
+      "title": "The Woman Who Served in Washington's Army as Robert Shurtleff",
+      "description": "Deborah Sampson enlisted in the Continental Army disguised as a man and received an honorable discharge in 1783.",
+      "hashtags": ["#DeborahSampson", "#AmericanRevolution", "#WomensHistory", "#History", "#Shorts"],
+      "year": 1782,
+      "era": "1700s",
+      "researchNotes": ["National Women's History Museum — Deborah Sampson"],
+      "workflow": {"checklist": {"research": true, "script": true, "visuals": true, "voice": false, "exported": false}, "history": [{"at": "2026-10-11T00:00:00.000Z", "message": "Added from the American Stories Batch 2 preset."}]},
+      "scenes": [
+        {"name": "Robert Shurtleff enlists", "duration": 10, "background": {"preset": "revolutionaryCamp1782"}, "script": "In 1782, Deborah Sampson disguised herself as a man, used the name Robert Shurtleff, and joined the Fourth Massachusetts Regiment.", "caption": "THE ARMY THOUGHT SHE WAS A MAN"},
+        {"name": "Light infantry work", "duration": 11, "background": {"preset": "revolutionaryCamp1782"}, "script": "She served in light infantry and carried out dangerous scouting work around New York during the final years of the Revolution.", "caption": "SCOUTING AROUND NEW YORK"},
+        {"name": "A dangerous secret", "duration": 11, "background": {"preset": "forest"}, "script": "After being wounded, she reportedly removed a musket ball herself rather than risk being exposed. The documented service is already extraordinary without adding disputed battles.", "caption": "HER IDENTITY STAYED HIDDEN"},
+        {"name": "An honorable discharge", "duration": 10, "background": {"preset": "governmentHall"}, "script": "Her identity was discovered after she became seriously ill in Philadelphia. Deborah Sampson received an honorable discharge in October 1783.", "caption": "HONORABLY DISCHARGED · 1783"}
+      ]
+    },
+    {
+      "title": "Garrett Morgan Added the Missing Pause Between Stop and Go",
+      "description": "Garrett Morgan's three-position traffic signal created a safer all-stop phase for crowded streets.",
+      "hashtags": ["#GarrettMorgan", "#Inventions", "#TrafficLight", "#BlackHistory", "#Shorts"],
+      "year": 1923,
+      "era": "Mid / Late 1800s",
+      "researchNotes": ["National Inventors Hall of Fame — Garrett Morgan"],
+      "workflow": {"checklist": {"research": true, "script": true, "visuals": true, "voice": false, "exported": false}, "history": [{"at": "2026-10-11T00:00:00.000Z", "message": "Added from the American Stories Batch 2 preset."}]},
+      "scenes": [
+        {"name": "Crowded Cleveland streets", "duration": 10, "background": {"preset": "clevelandIntersection1923"}, "script": "By the early 1920s, crowded streets had cars, trolleys, horses, and pedestrians fighting for the same intersections.", "caption": "STOP … OR GO?"},
+        {"name": "A dangerous collision", "duration": 11, "background": {"preset": "clevelandIntersection1923"}, "script": "After seeing a serious collision in Cleveland, inventor Garrett Morgan designed a better way to control the crossing.", "caption": "ONE COLLISION INSPIRES A FIX"},
+        {"name": "The all-stop phase", "duration": 11, "background": {"preset": "clevelandIntersection1923"}, "script": "His three-position signal created a phase where traffic in all directions stopped before another direction was allowed to move.", "caption": "ALL DIRECTIONS STOP"},
+        {"name": "A safer interval", "duration": 10, "background": {"preset": "clevelandIntersection1923"}, "script": "Morgan patented it in 1923. It was not exactly today's yellow light, but it tackled the same problem: a safe pause between conflicting movements.", "caption": "PATENTED · 1923"}
+      ]
+    },
+    {
+      "title": "Josephine Cochrane Built the Practical Dishwasher Because Hand-Washing Damaged Her Dishes",
+      "description": "Josephine Garis Cochran designed a practical dishwasher with wire racks and pressurized hot water in the 1880s.",
+      "hashtags": ["#JosephineCochrane", "#Dishwasher", "#Inventions", "#WomensHistory", "#Shorts"],
+      "year": 1886,
+      "era": "Mid / Late 1800s",
+      "researchNotes": ["National Inventors Hall of Fame — Josephine Garis Cochran"],
+      "workflow": {"checklist": {"research": true, "script": true, "visuals": true, "voice": false, "exported": false}, "history": [{"at": "2026-10-11T00:00:00.000Z", "message": "Added from the American Stories Batch 2 preset."}]},
+      "scenes": [
+        {"name": "Chipped dishware", "duration": 10, "background": {"preset": "victorianDiningRoom1880s"}, "script": "In the 1880s, Josephine Garis Cochran was frustrated that hand-washing frequently chipped her dishware. So she decided to build a better machine.", "caption": "SHE WAS TIRED OF CHIPPED DISHES"},
+        {"name": "The working mechanism", "duration": 11, "background": {"preset": "dishwasherWorkshop1886"}, "script": "Working with mechanic George Butters, she made a system that held dishes in wire compartments while pressurized hot soapy water cleaned them.", "caption": "WIRE RACKS + PRESSURIZED WATER"},
+        {"name": "Patent and fair", "duration": 11, "background": {"preset": "chicagoWorldsFair1893"}, "script": "Her patent was granted in 1886, and her dishwasher gained attention at Chicago's 1893 World's Columbian Exposition.", "caption": "PATENT · 1886"},
+        {"name": "From institutions to homes", "duration": 10, "background": {"preset": "dishwasherWorkshop1886"}, "script": "Hotels and restaurants adopted it before ordinary homes did, because early households often could not supply enough hot water. Her company later became part of KitchenAid.", "caption": "A PRACTICAL KITCHEN MACHINE"}
+      ]
+    },
+    {
+      "title": "Bass Reeves Was a Real-Life Frontier Lawman Before Hollywood Cowboys",
+      "description": "Deputy U.S. Marshal Bass Reeves spent decades pursuing fugitives across Indian Territory before Oklahoma statehood.",
+      "hashtags": ["#BassReeves", "#OldWest", "#BlackHistory", "#History", "#Shorts"],
+      "year": 1875,
+      "era": "Mid / Late 1800s",
+      "researchNotes": ["National Park Service — Bass Reeves"],
+      "workflow": {"checklist": {"research": true, "script": true, "visuals": true, "voice": false, "exported": false}, "history": [{"at": "2026-10-11T00:00:00.000Z", "message": "Added from the American Stories Batch 2 preset."}]},
+      "scenes": [
+        {"name": "From enslavement to freedom", "duration": 10, "background": {"preset": "fortSmithFrontier1875"}, "script": "Bass Reeves was born enslaved in the 1830s. After the Civil War he became free, and in 1875 he was hired as a deputy U.S. marshal out of Fort Smith.", "caption": "A REAL-LIFE FRONTIER LAWMAN"},
+        {"name": "A huge territory", "duration": 11, "background": {"preset": "fortSmithMap"}, "script": "His territory included the enormous and dangerous Indian Territory, much of modern Oklahoma. It demanded long travel, tracking, and careful planning.", "caption": "FORT SMITH → INDIAN TERRITORY"},
+        {"name": "Thirty-two years", "duration": 11, "background": {"preset": "fortSmithFrontier1875"}, "script": "Historical accounts describe Reeves using disguises and tracking skills to make arrests. He spent thirty-two years pursuing fugitives.", "caption": "DISGUISES · TRACKING · ARRESTS"},
+        {"name": "The West came after him", "duration": 10, "background": {"preset": "fortSmithFrontier1875"}, "script": "He stayed in federal service until Oklahoma became a state in 1907, then briefly served as a Muskogee police officer. The lawman came before the Hollywood legend.", "caption": "THE LAWMAN CAME FIRST"}
+      ]
+    },
+    {
+      "title": "John Paul Jones Won a Naval Battle—Then His Own Ship Sank",
+      "description": "John Paul Jones captured HMS Serapis in 1779, but his battered Bonhomme Richard sank two days later.",
+      "hashtags": ["#JohnPaulJones", "#NavalHistory", "#AmericanRevolution", "#History", "#Shorts"],
+      "year": 1779,
+      "era": "1700s",
+      "researchNotes": ["Naval History and Heritage Command — John Paul Jones"],
+      "workflow": {"checklist": {"research": true, "script": true, "visuals": true, "voice": false, "exported": false}, "history": [{"at": "2026-10-11T00:00:00.000Z", "message": "Added from the American Stories Batch 2 preset."}]},
+      "scenes": [
+        {"name": "Off the English coast", "duration": 10, "background": {"preset": "northSeaNaval1779"}, "script": "On September 23, 1779, John Paul Jones fought the British warship Serapis off Flamborough Head aboard Bonhomme Richard.", "caption": "NORTH SEA · 1779"},
+        {"name": "A battered ship", "duration": 11, "background": {"preset": "northSeaNaval1779"}, "script": "The British ship was stronger. Jones's vessel was blasted apart, burning, and taking on water—but he did not surrender.", "caption": "BONHOMME RICHARD IS BREAKING APART"},
+        {"name": "Point-blank battle", "duration": 11, "background": {"preset": "northSeaNaval1779"}, "script": "Jones forced the two ships together, turning the fight into a brutal point-blank battle. After hours of combat, Serapis surrendered.", "caption": "HE CAPTURED THE ENEMY SHIP"},
+        {"name": "The final twist", "duration": 10, "background": {"preset": "northSeaNaval1779"}, "script": "But Bonhomme Richard was too damaged to save. It sank two days later, so Jones sailed away aboard the British ship he had just captured.", "caption": "HE WON—THEN HIS SHIP SANK"}
+      ]
+    }
+  ]
+}
