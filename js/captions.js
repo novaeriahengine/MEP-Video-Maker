@@ -1,6 +1,6 @@
 // Canvas captions are part of the same render path for preview AND export.
 window.MEPCaptions=(()=>{
- const defaults={enabled:false,source:"narration",position:"bottom",x:50,y:84,fontSize:40,color:"#fff8e7",accent:"#f1c35f",stroke:"#202832",background:"none",animationIn:"rise",animationOut:"fade",wordsPerCaption:5,uppercase:false,shadow:true};
+ const defaults={enabled:false,source:"narration",position:"bottom",x:50,y:84,fontSize:40,color:"#fff8e7",accent:"#f1c35f",stroke:"#202832",background:"none",animationIn:"rise",animationOut:"fade",wordsPerCaption:5,uppercase:false,shadow:true,highlight:true};
  const clamp=(n,a,b)=>Math.min(b,Math.max(a,n));
  function style(sh){return {...defaults,...(sh?.captionStyle||{})}}
  function segments(scene,sh){
@@ -44,9 +44,16 @@ window.MEPCaptions=(()=>{
   if(st.background==="box"){ctx.fillStyle="rgba(24,30,37,.8)";const boxW=maxW+28,boxH=lines.length*lh+22;ctx.beginPath();ctx.roundRect(-boxW/2,-boxH/2,boxW,boxH,12);ctx.fill()}
   if(st.shadow){ctx.shadowColor="rgba(0,0,0,.65)";ctx.shadowBlur=10;ctx.shadowOffsetY=3}
   lines.forEach((line,i)=>{
-   const yy=top+i*lh;
-   ctx.lineWidth=Math.max(3,fs*.13);ctx.strokeStyle=st.stroke||defaults.stroke;ctx.strokeText(line,0,yy,maxW);
-   ctx.fillStyle=st.color||defaults.color;ctx.fillText(line,0,yy,maxW);
+   const yy=top+i*lh,words=line.split(/\\s+/),full=ctx.measureText(line).width;
+   let cursor=-full/2;
+   for(let j=0;j<words.length;j++){
+    const word=words[j],wordW=ctx.measureText(word).width,spaceW=j<words.length-1?ctx.measureText(" ").width:0;
+    const important=/\\d|patent|invent|freedom|victor|first|stop|saf|signal|fiber|strong|light|escape|breakthrough|machine|wiper|bag|electric|intelligen|filament/i.test(word);
+    const caution=/dead|injur|danger|burst|crash|fire|attack|sank|destroy|failure/i.test(word);
+    ctx.lineWidth=Math.max(3,fs*.13);ctx.strokeStyle=st.stroke||defaults.stroke;ctx.strokeText(word,cursor+wordW/2,yy,Math.min(wordW,maxW));
+    ctx.fillStyle=st.highlight&&caution?"#e78478":st.highlight&&important?(st.accent||defaults.accent):(st.color||defaults.color);
+    ctx.fillText(word,cursor+wordW/2,yy,Math.min(wordW,maxW));cursor+=wordW+spaceW;
+   }
   });
   ctx.restore();return true;
  }
