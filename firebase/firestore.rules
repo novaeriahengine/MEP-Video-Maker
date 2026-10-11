@@ -1,31 +1,61 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /mepLibrary/{docId} {
-      allow read: if true;
-      allow create, update: if request.resource.data.schema == "mep-library-v4";
-      allow delete: if true;
+    // Shared data: all visitors read the same projects and rankings.
+    // Only the verified Google account below may edit. This is not per-user storage.
+    // REPLACE the email with your own verified editor Google account before publishing.
+    function isEditor() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email == "REPLACE_WITH_EDITOR_EMAIL@example.com";
+    }
+    function validProject() {
+      return request.resource.data.schema == "mep-video-project"
+        && request.resource.data.shorts is list
+        && request.resource.data.shorts.size() <= 30;
     }
     match /mepProjects/{projectId} {
       allow read: if true;
-      allow create, update: if request.resource.data.schema == "mep-video-project";
-      allow delete: if true;
+      allow create, update: if isEditor() && validProject();
+      allow delete: if false; // Never delete past projects from the public editor.
+    }
+    match /mepFlagRatings/{stateCode} {
+      allow read: if true;
+      allow create, update: if isEditor()
+        && stateCode.matches('^[A-Z]{2}$')
+        && request.resource.data.schema == "mep-flag-rating-v1"
+        && request.resource.data.code == stateCode
+        && request.resource.data.grade in ["", "A", "B", "C", "D", "F"]
+        && request.resource.data.done is bool
+        && request.resource.data.episode is int
+        && request.resource.data.episode >= 1
+        && request.resource.data.episode <= 17;
+      allow delete: if false;
+    }
+    match /mepLibrary/{docId} {
+      allow read: if true;
+      allow create, update: if isEditor()
+        && request.resource.data.schema == "mep-library-v4";
+      allow delete: if false;
     }
     match /mepCharacters/{characterId} {
       allow read: if true;
-      allow create, update: if request.resource.data.schema == "mep-character-v3";
-      allow delete: if true;
+      allow create, update: if isEditor()
+        && request.resource.data.schema == "mep-character-v3";
+      allow delete: if false;
     }
     match /mepAnimations/{animationId} {
       allow read: if true;
-      allow create, update: if request.resource.data.schema == "mep-animation-v3";
-      allow delete: if true;
+      allow create, update: if isEditor()
+        && request.resource.data.schema == "mep-animation-v3";
+      allow delete: if false;
     }
     match /mepAssets/{assetId} {
       allow read: if true;
-      allow create, update: if request.resource.data.schema == "mep-asset-v1"
+      allow create, update: if isEditor()
+        && request.resource.data.schema == "mep-asset-v1"
         && request.resource.data.dataUrl.size() < 850000;
-      allow delete: if true;
+      allow delete: if false;
     }
     match /{document=**} {
       allow read, write: if false;
