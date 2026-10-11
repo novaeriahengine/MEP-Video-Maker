@@ -13,6 +13,7 @@ import urllib.parse
 import hashlib
 import mimetypes
 import webbrowser
+import warnings
 import zipfile
 import uuid
 from pathlib import Path
@@ -42,10 +43,33 @@ HF_CACHE.mkdir(parents=True, exist_ok=True)
 os.environ.setdefault("HF_HOME", str(HF_CACHE))
 os.environ.setdefault("HUGGINGFACE_HUB_CACHE", str(HF_CACHE / "hub"))
 
+# These three messages are emitted by Kokoro's current PyTorch dependencies.
+# They describe upstream compatibility/deprecation details, not a failed voice
+# generation. Keep the console focused on actionable errors and job progress.
+warnings.filterwarnings(
+    "ignore",
+    message=r"dropout option adds dropout after all but last recurrent layer.*",
+    category=UserWarning,
+)
+warnings.filterwarnings(
+    "ignore",
+    message=r"`torch\.nn\.utils\.weight_norm` is deprecated.*",
+    category=FutureWarning,
+)
+warnings.filterwarnings(
+    "ignore",
+    message=r"`torch\.jit\.script` is deprecated.*",
+    category=FutureWarning,
+)
+
 HOST = os.environ.get("MEP_HOST", "0.0.0.0")
 PORT = int(os.environ.get("MEP_PORT", "7860"))
 DEFAULT_VOICE = os.environ.get("MEP_VOICE", "bm_george")
 DEFAULT_SPEED = float(os.environ.get("MEP_SPEED", "0.95"))
+try:
+    HTTP_THREADS = max(4, min(16, int(os.environ.get("MEP_HTTP_THREADS", "8"))))
+except ValueError:
+    HTTP_THREADS = 8
 
 BRITISH_VOICES = [
     {"id": "bm_george", "name": "George", "description": "Classic British male"},
@@ -151,7 +175,9 @@ def get_pipeline():
             return _pipeline
         try:
             from kokoro import KPipeline
-            _pipeline = KPipeline(lang_code="b")
+            # Pin the public model ID so Kokoro does not emit a confusing
+            # "Defaulting repo_id" message every time the local server starts.
+            _pipeline = KPipeline(lang_code="b", repo_id="hexgrad/Kokoro-82M")
             _model_error = None
             return _pipeline
         except Exception as exc:
@@ -891,8 +917,10 @@ if __name__ == "__main__":
     print(f"Editor:       http://127.0.0.1:{PORT}/app/")
     print(f"Server setup: http://127.0.0.1:{PORT}/server/")
     print(f"Phone editor: http://{local_ip()}:{PORT}/app/")
+    print(f"Status workers: {HTTP_THREADS} (keeps the dashboard responsive during narration)")
+    print("First model download may mention Hugging Face; a traceback is the sign of an actual error.")
     print("Keep this window open while using the local AI voice server.")
     print("=" * 68)
     threading.Thread(target=open_editor_tab, daemon=True).start()
-    serve(app, host=HOST, port=PORT, threads=4)
+    serve(app, host=HOST, port=PORT, threads=HTTP_THREADS)
 

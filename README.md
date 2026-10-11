@@ -31,13 +31,13 @@ Built-in thematic backgrounds include WWI Western Front, WWI Eastern Front, Pear
 Exports are WebM because that is the broadly available browser MediaRecorder format. MP4 would require WebCodecs/ffmpeg or a backend transcoder.
 
 ## Project data
-Schema v7 is:
+Schema v8 is:
 Project → Shorts → Scenes → characters / graphics / background / narration.
 
-Each Short stores its own title, description, hashtags, year, 9:16 settings, scene list, and timing. Each scene stores background state, narration, captions, flag characters, graphic overlays, bubbles, and keyframes.
+Each Short stores its own title, description, hashtags, year, 9:16 settings, scene list, timing, and a persistent production checklist/history. Each scene stores background state, narration, captions, flag characters, graphic overlays, bubbles, and keyframes.
 
 ## Local projects + Firestore
-Local projects use a small project index plus one localStorage document per project. The latest project resumes on page load. Older v3/v5/v6 local saves are migrated once into the v7 project library.
+Local projects use a small project index plus one localStorage document per project. The latest project resumes on page load. Older v3/v5/v6/v7 local saves are migrated once into the v8 project library.
 
 Firestore remains no-login for the current personal-development setup. Projects save to `mepProjects`, assets to `mepAssets`, characters to `mepCharacters`, and the reusable engine library to `mepLibrary/default`. Publish the matching rules in `firebase/firestore.rules`.
 

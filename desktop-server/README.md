@@ -25,6 +25,14 @@ This folder turns the downloaded repository into a local/offline MEP Video Maker
 6. Python starts the server and opens a **Local Voice Server control panel** in your default browser. It includes live narration activity, saved job history, setup controls, and a one-click **Open MEP Video Maker** button. No API URL or token is required when you use that local editor tab.
 7. Server setup/status is available at `http://127.0.0.1:7860/server/`.
 8. Click **Cache Offline Editor** once while online. If you downloaded the full repository it copies the editor locally; if you downloaded only this folder it downloads the current editor files into `desktop-server/editor/`.
+
+### Normal first-run console messages
+
+The first Kokoro voice request downloads and loads its model. On a CPU-only computer this can take a few minutes. The control panel at `/server/` remains available and shows the live job, elapsed time, completed narration sections, and saved job history.
+
+Messages mentioning Hugging Face authentication only mean the public model download is using the normal anonymous rate limit; they are not a failed export and do not require an account. PyTorch compatibility warnings are filtered by the current launcher. A real server failure includes a `Traceback` or a job marked **Failed** in the control panel.
+
+If several browser requests arrive while the voice model is busy, Waitress may report a temporary queue depth. The launcher now reserves eight status workers by default so polling the dashboard and editor does not block narration. You can override that only if needed with `MEP_HTTP_THREADS` (4 through 16).
 9. Click **Download / Load Kokoro** once while online.
 10. Click **Download Map Pack** once while online.
 11. Click **Download Historical Photos** if you want a starter cache of license-safe historical images.
