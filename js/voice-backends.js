@@ -49,9 +49,9 @@ async function synthesize(base,{text,voice="bm_george",speed=.95,pauseMs=70,tail
   }
  }
 }
-function narrationForShort(sh){return(sh?.scenes||[]).map(s=>s.script||"").filter(Boolean).join(" ")}
+function narrationForShort(sh){const text=(sh?.scenes||[]).map(s=>s.script||"").filter(Boolean).join(" ");return window.MEPSpeech?MEPSpeech.normalize(text):text}
 function createColabBatch(project){
- return{schema:"mep-colab-narration-batch-v1",createdAt:new Date().toISOString(),projectId:project.id,projectName:project.name,shorts:(project.shorts||[]).map(sh=>({id:sh.id,title:sh.title,year:sh.year,duration:(sh.scenes||[]).reduce((n,s)=>n+(Number(s.duration)||0),0),voice:sh.voice?.kokoroVoice||"bm_george",speed:Number(sh.voice?.kokoroSpeed||.95),pauseMs:Number(sh.voice?.sentencePauseMs??70),tailTrimMs:Number(sh.voice?.tailTrimMs??100),narration:narrationForShort(sh),scenes:(sh.scenes||[]).map(s=>({id:s.id,name:s.name,duration:s.duration,script:s.script||"",caption:s.caption||""}))}))}
+ return{schema:"mep-colab-narration-batch-v1",createdAt:new Date().toISOString(),projectId:project.id,projectName:project.name,shorts:(project.shorts||[]).map(sh=>({id:sh.id,title:sh.title,year:sh.year,duration:(sh.scenes||[]).reduce((n,s)=>n+(Number(s.duration)||0),0),voice:sh.voice?.kokoroVoice||"bm_george",speed:Number(sh.voice?.kokoroSpeed||.95),pauseMs:Number(sh.voice?.sentencePauseMs??70),tailTrimMs:Number(sh.voice?.tailTrimMs??100),narration:narrationForShort(sh),scenes:(sh.scenes||[]).map(s=>({id:s.id,name:s.name,duration:s.duration,script:window.MEPSpeech?MEPSpeech.normalize(s.script||""):(s.script||""),caption:s.caption||""}))}))}
 }
 function downloadJson(name,data){const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1500)}
 function blobToDataUrl(blob){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(blob)})}
