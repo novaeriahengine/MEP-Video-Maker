@@ -14,6 +14,7 @@ import hashlib
 import mimetypes
 import webbrowser
 import zipfile
+import uuid
 from pathlib import Path
 
 import numpy as np
@@ -75,6 +76,9 @@ local_llm = LocalLLM(BASE)
 _pipeline = None
 _pipeline_lock = threading.Lock()
 _model_error = None
+_tts_jobs = {}
+_tts_jobs_lock = threading.Lock()
+_tts_job_ttl = 60 * 60
 
 
 def local_ip() -> str:
@@ -257,7 +261,13 @@ def trim_trailing_silence(audio: np.ndarray, max_trim_ms: float = 100.0) -> np.n
     return audio[:-trim] if trim > 0 else audio
 
 
-def synthesize(text: str, voice: str = DEFAULT_VOICE, speed: float = DEFAULT_SPEED, pause_ms: float = 70.0, tail_trim_ms: float = 100.0):
+def _tts_segment_estimate(text: str) -> int:
+    """Return a stable, deliberately conservative estimate for UI progress."""
+    words = len(re.findall(r"\S+", text))
+    return max(1, (words + 11) // 12)
+
+
+def synthesize(text: str, voice: str = DEFAULT_VOICE, speed: float = DEFAULT_SPEED, pause_ms: float = 70.0, tail_trim_ms: float = 100.0, progress=None):
     text = clean_text(text)
     if not text:
         raise ValueError("Text is empty.")
@@ -267,11 +277,20 @@ def synthesize(text: str, voice: str = DEFAULT_VOICE, speed: float = DEFAULT_SPE
     speed = max(0.6, min(1.4, float(speed or DEFAULT_SPEED)))
     pause_ms = max(0.0, min(450.0, float(pause_ms or 0)))
     tail_trim_ms = max(0.0, min(500.0, float(tail_trim_ms or 0)))
+    estimated_segments = _tts_segment_estimate(text)
+    if progress:
+        progress({"stage": "loading", "progress": 4, "segment": 0, "segments": estimated_segments, "message": "Loading Kokoro voice model…"})
     pipeline = get_pipeline()
     chunks = []
     with _pipeline_lock:
-        generated = list(pipeline(text, voice=voice, speed=speed))
+        if progress:
+            progress({"stage": "generating", "progress": 8, "segment": 0, "segments": estimated_segments, "message": "Generating narration segments…"})
+        generated = pipeline(text, voice=voice, speed=speed)
         for index, (graphemes, _phonemes, audio) in enumerate(generated):
+            if progress:
+                segment = index + 1
+                percent = min(92, 8 + round((segment / estimated_segments) * 84))
+                progress({"stage": "generating", "progress": percent, "segment": segment, "segments": estimated_segments, "message": f"Generating narration segment {segment}…"})
             arr = np.asarray(audio, dtype=np.float32)
             if not arr.size:
                 continue
@@ -282,6 +301,8 @@ def synthesize(text: str, voice: str = DEFAULT_VOICE, speed: float = DEFAULT_SPE
                 chunks.append(np.zeros(int(24000 * pause / 1000.0), dtype=np.float32))
     if not chunks:
         raise RuntimeError("Kokoro returned no audio.")
+    if progress:
+        progress({"stage": "finalizing", "progress": 95, "segment": estimated_segments, "segments": estimated_segments, "message": "Finalizing WAV audio…"})
     audio = np.concatenate(chunks)
     audio = trim_trailing_silence(audio, tail_trim_ms)
     audio = polish_audio(audio)
@@ -289,6 +310,8 @@ def synthesize(text: str, voice: str = DEFAULT_VOICE, speed: float = DEFAULT_SPE
     buf = io.BytesIO()
     sf.write(buf, audio, 24000, format="WAV", subtype="PCM_16")
     buf.seek(0)
+    if progress:
+        progress({"stage": "complete", "progress": 100, "segment": estimated_segments, "segments": estimated_segments, "message": "Narration ready."})
     return buf, duration
 
 def download_map(filename: str) -> Path:
@@ -579,6 +602,104 @@ def tts():
         return response
     except Exception as exc:
         return jsonify(error=str(exc)), 500
+
+
+def _tts_job_snapshot(job_id: str):
+    with _tts_jobs_lock:
+        job = _tts_jobs.get(job_id)
+        if not job:
+            return None
+        snapshot = {key: value for key, value in job.items() if key != "filename"}
+        if job.get("filename"):
+            snapshot["audioUrl"] = f"/api/tts/jobs/{job_id}/audio"
+        return snapshot
+
+
+def _update_tts_job(job_id: str, **updates):
+    with _tts_jobs_lock:
+        if job_id in _tts_jobs:
+            _tts_jobs[job_id].update(updates)
+
+
+def _run_tts_job(job_id: str, data: dict):
+    text = str(data.get("text", "")).strip()
+    voice = str(data.get("voice") or DEFAULT_VOICE)
+    speed = data.get("speed", DEFAULT_SPEED)
+    pause_ms = data.get("pauseMs", 70)
+    tail_trim_ms = data.get("tailTrimMs", 100)
+    title = str(data.get("title") or "MEP narration")
+    short_id = str(data.get("shortId") or "")
+
+    def progress(update):
+        _update_tts_job(job_id, **update, updatedAt=time.time())
+
+    try:
+        _update_tts_job(job_id, state="running", stage="starting", progress=1, message="Starting local voice generation…", startedAt=time.time(), updatedAt=time.time())
+        audio, duration = synthesize(text, voice, speed, pause_ms, tail_trim_ms, progress=progress)
+        filename = safe_name(title) + "-" + job_id[:8] + ".wav"
+        saved = OUTPUTS / filename
+        saved.write_bytes(audio.getvalue())
+        _update_tts_job(job_id, state="complete", stage="complete", progress=100, message="Narration ready to mix into the video.", duration=duration, filename=filename, shortId=short_id, updatedAt=time.time(), completedAt=time.time())
+    except Exception as exc:
+        _update_tts_job(job_id, state="error", stage="error", progress=0, message=str(exc), error=str(exc), updatedAt=time.time(), completedAt=time.time())
+
+
+@app.post("/api/tts/jobs")
+def start_tts_job():
+    data = request.get_json(silent=True) or {}
+    if not str(data.get("text", "")).strip():
+        return jsonify(error="Text is empty."), 400
+    now = time.time()
+    with _tts_jobs_lock:
+        expired = [key for key, value in _tts_jobs.items() if now - float(value.get("updatedAt", now)) > _tts_job_ttl]
+        for key in expired:
+            filename = _tts_jobs[key].get("filename")
+            if filename:
+                try:
+                    (OUTPUTS / filename).unlink(missing_ok=True)
+                except OSError:
+                    pass
+            del _tts_jobs[key]
+        job_id = uuid.uuid4().hex
+        _tts_jobs[job_id] = {
+            "jobId": job_id,
+            "voice": str(data.get("voice") or DEFAULT_VOICE),
+            "state": "queued",
+            "stage": "queued",
+            "progress": 0,
+            "segment": 0,
+            "segments": _tts_segment_estimate(str(data.get("text", ""))),
+            "message": "Queued for the local Kokoro engine…",
+            "createdAt": now,
+            "updatedAt": now,
+        }
+    threading.Thread(target=_run_tts_job, args=(job_id, data), daemon=True, name=f"mep-tts-{job_id[:8]}").start()
+    return jsonify(_tts_job_snapshot(job_id)), 202
+
+
+@app.get("/api/tts/jobs/<job_id>")
+def tts_job_status(job_id: str):
+    snapshot = _tts_job_snapshot(job_id)
+    if not snapshot:
+        return jsonify(error="Voice generation job not found."), 404
+    return jsonify(snapshot)
+
+
+@app.get("/api/tts/jobs/<job_id>/audio")
+def tts_job_audio(job_id: str):
+    snapshot = _tts_job_snapshot(job_id)
+    if not snapshot:
+        return jsonify(error="Voice generation job not found."), 404
+    if snapshot.get("state") != "complete":
+        return jsonify(error="Voice generation is not complete yet."), 409
+    filename = _tts_jobs[job_id].get("filename")
+    if not filename or not (OUTPUTS / filename).is_file():
+        return jsonify(error="Generated voice file is missing."), 404
+    response = send_file(OUTPUTS / filename, mimetype="audio/wav", as_attachment=False, download_name=filename)
+    response.headers["X-MEP-Duration"] = f"{float(snapshot.get('duration') or 0):.3f}"
+    response.headers["X-MEP-Voice"] = str(snapshot.get("voice") or DEFAULT_VOICE)
+    response.headers["X-MEP-Short-Id"] = str(snapshot.get("shortId") or "")
+    return response
 
 
 @app.post("/api/tts/batch")

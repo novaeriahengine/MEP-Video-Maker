@@ -7,6 +7,7 @@ This folder turns the downloaded repository into a local/offline MEP Video Maker
 - Local MEP editor at `http://127.0.0.1:7860/app/`
 - Phone/LAN editor at `http://YOUR-LAPTOP-IP:7860/app/`
 - British Kokoro voices: George, Daniel, Fable, Lewis
+- Background narration jobs with segment-level progress for the web editor, so long local generations remain visible instead of blocking the page
 - WAV narration generation
 - A local dashboard with model status, a TTS tester, and a downloadable QR code
 - Optional GGUF director: Windows folder selection, model scanning, approved Qwen downloads with progress, and a separately managed llama.cpp chat process

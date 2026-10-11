@@ -19,12 +19,35 @@ async function apiFetch(base,path,options={}){
  const root=normalizeUrl(base||defaultServerUrl());if(!root)throw new Error("Voice server URL is empty.");
  if(mixedContentRisk(root))throw new Error("This HTTPS page cannot call an HTTP laptop server. Open the editor from the laptop server QR code instead.");
  const r=await fetch(root+path,{...options,headers:{"Content-Type":"application/json",...(options.headers||{})}});
- if(!r.ok){let msg="Voice server error "+r.status;try{const j=await r.json();msg=j.error||j.message||msg}catch{}throw new Error(msg)}return r
+ if(!r.ok){let msg="Voice server error "+r.status;try{const j=await r.json();msg=j.error||j.message||msg}catch{}const error=new Error(msg);error.status=r.status;throw error}return r
 }
 async function health(base){return(await apiFetch(base,"/api/health")).json()}
 async function voices(base){return(await apiFetch(base,"/api/voices")).json()}
-async function synthesize(base,{text,voice="bm_george",speed=.95,pauseMs=70,tailTrimMs=100,title="",shortId=""}={}){
- const r=await apiFetch(base,"/api/tts",{method:"POST",body:JSON.stringify({text,voice,speed,pauseMs,tailTrimMs,title,shortId})});return r.blob()
+async function synthesize(base,{text,voice="bm_george",speed=.95,pauseMs=70,tailTrimMs=100,title="",shortId="",onProgress=null}={}){
+ const payload={text,voice,speed,pauseMs,tailTrimMs,title,shortId};
+ let started;
+ try{started=await apiFetch(base,"/api/tts/jobs",{method:"POST",body:JSON.stringify(payload)})}
+ catch(error){
+  if(error.status!==404)throw error;
+  const r=await apiFetch(base,"/api/tts",{method:"POST",body:JSON.stringify(payload)});
+  onProgress?.({state:"complete",stage:"complete",progress:100,message:"Narration ready."});
+  return r.blob();
+ }
+ const job=await started.json();
+ if(!job.jobId)throw new Error("Voice server did not return a generation job.");
+ onProgress?.(job);
+ while(true){
+  await new Promise(resolve=>setTimeout(resolve,900));
+  const status=await (await apiFetch(base,"/api/tts/jobs/"+encodeURIComponent(job.jobId))).json();
+  onProgress?.(status);
+  if(status.state==="error")throw new Error(status.error||status.message||"Voice generation failed.");
+  if(status.state==="complete"){
+   onProgress?.({...status,stage:"downloading",message:"Downloading generated WAV…"});
+   const audio=await apiFetch(base,"/api/tts/jobs/"+encodeURIComponent(job.jobId)+"/audio");
+   onProgress?.({...status,stage:"downloaded",message:"Generated WAV downloaded."});
+   return audio.blob();
+  }
+ }
 }
 function narrationForShort(sh){return(sh?.scenes||[]).map(s=>s.script||"").filter(Boolean).join(" ")}
 function createColabBatch(project){

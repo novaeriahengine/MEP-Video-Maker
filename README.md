@@ -26,7 +26,7 @@ The local Python server also exposes a **Historical Photos** search backed by Wi
 Built-in thematic backgrounds include WWI Western Front, WWI Eastern Front, Pearl Harbor/Pacific, Normandy, Cold War Europe, American Revolution, Napoleonic Europe, and general world/continent maps.
 
 ## Video export
-**Export This Short** records the active Short on an offscreen canvas so the editor does not have to visibly play the video. The export is the same scene renderer used by Preview mode. **Export All** processes every Short in the current project sequentially. Browser MediaRecorder still encodes in real time, so a 42-second Short takes roughly 42 seconds to render, but the visible editor can remain on the current screen.
+**Export This Short** records the active Short on an offscreen canvas so the editor does not have to visibly play the video. The export is the same scene renderer used by Preview mode. **Export All** processes every Short in the current project sequentially. Browser MediaRecorder still encodes in real time, so a 42-second Short takes roughly 42 seconds to render, but the visible editor can remain on the current screen. When Chrome Preview is converted to Local Kokoro, the local server runs that work as a tracked job; the editor keeps a visible progress bar for model loading, narration segments, WAV transfer, scene preparation, and video rendering instead of appearing frozen.
 
 Exports are WebM because that is the broadly available browser MediaRecorder format. MP4 would require WebCodecs/ffmpeg or a backend transcoder.
 
