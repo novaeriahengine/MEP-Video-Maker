@@ -82,6 +82,8 @@ async function saveCloud(p){
  }
  if(byteSize(metadata)>900000)throw Error("Project metadata is too large to store.");
  batch.set(cloud.fs.doc(cloud.db,"mepProjects",p.id),metadata);
+ const audit={schema:"mep-project-activity-v1",projectId:p.id,action:"cloud-save",videoCount:summaries.length,projectName:p.name||"Untitled",ownerUid:cloud.auth.currentUser.uid,createdAt:new Date().toISOString()};
+ batch.set(cloud.fs.doc(cloud.db,"mepProjectHistory",p.id+"__"+Date.now()+"__"+Math.random().toString(36).slice(2,8)),audit);
  await batch.commit();
  for(const a of p.assets||[])if(a.dataUrl)await saveAssetDoc(p.id,a);
  p.sync=p.sync||{};p.sync.status="synced";p.sync.lastSyncedAt=metadata.updatedAt;save(p);
@@ -129,6 +131,13 @@ async function loadCloud(id){
  }
  const p=MEPModel.migrate(await hydrateAssets(data));save(p);return p
 }
+async function listCloudHistory(projectId){
+ await ensure();
+ const ref=cloud.fs.collection(cloud.db,"mepProjectHistory");
+ const q=cloud.fs.query(ref,cloud.fs.where("projectId","==",projectId));
+ const snaps=await cloud.fs.getDocs(q);
+ return snaps.docs.map(d=>d.data()).sort((a,b)=>(b.createdAt||"").localeCompare(a.createdAt||"")).slice(0,30)
+}
 async function listCloud(){await ensure();const snap=await cloud.fs.getDocs(cloud.fs.collection(cloud.db,"mepProjects"));return snap.docs.map(d=>({id:d.id,name:d.data().name||"Untitled Project",updatedAt:d.data().updatedAt||"",shortCount:d.data().shorts?.length||1})).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt))}
 async function loadLatestCloud(){const list=await listCloud();return list.length?loadCloud(list[0].id):null}
 async function seedLibrary(snapshot){await ensure();requireEditor();await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepLibrary","default"),structuredClone(snapshot),{merge:false});return true}
@@ -136,5 +145,5 @@ function isHaitiLegacy(data,id=""){const raw=(id+" "+JSON.stringify(data||{})).t
 async function deleteLegacyHaitiCloud(){return{deletedProjects:[],disabled:true,reason:"Automatic cloud deletion removed for project preservation"}}
 async function saveCharacter(c){await ensure();requireEditor();const doc={schema:"mep-character-v3",id:c.id,name:c.name,tags:c.tags||[],visual:c.visual,prop:c.prop||"none",updatedAt:new Date().toISOString()};await cloud.fs.setDoc(cloud.fs.doc(cloud.db,"mepCharacters",c.id),doc,{merge:true});return c.id}
 function download(p){const blob=new Blob([JSON.stringify(MEPModel.syncAlias(p),null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=(p.name||"mep-project").replace(/[^a-z0-9-_]+/gi,"-").toLowerCase()+".mep.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
-return{save,load,hasLocal,listLocal,removeLocal,needsShortMakerReset,resetLocalToProject,deleteLegacyHaitiCloud,download,initCloud,saveCloud,saveAllLocalProjects,seedBundledProjects,loadCloud,listCloud,loadLatestCloud,seedLibrary,saveCharacter,currentEditor,signInEditor,signOutEditor,saveFlagRating,subscribeFlagRatings,signedInAccount,sendEditorReset,sendEditorVerification,refreshEditor,changeEditorPassword,watchEditor};
+return{save,load,hasLocal,listLocal,removeLocal,needsShortMakerReset,resetLocalToProject,deleteLegacyHaitiCloud,download,initCloud,saveCloud,saveAllLocalProjects,seedBundledProjects,loadCloud,listCloud,listCloudHistory,loadLatestCloud,seedLibrary,saveCharacter,currentEditor,signInEditor,signOutEditor,saveFlagRating,subscribeFlagRatings,signedInAccount,sendEditorReset,sendEditorVerification,refreshEditor,changeEditorPassword,watchEditor};
 })();
