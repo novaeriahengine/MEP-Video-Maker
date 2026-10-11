@@ -204,6 +204,7 @@ function cloneScene(src){const s=structuredClone(src);s.id=MEPModel.id();s.name=
 on("#projectName","input",e=>{project.name=e.target.value;changed()});
 
 let selectedFlagCode="AL";
+let lastFlagRowSignature="";
 function syncFlagsUI(){
  const panel=$("#flagSeriesPanel"),active=project?.series?.type==="state-flags";
  if(!panel)return;panel.hidden=!active;if(!active||!window.MEPFlagSeries)return;
@@ -217,8 +218,12 @@ function syncFlagsUI(){
  $("#flagCompletedCount").textContent=codes.filter(c=>rank[c]?.done).length+" / 50";
  $("#flagActivePreview").innerHTML='<img loading="lazy" alt="Official flag of '+selectedFlagCode+'" src="flags/current/'+selectedFlagCode.toLowerCase()+'.svg"><strong>'+esc(MEPFlagSeries.flagInfo(selectedFlagCode)?.name||selectedFlagCode)+'</strong><small>Episode '+MEPFlagSeries.episodeOf(selectedFlagCode)+'</small>';
  $("#flagTierBoard").innerHTML=["A","B","C","D","F"].map(g=>'<div class="tierRow tier'+g+'"><b>'+g+'</b><span>'+(codes.filter(c=>rank[c]?.grade===g).map(c=>'<span class="tierCode">'+c+'</span>').join("")||"—")+'</span></div>').join("");
- $("#flagAllStates").innerHTML=codes.map(code=>{const r=rank[code]||{};return'<button class="flagStateRow" data-flag-code="'+code+'"><span>'+(r.done?"✓":"○")+'</span><img loading="lazy" src="flags/current/'+code.toLowerCase()+'.svg" alt=""><strong>'+code+'</strong><span>'+(r.grade||"—")+'</span><small>Ep '+MEPFlagSeries.episodeOf(code)+'</small></button>'}).join("");
- $$("[data-flag-code]").forEach(b=>on(b,"click",()=>{selectedFlagCode=b.dataset.flagCode;const target=project.shorts.find(sh=>sh.flagsEpisode?.stateCodes?.includes(selectedFlagCode));if(target&&target.id!==short.id){MEPModel.setActiveShort(project,target.id);refreshRefs();syncUI()}else syncFlagsUI()}));
+ const rowSignature=codes.map(c=>c+":"+(rank[c]?.grade||"-")+":"+(rank[c]?.done?1:0)).join("|");
+ if(rowSignature!==lastFlagRowSignature||!$("#flagAllStates").children.length){
+  lastFlagRowSignature=rowSignature;
+  $("#flagAllStates").innerHTML=codes.map(code=>{const r=rank[code]||{};return'<button class="flagStateRow" data-flag-code="'+code+'"><span>'+(r.done?"✓":"○")+'</span><img loading="lazy" decoding="async" src="flags/current/'+code.toLowerCase()+'.svg" alt=""><strong>'+code+'</strong><span>'+(r.grade||"—")+'</span><small>Ep '+MEPFlagSeries.episodeOf(code)+'</small></button>'}).join("");
+  $("[data-flag-code]").forEach(b=>on(b,"click",()=>{selectedFlagCode=b.dataset.flagCode;const target=project.shorts.find(sh=>sh.flagsEpisode?.stateCodes?.includes(selectedFlagCode));if(target&&target.id!==short.id){MEPModel.setActiveShort(project,target.id);refreshRefs();syncUI()}else syncFlagsUI()}));
+ }
  $("#flagCloudStatus").textContent=MEPStorage.currentEditor()?"Signed in · Firestore rules determine write access · "+MEPStorage.currentEditor():"Shared board · sign in to publish updates; local ratings still work offline";
 }
 
