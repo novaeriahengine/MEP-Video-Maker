@@ -504,6 +504,7 @@ on("#addBubble","click",()=>{const style=$("#bubbleStyle").value||"speech",st=ME
 on("#scrubber","input",e=>{playing=false;editPreview=null;time=Number(e.target.value);render();syncBackgroundUI()});function playTick(now){if(!playing)return;time+=(now-lastFrame)/1000;lastFrame=now;if(time>=scene.duration){time=scene.duration;playing=false}render();if(playing)requestAnimationFrame(playTick)}on("#play","click",()=>{if(time>=scene.duration)time=0;playing=true;lastFrame=performance.now();requestAnimationFrame(playTick)});on("#stop","click",()=>{playing=false;time=0;render()});
 
 let videoPlaying=false,videoTime=0,videoLast=0,videoFrameLast=0,videoUiLast=0,videoRaf=0,videoStartAt=0,videoStartPosition=0;
+let previewRenderMs=0,adaptivePreviewFps=18;
 function sceneAtGlobal(sh,t){
  const scenes=sh?.scenes||[];if(!scenes.length)return{scene:null,index:0,local:0,offset:0};
  let off=0;const position=Math.max(0,Number(t)||0);
@@ -618,12 +619,21 @@ function videoTick(now){
    if(voiceRecorder?.state==="recording")setTimeout(stopVoiceRecording,450)
   }
  }
- const targetFps=Math.max(10,Math.min(30,Number($("#previewQuality")?.value)||18));
+ const quality=$("#previewQuality")?.value||"auto";
+ const targetFps=quality==="auto"?adaptivePreviewFps:Math.max(10,Math.min(30,Number(quality)||18));
  const framePeriod=1000/targetFps;
  const changed=sceneAtGlobal(short,videoTime).index!==lastVideoSceneIndex;
  if(changed||now-videoFrameLast>=framePeriod||!videoPlaying){
   videoFrameLast=now;
-  try{renderVideo({quiet:true})}catch(error){
+  try{
+   const began=performance.now();
+   renderVideo({quiet:true});
+   if(quality==="auto"){
+    const cost=Math.max(0,performance.now()-began);
+    previewRenderMs=previewRenderMs?previewRenderMs*.88+cost*.12:cost;
+    adaptivePreviewFps=previewRenderMs>65?12:previewRenderMs>43?15:previewRenderMs>26?18:24;
+   }
+  }catch(error){
    stopPreviewPlayback();console.error("Video preview paused after a render error:",error);
    setText("#exportStatus","Preview rendering error: "+error.message);
    return
