@@ -162,3 +162,13 @@ body.tool-full .toolAssistant{background:#0f141b}
 #editPlayingScene{border:1px solid rgba(233,188,88,.4);white-space:nowrap}
 #flagUpgradeStatus{font-size:12px;line-height:1.5;color:#f0cd7a;overflow-wrap:anywhere}
 @media(max-width:650px){.video-mode .transport{flex-wrap:wrap;gap:6px}.video-mode .transport button{min-height:42px}.previewSceneInfo{gap:4px}}
+
+/* Flag-scene directing, with linked narration and immediate visual preview. */
+#flagSceneDirector{margin:8px 0 12px;padding:12px;border:1px solid rgba(229,184,80,.35);border-radius:12px;background:rgba(20,35,45,.22)}
+#flagSceneDirector[hidden]{display:none!important}
+#flagSceneDirector summary{cursor:pointer;font-weight:750;padding:5px 0}
+#flagSceneDirector label{display:flex;flex-direction:column;gap:5px;margin-top:10px;min-width:0}
+#flagSceneDirector select,#flagSceneDirector input{width:100%;min-width:0}
+#flagSceneDirector .buttonGrid{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+#flagSceneDirector .buttonGrid button{flex:1 1 120px}
+#flagSceneLinkPreview{margin:10px 0 0;overflow-wrap:anywhere;line-height:1.5}
