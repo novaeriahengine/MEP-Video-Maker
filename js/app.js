@@ -481,6 +481,7 @@ function renderVideo({quiet=false}={}){
   if(lastVideoSceneIndex>=0)videoStripButtons[lastVideoSceneIndex]?.classList.remove("active");
   videoStripButtons[a.index]?.classList.add("active");lastVideoSceneIndex=a.index;
   setText("#videoScript",a.scene.script||"");
+  if(videoPlaying&&short.voice?.source==="chrome")speakChromeScene(a.scene);
   setText("#previewSceneCounter","Scene "+(a.index+1)+" of "+short.scenes.length+" · "+a.scene.name);
   setText("#previewSceneScriptHint","Narration + visuals linked · "+(Number(a.scene.duration)||0).toFixed(1)+"s beat")
  }
@@ -503,15 +504,25 @@ on("#localLlmResearch","click",async()=>{try{const query=$("#localResearchQuery"
 let videoPreviewVoice=null,videoPreviewSerial=0;
 function refreshPreviewNarration(){if(videoPlaying){stopVideoPreviewVoice();startVideoPreviewVoice()}}
 function stopVideoPreviewVoice(){
+ lastChromeSceneSpoken="";
  videoPreviewSerial++;
  if(videoPreviewVoice){try{videoPreviewVoice.src.stop()}catch{}try{videoPreviewVoice.ac.close()}catch{}videoPreviewVoice=null}
  window.__mepChromeVoiceCancel?.();window.speechSynthesis?.cancel()
 }
+let lastChromeSceneSpoken="";
+function speakChromeScene(scene){
+ if(!videoPlaying||short.voice?.source!=="chrome"||!scene?.script?.trim())return;
+ if(lastChromeSceneSpoken===scene.id)return;
+ lastChromeSceneSpoken=scene.id;
+ // Play only the narrated beat currently visible; stop voice drifting away from captions.
+ chromeSpeak(scene.script);
+}
 async function startVideoPreviewVoice(){
  const token=++videoPreviewSerial,source=short.voice?.source||"chrome";
  if(source==="chrome"){
-  const sceneInfo=sceneAtGlobal(short,videoTime),text=short.scenes.slice(sceneInfo.index).map(s=>s.script||"").filter(Boolean).join(" ");
-  if(text)chromeSpeak(text);return
+  lastChromeSceneSpoken="";
+  speakChromeScene(sceneAtGlobal(short,videoTime).scene);
+  return
  }
  if(!["mic","server","colab","ai"].includes(source))return;
  try{
