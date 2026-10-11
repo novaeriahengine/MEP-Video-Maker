@@ -16,7 +16,7 @@ window.MEPInventionScenes=(()=>{
  function document(g,x,y){rect(g,x,y,220,280,"#f2e7cf");for(let k=0;k<7;k++)line(g,x+20,y+40+k*31,x+200,y+40+k*31,"#b4a68b",3)}
  function bottle(g,x,y,fill="#94b1ba"){rect(g,x-34,y-60,68,60,"#98a5a4");rect(g,x-73,y,146,205,fill);rect(g,x-80,y+200,160,14,C.dark)}
  function lab(g){base(g,"#6f7068",false);rect(g,50,250,620,420,"#aeb9b6");rect(g,50,667,620,70,C.brown);rect(g,0,950,720,330,"#626565")}
- function paperFactory(g){base(g,"#9a8066");for(let x=60;x<680;x+=170){rect(g,x,270,130,300,C.brick);rect(g,x+27,340,76,90,C.dark)}rect(g,40,740,640,80,C.wood||C.brown);machine(g,180,800,340,190)}
+ function paperFactory(g){base(g,"#9a8066");for(let x=60;x<680;x+=170){rect(g,x,270,130,300,C.brick);rect(g,x+27,340,76,90,C.dark)}rect(g,40,740,640,80,C.brown);machine(g,180,800,340,190)}
  function setCaption(g,t){label(g,t,360,300,27,C.ink)}
  function draw(ctx,key,w,h,options={}){
   const time=Math.max(0,Number(options.time)||0),dur=Math.max(.1,Number(options.duration)||3.2),p=Math.min(1,time/dur),intent=String(options.intent||"");
@@ -83,7 +83,7 @@ window.MEPInventionScenes=(()=>{
    else if(/steel|strength|weight|five/.test(intent)){label(ctx,"5× STRENGTH BY WEIGHT",360,382,32);label(ctx,"LIGHTWEIGHT FIBER",360,960,30)}
   }
   // Minimal editorial framing, shared between all five inventions.
-  rect(ctx,0,0,720,92,"rgba(38,50,58,.93)");ctx.fillStyle=C.gold;ctx.font="800 23px system-ui";ctx.textAlign="left";ctx.fillText("NOVERIA · INVENTIONS",30,54);
+  // The shared app draws the Noveria brand once, above the visual layer.
   ctx.restore();
  }
  return{has:key=>keys.has(key),draw};
