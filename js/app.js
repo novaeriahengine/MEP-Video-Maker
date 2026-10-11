@@ -288,9 +288,71 @@ async function warmHistoricalMaps(sh){
   if(sh?.voice?.source!=="chrome")return;const script=wholeNarration(sh);if(!script.trim())throw new Error("Chrome Preview has no narration text to convert. Write a narration or choose No Voice for a silent export.");const url=(window.MEPVoiceBackends?.defaultServerUrl?.()||$("#neuralApiUrl")?.value||"").trim();if(!url)throw new Error("Chrome Preview cannot be embedded. Open the local MEP server, then Export will generate a Local Kokoro track automatically.");if(!window.MEPVoiceBackends?.synthesize)throw new Error("The Local Kokoro export helper is unavailable. Reload the local MEP editor and try again.");setText("#exportStatus","Chrome Preview selected · generating an exportable Local Kokoro narration…");MEPVoiceBackends.setServerUrl(url);const v=sh.voice||{},blob=await MEPVoiceBackends.synthesize(url,{text:script,voice:v.kokoroVoice||"bm_george",speed:Number(v.kokoroSpeed)||.95,pauseMs:Number(v.sentencePauseMs??70),tailTrimMs:Number(v.tailTrimMs??100),title:sh.title,shortId:sh.id});await attachNeuralAudio(blob,(sh.title||"mep-short").replace(/[^a-z0-9]+/gi,"-")+"-kokoro.wav",sh,{quiet:true,voice:v.kokoroVoice||"bm_george",speed:Number(v.kokoroSpeed)||.95,source:"server"});selectVoiceSource(sh,"server");changed();syncVoiceUI();setText("#exportStatus","Local Kokoro narration attached · mixing it into the WebM…")
  }
  async function exportShort(sh,position=1,totalCount=1){
-  if(!window.MediaRecorder)return alert("This browser does not support MediaRecorder.");await prepareChromePreviewForExport(sh);const voiceInfo=voiceSourceInfo(sh);setText("#exportStatus","Loading historical maps…");await Promise.all([warmAssets(),warmHistoricalMaps(sh)]);const c=document.createElement("canvas");c.width=sh.width||720;c.height=sh.height||1280;const x=c.getContext("2d"),videoStream=c.captureStream(sh.fps||30),voiceGraph=await buildVoiceGraph(sh,{monitor:false}),tracks=[...videoStream.getVideoTracks()];if(["mic","server","colab","ai"].includes(sh.voice?.source)&&!voiceGraph)throw new Error(voiceInfo.label+" is selected but no usable audio is attached. Generate, import, or record that source again before exporting.");if(voiceGraph?.track)tracks.push(voiceGraph.track);const stream=new MediaStream(tracks),mime=MediaRecorder.isTypeSupported("video/webm;codecs=vp9,opus")?"video/webm;codecs=vp9,opus":MediaRecorder.isTypeSupported("video/webm;codecs=vp9")?"video/webm;codecs=vp9":"video/webm",rec=new MediaRecorder(stream,{mimeType:mime}),chunks=[],visualTotal=MEPModel.shortDuration(sh),audioTotal=voiceGraph?.outputDuration||0,total=(sh.voice?.fitExportToVoice!==false&&voiceGraph)?Math.max(visualTotal,audioTotal+.08):visualTotal;
-  return new Promise(async(resolve,reject)=>{let timer=null,startTime=performance.now();rec.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};rec.onerror=e=>{clearInterval(timer);voiceGraph?.ac?.close().catch(()=>{});reject(e.error||e)};rec.onstop=()=>{clearInterval(timer);voiceGraph?.ac?.close().catch(()=>{});const blob=new Blob(chunks,{type:"video/webm"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=(sh.title||"Noveria-History-Short").replace(/[^a-z0-9]+/gi,"-").replace(/^-|-$/g,"")+".webm";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1500);resolve()};renderShortFrame(x,sh,0);rec.start(1000);if(voiceGraph){await voiceGraph.ac.resume();voiceGraph.start(.05)}
- timer=setInterval(()=>{const elapsed=(performance.now()-startTime)/1000,t=Math.min(total,elapsed),renderT=Math.min(Math.max(0,visualTotal-.001),t);renderShortFrame(x,sh,renderT);setText("#exportStatus","Rendering "+position+"/"+totalCount+" · "+sh.title+" · "+Math.round(t/total*100)+"% · "+(voiceGraph?voiceInfo.label+" mixed":voiceInfo.label)+(total>visualTotal+.05?" · holding final frame for voice":""));if(elapsed>=total){clearInterval(timer);setTimeout(()=>rec.stop(),180)}},Math.max(16,1000/(sh.fps||30)))
+ if(!window.MediaRecorder)throw new Error("This browser does not support MediaRecorder.");
+ await prepareChromePreviewForExport(sh);
+ const voiceInfo=voiceSourceInfo(sh);
+ setText("#exportStatus","Preparing historical maps and media…");
+ await Promise.all([warmAssets(),warmHistoricalMaps(sh)]);
+ const canvas=document.createElement("canvas");
+ canvas.width=sh.width||720;
+ canvas.height=sh.height||1280;
+ if(typeof canvas.captureStream!=="function")throw new Error("Canvas video capture is unsupported in this browser.");
+ const fps=Math.max(12,Math.min(60,Math.round(Number(sh.fps)||30)));
+ const ctx=canvas.getContext("2d");
+ const videoStream=canvas.captureStream(fps);
+ const voiceGraph=await buildVoiceGraph(sh,{monitor:false});
+ const audioRequired=["mic","server","colab","ai"].includes(sh.voice?.source);
+ if(audioRequired&&!voiceGraph)throw new Error(voiceInfo.label+" selected, but no playable narration is attached. Record or generate the track first.");
+ const tracks=[...videoStream.getVideoTracks()];
+ if(voiceGraph?.track)tracks.push(voiceGraph.track);
+ if(!tracks.length||!tracks[0])throw new Error("Could not capture the canvas video track.");
+ const hasAudio=!!voiceGraph?.track;
+ if(audioRequired&&!hasAudio)throw new Error("Could not capture the selected narration audio track.");
+ const preferred=hasAudio
+  ?["video/webm;codecs=vp9,opus","video/webm;codecs=vp8,opus","video/webm;codecs=opus","video/webm"]
+  :["video/webm;codecs=vp9","video/webm;codecs=vp8","video/webm"];
+ const mime=preferred.find(m=>MediaRecorder.isTypeSupported(m));
+ if(!mime)throw new Error("This browser cannot record a supported WebM"+(hasAudio?" video + Opus audio":"")+" format.");
+ let rec;
+ try{rec=new MediaRecorder(new MediaStream(tracks),{mimeType:mime,videoBitsPerSecond:fps>=50?4200000:3000000})}
+ catch(e){throw new Error("Video recorder initialization failed: "+e.message)}
+ const chunks=[],visualTotal=MEPModel.shortDuration(sh),audioTotal=voiceGraph?.outputDuration||0;
+ const total=(sh.voice?.fitExportToVoice!==false&&voiceGraph)?Math.max(visualTotal,audioTotal+.10):visualTotal;
+ return new Promise((resolve,reject)=>{
+  let timer=null,settled=false,stopping=false,startTime=0;
+  function cleanup(){if(timer!==null)clearInterval(timer);voiceGraph?.ac?.close().catch(()=>{});videoStream.getTracks().forEach(t=>t.stop())}
+  function fail(error){if(settled)return;settled=true;cleanup();try{if(rec.state!=="inactive")rec.stop()}catch{}reject(error)}
+  rec.ondataavailable=e=>{if(e.data?.size)chunks.push(e.data)};
+  rec.onerror=e=>fail(e.error||new Error("MediaRecorder failed"));
+  rec.onstop=()=>{
+   if(settled)return;
+   settled=true;cleanup();
+   const blob=new Blob(chunks,{type:rec.mimeType||mime});
+   if(blob.size<1024){reject(new Error("The browser produced an empty or invalid video file. Try 30 FPS or a different browser."));return}
+   const link=document.createElement("a"),url=URL.createObjectURL(blob);
+   link.href=url;
+   link.download=(sh.title||"Noveria-History-Short").replace(/[^a-z0-9]+/gi,"-").replace(/^-|-$/g,"")+".webm";
+   document.body.appendChild(link);link.click();link.remove();
+   // A long-lived URL helps mobile browsers finish the save dialog.
+   setTimeout(()=>URL.revokeObjectURL(url),120000);
+   resolve()
+  };
+  try{renderShortFrame(ctx,sh,0);rec.start(1000)}
+  catch(e){fail(new Error("Could not start video recording: "+e.message));return}
+  startTime=performance.now();
+  if(voiceGraph)voiceGraph.ac.resume().then(()=>voiceGraph.start(.05)).catch(e=>fail(new Error("Could not start narration audio: "+e.message)));
+  timer=setInterval(()=>{
+   if(settled||stopping)return;
+   try{
+    const elapsed=(performance.now()-startTime)/1000;
+    const t=Math.min(total,elapsed);
+    const renderT=Math.min(Math.max(0,visualTotal-.001),t);
+    renderShortFrame(ctx,sh,renderT);
+    const status=hasAudio?voiceInfo.label+" + audio":"silent";
+    setText("#exportStatus","Rendering "+position+"/"+totalCount+" · "+sh.title+" · "+Math.round(t/total*100)+"% · "+status+" · "+fps+" FPS"+(total>visualTotal+.05?" · holding last frame for narration":""));
+    if(elapsed>=total){stopping=true;clearInterval(timer);timer=null;rec.requestData();setTimeout(()=>{try{if(rec.state!=="inactive")rec.stop()}catch(e){fail(e)}},180)}
+   }catch(e){fail(e)}
+  },Math.max(16,1000/fps))
  })
 }
 async function doExportOne(){if(exporting)return;exporting=true;try{await exportShort(short);setText("#exportStatus","Downloaded: "+short.title)}catch(e){alert("Export failed: "+e.message)}finally{exporting=false}}
