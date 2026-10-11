@@ -439,10 +439,49 @@ on("#addBubble","click",()=>{const style=$("#bubbleStyle").value||"speech",st=ME
 
 on("#scrubber","input",e=>{playing=false;editPreview=null;time=Number(e.target.value);render();syncBackgroundUI()});function playTick(now){if(!playing)return;time+=(now-lastFrame)/1000;lastFrame=now;if(time>=scene.duration){time=scene.duration;playing=false}render();if(playing)requestAnimationFrame(playTick)}on("#play","click",()=>{if(time>=scene.duration)time=0;playing=true;lastFrame=performance.now();requestAnimationFrame(playTick)});on("#stop","click",()=>{playing=false;time=0;render()});
 
-let videoPlaying=false,videoTime=0,videoLast=0;
-function sceneAtGlobal(sh,t){let off=0;for(let i=0;i<sh.scenes.length;i++){const s=sh.scenes[i];if(t<=off+s.duration||i===sh.scenes.length-1)return{scene:s,index:i,local:Math.max(0,t-off),offset:off};off+=s.duration}return{scene:sh.scenes[0],index:0,local:0,offset:0}}
-function renderShortFrame(context,sh,t){const a=sceneAtGlobal(sh,t);renderScene(context,a.scene,a.local,{selectable:false,shortContext:sh});return a}
-let lastSceneStripSignature="";function renderVideo(){const a=renderShortFrame(videoCtx,short,videoTime),total=MEPModel.shortDuration(short);setText("#videoCaption","");setText("#videoClock",fmt(videoTime)+" / "+fmt(total));setVal("#videoScrubber",videoTime);$("#videoScrubber").max=total;setText("#videoScript",a.scene.script||"");const signature=short.id+":"+short.scenes.length+":"+a.index;if(signature!==lastSceneStripSignature){lastSceneStripSignature=signature;$("#sceneStrip").innerHTML=short.scenes.map((s,i)=>'<button class="'+(i===a.index?"active":"")+'" data-vscene="'+i+'">'+(i+1)+'. '+esc(s.name)+'</button>').join("");$("[data-vscene]").forEach(b=>on(b,"click",()=>{videoTime=short.scenes.slice(0,Number(b.dataset.vscene)).reduce((n,s)=>n+s.duration,0);renderVideo()}))}}
+let videoPlaying=false,videoTime=0,videoLast=0,videoFrameLast=0,videoUiLast=0,videoRaf=0;
+function sceneAtGlobal(sh,t){
+ const scenes=sh?.scenes||[];if(!scenes.length)return{scene:null,index:0,local:0,offset:0};
+ let off=0;const position=Math.max(0,Number(t)||0);
+ for(let i=0;i<scenes.length;i++){
+  const s=scenes[i],duration=Math.max(.01,Number(s.duration)||1);
+  // Half-open scene boundaries mean exactly 3.3 seconds displays scene TWO, not scene ONE.
+  if(position<off+duration||i===scenes.length-1)return{scene:s,index:i,local:Math.min(duration,Math.max(0,position-off)),offset:off};
+  off+=duration
+ }
+ return{scene:scenes.at(-1),index:scenes.length-1,local:0,offset:off}
+}
+function renderShortFrame(context,sh,t){const a=sceneAtGlobal(sh,t);if(a.scene)renderScene(context,a.scene,a.local,{selectable:false,shortContext:sh});return a}
+let lastSceneStripSignature="",lastVideoSceneIndex=-1,videoStripButtons=[];
+function renderVideo({quiet=false}={}){
+ const a=renderShortFrame(videoCtx,short,videoTime),total=MEPModel.shortDuration(short),now=performance.now();
+ if(!a.scene)return;
+ const signature=short.id+":"+short.scenes.length;
+ if(signature!==lastSceneStripSignature){
+  lastSceneStripSignature=signature;lastVideoSceneIndex=-1;
+  $("#sceneStrip").innerHTML=short.scenes.map((s,i)=>'<button data-vscene="'+i+'">'+(i+1)+'. '+esc(s.name)+'</button>').join("");
+  videoStripButtons=$$("[data-vscene]");
+  videoStripButtons.forEach(b=>on(b,"click",()=>{
+    videoPlaying=false;cancelAnimationFrame(videoRaf);stopVideoPreviewVoice();
+    const targetIndex=Number(b.dataset.vscene);
+    videoTime=short.scenes.slice(0,targetIndex).reduce((sum,s)=>sum+(Number(s.duration)||0),0);
+    videoFrameLast=0;renderVideo()
+  }))
+ }
+ const sceneChanged=lastVideoSceneIndex!==a.index;
+ if(sceneChanged){
+  if(lastVideoSceneIndex>=0)videoStripButtons[lastVideoSceneIndex]?.classList.remove("active");
+  videoStripButtons[a.index]?.classList.add("active");lastVideoSceneIndex=a.index;
+  setText("#videoScript",a.scene.script||"")
+ }
+ if(!quiet||sceneChanged||now-videoUiLast>=140){
+  videoUiLast=now;
+  setText("#videoClock",fmt(videoTime)+" / "+fmt(total));
+  setVal("#videoScrubber",videoTime);
+  $("#videoScrubber").max=total;
+  setText("#videoCaption","")
+ }
+}
 let localLlmLastAnswer="",localLlmDownloadTimer=null;
 function localServerUrl(){const entered=$("#neuralApiUrl")?.value.trim();return (entered||location.origin).replace(/\/$/,"")}
 async function localLlmRequest(path,options={}){const response=await fetch(localServerUrl()+path,options);const data=await response.json().catch(()=>({}));if(!response.ok||data.ok===false)throw Error(data.error||"Local GGUF request failed.");return data}
@@ -476,25 +515,59 @@ async function startVideoPreviewVoice(){
   graph.start(.03,videoTime)
  }catch(e){if(token===videoPreviewSerial)setText("#exportStatus","Voice preview: "+e.message)}
 }
+function stopPreviewPlayback({reset=false}={}){
+ videoPlaying=false;
+ if(videoRaf)cancelAnimationFrame(videoRaf);videoRaf=0;
+ stopVideoPreviewVoice();
+ if(reset){videoTime=0;videoFrameLast=0;renderVideo()}
+}
 function videoTick(now){
- if(!videoPlaying)return;videoTime+=(now-videoLast)/1000;videoLast=now;
+ if(!videoPlaying)return;
+ const dt=Math.max(0,Math.min(.20,(now-videoLast)/1000));videoLast=now;
  const total=MEPModel.shortDuration(short);
- if(videoTime>=total){videoTime=total;videoPlaying=false;stopVideoPreviewVoice();if(voiceRecorder?.state==="recording")setTimeout(stopVoiceRecording,450)}
- renderVideo();if(videoPlaying)requestAnimationFrame(videoTick)
+ videoTime=Math.min(total,videoTime+dt);
+ if(videoTime>=total){videoPlaying=false;stopVideoPreviewVoice();if(voiceRecorder?.state==="recording")setTimeout(stopVoiceRecording,450)}
+ const targetFps=Math.max(10,Math.min(30,Number($("#previewQuality")?.value)||18));
+ const framePeriod=1000/targetFps;
+ const changed=sceneAtGlobal(short,videoTime).index!==lastVideoSceneIndex;
+ if(changed||now-videoFrameLast>=framePeriod||!videoPlaying){
+  videoFrameLast=now;
+  try{renderVideo({quiet:true})}catch(error){
+   stopPreviewPlayback();console.error("Video preview paused after a render error:",error);
+   setText("#exportStatus","Preview rendering error: "+error.message);
+   return
+  }
+ }
+ if(videoPlaying)videoRaf=requestAnimationFrame(videoTick);else videoRaf=0
 }
 function setVideoMode(v){
- videoPlaying=false;stopVideoPreviewVoice();
+ stopPreviewPlayback();
  document.body.classList.toggle("video-mode",v);$("#editorMode").classList.toggle("active",!v);$("#videoMode").classList.toggle("active",v);
- if(v){videoTime=0;renderVideo()}
+ if(v){videoTime=0;videoFrameLast=0;renderVideo()}
 }
 on("#editorMode","click",()=>setVideoMode(false));on("#videoMode","click",()=>setVideoMode(true));on("#mobileVideo","click",()=>setVideoMode(true));
-on("#videoPlayPause","click",()=>{videoPlaying=!videoPlaying;if(videoPlaying){if(videoTime>=MEPModel.shortDuration(short))videoTime=0;videoLast=performance.now();startVideoPreviewVoice();requestAnimationFrame(videoTick)}else stopVideoPreviewVoice()});
-on("#videoStop","click",()=>{videoPlaying=false;stopVideoPreviewVoice();videoTime=0;renderVideo()});
-on("#previewStopVoice","click",()=>{stopVoiceRecording();videoPlaying=false;stopVideoPreviewVoice()});
-on("#videoScrubber","input",e=>{videoPlaying=false;stopVideoPreviewVoice();videoTime=Number(e.target.value);renderVideo()});
-on("#videoPrevScene","click",()=>{videoPlaying=false;stopVideoPreviewVoice();const x=sceneAtGlobal(short,videoTime);videoTime=sceneAtGlobal(short,Math.max(0,x.offset-.01)).offset;renderVideo()});
-on("#videoNextScene","click",()=>{videoPlaying=false;stopVideoPreviewVoice();const x=sceneAtGlobal(short,videoTime);videoTime=Math.min(MEPModel.shortDuration(short),x.offset+x.scene.duration+.001);renderVideo()});
-
+on("#videoPlayPause","click",()=>{
+ if(videoPlaying){stopPreviewPlayback();return}
+ if(videoTime>=MEPModel.shortDuration(short))videoTime=0;
+ videoPlaying=true;videoLast=performance.now();videoFrameLast=0;
+ // Start voice and visuals independently; slow TTS startup should not block the scene timeline.
+ startVideoPreviewVoice();
+ if(window.MEPFlagSeries&&short.flagsEpisode)MEPFlagSeries.warm(short).catch(e=>console.warn("Flag prewarm:",e));
+ videoRaf=requestAnimationFrame(videoTick)
+});
+on("#videoStop","click",()=>stopPreviewPlayback({reset:true}));
+on("#previewStopVoice","click",()=>{stopVoiceRecording();stopPreviewPlayback()});
+on("#videoScrubber","input",e=>{stopPreviewPlayback();videoTime=Number(e.target.value);videoFrameLast=0;renderVideo()});
+on("#videoPrevScene","click",()=>{
+ stopPreviewPlayback();const x=sceneAtGlobal(short,videoTime),idx=Math.max(0,x.index-1);
+ videoTime=short.scenes.slice(0,idx).reduce((n,s)=>n+(Number(s.duration)||0),0);
+ videoFrameLast=0;renderVideo()
+});
+on("#videoNextScene","click",()=>{
+ stopPreviewPlayback();const x=sceneAtGlobal(short,videoTime);
+ videoTime=Math.min(MEPModel.shortDuration(short),x.offset+(Number(x.scene.duration)||0));
+ videoFrameLast=0;renderVideo()
+});
 async function warmAssets(sh){
  const usedIds=new Set();
  for(const s of sh?.scenes||[]){
