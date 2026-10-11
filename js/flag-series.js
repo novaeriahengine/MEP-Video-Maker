@@ -8,7 +8,7 @@ window.MEPFlagSeries=(()=>{
  function loadLocal(){try{ratings=JSON.parse(localStorage.getItem(LOCAL_KEY)||"{}")||{}}catch{ratings={}}return ratings}
  function setRatings(next){ratings={...ratings,...(next||{})};try{localStorage.setItem(LOCAL_KEY,JSON.stringify(ratings))}catch{}window.dispatchEvent(new Event("mep-flag-ratings-changed"))}
  function getRatings(){return ratings}
- function updateRating(code,changes){if(!codes.includes(code))throw Error("Invalid state");const prev=ratings[code]||{};const next={...prev,...changes};if(next.grade&&!goodGrade(next.grade))throw Error("Grade must be A, B, C, D or F");next.updatedAt=new Date().toISOString();setRatings({[code]:next});return next}
+ function updateRating(code,changes){if(!codes.includes(code))throw Error("Invalid state");const prev=ratings[code]||{};const next={...prev,...changes};if(next.grade&&!goodGrade(next.grade))throw Error("Grade must be A, B, C, D or F");if(next.done&&!goodGrade(next.grade))throw Error("Choose a grade before marking a flag completed");next.updatedAt=new Date().toISOString();setRatings({[code]:next});return next}
  async function load(){try{const r=await fetch("flags/manifest.json",{cache:"no-store"});if(!r.ok)throw Error("Flag manifest returned "+r.status);manifest=await r.json();byCode=new Map((manifest.states||[]).map(s=>[s.code,s]));window.dispatchEvent(new Event("mep-flags-ready"));}catch(e){console.warn("Flag manifest unavailable",e)}return manifest}
 
  async function warm(sh){
