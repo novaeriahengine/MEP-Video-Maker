@@ -315,8 +315,13 @@ on("#saveFlagRating","click",async()=>{
  }
  if(scriptUpdated){MEPStorage.save(project);setText("#flagCloudStatus","Spoken grade updated locally. Regenerate voice and click Save Firestore to share the revised episode.");}
  syncFlagsUI();render();if(document.body.classList.contains("video-mode"))renderVideo();
- try{await MEPStorage.saveFlagRating(code,rating);$("#flagCloudStatus").textContent="Published "+code+" rating to the shared Firestore board ✓"}
- catch(e){$("#flagCloudStatus").textContent="Saved locally. Cloud: "+e.message}
+ try{
+  await MEPStorage.saveFlagRating(code,rating);
+  if(scriptUpdated&&MEPStorage.currentEditor()){
+   try{await MEPStorage.saveCloud(project);$("#flagCloudStatus").textContent="Published "+code+" rating and spoken grade to Firestore ✓"}
+   catch(saveError){$("#flagCloudStatus").textContent="Rating published, but video narration is local only. Save Firestore: "+saveError.message}
+  }else $("#flagCloudStatus").textContent="Published "+code+" rating to the shared Firestore board ✓";
+ }catch(e){$("#flagCloudStatus").textContent="Saved locally. Cloud: "+e.message}
 });
 on("#refreshFlagRatings","click",async()=>{try{await connectFlagRatings();syncFlagsUI()}catch(e){$("#flagCloudStatus").textContent=e.message}});
 let flagsUnsubscribe=null;
