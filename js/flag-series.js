@@ -121,8 +121,8 @@ window.MEPFlagSeries=(()=>{
   });
   ctx.restore()
  }
- function draw(ctx,beat,time=0,duration=3.3){
-  if(!beat)return false;const w=ctx.canvas.width,h=ctx.canvas.height,p=clamp(time/Math.max(.1,duration),0,1),mode=beat.mode||"full",code=beat.stateCode||"US";
+ function draw(ctx,beat,time=0,duration=3.3,viewport={}){
+  if(!beat)return false;const w=viewport.width||ctx.canvas.width,h=viewport.height||ctx.canvas.height,p=clamp(time/Math.max(.1,duration),0,1),mode=beat.mode||"full",code=beat.stateCode||"US";
   ctx.save();frameMotion=time;bg(ctx,w,h);
   const state=flagInfo(code),name=state?.name||"United States",ep=beat.episode||0,score=ratings[code]||{};
   text(ctx,ep?"STATE FLAG RANKINGS · EPISODE "+ep:"50 STATE FLAGS · THE RULES",w*.5,h*.065,25,theme.gold);
