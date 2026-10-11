@@ -16,8 +16,10 @@
   <button id="newProject" class="primary">+ New Project</button>
   <button id="openProjects">Open / Recent</button>
   <button id="loadShortPack">Load 10 Ready Shorts</button>
-  <button id="loadStoryPack">Load 10 American Stories</button>
+  <button id="loadStoryPack">Load 15 American Stories</button>
+  <button id="createFlagsProject" class="primary">Open / Create 50 State Flags</button>
   <button id="saveProject">Save Local</button>
+  <button id="cloudSignIn">Sign In to Edit Cloud</button>
   <button id="saveCloud">Save Firestore</button>
   <button id="exportProject">Export JSON</button>
   <label class="fileButton">Import JSON<input id="importProject" type="file" accept=".json,application/json"></label>
@@ -44,6 +46,25 @@
       <input id="yearSlider" type="range" min="1000" max="2026" value="1944" step="1">
     </div>
     <div class="shortStats"><b id="eraBadge">World Wars</b><span id="shortDuration">0s</span><span>9:16 · 720×1280</span></div>
+
+    <section id="flagSeriesPanel" class="flagsSeriesPanel" hidden>
+      <h2>50 State Flags · Shared Tier List</h2>
+      <p id="flagCloudStatus">Shared ratings load from Firestore; local fallback is available offline.</p>
+      <div class="flagSummary"><strong id="flagRankedCount">0 / 50</strong> ranked <strong id="flagCompletedCount">0 / 50</strong> finished</div>
+      <label>Flag to rate <select id="flagStateSelect"></select></label>
+      <div id="flagActivePreview" class="flagActivePreview"></div>
+      <label>Grade <select id="flagGradeSelect">
+        <option value="">Not rated</option><option value="A">A · Excellent</option><option value="B">B · Good</option>
+        <option value="C">C · Average</option><option value="D">D · Weak</option><option value="F">F · Poor</option>
+      </select></label>
+      <label class="flagDoneLabel"><input type="checkbox" id="flagDone"> Mark flag reviewed / complete</label>
+      <label class="stack">My rating notes<textarea id="flagRatingNotes" rows="3" placeholder="Why I gave this flag its grade"></textarea></label>
+      <div class="buttonGrid"><button id="saveFlagRating" class="primary">Save Rating to Firestore</button><button id="refreshFlagRatings">Refresh Rankings</button></div>
+      <h3>A–F Tier List</h3>
+      <div id="flagTierBoard" class="flagTierBoard"></div>
+      <h3>50 States · Checklist + Episode</h3>
+      <div id="flagAllStates" class="flagAllStates"></div>
+    </section>
 
     <h2>Production checklist</h2>
     <div id="shortChecklistSummary" class="workflowSummary">0 / 5 complete</div>
@@ -143,8 +164,9 @@
         <label>Captions <select id="captionEnabled"><option value="on">On</option><option value="off">Off</option></select></label>
         <label>Text Source <select id="captionSource"><option value="narration">Follow Narration</option><option value="scene">Scene Caption</option></select></label>
         <label>Position <select id="captionPosition"><option value="bottom">Bottom</option><option value="middle">Center</option><option value="top">Top</option><option value="custom">Custom X / Y</option></select></label>
-        <label>Animate In <select id="captionAnimationIn"><option value="rise">Rise</option><option value="fade">Fade In</option><option value="slide-left">Slide from Right</option><option value="slide-right">Slide from Left</option><option value="pop">Pop</option><option value="typewriter">Typewriter</option><option value="none">None</option></select></label>
-        <label>Animate Out <select id="captionAnimationOut"><option value="fade">Fade Out</option><option value="rise">Rise</option><option value="slide-left">Slide Left</option><option value="slide-right">Slide Right</option><option value="pop">Shrink</option><option value="none">None</option></select></label>
+        <label>Caption Template <select id="captionTemplate"><option value="classic">Classic White</option><option value="kinetic">Kinetic Gold</option><option value="banner">Dark Label Box</option><option value="clean">Minimal Editorial</option><option value="red">Action Red</option><option value="bold">Large Punchy</option></select></label>
+        <label>Animate In <select id="captionAnimationIn"><option value="rise">Rise</option><option value="fade">Fade In</option><option value="slide-left">Slide from Right</option><option value="slide-right">Slide from Left</option><option value="pop">Pop</option><option value="typewriter">Typewriter</option><option value="wipe">Wipe Reveal</option><option value="scroll">Scroll Up</option><option value="shake">Shake</option><option value="none">None</option></select></label>
+        <label>Animate Out <select id="captionAnimationOut"><option value="fade">Fade Out</option><option value="rise">Rise</option><option value="slide-left">Slide Left</option><option value="slide-right">Slide Right</option><option value="pop">Shrink</option><option value="scroll">Scroll Away</option><option value="none">None</option></select></label>
         <label>Size <input id="captionFontSize" type="range" min="20" max="72" value="40"></label>
         <label>Words / Caption <input id="captionWordsPerCaption" type="range" min="2" max="12" value="5"></label>
         <label>X Position % <input id="captionX" type="range" min="8" max="92" value="50"></label>
@@ -153,7 +175,7 @@
         <label>Accent Color <input id="captionAccent" type="color" value="#f1c35f"></label>
         <label>Auto Highlight <select id="captionHighlight"><option value="on">On</option><option value="off">Off</option></select></label>
         <label>Outline <input id="captionStroke" type="color" value="#202832"></label>
-        <label>Background <select id="captionBackground"><option value="none">No Box</option><option value="box">Dark Box</option></select></label>
+        <label>Background <select id="captionBackground"><option value="none">No Box</option><option value="box">Dark Box</option><option value="label">Rounded Color Label</option></select></label>
         <label>Uppercase <select id="captionUppercase"><option value="off">Off</option><option value="on">On</option></select></label>
       </div>
       <p class="captionEditorHint">Settings apply to the selected Short. Captions are timed to each scene's narration and appear in Preview and Export. Scene Caption is the custom text option.</p>
@@ -269,6 +291,7 @@
 <script src="js/ai-config.js?v=20261011y"></script>
 <script src="js/ai-director.js?v=20261011-final"></script>
 <script src="js/invention-scenes.js?v=20261011-final"></script>
+<script src="js/flag-series.js?v=20261011-flags"></script>
 <script src="js/renderer.js?v=20261011-final"></script>
 <script src="js/storage.js?v=20261011y"></script>
 <script src="js/voice-backends.js?v=20261011-final"></script>
