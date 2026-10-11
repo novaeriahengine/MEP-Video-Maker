@@ -329,11 +329,11 @@ async function connectFlagRatings(){
  if(!cloudReady||flagsUnsubscribe)return;
  flagsUnsubscribe=await MEPStorage.subscribeFlagRatings(ratings=>MEPFlagSeries.setRatings(ratings));
 }
-window.addEventListener("mep-flags-ready",()=>{try{render();if(document.body.classList.contains("video-mode"))renderVideo();syncFlagsUI()}catch{}});
+window.addEventListener("mep-flags-ready",()=>{try{if(document.body.classList.contains("video-mode")){if(!videoPlaying)renderVideo()}else render();syncFlagsUI()}catch(e){console.warn("Flag manifest ready:",e)}});
 window.addEventListener("mep-flag-image-ready",()=>{
  try{if(!videoPlaying){if(document.body.classList.contains("video-mode"))renderVideo();else render()}}catch(e){console.warn("Flag image redraw:",e)}
 });
-window.addEventListener("mep-flag-ratings-changed",()=>{try{syncFlagsUI();render();if(document.body.classList.contains("video-mode"))renderVideo()}catch{}});
+window.addEventListener("mep-flag-ratings-changed",()=>{try{syncFlagsUI();if(document.body.classList.contains("video-mode")){if(!videoPlaying)renderVideo()}else render()}catch(e){console.warn("Rating refresh:",e)}});
 MEPFlagSeries.load().then(()=>{try{syncFlagsUI()}catch{}});
 
 on("#saveProject","click",()=>{MEPStorage.save(project);setText("#saveStatus","Local ✓")});on("#saveCloud","click",async()=>{if(!MEPStorage.currentEditor()){openOwnerAccount();return}try{setText("#saveStatus","Saving all video scenes to Firestore…");const r=await MEPStorage.saveCloud(project);cloudReady=true;setText("#saveStatus","Firestore ✓ "+r.videos+" videos saved")}catch(e){setText("#saveStatus","Cloud save failed · local copy retained");alert(e.message)}});on("#exportProject","click",()=>MEPStorage.download(project));on("#importProject","change",async e=>{const f=e.target.files?.[0];if(!f)return;try{project=MEPModel.migrate(JSON.parse(await f.text()));const v=MEPModel.validateProject(project);if(!v.ok)throw new Error(v.errors.join("; "));refreshRefs();changed({cloud:false});syncUI()}catch(err){alert("Import failed: "+err.message)}e.target.value=""});
@@ -442,7 +442,7 @@ on("#addBubble","click",()=>{const style=$("#bubbleStyle").value||"speech",st=ME
 
 on("#scrubber","input",e=>{playing=false;editPreview=null;time=Number(e.target.value);render();syncBackgroundUI()});function playTick(now){if(!playing)return;time+=(now-lastFrame)/1000;lastFrame=now;if(time>=scene.duration){time=scene.duration;playing=false}render();if(playing)requestAnimationFrame(playTick)}on("#play","click",()=>{if(time>=scene.duration)time=0;playing=true;lastFrame=performance.now();requestAnimationFrame(playTick)});on("#stop","click",()=>{playing=false;time=0;render()});
 
-let videoPlaying=false,videoTime=0,videoLast=0,videoFrameLast=0,videoUiLast=0,videoRaf=0;
+let videoPlaying=false,videoTime=0,videoLast=0,videoFrameLast=0,videoUiLast=0,videoRaf=0,videoStartAt=0,videoStartPosition=0;
 function sceneAtGlobal(sh,t){
  const scenes=sh?.scenes||[];if(!scenes.length)return{scene:null,index:0,local:0,offset:0};
  let off=0;const position=Math.max(0,Number(t)||0);
@@ -526,9 +526,11 @@ function stopPreviewPlayback({reset=false}={}){
 }
 function videoTick(now){
  if(!videoPlaying)return;
- const dt=Math.max(0,Math.min(.20,(now-videoLast)/1000));videoLast=now;
+ // Wall-clock timeline: dropping expensive frames must NOT slow down, freeze, or repeat scenes.
+ // The previous 0.20-second dt clamp made a 99s short take minutes on slower devices.
+ videoLast=now;
  const total=MEPModel.shortDuration(short);
- videoTime=Math.min(total,videoTime+dt);
+ videoTime=Math.min(total,Math.max(0,videoStartPosition+(now-videoStartAt)/1000));
  if(videoTime>=total){videoPlaying=false;stopVideoPreviewVoice();if(voiceRecorder?.state==="recording")setTimeout(stopVoiceRecording,450)}
  const targetFps=Math.max(10,Math.min(30,Number($("#previewQuality")?.value)||18));
  const framePeriod=1000/targetFps;
@@ -552,7 +554,7 @@ on("#editorMode","click",()=>setVideoMode(false));on("#videoMode","click",()=>se
 on("#videoPlayPause","click",()=>{
  if(videoPlaying){stopPreviewPlayback();return}
  if(videoTime>=MEPModel.shortDuration(short))videoTime=0;
- videoPlaying=true;videoLast=performance.now();videoFrameLast=0;
+ videoPlaying=true;videoLast=performance.now();videoStartAt=videoLast;videoStartPosition=videoTime;videoFrameLast=0;
  // Start voice and visuals independently; slow TTS startup should not block the scene timeline.
  startVideoPreviewVoice();
  if(window.MEPFlagSeries&&short.flagsEpisode)MEPFlagSeries.warm(short).catch(e=>console.warn("Flag prewarm:",e));
