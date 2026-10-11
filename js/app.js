@@ -67,7 +67,7 @@ async function buildVoiceGraph(sh,{monitor=false}={}){
  return{ac,src,track:dest.stream.getAudioTracks()[0],duration:buf.duration,playDuration,outputDuration,start}
 }
 function refreshRefs(){MEPModel.syncAlias(project);short=MEPModel.activeShort(project);scene=MEPModel.activeScene(project);selectedId=scene?.characters?.some(c=>c.id===selectedId)?selectedId:(scene?.characters?.[0]?.id||null);selectedBubbleId=null;time=0;playing=false;editPreview=null;applyCanvasSize()}
-function applyCanvasSize(){if(!short)return;const w=short.width||720,h=short.height||1280;canvas.width=w;canvas.height=h;const previewScale=short.flagsEpisode?.index!==undefined?.67:1;videoCanvas.width=Math.max(2,Math.round(w*previewScale));videoCanvas.height=Math.max(2,Math.round(h*previewScale));document.documentElement.style.setProperty("--stage-ratio",w+"/"+h)}
+function applyCanvasSize(){if(!short)return;const w=short.width||720,h=short.height||1280;canvas.width=w;canvas.height=h;const previewScale=short.flagsEpisode?.index!==undefined?0.67:1;videoCanvas.width=Math.max(2,Math.round(w*previewScale));videoCanvas.height=Math.max(2,Math.round(h*previewScale));document.documentElement.style.setProperty("--stage-ratio",w+"/"+h)}
 refreshRefs();
 
 const selected=()=>scene?.characters?.find(c=>c.id===selectedId)||null;
@@ -496,11 +496,11 @@ async function startVoiceRecording(){
 function stopVoiceRecording(){if(voiceRecorder?.state==="recording")voiceRecorder.stop();$("#voiceStatus")?.classList.remove("recording")}
 async function playProcessedVoice(){try{if(activeVoicePreview){try{activeVoicePreview.src.stop()}catch{}try{await activeVoicePreview.ac.close()}catch{}activeVoicePreview=null}const g=await buildVoiceGraph(short,{monitor:true});if(!g)return alert("Attach or record a final voice track first.");activeVoicePreview=g;await g.ac.resume();g.src.onended=()=>{g.ac.close().catch(()=>{});activeVoicePreview=null;syncVoiceUI()};g.start();setText("#voiceStatus","Playing processed voiceover…")}catch(e){alert("Voice preview failed: "+e.message)}}
 function stopProcessedVoice(){if(activeVoicePreview){try{activeVoicePreview.src.stop()}catch{}try{activeVoicePreview.ac.close()}catch{}activeVoicePreview=null}}
-function chromeSpeak(text){
+function chromeSpeak(text,beatDuration=0){
  if(!window.speechSynthesis||!text)return;stopProcessedVoice();speechSynthesis.cancel();const v=short.voice||{},voices=speechSynthesis.getVoices(),voice=voices.find(x=>x.name===v.chromeVoice)||bestChromeVoice(),clean=(window.MEPSpeech?MEPSpeech.normalize(text):String(text)).replace(/—/g,", ").replace(/\s+/g," ").trim(),sentences=clean.match(/[^.!?]+[.!?]+|[^.!?]+$/g)||[clean],chunks=[];
  if(v.continuousRead!==false)chunks.push(clean);else{let buf="";for(const s of sentences){if((buf+" "+s).length>240&&buf){chunks.push(buf.trim());buf=s}else buf+=(buf?" ":"")+s}if(buf)chunks.push(buf.trim())}
  let i=0,cancelled=false;window.__mepChromeVoiceCancel=()=>{cancelled=true;speechSynthesis.cancel()};const gap=Math.max(0,Math.min(450,Number(v.sentencePauseMs)??70));
- const speakNext=()=>{if(cancelled||i>=chunks.length){syncVoiceUI();return}const u=new SpeechSynthesisUtterance(chunks[i++]);if(voice)u.voice=voice;u.rate=Math.max(.65,Math.min(1.25,Number(v.ttsRate)||.92));u.pitch=Math.max(.7,Math.min(1.25,Number(v.ttsPitch)||.96));u.volume=1;u.onstart=()=>setText("#voiceStatus","Chrome voice · "+(voice?.name||"device voice")+" · "+i+"/"+chunks.length);u.onend=()=>setTimeout(speakNext,gap);u.onerror=()=>setTimeout(speakNext,gap);speechSynthesis.speak(u)};speakNext()
+ const speakNext=()=>{if(cancelled||i>=chunks.length){syncVoiceUI();return}const u=new SpeechSynthesisUtterance(chunks[i++]);if(voice)u.voice=voice;const words=clean.split(/\s+/).filter(Boolean).length,baseRate=Number(v.ttsRate)||.92,estimatedTime=words/2.65,fitRate=beatDuration>0?Math.max(1,estimatedTime/Math.max(.6,beatDuration-.23)):1;u.rate=Math.max(.65,Math.min(1.6,baseRate*fitRate));u.pitch=Math.max(.7,Math.min(1.25,Number(v.ttsPitch)||.96));u.volume=1;u.onstart=()=>setText("#voiceStatus","Chrome voice · "+(voice?.name||"device voice")+" · "+i+"/"+chunks.length);u.onend=()=>setTimeout(speakNext,gap);u.onerror=()=>setTimeout(speakNext,gap);speechSynthesis.speak(u)};speakNext()
 }
 function applyVoicePreset(name){const presets={
  britishDocumentary:{voiceProfile:"britishMale",source:"chrome",ttsRate:.90,ttsPitch:.88,pitchSemitones:-.5,speed:.98,lowCut:72,bass:3,warmth:2,mid:-1,clarity:2,presence:4,deEss:3,treble:1,air:2,compression:.58,limiter:.72,echo:0,grit:0,gain:1.06},
@@ -629,7 +629,7 @@ function speakChromeScene(scene){
  if(lastChromeSceneSpoken===scene.id)return;
  lastChromeSceneSpoken=scene.id;
  // Play only the narrated beat currently visible; stop voice drifting away from captions.
- chromeSpeak(scene.script);
+ chromeSpeak(scene.script,Number(scene.duration)||3.3);
 }
 async function startVideoPreviewVoice(){
  const token=++videoPreviewSerial,source=short.voice?.source||"chrome";
