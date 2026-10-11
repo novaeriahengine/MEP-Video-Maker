@@ -21,6 +21,7 @@ window.MEPFlagSeries=(()=>{
   requestAnimationFrame(()=>{pendingImageRedraw=false;window.dispatchEvent(new Event("mep-flag-image-ready"))})
  }
 
+ let frameMotion=0;
  const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
  const goodGrade=g=>/^[ABCDF]$/.test(g||"");
  function loadLocal(){try{ratings=JSON.parse(localStorage.getItem(LOCAL_KEY)||"{}")||{}}catch{ratings={}}return ratings}
@@ -94,7 +95,7 @@ window.MEPFlagSeries=(()=>{
  function gradeColor(g){return({A:"#55bc83",B:"#84b6da",C:"#e6c05f",D:"#d99655",F:"#db6868"})[g]||theme.mute}
  function flagCard(ctx,code,x,y,w,h,progress=1,{variant="current",title=true}={}){
   const info=flagInfo(code);
-  ctx.save();const entrance=1-clamp(progress,0,1);ctx.translate(x+w*.5,y+h*.5);ctx.translate(0,Math.pow(entrance,2)*65);ctx.scale(.92+.08*progress,.92+.08*progress);
+  ctx.save();const entrance=1-clamp(progress,0,1);ctx.translate(x+w*.5,y+h*.5);ctx.translate(Math.sin(frameMotion*1.4)*3,Math.pow(entrance,2)*65+Math.sin(frameMotion*1.15)*4);ctx.rotate(Math.sin(frameMotion*.9)*.007);ctx.scale(.92+.08*progress,.92+.08*progress);
   ctx.globalAlpha*=.3+.7*progress;
   const x0=-w*.5,y0=-h*.5;
   ctx.fillStyle=theme.cream;rounded(ctx,x0,y0,w,h,22);ctx.fill();
@@ -122,7 +123,7 @@ window.MEPFlagSeries=(()=>{
  }
  function draw(ctx,beat,time=0,duration=3.3){
   if(!beat)return false;const w=ctx.canvas.width,h=ctx.canvas.height,p=clamp(time/Math.max(.1,duration),0,1),mode=beat.mode||"full",code=beat.stateCode||"US";
-  ctx.save();bg(ctx,w,h);
+  ctx.save();frameMotion=time;bg(ctx,w,h);
   const state=flagInfo(code),name=state?.name||"United States",ep=beat.episode||0,score=ratings[code]||{};
   text(ctx,ep?"STATE FLAG RANKINGS · EPISODE "+ep:"50 STATE FLAGS · THE RULES",w*.5,h*.065,25,theme.gold);
   const enter=clamp(p*4,0,1),ease=1-(1-enter)**3;
@@ -132,17 +133,17 @@ window.MEPFlagSeries=(()=>{
    names.forEach(([g,label],i)=>{const x=w*.15,y=h*(.27+i*.102);ctx.fillStyle=gradeColor(g);rounded(ctx,x,y,w*.70,h*.085,12);ctx.fill();text(ctx,g,x+w*.085,y+h*.043,45,theme.dark);text(ctx,label,x+w*.40,y+h*.043,28,theme.dark)});
   }else if(mode==="board"||mode==="rate"){
    if(mode==="rate"){flagCard(ctx,code,w*.17,h*.20,w*.66,h*.31,ease);text(ctx,name+" → "+(goodGrade(score.grade)?score.grade:"YOUR GRADE?"),w*.5,h*.56,35,score.grade?gradeColor(score.grade):theme.gold)}
-   else{const subject=beat.episode?name:"RUNNING TIER LIST";text(ctx,subject,w*.5,h*.20,31,theme.gold)}
+   else{const subject=beat.heading||(beat.episode?name:"RUNNING TIER LIST");text(ctx,subject,w*.5,h*.20,31,theme.gold)}
    tierBoard(ctx,w*.05,mode==="rate"?h*.64:h*.29,w*.90,mode==="rate"?h*.21:h*.46,{highlight:code})
   }else if(mode==="intro-title"||mode==="outro"){
    flagCard(ctx,"US",w*.18,h*.22,w*.64,h*.38,ease);
-   text(ctx,mode==="outro"?"LET'S RANK THEM":"50 STATE FLAGS",w*.5,h*.72,54,theme.gold);
+   text(ctx,beat.heading||(mode==="outro"?"LET'S RANK THEM":"50 STATE FLAGS"),w*.5,h*.72,46,theme.gold);
    text(ctx,"A  →  B  →  C  →  D  →  F",w*.5,h*.79,28,theme.cream)
   }else if(mode==="montage"){
    const arr=["AL","AK","AZ","CA","CO","FL","TX","MN","UT","MS","MD","SC"];
    const offset=Math.floor((beat.montageIndex||0)*3+p*3);
    for(let i=0;i<3;i++){const c=arr[(offset+i)%arr.length];flagCard(ctx,c,w*(.035+i*.323),h*(.28+Math.sin(i+p*5)*.025),w*.30,h*.34,ease,{title:true})}
-   text(ctx,ep?"NEXT THREE FLAGS":"50 STATES · 17 ROUNDS",w*.5,h*.75,34,theme.gold)
+   text(ctx,beat.heading||(ep?"NEXT THREE FLAGS":"50 STATES · 17 ROUNDS"),w*.5,h*.75,31,theme.gold)
   }else if(mode==="timeline"||mode==="compare"){
    const history=(state?.history||[]).filter(item=>item.status==="source-verified");
    if(history.length){
@@ -153,12 +154,12 @@ window.MEPFlagSeries=(()=>{
     text(ctx,beat.heading||"HISTORIC → CURRENT",w*.5,h*.73,30,theme.gold)
    }else{
     flagCard(ctx,code,w*.17,h*.23,w*.66,h*.41,ease);
-    text(ctx,"CURRENT OFFICIAL FLAG",w*.5,h*.72,30,theme.gold)
+    text(ctx,beat.heading||"CURRENT OFFICIAL FLAG",w*.5,h*.72,30,theme.gold)
    }
   }else if(mode==="comparisons"){
    flagCard(ctx,code,w*.08,h*.28,w*.48,h*.34,ease);
    tierBoard(ctx,w*.59,h*.29,w*.37,h*.34,{highlight:code});
-   text(ctx,"COMPARE THE RANKINGS",w*.5,h*.75,31,theme.gold)
+   text(ctx,beat.heading||"COMPARE THE RANKINGS",w*.5,h*.75,31,theme.gold)
   }else{
    const zoom=mode==="zoom"||mode==="detail"||mode==="closeup";
    const shift=mode==="entrance"?90*(1-ease):0;
