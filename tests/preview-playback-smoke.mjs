@@ -31,3 +31,27 @@ assert.ok(code.includes('$("#previewQuality")'));
 console.log("PASS no single-element forEach crash");
 console.log("PASS all 30 flag intro scenes advance automatically");
 console.log("PASS adjustable preview frame-rate playback loop");
+assert.ok(code.includes("videoStartPosition+(now-videoStartAt)/1000"),"Playback must use a wall clock, not clamp delta time.");
+assert.ok(code.includes('on("#editPlayingScene","click"'),"Preview-to-script editor link missing.");
+assert.ok(code.includes('on("#videoPlayPause","click"'),"Play/Pause handler missing.");
+assert.ok(code.includes('on("#autoNextEpisode"')||code.includes('$("#autoNextEpisode")'),"Next-episode checkbox missing.");
+assert.ok(code.includes("speakChromeScene(a.scene)"),"Chrome voice must follow individual scene narration.");
+// Execute the real player timer in isolation: a slow render must not slow down scene time.
+const t0=code.indexOf("function videoTick(now){"),t1=code.indexOf("\nfunction setVideoMode(",t0);
+assert.ok(t0>=0&&t1>t0);
+const loop=code.slice(t0,t1);
+const clock=new Function("sh",
+ `const short=sh,project={shorts:[sh]},MEPModel={shortDuration(sh){return sh.scenes.reduce((n,x)=>n+x.duration,0)}};
+  let videoPlaying=true,videoTime=0,videoLast=0,videoFrameLast=0,videoUiLast=0,videoRaf=0,videoStartAt=1000,videoStartPosition=0,lastVideoSceneIndex=-1,voiceRecorder=null;
+  const $=()=>({checked:false,value:"12"}),requestAnimationFrame=()=>1,stopVideoPreviewVoice=()=>{},stopVoiceRecording=()=>{};
+  const renderVideo=()=>{lastVideoSceneIndex=sceneAtGlobal(short,videoTime).index},stopPreviewPlayback=()=>{videoPlaying=false},setText=()=>{},console={error(){}},window={MEPFlagSeries:null};
+  ${code.slice(start,end)}
+  ${loop}
+  return now=>{videoTick(now);return{time:videoTime,index:sceneAtGlobal(short,videoTime).index,playing:videoPlaying}}`
+)(short);
+assert.equal(clock(1000).index,0);
+assert.equal(clock(4300).index,1);
+assert.equal(clock(24000).index,6);
+assert.equal(clock(90000).time,89);
+assert.equal(clock(100100).index,29);
+console.log("PASS playback stays in real time under skipped frames and links narration to visual beats");
