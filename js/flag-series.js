@@ -36,7 +36,7 @@ window.MEPFlagSeries=(()=>{
     const b=scene.flagBeat;if(!b)continue;
     if(b.stateCode==="US")needed.add("flags/current/us.svg");
     else if(byCode.has(b.stateCode))needed.add(byCode.get(b.stateCode).current.art);
-    if((b.mode==="timeline"||b.mode==="compare")&&byCode.get(b.stateCode)?.history?.length)needed.add(byCode.get(b.stateCode).history.at(-1).art);
+    if((b.mode==="timeline"||b.mode==="compare")&&byCode.get(b.stateCode)?.history?.some(x=>x.status==="source-verified"))needed.add(byCode.get(b.stateCode).history.filter(x=>x.status==="source-verified").at(-1).art);
     if(b.mode==="montage")for(const code of ["AL","AK","AZ","CA","CO","FL","TX","MN","UT","MS","MD","SC"])needed.add(byCode.get(code)?.current.art);
   }
   const loadOne=url=>new Promise(resolve=>{
@@ -86,7 +86,7 @@ window.MEPFlagSeries=(()=>{
   const margin=18,top=title?64:22,bottom=22,availW=w-2*margin,availH=h-top-bottom;
   ctx.fillStyle="#d5d5cc";ctx.fillRect(x0+margin,y0+top,availW,availH);
   let art=info?.current?.art;if(code==="US")art="flags/current/us.svg";
-  if(variant==="history"&&info?.history?.length)art=info.history[info.history.length-1].art;
+  if(variant==="history"&&info?.history?.some(x=>x.status==="source-verified"))art=info.history.filter(x=>x.status==="source-verified").at(-1).art;
   const original=getImage(art),img=original?getFlagRaster(art,original):null;
   if(img){const iw0=img.naturalWidth||img.width||640,ih0=img.naturalHeight||img.height||480;const f=Math.min(availW/iw0,availH/ih0),iw=iw0*f,ih=ih0*f;ctx.drawImage(img,x0+margin+(availW-iw)/2,y0+top+(availH-ih)/2,iw,ih)}
   else{ctx.fillStyle=theme.dark;ctx.fillRect(x0+margin,y0+top,availW,availH);ctx.fillStyle=theme.cream;ctx.font="700 20px system-ui";ctx.textAlign="center";ctx.fillText("Loading flag art...",0,y0+top+availH*.5)}
@@ -111,8 +111,12 @@ window.MEPFlagSeries=(()=>{
   const state=flagInfo(code),name=state?.name||"United States",ep=beat.episode||0,score=ratings[code]||{};
   text(ctx,ep?"STATE FLAG RANKINGS · EPISODE "+ep:"50 STATE FLAGS · THE RULES",w*.5,h*.065,25,theme.gold);
   const enter=clamp(p*4,0,1),ease=1-(1-enter)**3;
-  if(mode==="board"||mode==="rate"){
-   if(mode==="rate"){flagCard(ctx,code,w*.17,h*.20,w*.66,h*.31,ease);text(ctx,name+" → "+(goodGrade(score.grade)?score.grade:"UNRATED"),w*.5,h*.56,35,score.grade?gradeColor(score.grade):theme.gold)}
+  if(mode==="tiers"){
+   text(ctx,"WHAT THE GRADES MEAN",w*.5,h*.19,36,theme.gold);
+   const names=[["A","STANDOUT"],["B","GREAT"],["C","SOLID"],["D","WEAK"],["F","RETHINK"]];
+   names.forEach(([g,label],i)=>{const x=w*.15,y=h*(.27+i*.102);ctx.fillStyle=gradeColor(g);rounded(ctx,x,y,w*.70,h*.085,12);ctx.fill();text(ctx,g,x+w*.085,y+h*.043,45,theme.dark);text(ctx,label,x+w*.40,y+h*.043,28,theme.dark)});
+  }else if(mode==="board"||mode==="rate"){
+   if(mode==="rate"){flagCard(ctx,code,w*.17,h*.20,w*.66,h*.31,ease);text(ctx,name+" → "+(goodGrade(score.grade)?score.grade:"YOUR GRADE?"),w*.5,h*.56,35,score.grade?gradeColor(score.grade):theme.gold)}
    else{const subject=beat.episode?name:"RUNNING TIER LIST";text(ctx,subject,w*.5,h*.20,31,theme.gold)}
    tierBoard(ctx,w*.05,mode==="rate"?h*.64:h*.29,w*.90,mode==="rate"?h*.21:h*.46,{highlight:code})
   }else if(mode==="intro-title"||mode==="outro"){
@@ -125,13 +129,13 @@ window.MEPFlagSeries=(()=>{
    for(let i=0;i<3;i++){const c=arr[(offset+i)%arr.length];flagCard(ctx,c,w*(.035+i*.323),h*(.28+Math.sin(i+p*5)*.025),w*.30,h*.34,ease,{title:true})}
    text(ctx,ep?"NEXT THREE FLAGS":"50 STATES · 17 ROUNDS",w*.5,h*.75,34,theme.gold)
   }else if(mode==="timeline"||mode==="compare"){
-   const history=state?.history||[];
+   const history=(state?.history||[]).filter(item=>item.status==="source-verified");
    if(history.length){
     flagCard(ctx,code,w*.06,h*.26,w*.42,h*.33,ease,{variant:"history"});
     flagCard(ctx,code,w*.52,h*.26,w*.42,h*.33,ease,{variant:"current"});
     text(ctx,history.at(-1).from+"–"+String(history.at(-1).to).slice(0,4),w*.27,h*.63,22,theme.cream);
     text(ctx,"CURRENT",w*.74,h*.63,23,theme.gold);
-    text(ctx,"FLAG DESIGN TIMELINE",w*.5,h*.73,30,theme.gold)
+    text(ctx,beat.heading||"HISTORIC → CURRENT",w*.5,h*.73,30,theme.gold)
    }else{
     flagCard(ctx,code,w*.17,h*.23,w*.66,h*.41,ease);
     text(ctx,"CURRENT OFFICIAL FLAG",w*.5,h*.72,30,theme.gold)
@@ -144,10 +148,13 @@ window.MEPFlagSeries=(()=>{
    const zoom=mode==="zoom"||mode==="detail"||mode==="closeup";
    const shift=mode==="entrance"?90*(1-ease):0;
    flagCard(ctx,code,w*(zoom?.1:.14)+shift,h*(zoom?.225:.26),w*(zoom?.8:.72),h*(zoom?.45:.39),ease);
-   if(mode==="contrast")text(ctx,"READS CLEARLY FROM A DISTANCE?",w*.5,h*.73,30,theme.gold);
-   else if(mode==="focus")text(ctx,"SHAPE · COLOR · SYMBOLISM",w*.5,h*.73,31,theme.gold);
-   else if(mode==="detail"&&state)text(ctx,state.visualNotes.toUpperCase(),w*.5,h*.73,29,theme.gold);
-   else text(ctx,mode==="entrance"?"THE NEXT STATE":"THE OFFICIAL DESIGN",w*.5,h*.73,31,theme.gold)
+   if(mode==="contrast"){
+     flagCard(ctx,code,w*.58,h*.57,w*.25,h*.12,ease,{title:false});
+     text(ctx,beat.heading||"STILL RECOGNIZABLE SMALL?",w*.5,h*.76,28,theme.gold)
+   }
+   else if(mode==="focus")text(ctx,beat.heading||"SHAPE · COLOR · SYMBOLISM",w*.5,h*.73,29,theme.gold);
+   else if(mode==="detail"&&state)text(ctx,beat.heading||state.visualNotes.toUpperCase(),w*.5,h*.73,26,theme.gold);
+   else text(ctx,beat.heading||(mode==="entrance"?"THE NEXT STATE":"THE OFFICIAL DESIGN"),w*.5,h*.73,28,theme.gold)
   }
   const reviewed=codes.filter(c=>ratings[c]?.done).length;
   text(ctx,"RANKED "+reviewed+" / 50",w*.18,h*.93,20,theme.cream,{align:"center"});
