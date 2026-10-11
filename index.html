@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Noveria History — MEP Short Maker</title>
 <link rel="icon" type="image/svg+xml" href="assets/brand/mep-kokoro-florida-mark.svg">
-<link rel="stylesheet" href="css/style.css?v=20261011-flags-final">
+<link rel="stylesheet" href="css/style.css?v=20261011-owner-v2">
 </head>
 <body>
 <div id="app">
@@ -308,7 +308,7 @@
  </form>
 </dialog>
 
-<dialog id="projectDialog"><div class="dialogShell"><header><div><h2>Projects</h2><p>Recent local projects appear first. Firestore projects appear when cloud access is available.</p></div><button id="closeProjectDialog">Close</button></header><h3>Recent Local</h3><div id="localProjectList" class="cloudProjectList"></div><h3>Firestore</h3><div id="cloudProjectList" class="cloudProjectList"></div></div></dialog>
+<dialog id="projectDialog"><div class="dialogShell"><header><div><h2>Projects</h2><p>Recent local projects appear first. Firestore projects appear when cloud access is available.</p></div><button id="closeProjectDialog">Close</button></header><h3>Recent Local</h3><div id="localProjectList" class="cloudProjectList"></div><h3>Firestore</h3><div id="cloudProjectList" class="cloudProjectList"></div><h3>Current Project · Cloud Save History</h3><div id="cloudHistoryList" class="shortHistory"><p>Open a project to see its Firestore save history.</p></div></div></dialog>
 
 <dialog id="aiDialog"><form method="dialog" class="dialogShell aiPanel"><header><div><h2>AI Director</h2><p>Generate a 30–60 second narrated history short plan.</p></div><button>Close</button></header><textarea id="aiPrompt" rows="4" placeholder="Make a 45-second short explaining..."></textarea><div class="buttonGrid"><button type="button" id="aiGenerate" class="primary">Generate</button><button type="button" id="aiShowContext">Show Context</button></div><textarea id="aiJson" rows="12"></textarea><button type="button" id="aiApply">Apply as Project</button><pre id="aiStatus"></pre></form></dialog>
 
@@ -323,12 +323,12 @@
 <script src="js/invention-scenes.js?v=20261011-final"></script>
 <script src="js/flag-series.js?v=20261011-flags-final"></script>
 <script src="js/renderer.js?v=20261011-final"></script>
-<script src="js/storage.js?v=20261011-flags-final"></script>
+<script src="js/storage.js?v=20261011-owner-v2"></script>
 <script src="js/voice-backends.js?v=20261011-final"></script>
 <script>window.addEventListener("error",e=>{const el=document.getElementById("bootStatus");if(el){el.className="bootStatus error";el.textContent="MEP error: "+(e.message||"Unknown startup error")}});</script>
 <script src="js/speech-text.js?v=20261011-final"></script>
 <script src="js/captions.js?v=20261011-flags-final"></script>
-<script src="js/app.js?v=20261011-flags-voicegrade"></script>
+<script src="js/app.js?v=20261011-owner-v2"></script>
 <script src="js/tool-assistant.js?v=20261011y"></script>
 </body>
 </html>
