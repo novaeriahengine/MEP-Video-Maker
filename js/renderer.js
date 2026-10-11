@@ -33,7 +33,19 @@ function drawAccessory(ctx,cx,cy,size,v={}){
 }
 function drawProp(ctx,cx,cy,size,prop="none",face=1){
  if(!prop||prop==="none")return;ctx.save();ctx.translate(cx+size*.56*face,cy+size*.02);ctx.scale(face,1);ctx.strokeStyle="#553b2a";ctx.fillStyle="#745036";ctx.lineCap="round";ctx.lineJoin="round";
- if(["spear","staff","rifle","musket","pointer"].includes(prop)){ctx.lineWidth=Math.max(4,size*.042);ctx.beginPath();ctx.moveTo(-size*.12,size*.36);ctx.lineTo(size*.18,-size*.48);ctx.stroke();if(prop==="spear"){ctx.fillStyle="#aeb5ba";ctx.beginPath();ctx.moveTo(size*.18,-size*.48);ctx.lineTo(size*.1,-size*.31);ctx.lineTo(size*.25,-size*.36);ctx.closePath();ctx.fill()}if(prop==="rifle"||prop==="musket"){ctx.strokeStyle="#2b2d30";ctx.lineWidth=Math.max(3,size*.027);ctx.beginPath();ctx.moveTo(size*.12,-size*.31);ctx.lineTo(size*.34,-size*.42);ctx.stroke();ctx.fillStyle="#4c3527";ctx.fillRect(-size*.08,size*.20,size*.14,size*.10)}}
+ if(["spear","staff","pointer"].includes(prop)){
+  ctx.lineWidth=Math.max(4,size*.042);ctx.beginPath();ctx.moveTo(-size*.12,size*.36);ctx.lineTo(size*.18,-size*.48);ctx.stroke();
+  if(prop==="spear"){ctx.fillStyle="#aeb5ba";ctx.beginPath();ctx.moveTo(size*.18,-size*.48);ctx.lineTo(size*.1,-size*.31);ctx.lineTo(size*.25,-size*.36);ctx.closePath();ctx.fill()}
+ }
+ else if(prop==="rifle"||prop==="musket"){
+  ctx.save();ctx.rotate(-.65);
+  ctx.fillStyle="#6b4935";ctx.beginPath();ctx.moveTo(-size*.34,size*.08);ctx.lineTo(size*.24,size*.08);ctx.lineTo(size*.24,size*.20);ctx.lineTo(-size*.13,size*.20);ctx.lineTo(-size*.22,size*.35);ctx.lineTo(-size*.39,size*.27);ctx.closePath();ctx.fill();
+  ctx.fillStyle="#30363b";ctx.fillRect(-size*.06,size*.065,size*.44,size*.055);
+  ctx.fillRect(size*.29,size*.08,size*.19,size*.026);
+  ctx.fillStyle="#36383a";ctx.fillRect(-size*.035,size*.14,size*.12,size*.1);
+  if(prop==="rifle"){ctx.fillStyle="#59604f";ctx.fillRect(size*.03,size*.02,size*.15,size*.055)}
+  ctx.restore()
+ }
  else if(prop==="sword"){ctx.strokeStyle="#c4c9ce";ctx.lineWidth=Math.max(4,size*.038);ctx.beginPath();ctx.moveTo(0,size*.12);ctx.lineTo(size*.3,-size*.45);ctx.stroke();ctx.strokeStyle="#63452f";ctx.lineWidth=Math.max(6,size*.055);ctx.beginPath();ctx.moveTo(-size*.07,size*.05);ctx.lineTo(size*.12,size*.12);ctx.stroke()}
  else if(prop==="pistol"){ctx.fillStyle="#30343a";ctx.fillRect(-size*.02,-size*.16,size*.26,size*.09);ctx.fillRect(size*.01,-size*.07,size*.08,size*.19)}
  else if(prop==="binoculars"){ctx.strokeStyle="#252b2d";ctx.lineWidth=Math.max(7,size*.07);ctx.beginPath();ctx.moveTo(-size*.06,-size*.1);ctx.lineTo(size*.08,-size*.2);ctx.moveTo(size*.08,-size*.1);ctx.lineTo(size*.22,-size*.2);ctx.stroke()}
@@ -52,7 +64,12 @@ function drawCharacter(ctx,state,ch,selected=false){
  const v=ch.visual||{},shape=v.shape||"square",size=114*(state.scale||1),cx=state.x,cy=state.y;ctx.save();ctx.translate(cx,cy);ctx.rotate(rad(state.rotation||0));ctx.translate(-cx,-cy);
  shapePath(ctx,shape,cx,cy,size);ctx.save();ctx.clip();const flag=window.MEPHistoryFlags?MEPHistoryFlags.resolve(v.countryCode||"US",v.historicalYear||1863,v.flagVariant||"auto"):null;if(flag&&window.MEPHistoryFlags)MEPHistoryFlags.render(ctx,cx-size/2,cy-size/2,size,size,flag);else{ctx.fillStyle="#e6e6e6";ctx.fillRect(cx-size/2,cy-size/2,size,size)}ctx.restore();
  shapePath(ctx,shape,cx,cy,size);ctx.strokeStyle=selected?"#ffb020":v.stroke||"#17191d";ctx.lineWidth=selected?6:4;ctx.stroke();
- drawEyes(ctx,cx,cy,size,v.expression||"neutral",v.eyeColor||"#111");drawMouth(ctx,cx,cy,size,v,state);drawAccessory(ctx,cx,cy,size,v);drawProp(ctx,cx,cy,size,ch.prop||"none",state.facing||1);
+ drawEyes(ctx,cx,cy,size,v.expression||"neutral",v.eyeColor||"#111");drawMouth(ctx,cx,cy,size,v,state);drawAccessory(ctx,cx,cy,size,v);
+ // A pointing stick is reserved for the Florida presenter; saved country characters
+ // with the old pointer default are displayed empty-handed without losing their data.
+ const isFloridaHost=v.countryCode==="FL"||/noveria host/i.test(ch.name||"");
+ const prop=(ch.prop==="pointer"||ch.prop==="staff")&&!isFloridaHost?"none":(ch.prop||"none");
+ drawProp(ctx,cx,cy,size,prop,state.facing||1);
  if(selected){ctx.setLineDash([7,5]);ctx.strokeStyle="#ffb020";ctx.lineWidth=2;ctx.strokeRect(cx-size*.67,cy-size*.67,size*1.34,size*1.34);ctx.setLineDash([])}ctx.restore()
 }
 function bounds(state,ch){const s=114*(state.scale||1);return{x:state.x-s*.7,y:state.y-s*.7,w:s*1.4,h:s*1.4}}
