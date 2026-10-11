@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Noveria History — MEP Short Maker</title>
 <link rel="icon" type="image/svg+xml" href="assets/brand/mep-kokoro-florida-mark.svg">
-<link rel="stylesheet" href="css/style.css?v=20261011x">
+<link rel="stylesheet" href="css/style.css?v=20261011y">
 </head>
 <body>
 <div id="app">
@@ -43,6 +43,11 @@
       <input id="yearSlider" type="range" min="1000" max="2026" value="1944" step="1">
     </div>
     <div class="shortStats"><b id="eraBadge">World Wars</b><span id="shortDuration">0s</span><span>9:16 · 720×1280</span></div>
+
+    <h2>Production checklist</h2>
+    <div id="shortChecklistSummary" class="workflowSummary">0 / 5 complete</div>
+    <div id="shortChecklist" class="shortChecklist"></div>
+    <div id="shortHistory" class="shortHistory"></div>
 
     <h2>Scenes</h2>
     <label>Scene <select id="sceneSelect"></select></label>
@@ -235,18 +240,18 @@
 
 <nav id="mobileDock" class="mobileDock"><button data-jump="#stageArea">Canvas</button><button data-jump="#scenePanel">Shorts</button><button data-jump="#characterPanel">Flags</button><button data-jump="#scriptPanel">Script</button><button id="mobileVideo">Preview</button></nav>
 
-<script src="js/firebase-config.js?v=20261011x"></script>
-<script src="js/history-flags.js?v=20261011x"></script>
-<script src="js/historical-maps.js?v=20261011x"></script>
-<script src="js/model.js?v=20261011x"></script>
-<script src="js/ai-config.js?v=20261011x"></script>
-<script src="js/ai-director.js?v=20261011x"></script>
-<script src="js/renderer.js?v=20261011x"></script>
-<script src="js/storage.js?v=20261011x"></script>
-<script src="js/voice-backends.js?v=20261011x"></script>
+<script src="js/firebase-config.js?v=20261011y"></script>
+<script src="js/history-flags.js?v=20261011y"></script>
+<script src="js/historical-maps.js?v=20261011y"></script>
+<script src="js/model.js?v=20261011y"></script>
+<script src="js/ai-config.js?v=20261011y"></script>
+<script src="js/ai-director.js?v=20261011y"></script>
+<script src="js/renderer.js?v=20261011y"></script>
+<script src="js/storage.js?v=20261011y"></script>
+<script src="js/voice-backends.js?v=20261011y"></script>
 <script>window.addEventListener("error",e=>{const el=document.getElementById("bootStatus");if(el){el.className="bootStatus error";el.textContent="MEP error: "+(e.message||"Unknown startup error")}});</script>
-<script src="js/app.js?v=20261011x"></script>
-<script src="js/tool-assistant.js?v=20261011x"></script>
+<script src="js/app.js?v=20261011y"></script>
+<script src="js/tool-assistant.js?v=20261011y"></script>
 </body>
 </html>
 

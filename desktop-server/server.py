@@ -34,6 +34,7 @@ MAP_CACHE = CACHE / "maps"
 PHOTO_CACHE = CACHE / "historical-photos"
 HF_CACHE = CACHE / "huggingface"
 OUTPUTS.mkdir(exist_ok=True)
+TTS_HISTORY = OUTPUTS / "tts-job-history.jsonl"
 MAP_CACHE.mkdir(parents=True, exist_ok=True)
 PHOTO_CACHE.mkdir(parents=True, exist_ok=True)
 HF_CACHE.mkdir(parents=True, exist_ok=True)
@@ -96,10 +97,10 @@ def local_ip() -> str:
 
 
 def editor_root() -> Path:
-    if (LOCAL_EDITOR / "index.html").exists():
-        return LOCAL_EDITOR
     if (REPO_ROOT / "index.html").exists():
         return REPO_ROOT
+    if (LOCAL_EDITOR / "index.html").exists():
+        return LOCAL_EDITOR
     return LOCAL_EDITOR
 
 
@@ -262,9 +263,41 @@ def trim_trailing_silence(audio: np.ndarray, max_trim_ms: float = 100.0) -> np.n
 
 
 def _tts_segment_estimate(text: str) -> int:
-    """Return a stable, deliberately conservative estimate for UI progress."""
+    """Return the number of short synthesis sections shown to the UI."""
+    return len(_tts_sections(text))
+
+
+def _tts_sections(text: str, limit: int = 140) -> list[str]:
+    """Keep Kokoro work small enough that the UI receives regular progress updates."""
+    sentences = re.findall(r"[^.!?]+(?:[.!?]+|$)", clean_text(text)) or [clean_text(text)]
+    sections, current = [], ""
+    for sentence in sentences:
+        sentence = sentence.strip()
+        if not sentence:
+            continue
+        if current and len(current) + len(sentence) + 1 > limit:
+            sections.append(current)
+            current = sentence
+        elif len(sentence) > limit:
+            words = sentence.split()
+            for word in words:
+                if current and len(current) + len(word) + 1 > limit:
+                    sections.append(current)
+                    current = word
+                else:
+                    current = (current + " " + word).strip()
+        else:
+            current = (current + " " + sentence).strip()
+    if current:
+        sections.append(current)
+    return sections or [clean_text(text)]
+
+
+def _tts_estimated_seconds(text: str) -> int:
     words = len(re.findall(r"\S+", text))
-    return max(1, (words + 11) // 12)
+    # CPU-only Kokoro can be several seconds per word. This is intentionally
+    # conservative until the first completed section gives us a real sample.
+    return max(45, int(words * 4.0 + _tts_segment_estimate(text) * 8))
 
 
 def _tts_parameters(text: str, voice: str = DEFAULT_VOICE, speed: float = DEFAULT_SPEED, pause_ms: float = 70.0, tail_trim_ms: float = 100.0):
@@ -290,7 +323,8 @@ def synthesize(text: str, voice: str = DEFAULT_VOICE, speed: float = DEFAULT_SPE
     text, voice, speed, pause_ms, tail_trim_ms = _tts_parameters(text, voice, speed, pause_ms, tail_trim_ms)
     if not text:
         raise ValueError("Text is empty.")
-    estimated_segments = _tts_segment_estimate(text)
+    sections = _tts_sections(text)
+    estimated_segments = len(sections)
     if progress:
         progress({"stage": "loading", "progress": 4, "segment": 0, "segments": estimated_segments, "message": "Loading Kokoro voice model…"})
     pipeline = get_pipeline()
@@ -298,22 +332,24 @@ def synthesize(text: str, voice: str = DEFAULT_VOICE, speed: float = DEFAULT_SPE
     with _pipeline_lock:
         if progress:
             progress({"stage": "generating", "progress": 8, "segment": 0, "segments": estimated_segments, "message": "Generating narration segments…"})
-        generated = pipeline(text, voice=voice, speed=speed)
         previous_graphemes = None
-        for index, (graphemes, _phonemes, audio) in enumerate(generated):
+        for index, section in enumerate(sections):
+            if progress:
+                progress({"stage": "generating", "progress": min(92, 8 + round((index / estimated_segments) * 84)), "segment": index, "segments": estimated_segments, "message": f"Generating narration section {index + 1}/{estimated_segments}…"})
+            for graphemes, _phonemes, audio in pipeline(section, voice=voice, speed=speed):
+                arr = np.asarray(audio, dtype=np.float32)
+                if not arr.size:
+                    continue
+                if previous_graphemes is not None and pause_ms > 0:
+                    punctuation = bool(re.search(r"[.!?][\"'”’)]?\s*$", str(previous_graphemes or "")))
+                    pause = pause_ms * (1.25 if punctuation else 0.65)
+                    chunks.append(np.zeros(int(24000 * pause / 1000.0), dtype=np.float32))
+                chunks.append(arr)
+                previous_graphemes = graphemes
             if progress:
                 segment = index + 1
                 percent = min(92, 8 + round((segment / estimated_segments) * 84))
-                progress({"stage": "generating", "progress": percent, "segment": segment, "segments": estimated_segments, "message": f"Generating narration segment {segment}…"})
-            arr = np.asarray(audio, dtype=np.float32)
-            if not arr.size:
-                continue
-            if previous_graphemes is not None and pause_ms > 0:
-                punctuation = bool(re.search(r"[.!?][\"'”’)]?\s*$", str(previous_graphemes or "")))
-                pause = pause_ms * (1.25 if punctuation else 0.65)
-                chunks.append(np.zeros(int(24000 * pause / 1000.0), dtype=np.float32))
-            chunks.append(arr)
-            previous_graphemes = graphemes
+                progress({"stage": "generating", "progress": percent, "segment": segment, "segments": estimated_segments, "message": f"Finished narration section {segment}/{estimated_segments}."})
     if not chunks:
         raise RuntimeError("Kokoro returned no audio.")
     if progress:
@@ -627,13 +663,43 @@ def _tts_job_snapshot(job_id: str):
         snapshot = {key: value for key, value in job.items() if key != "filename"}
         if job.get("filename"):
             snapshot["audioUrl"] = f"/api/tts/jobs/{job_id}/audio"
-        return snapshot
+    now = time.time()
+    started = float(snapshot.get("startedAt") or snapshot.get("createdAt") or now)
+    completed = float(snapshot.get("completedAt") or now) if snapshot.get("state") in {"complete", "error"} else now
+    elapsed = max(0.0, completed - started)
+    snapshot["elapsedSeconds"] = round(elapsed, 1)
+    if snapshot.get("state") in {"queued", "running"}:
+        segments = max(1, int(snapshot.get("segments") or 1))
+        finished = max(0, int(snapshot.get("segment") or 0))
+        baseline = float(snapshot.get("estimatedSeconds") or 0)
+        total = (elapsed / finished * segments) if finished else max(baseline, elapsed + 30)
+        snapshot["estimatedSeconds"] = round(total, 1)
+        snapshot["estimatedRemainingSeconds"] = round(max(0.0, total - elapsed), 1)
+    return snapshot
 
 
 def _update_tts_job(job_id: str, **updates):
     with _tts_jobs_lock:
         if job_id in _tts_jobs:
             _tts_jobs[job_id].update(updates)
+
+
+def _append_tts_job_event(job_id: str, message: str, stage: str = ""):
+    with _tts_jobs_lock:
+        job = _tts_jobs.get(job_id)
+        if not job:
+            return
+        events = job.setdefault("events", [])
+        if events and events[-1].get("message") == message:
+            return
+        event = {"at": time.time(), "jobId": job_id, "shortId": job.get("shortId", ""), "stage": stage or job.get("stage", ""), "message": message}
+        events.append(event)
+        del events[:-60]
+    try:
+        with TTS_HISTORY.open("a", encoding="utf-8") as history:
+            history.write(json.dumps(event, ensure_ascii=False) + "\n")
+    except OSError:
+        pass
 
 
 def _run_tts_job(job_id: str, data: dict):
@@ -644,21 +710,25 @@ def _run_tts_job(job_id: str, data: dict):
         data.get("pauseMs", 70),
         data.get("tailTrimMs", 100),
     )
-    title = str(data.get("title") or "MEP narration")
     short_id = str(data.get("shortId") or "")
     filename = _tts_cache_filename(text, voice, speed, pause_ms, tail_trim_ms)
     saved = OUTPUTS / filename
 
     def progress(update):
         _update_tts_job(job_id, **update, updatedAt=time.time())
+        if update.get("message"):
+            _append_tts_job_event(job_id, str(update["message"]), str(update.get("stage") or ""))
 
     try:
         _update_tts_job(job_id, state="running", stage="starting", progress=1, message="Starting local voice generation…", startedAt=time.time(), updatedAt=time.time())
+        _append_tts_job_event(job_id, "Started local Kokoro generation.", "starting")
         audio, duration = synthesize(text, voice, speed, pause_ms, tail_trim_ms, progress=progress)
         saved.write_bytes(audio.getvalue())
         _update_tts_job(job_id, state="complete", stage="complete", progress=100, message="Narration ready to mix into the video.", duration=duration, filename=filename, cached=True, shortId=short_id, updatedAt=time.time(), completedAt=time.time())
+        _append_tts_job_event(job_id, "Narration WAV is ready to download.", "complete")
     except Exception as exc:
         _update_tts_job(job_id, state="error", stage="error", progress=0, message=str(exc), error=str(exc), updatedAt=time.time(), completedAt=time.time())
+        _append_tts_job_event(job_id, "Generation failed: " + str(exc), "error")
 
 
 @app.post("/api/tts/jobs")
@@ -702,6 +772,7 @@ def start_tts_job():
             "segment": 0,
             "segments": _tts_segment_estimate(text),
             "message": "Using cached narration." if cached_file.is_file() else "Queued for the local Kokoro engine…",
+            "estimatedSeconds": _tts_estimated_seconds(text),
             "duration": cached_duration if cached_file.is_file() else None,
             "filename": cache_filename if cached_file.is_file() else None,
             "cached": cached_file.is_file(),
@@ -709,10 +780,31 @@ def start_tts_job():
             "createdAt": now,
             "updatedAt": now,
             "completedAt": now if cached_file.is_file() else None,
+            "events": [],
         }
+    _append_tts_job_event(job_id, "Using cached narration." if cached_file.is_file() else "Queued for local Kokoro generation.", "cached" if cached_file.is_file() else "queued")
     if not cached_file.is_file():
         threading.Thread(target=_run_tts_job, args=(job_id, data), daemon=True, name=f"mep-tts-{job_id[:8]}").start()
     return jsonify(_tts_job_snapshot(job_id)), 202
+
+
+@app.get("/api/tts/jobs")
+def tts_jobs():
+    with _tts_jobs_lock:
+        job_ids = sorted(_tts_jobs, key=lambda key: float(_tts_jobs[key].get("createdAt") or 0), reverse=True)[:25]
+    return jsonify(jobs=[_tts_job_snapshot(job_id) for job_id in job_ids])
+
+
+@app.get("/api/tts/history")
+def tts_history():
+    if not TTS_HISTORY.is_file():
+        return jsonify(events=[])
+    try:
+        lines = TTS_HISTORY.read_text(encoding="utf-8").splitlines()[-100:]
+        events = [json.loads(line) for line in lines if line.strip()]
+        return jsonify(events=events[-50:])
+    except (OSError, json.JSONDecodeError):
+        return jsonify(events=[])
 
 
 @app.get("/api/tts/jobs/<job_id>")
@@ -787,7 +879,9 @@ def output_file(filename: str):
 
 def open_editor_tab():
     time.sleep(1.2)
-    target = f"http://127.0.0.1:{PORT}/app/" if (editor_root() / "index.html").exists() else f"http://127.0.0.1:{PORT}/server/"
+    # Open the visible control panel first; it has a one-click editor link and
+    # live narration logs, so the Python window never feels like a black box.
+    target = f"http://127.0.0.1:{PORT}/server/"
     webbrowser.open(target)
 
 

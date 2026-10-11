@@ -7,7 +7,7 @@ This folder turns the downloaded repository into a local/offline MEP Video Maker
 - Local MEP editor at `http://127.0.0.1:7860/app/`
 - Phone/LAN editor at `http://YOUR-LAPTOP-IP:7860/app/`
 - British Kokoro voices: George, Daniel, Fable, Lewis
-- Background narration jobs with segment-level progress for the web editor, so long local generations remain visible instead of blocking the page
+- Background narration jobs split long scripts into visible sections, with elapsed time, rough remaining-time estimates, and a saved local narration log
 - Completed narrations are cached by text and voice settings, so repeating an export reuses the WAV instead of running Kokoro again
 - WAV narration generation
 - A local dashboard with model status, a TTS tester, and a downloadable QR code
@@ -22,7 +22,7 @@ This folder turns the downloaded repository into a local/offline MEP Video Maker
 3. Download/clone the full MEP Video Maker repository.
 4. Open this `desktop-server` folder.
 5. Double-click `START_WINDOWS.bat`.
-6. Python starts the server and opens **MEP Video Maker itself** in your default browser. No API URL or token is required when you use this local tab.
+6. Python starts the server and opens a **Local Voice Server control panel** in your default browser. It includes live narration activity, saved job history, setup controls, and a one-click **Open MEP Video Maker** button. No API URL or token is required when you use that local editor tab.
 7. Server setup/status is available at `http://127.0.0.1:7860/server/`.
 8. Click **Cache Offline Editor** once while online. If you downloaded the full repository it copies the editor locally; if you downloaded only this folder it downloads the current editor files into `desktop-server/editor/`.
 9. Click **Download / Load Kokoro** once while online.
