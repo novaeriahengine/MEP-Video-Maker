@@ -222,7 +222,7 @@ function syncFlagsUI(){
  if(rowSignature!==lastFlagRowSignature||!$("#flagAllStates").children.length){
   lastFlagRowSignature=rowSignature;
   $("#flagAllStates").innerHTML=codes.map(code=>{const r=rank[code]||{};return'<button class="flagStateRow" data-flag-code="'+code+'"><span>'+(r.done?"✓":"○")+'</span><img loading="lazy" decoding="async" src="flags/current/'+code.toLowerCase()+'.svg" alt=""><strong>'+code+'</strong><span>'+(r.grade||"—")+'</span><small>Ep '+MEPFlagSeries.episodeOf(code)+'</small></button>'}).join("");
-  $("[data-flag-code]").forEach(b=>on(b,"click",()=>{selectedFlagCode=b.dataset.flagCode;const target=project.shorts.find(sh=>sh.flagsEpisode?.stateCodes?.includes(selectedFlagCode));if(target&&target.id!==short.id){MEPModel.setActiveShort(project,target.id);refreshRefs();syncUI()}else syncFlagsUI()}));
+  $$("[data-flag-code]").forEach(b=>on(b,"click",()=>{selectedFlagCode=b.dataset.flagCode;const target=project.shorts.find(sh=>sh.flagsEpisode?.stateCodes?.includes(selectedFlagCode));if(target&&target.id!==short.id){MEPModel.setActiveShort(project,target.id);refreshRefs();syncUI()}else syncFlagsUI()}));
  }
  $("#flagCloudStatus").textContent=MEPStorage.currentEditor()?"Signed in · Firestore rules determine write access · "+MEPStorage.currentEditor():"Shared board · sign in to publish updates; local ratings still work offline";
 }
