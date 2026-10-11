@@ -8,10 +8,10 @@ async function assetArrayBuffer(asset){if(asset?.voiceDbKey){const blob=await ge
 function normalizeUrl(url=""){return String(url||"").trim().replace(/\/+$/,"")}
 function isPrivateHost(host=""){return /^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[0-1])\.)/i.test(host)}
 function defaultServerUrl(){
- const saved=normalizeUrl(localStorage.getItem(URL_KEY)||"");
- if(saved)return saved;
+ // In the desktop editor always use its own same-origin Flask service.
+ // A previously saved public/tunnel URL must not silently override it.
  if(location.protocol==="http:"&&isPrivateHost(location.hostname))return location.origin;
- return""
+ return normalizeUrl(localStorage.getItem(URL_KEY)||"");
 }
 function setServerUrl(url){url=normalizeUrl(url);if(url)localStorage.setItem(URL_KEY,url);else localStorage.removeItem(URL_KEY);return url}
 function mixedContentRisk(url){try{const u=new URL(url,location.href);return location.protocol==="https:"&&u.protocol==="http:"}catch{return false}}
