@@ -77,10 +77,22 @@ const visibleBubbles=(s,t)=>(s.bubbles||[]).filter(b=>t>=(b.startTime??0)&&t<=(b
 const shortIndex=()=>Math.max(0,project.shorts.findIndex(s=>s.id===short.id));
 const sceneIndex=()=>Math.max(0,short.scenes.findIndex(s=>s.id===scene.id));
 function drawOverlayBrand(context){
- const w=context.canvas.width,h=context.canvas.height;context.save();context.font="800 "+Math.max(14,w*.027)+"px system-ui";context.textAlign="left";context.textBaseline="middle";const text="NOVERIA HISTORY",tw=context.measureText(text).width,pad=10;context.fillStyle="rgba(8,12,18,.72)";context.fillRect(18,22,tw+pad*2,34);context.fillStyle="#ffd16c";context.fillText(text,18+pad,39);context.restore()
+ const w=context.canvas.width;context.save();context.font="800 "+Math.max(13,w*.024)+"px system-ui";context.textAlign="left";context.textBaseline="middle";
+ const text="NOVERIA HISTORY",tw=context.measureText(text).width;context.fillStyle="rgba(39,49,57,.82)";context.fillRect(18,20,tw+24,30);
+ context.fillStyle="#d5a94f";context.fillText(text,30,35);context.restore()
 }
 function drawBurnedCaption(context,text){
- if(!text)return;const w=context.canvas.width,h=context.canvas.height,maxW=w*.82,font=Math.max(24,w*.048),padX=18,padY=12;context.save();context.font="800 "+font+"px system-ui";context.textAlign="center";context.textBaseline="middle";const words=String(text).split(/\s+/),lines=[];let line="";for(const word of words){const test=line?line+" "+word:word;if(context.measureText(test).width>maxW&&line){lines.push(line);line=word}else line=test}if(line)lines.push(line);const lh=font*1.18,boxH=lines.length*lh+padY*2,y=Math.round(h*.76-boxH/2);context.fillStyle="rgba(0,0,0,.72)";context.fillRect((w-maxW)/2-padX,y-padY,maxW+padX*2,boxH+padY*2);context.lineWidth=5;context.strokeStyle="#000";context.fillStyle="#fff";lines.forEach((ln,i)=>{const yy=y+padY+lh*.5+i*lh;context.strokeText(ln,w/2,yy);context.fillText(ln,w/2,yy)});context.restore()
+ if(!text)return;
+ const w=context.canvas.width,h=context.canvas.height,maxW=w*.84,font=Math.max(24,w*.047);
+ context.save();context.font="850 "+font+"px system-ui";context.textAlign="center";context.textBaseline="middle";context.lineJoin="round";
+ const words=String(text).split(/\s+/),lines=[];let line="";
+ for(const word of words){const test=line?line+" "+word:word;if(context.measureText(test).width>maxW&&line){lines.push(line);line=word}else line=test}
+ if(line)lines.push(line);while(lines.length>2){lines[1]+=" "+lines.splice(2,1)[0]}
+ const lh=font*1.16,startY=h*.83-(lines.length-1)*lh*.5;
+ context.shadowColor="rgba(0,0,0,.55)";context.shadowBlur=8;context.shadowOffsetY=3;
+ context.lineWidth=Math.max(6,w*.009);context.strokeStyle="rgba(24,29,33,.9)";context.fillStyle="#f7f3e8";
+ lines.forEach((ln,i)=>{const yy=startY+i*lh;context.strokeText(ln,w/2,yy,maxW);context.fillText(ln,w/2,yy,maxW)});
+ context.restore()
 }
 
 function imageForAsset(asset){if(!asset?.dataUrl)return null;if(imageCache.has(asset.id))return imageCache.get(asset.id);const im=new Image();im.src=asset.dataUrl;imageCache.set(asset.id,im);im.onload=()=>render();return im}
