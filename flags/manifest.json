@@ -1,0 +1,899 @@
+{
+  "schema": "mep-state-flags-v1",
+  "updated": "2026-10-11",
+  "coverage": {
+    "current": 50,
+    "history": "partial verified entries only; not a complete archive"
+  },
+  "source": "Invoxio/us-state-flags SVG collection, checked against current Wikimedia Commons for MN/MS/UT",
+  "sourceUrl": "https://github.com/Invoxio/us-state-flags",
+  "licenseNote": "Official state flag designs; verify any underlying vector artwork license and heraldic restrictions before redistribution.",
+  "states": [
+    {
+      "id": "al",
+      "code": "AL",
+      "name": "Alabama",
+      "order": 1,
+      "visualNotes": "Red diagonal cross on white",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/al.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "ak",
+      "code": "AK",
+      "name": "Alaska",
+      "order": 2,
+      "visualNotes": "Eight gold stars on blue",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/ak.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "az",
+      "code": "AZ",
+      "name": "Arizona",
+      "order": 3,
+      "visualNotes": "Copper star with red and gold rays",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/az.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "ar",
+      "code": "AR",
+      "name": "Arkansas",
+      "order": 4,
+      "visualNotes": "Diamond emblem with stars",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/ar.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "ca",
+      "code": "CA",
+      "name": "California",
+      "order": 5,
+      "visualNotes": "Bear, red star, and red stripe",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/ca.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "co",
+      "code": "CO",
+      "name": "Colorado",
+      "order": 6,
+      "visualNotes": "Bold red C over blue and white",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/co.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "ct",
+      "code": "CT",
+      "name": "Connecticut",
+      "order": 7,
+      "visualNotes": "Three grapevines on a blue field",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/ct.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "de",
+      "code": "DE",
+      "name": "Delaware",
+      "order": 8,
+      "visualNotes": "Colonial blue with a buff diamond",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/de.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "fl",
+      "code": "FL",
+      "name": "Florida",
+      "order": 9,
+      "visualNotes": "Red diagonal cross and state seal",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/fl.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "ga",
+      "code": "GA",
+      "name": "Georgia",
+      "order": 10,
+      "visualNotes": "Three stripes with a blue canton",
+      "current": {
+        "from": "2003-05-08",
+        "to": null,
+        "art": "flags/current/ga.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [
+        {
+          "from": "1956",
+          "to": "2001",
+          "art": "https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_the_State_of_Georgia_(1956%E2%80%932001).svg",
+          "label": "1956–2001 design, with Confederate battle emblem",
+          "status": "source-verified",
+          "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_State_of_Georgia_(1956%E2%80%932001).svg"
+        }
+      ],
+      "historyComplete": false
+    },
+    {
+      "id": "hi",
+      "code": "HI",
+      "name": "Hawaii",
+      "order": 11,
+      "visualNotes": "Union Jack canton and eight stripes",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/hi.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "id",
+      "code": "ID",
+      "name": "Idaho",
+      "order": 12,
+      "visualNotes": "State seal on dark blue",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/id.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "il",
+      "code": "IL",
+      "name": "Illinois",
+      "order": 13,
+      "visualNotes": "State seal above the state name",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/il.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "in",
+      "code": "IN",
+      "name": "Indiana",
+      "order": 14,
+      "visualNotes": "Golden torch encircled by stars",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/in.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "ia",
+      "code": "IA",
+      "name": "Iowa",
+      "order": 15,
+      "visualNotes": "Red, white, blue vertical panels and eagle",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/ia.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "ks",
+      "code": "KS",
+      "name": "Kansas",
+      "order": 16,
+      "visualNotes": "Sunflower above the state seal",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/ks.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "ky",
+      "code": "KY",
+      "name": "Kentucky",
+      "order": 17,
+      "visualNotes": "Two people shaking hands in the seal",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/ky.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "la",
+      "code": "LA",
+      "name": "Louisiana",
+      "order": 18,
+      "visualNotes": "Pelican caring for its young",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/la.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "me",
+      "code": "ME",
+      "name": "Maine",
+      "order": 19,
+      "visualNotes": "Pine tree and moose in the coat of arms",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/me.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "md",
+      "code": "MD",
+      "name": "Maryland",
+      "order": 20,
+      "visualNotes": "Quartered heraldic arms",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/md.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "ma",
+      "code": "MA",
+      "name": "Massachusetts",
+      "order": 21,
+      "visualNotes": "State shield and surrounding star",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/ma.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "mi",
+      "code": "MI",
+      "name": "Michigan",
+      "order": 22,
+      "visualNotes": "Elk, moose, and heraldic eagle",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/mi.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "mn",
+      "code": "MN",
+      "name": "Minnesota",
+      "order": 23,
+      "visualNotes": "Eight-point North Star and blue land silhouette",
+      "current": {
+        "from": "2024-05-11",
+        "to": null,
+        "art": "flags/current/mn.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [
+        {
+          "from": "1983",
+          "to": "2024-05-10",
+          "art": "https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Minnesota_(1983%E2%80%932024).svg",
+          "label": "Previous seal-centered flag",
+          "status": "source-verified",
+          "source": "https://sos.mn.gov/about-minnesota/minnesota-in-profile/historic-state-flag/"
+        }
+      ],
+      "historyComplete": false
+    },
+    {
+      "id": "ms",
+      "code": "MS",
+      "name": "Mississippi",
+      "order": 24,
+      "visualNotes": "Magnolia flower, stars, and gold stripes",
+      "current": {
+        "from": "2021-01-11",
+        "to": null,
+        "art": "flags/current/ms.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [
+        {
+          "from": "1894",
+          "to": "2020-06-30",
+          "art": "https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Mississippi_(1894%E2%80%932020).svg",
+          "label": "Former Mississippi flag",
+          "status": "reference-needs-asset-validation",
+          "source": "https://en.wikipedia.org/wiki/Flag_of_Mississippi"
+        }
+      ],
+      "historyComplete": false
+    },
+    {
+      "id": "mo",
+      "code": "MO",
+      "name": "Missouri",
+      "order": 25,
+      "visualNotes": "State seal on red-white-blue stripes",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/mo.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "mt",
+      "code": "MT",
+      "name": "Montana",
+      "order": 26,
+      "visualNotes": "State seal and name on blue",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/mt.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "ne",
+      "code": "NE",
+      "name": "Nebraska",
+      "order": 27,
+      "visualNotes": "State seal on blue",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/ne.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "nv",
+      "code": "NV",
+      "name": "Nevada",
+      "order": 28,
+      "visualNotes": "Silver star and sagebrush emblem",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/nv.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "nh",
+      "code": "NH",
+      "name": "New Hampshire",
+      "order": 29,
+      "visualNotes": "Frigate Raleigh in the state seal",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/nh.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "nj",
+      "code": "NJ",
+      "name": "New Jersey",
+      "order": 30,
+      "visualNotes": "Blue state coat of arms on a buff field",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/nj.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "nm",
+      "code": "NM",
+      "name": "New Mexico",
+      "order": 31,
+      "visualNotes": "Red Zia sun symbol on yellow",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/nm.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "ny",
+      "code": "NY",
+      "name": "New York",
+      "order": 32,
+      "visualNotes": "State coat of arms on blue",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/ny.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "nc",
+      "code": "NC",
+      "name": "North Carolina",
+      "order": 33,
+      "visualNotes": "Blue vertical panel, star, red and white stripes",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/nc.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "nd",
+      "code": "ND",
+      "name": "North Dakota",
+      "order": 34,
+      "visualNotes": "Heraldic eagle on dark blue",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/nd.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "oh",
+      "code": "OH",
+      "name": "Ohio",
+      "order": 35,
+      "visualNotes": "Unique swallowtail burgee with circle and stars",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/oh.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "ok",
+      "code": "OK",
+      "name": "Oklahoma",
+      "order": 36,
+      "visualNotes": "Osage warrior shield and peace symbols",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/ok.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "or",
+      "code": "OR",
+      "name": "Oregon",
+      "order": 37,
+      "visualNotes": "State arms on front; beaver on reverse",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/or.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "pa",
+      "code": "PA",
+      "name": "Pennsylvania",
+      "order": 38,
+      "visualNotes": "Coat of arms with horses and eagle",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/pa.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "ri",
+      "code": "RI",
+      "name": "Rhode Island",
+      "order": 39,
+      "visualNotes": "Gold anchor and thirteen stars",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/ri.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "sc",
+      "code": "SC",
+      "name": "South Carolina",
+      "order": 40,
+      "visualNotes": "White palmetto and crescent on indigo",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/sc.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "sd",
+      "code": "SD",
+      "name": "South Dakota",
+      "order": 41,
+      "visualNotes": "State seal on blue with gold lettering",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/sd.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "tn",
+      "code": "TN",
+      "name": "Tennessee",
+      "order": 42,
+      "visualNotes": "Three stars within a blue circle",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/tn.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "tx",
+      "code": "TX",
+      "name": "Texas",
+      "order": 43,
+      "visualNotes": "Lone Star on blue, white, and red",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/tx.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "ut",
+      "code": "UT",
+      "name": "Utah",
+      "order": 44,
+      "visualNotes": "Beehive, mountains, and white star on geometric tricolor",
+      "current": {
+        "from": "2024-03-09",
+        "to": null,
+        "art": "flags/current/ut.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [
+        {
+          "from": "2011",
+          "to": "2024-03-08",
+          "art": "https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Utah_(2011%E2%80%932024).svg",
+          "label": "Historic state flag (retained coofficial status)",
+          "status": "source-verified",
+          "source": "https://en.wikipedia.org/wiki/Flag_of_Utah"
+        }
+      ],
+      "historyComplete": false
+    },
+    {
+      "id": "vt",
+      "code": "VT",
+      "name": "Vermont",
+      "order": 45,
+      "visualNotes": "State coat of arms in a blue field",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/vt.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "va",
+      "code": "VA",
+      "name": "Virginia",
+      "order": 46,
+      "visualNotes": "State seal showing Virtus",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/va.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "wa",
+      "code": "WA",
+      "name": "Washington",
+      "order": 47,
+      "visualNotes": "George Washington portrait on green",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/wa.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "wv",
+      "code": "WV",
+      "name": "West Virginia",
+      "order": 48,
+      "visualNotes": "Coat of arms with wreath on white",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/wv.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "wi",
+      "code": "WI",
+      "name": "Wisconsin",
+      "order": 49,
+      "visualNotes": "State coat of arms and Wisconsin name",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/wi.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    },
+    {
+      "id": "wy",
+      "code": "WY",
+      "name": "Wyoming",
+      "order": 50,
+      "visualNotes": "White bison against blue with red border",
+      "current": {
+        "from": null,
+        "to": null,
+        "art": "flags/current/wy.svg",
+        "label": "Current official flag",
+        "status": "sourced-vector",
+        "source": "https://github.com/Invoxio/us-state-flags"
+      },
+      "history": [],
+      "historyComplete": false
+    }
+  ]
+}
