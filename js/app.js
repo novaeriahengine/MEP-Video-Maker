@@ -225,8 +225,32 @@ function syncFlagsUI(){
   $$("[data-flag-code]").forEach(b=>on(b,"click",()=>{selectedFlagCode=b.dataset.flagCode;const target=project.shorts.find(sh=>sh.flagsEpisode?.stateCodes?.includes(selectedFlagCode));if(target&&target.id!==short.id){MEPModel.setActiveShort(project,target.id);refreshRefs();syncUI()}else syncFlagsUI()}));
  }
  $("#flagCloudStatus").textContent=MEPStorage.currentEditor()?"Signed in · Firestore rules determine write access · "+MEPStorage.currentEditor():"Shared board · sign in to publish updates; local ratings still work offline";
+ const visual=scene?.flagBeat||null,details=$("#flagSceneDirector");
+ if(details){details.hidden=!visual;
+  if(visual){
+   const choices=[{code:"US",name:"United States"},...codes.map(code=>({code,name:MEPFlagSeries.flagInfo(code)?.name||code}))];
+   const selector=$("#flagSceneState");if(selector.options.length!==choices.length){selector.innerHTML=choices.map(x=>'<option value="'+x.code+'">'+esc(x.name)+'</option>').join("")}
+   setVal("#flagSceneState",visual.stateCode||"US");setVal("#flagSceneShot",visual.mode||"full");setVal("#flagSceneHeading",visual.heading||"");
+   setText("#flagSceneLinkPreview","Linked narration: "+(scene.script||"(no narration)")+" · "+(Number(scene.duration)||0).toFixed(1)+" second scene");
+  }
+ }
+
 }
 
+on("#applyFlagScene","click",()=>{
+ if(!project?.series||!scene?.flagBeat){alert("Open the Flags project and select a flag scene first.");return}
+ const code=$("#flagSceneState").value,mode=$("#flagSceneShot").value,heading=$("#flagSceneHeading").value.trim().slice(0,72);
+ if(!["US",...MEPFlagSeries.codes].includes(code))return alert("Choose a supported state flag.");
+ const inEpisode=short.flagsEpisode?.stateCodes||[];
+ if(short.flagsEpisode?.index>0&&code!=="US"&&!inEpisode.includes(code)){
+  if(!confirm("This flag belongs to another episode. Change only this scene's flag while keeping the episode assignment?"))return
+ }
+ scene.flagBeat={...scene.flagBeat,stateCode:code,mode,heading};
+ if(project.scripts?.sceneById)project.scripts.sceneById[scene.id]=scene.script||"";
+ changed({cloud:false});syncFlagsUI();if(document.body.classList.contains("video-mode"))renderVideo();
+ setText("#flagSceneLinkPreview","Updated visual: "+mode+" · "+code+" · "+(scene.script||"No narration")+". Save Firestore to publish.")
+});
+on("#flagSceneJumpScript","click",()=>{$("#sceneScript")?.scrollIntoView({behavior:"smooth",block:"center"});$("#sceneScript")?.focus({preventScroll:true})});
 on("#newProject","click",()=>{MEPStorage.save(project);project=MEPModel.project("Untitled Project");refreshRefs();changed({cloud:false});syncUI()});
 async function openProjects(){const local=MEPStorage.listLocal();$("#localProjectList").innerHTML=local.length?local.map(x=>'<button class="cloudCard" data-local="'+x.id+'"><strong>'+esc(x.name)+'</strong><small>'+x.shortCount+' shorts · '+esc(x.updatedAt.slice(0,16).replace("T"," "))+'</small></button>').join(""):'<p>No local projects yet.</p>';$$("[data-local]").forEach(b=>on(b,"click",()=>{const p=MEPStorage.load(b.dataset.local);if(p){project=p;refreshRefs();$("#projectDialog").close();syncUI()}}));if(cloudReady){try{const cloud=await MEPStorage.listCloud();$("#cloudProjectList").innerHTML=cloud.length?cloud.map(x=>'<button class="cloudCard" data-cloud="'+x.id+'"><strong>'+esc(x.name)+'</strong><small>'+x.shortCount+' shorts</small></button>').join(""):'<p>No Firestore projects.</p>';$$("[data-cloud]").forEach(b=>on(b,"click",async()=>{project=await MEPStorage.loadCloud(b.dataset.cloud);refreshRefs();$("#projectDialog").close();syncUI()}))}catch(e){$("#cloudProjectList").innerHTML="<p>Cloud unavailable.</p>"}}else $("#cloudProjectList").innerHTML="<p>Firestore not connected yet.</p>";
  if(cloudReady){try{const entries=await MEPStorage.listCloudHistory(project.id);$("#cloudHistoryList").innerHTML=entries.length?entries.map(x=>'<div><b>'+esc((x.createdAt||"").replace("T"," ").slice(0,19))+'</b><span>'+esc(x.action||"save")+' · '+Number(x.videoCount||0)+' videos saved</span></div>').join(""):'<p>No cloud save history yet.</p>'}catch(e){$("#cloudHistoryList").innerHTML="<p>History unavailable: "+esc(e.message)+"</p>"}}else $("#cloudHistoryList").innerHTML="<p>Connect to Firestore to view history.</p>";
@@ -504,7 +528,7 @@ on("#addBubble","click",()=>{const style=$("#bubbleStyle").value||"speech",st=ME
 on("#scrubber","input",e=>{playing=false;editPreview=null;time=Number(e.target.value);render();syncBackgroundUI()});function playTick(now){if(!playing)return;time+=(now-lastFrame)/1000;lastFrame=now;if(time>=scene.duration){time=scene.duration;playing=false}render();if(playing)requestAnimationFrame(playTick)}on("#play","click",()=>{if(time>=scene.duration)time=0;playing=true;lastFrame=performance.now();requestAnimationFrame(playTick)});on("#stop","click",()=>{playing=false;time=0;render()});
 
 let videoPlaying=false,videoTime=0,videoLast=0,videoFrameLast=0,videoUiLast=0,videoRaf=0,videoStartAt=0,videoStartPosition=0;
-let previewRenderMs=0,adaptivePreviewFps=18;
+let previewRenderMs=0,adaptivePreviewFps=15;
 function sceneAtGlobal(sh,t){
  const scenes=sh?.scenes||[];if(!scenes.length)return{scene:null,index:0,local:0,offset:0};
  let off=0;const position=Math.max(0,Number(t)||0);
@@ -620,7 +644,7 @@ function videoTick(now){
   }
  }
  const quality=$("#previewQuality")?.value||"auto";
- const targetFps=quality==="auto"?adaptivePreviewFps:Math.max(10,Math.min(30,Number(quality)||18));
+ const targetFps=quality==="auto"?Math.min(short?.flagsEpisode?18:24,adaptivePreviewFps):Math.max(10,Math.min(30,Number(quality)||18));
  const framePeriod=1000/targetFps;
  const changed=sceneAtGlobal(short,videoTime).index!==lastVideoSceneIndex;
  if(changed||now-videoFrameLast>=framePeriod||!videoPlaying){
@@ -652,6 +676,8 @@ function setVideoMode(v){
   }).catch(error=>console.warn("Flag artwork prewarm:",error.message))
  }
 }
+const autoNextControl=$("#autoNextEpisode");
+if(autoNextControl){autoNextControl.checked=localStorage.getItem("mep-flag-video-auto-next-v1")!=="off";on(autoNextControl,"change",()=>localStorage.setItem("mep-flag-video-auto-next-v1",autoNextControl.checked?"on":"off"))}
 on("#editorMode","click",()=>setVideoMode(false));on("#videoMode","click",()=>setVideoMode(true));on("#mobileVideo","click",()=>setVideoMode(true));
 on("#videoPlayPause","click",()=>{
  if(videoPlaying){stopPreviewPlayback();return}
