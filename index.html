@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Noveria History — MEP Short Maker</title>
+<title>Noveria History — MEP Video Studio</title>
 <link rel="icon" type="image/svg+xml" href="assets/brand/mep-kokoro-florida-mark.svg">
-<link rel="stylesheet" href="css/style.css?v=20261011-preview-performance-r7">
+<link rel="stylesheet" href="css/style.css?v=20261011-longform-engine-r10">
 </head>
 <body>
 <div id="app">
 <header class="topbar">
-  <div class="brand"><img class="brandMark" src="assets/brand/mep-kokoro-florida-mark.svg" alt="MEP Video Maker mark"><div><strong>Noveria History</strong><span>MEP Short Maker</span></div></div>
-  <nav class="modeTabs"><button id="editorMode" class="active">Editor</button><button id="videoMode">Preview Short</button></nav>
+  <div class="brand"><img class="brandMark" src="assets/brand/mep-kokoro-florida-mark.svg" alt="MEP Video Maker mark"><div><strong>Noveria History</strong><span>MEP Video Studio</span></div></div>
+  <nav class="modeTabs"><button id="editorMode" class="active">Editor</button><button id="videoMode">Preview Video</button><button id="longFormMode">Long Form Videos</button></nav>
   <label class="projectNameLabel">Project <input id="projectName" value="Untitled Project"></label>
   <button id="newProject" class="primary">+ New Project</button>
   <button id="openProjects">Open / Recent</button>
@@ -28,7 +28,7 @@
   <span id="saveStatus"></span>
 </header>
 <div id="bootStatus" class="bootStatus">Starting Noveria History…</div>
-<div id="mepBuildLabel" style="font-size:11px;opacity:.68;padding:0 14px 6px" aria-label="Installed build">Build: Preview performance r7 · 2026-10-11</div>
+<div id="mepBuildLabel" style="font-size:11px;opacity:.68;padding:0 14px 6px" aria-label="Installed build">Build: documentary visual director + exact cue timing r11 · 2026-10-11</div>
 
 <div id="exportProgress" class="exportProgress" hidden aria-live="polite">
   <div class="exportProgressHeader"><strong id="exportProgressPhase">Export ready</strong><span id="exportProgressPercent">0%</span></div>
@@ -36,19 +36,29 @@
   <div id="exportProgressDetail" class="exportProgressDetail">The editor will show voice-generation and video-render progress here.</div>
 </div>
 
+<section id="longFormStudio" class="longFormStudio" hidden>
+  <header><div><h1>Long Form Videos</h1><p>Build one continuous video: one script, one scene timeline, one final voice track, and one export. It does not export separate Shorts first.</p></div><button id="longFormOpenEditor" class="primary">Open Full Editor</button></header>
+  <div class="longFormGrid">
+    <article><h2>American Flag Atlas</h2><p>Creates one 16:9 long-form project covering North America, the Caribbean, Central America, and South America. It includes local SVG flag art, editable scenes, research notes, and a seven-minute starter narration.</p><button id="createAmericasFlagsProject" class="primary wide">Create American Flag Atlas · 7 Minutes</button></article>
+    <article><h2>Start a Future Video</h2><label>Topic <input id="longFormTopic" placeholder="e.g. History of Haitian flags"></label><label>Target length <select id="longFormTargetMinutes"><option value="1">1 minute Short</option><option value="7" selected>7 minute long-form</option><option value="10">10 minute long-form</option><option value="15">15 minute long-form</option></select></label><button id="longFormOpenDirector">Open Script + Scene Brief</button><p class="captionEditorHint">The backend contract stores your format, topic, timing, scripts, and background instructions now. Connect an LLM endpoint later to generate the plan.</p></article>
+    <article><h2>Current Long-form Project</h2><div id="longFormProjectInfo">Open or create a long-form project to see its continuous timeline.</div><div class="buttonGrid"><button id="longFormPreview">Preview Video</button><button id="longFormExport" class="primary">Export One Video</button></div></article>
+  </div>
+  <section><h2>Research sources for this project</h2><div id="longFormSourceList" class="longFormSourceList">Sources appear with the American Flag Atlas project.</div></section>
+</section>
+
 <main class="workspace">
   <aside id="scenePanel" class="panel scenePanel">
     <h2>Videos in Project</h2>
-    <label>Short <select id="shortSelect"></select></label>
+    <label><span id="videoSelectorLabel">Short</span> <select id="shortSelect"></select></label>
     <div class="buttonGrid"><button id="addShort">+ New Short</button><button id="duplicateShort">Duplicate</button></div>
     <button id="deleteShort" class="danger wide">Delete Short</button>
     <div id="shortList" class="miniList"></div>
-    <label class="stack">Short Title<input id="shortTitle"></label>
+    <label class="stack"><span id="videoTitleLabel">Short Title</span><input id="shortTitle"></label>
     <div class="yearControl compact">
       <label>Year <input id="projectYear" type="number" min="1000" max="2026" value="1944"></label>
       <input id="yearSlider" type="range" min="1000" max="2026" value="1944" step="1">
     </div>
-    <div class="shortStats"><b id="eraBadge">World Wars</b><span id="shortDuration">0s</span><span>9:16 · 720×1280</span></div>
+    <div class="shortStats"><b id="eraBadge">World Wars</b><span id="shortDuration">0s</span><span id="videoDimensions">9:16 · 720×1280</span></div>
 
     <section id="flagSeriesPanel" class="flagsSeriesPanel" hidden>
       <h2>50 State Flags · Shared Tier List</h2>
@@ -110,8 +120,15 @@
     <h2>Scenes</h2>
     <label>Scene <select id="sceneSelect"></select></label>
     <div class="sceneActions"><button id="prevScene">◀</button><button id="addScene">+ Scene</button><button id="duplicateScene">Duplicate</button><button id="deleteScene">Delete</button><button id="nextScene">▶</button></div>
+    <div class="buttonGrid"><button id="addTextIntro">+ Text Intro</button><button id="addTextOutro">+ Text Outro</button></div>
+    <div class="buttonGrid"><button id="moveSceneEarlier">↑ Move Earlier</button><button id="moveSceneLater">↓ Move Later</button></div>
     <label>Transition <select id="sceneTransition"><option value="cut">Cut</option><option value="fade">Fade</option></select></label>
     <div id="sceneBoard" class="sceneBoard"></div>
+
+    <h2>Shorts Compilation</h2>
+    <label>Layout <select id="longFormLayout"><option value="vertical">Vertical 9:16</option><option value="landscape">Landscape 16:9 · vertical videos centered</option></select></label>
+    <button id="exportLongForm" class="primary wide">Compile Separate Shorts</button>
+    <div id="longFormStatus" class="backgroundPreviewInfo">For an actual long-form video, use Long Form Videos: it is one continuous script, timeline, voice, and export.</div>
 
     <h2 id="backgroundSection">Background</h2>
     <label>Preset <span class="cycle"><button id="prevBackground">◀</button><select id="backgroundPreset"></select><button id="nextBackground">▶</button></span></label>
@@ -130,6 +147,7 @@
     <label class="stack">Highlight Countries <input id="sceneMapHighlights" placeholder="US, GB, FR, DE, RU"></label>
     <div class="buttonGrid"><button id="autoSceneMap" class="primary">Auto Pick Historical Map</button><button id="clearSceneHighlights">Clear Highlights</button></div>
     <div id="mapSnapshotInfo" class="backgroundPreviewInfo">Historical snapshot will be selected automatically.</div>
+    <div id="scriptVisualLink" class="backgroundPreviewInfo">Narration-to-visual link: write a country, U.S. state, or supported city in the script.</div>
 
     <h2>Map / Explainer Tools</h2>
     <label>Tool <select id="graphicType"></select></label>
@@ -144,7 +162,10 @@
     <div class="stageToolbar">
       <button id="play">▶ Scene</button><button id="stop">■ Stop</button>
       <span id="timeLabel">0.00 / 7.00s</span>
-      <label>Scene sec <input id="duration" type="number" min="1" max="60" step=".5" value="7"></label>
+      <label>This scene <input id="duration" type="number" min="1" max="300" step=".5" value="7"> sec</label>
+      <button id="sceneMinusSecond" class="timingNudge" title="Remove one second from only this scene">−1s</button>
+      <button id="scenePlusSecond" class="timingNudge" title="Add one second to only this scene">+1s</button>
+      <button id="scenePlusThreeSeconds" class="timingNudge" title="Add three seconds to only this scene">+3s</button>
       <label>FPS <select id="fps"><option>24</option><option selected>30</option><option>60</option></select></label>
       <button id="addKeyframe">◆ Character Keyframe</button>
       <button id="exportCurrentShort" class="primary">⬇ Export This Short</button>
@@ -152,7 +173,7 @@
       <span id="exportStatus"></span>
     </div>
     <div class="canvasWrap shortCanvasWrap"><canvas id="stage" width="720" height="1280"></canvas></div>
-    <div class="canvasHint">9:16 YouTube Short canvas. Flag characters stay simple; maps, arrows, fronts, routes, photos, captions, and narration do the explaining.</div>
+    <div id="canvasHint" class="canvasHint">9:16 YouTube Short canvas. Flag characters stay simple; maps, arrows, fronts, routes, photos, captions, and narration do the explaining.</div>
   </section>
 
   <aside id="characterPanel" class="panel characterPanel">
@@ -194,6 +215,12 @@
 
     <h2>Narration</h2>
     <label class="stack">Current Scene Script<textarea id="sceneScript" rows="9"></textarea></label>
+    <div id="sceneTimingBox" class="sceneTimingBox">
+      <strong>Voice timing for this scene</strong>
+      <span id="sceneTimingHint">Checking the narration length…</span>
+      <div class="buttonGrid"><button id="fitSceneToNarration" class="primary">Fit This Scene to Voice</button><button id="fitAllScenesToNarration">Fit All Scenes to Voice</button></div>
+      <small>Fitting only adds time where narration needs it. It never shortens scenes or changes your script and visuals.</small>
+    </div>
     <label class="stack">On-screen Caption<textarea id="sceneCaption" rows="3"></textarea></label>
     <details id="captionEditor" open><summary>Animated Narration Captions</summary>
       <div class="captionEditorGrid">
@@ -214,7 +241,25 @@
         <label>Background <select id="captionBackground"><option value="none">No Box</option><option value="box">Dark Box</option><option value="label">Rounded Color Label</option></select></label>
         <label>Uppercase <select id="captionUppercase"><option value="off">Off</option><option value="on">On</option></select></label>
       </div>
-      <p class="captionEditorHint">Settings apply to the selected Short. Captions are timed to each scene's narration and appear in Preview and Export. Scene Caption is the custom text option.</p>
+      <p class="captionEditorHint">Settings apply to the selected Short. After voice generation, caption cues are rebuilt from the final audio duration so Preview and Export share the same narration timing.</p>
+    </details>
+    <details id="textLayerEditor" open><summary>Custom Text Layers</summary>
+      <p class="captionEditorHint">Add independent text anywhere on the selected scene. Drag it directly on the canvas, then copy it to the next scene or every scene.</p>
+      <label class="stack">Text<textarea id="textLayerText" rows="3" placeholder="Thank you for watching! Subscribe for the next episode."></textarea></label>
+      <div class="textLayerGrid">
+        <label>Font <select id="textLayerFont"><option value="system-ui">Modern Sans</option><option value="Arial">Arial</option><option value="Georgia">Georgia</option><option value="Impact">Impact</option><option value="Courier New">Courier</option><option value="Trebuchet MS">Trebuchet</option></select></label>
+        <label>Size <input id="textLayerSize" type="number" min="16" max="180" step="2" value="56"></label>
+        <label>Color <input id="textLayerColor" type="color" value="#ffffff"></label>
+        <label>Background <select id="textLayerBackground"><option value="none">None</option><option value="dark">Dark box</option><option value="gold">Gold box</option><option value="white">White box</option></select></label>
+        <label>Align <select id="textLayerAlign"><option value="center">Center</option><option value="left">Left</option><option value="right">Right</option></select></label>
+        <label>Weight <select id="textLayerWeight"><option value="900">Bold</option><option value="700">Semi-bold</option><option value="400">Regular</option></select></label>
+        <label>X <input id="textLayerX" type="number" min="0" max="720" step="1"></label><label>Y <input id="textLayerY" type="number" min="0" max="1280" step="1"></label>
+        <label>Width <input id="textLayerWidth" type="number" min="100" max="700" step="10" value="620"></label><label>Rotate <input id="textLayerRotation" type="number" min="-180" max="180" step="1" value="0"></label>
+        <label>Start <input id="textLayerStart" type="number" min="0" step=".1" value="0"></label><label>End <input id="textLayerEnd" type="number" min="0" step=".1" value="7"></label>
+      </div>
+      <div class="buttonGrid"><button id="addTextLayer" class="primary">+ Add Text</button><button id="deleteTextLayer" class="danger">Delete Text</button></div>
+      <div class="buttonGrid"><button id="copyTextNext">Copy to Next Scene</button><button id="copyTextAll">Copy to All Scenes</button></div>
+      <div id="textLayerList" class="miniList"></div>
     </details>
     <label class="stack">Scene Notes<textarea id="sceneNotes" rows="4"></textarea></label>
 
@@ -226,7 +271,7 @@
       <button type="button" data-voice-source="chrome"><span>▶</span><b>Chrome Preview</b><small>Preview · converts to Local Kokoro on export</small><i>✓</i></button>
       <button type="button" data-voice-source="none"><span>∅</span><b>No Voice</b><small>Silent export</small><i>✓</i></button>
     </div>
-    <label>Voice Source <select id="voiceSource"><option value="mic">Recorded Mic Voiceover</option><option value="server">Local Kokoro AI Voice</option><option value="colab">Google Colab Kokoro Voice</option><option value="chrome">British Male Chrome Preview → Local Kokoro export</option><option value="none">No Voice</option></select></label>
+    <label>Voice Source <select id="voiceSource"><option value="mic">Recorded Mic Voiceover</option><option value="server">Local Kokoro AI Voice</option><option value="colab">Google Colab Kokoro Voice</option><option value="chrome">Chrome Preview → Local Kokoro export</option><option value="none">No Voice</option></select></label>
     <div id="voiceExportBadge" class="voiceExportBadge">Chrome Preview will generate Local Kokoro audio before export</div>
     <div class="voiceActions"><button id="recordVoice" class="primary">Record Full Voiceover</button><button id="stopVoiceRecord">Stop</button><button id="playVoiceover">Play Processed</button><button id="clearVoiceover">Clear</button></div>
     <div id="voiceStatus" class="voiceStatus">No recorded voiceover yet.</div>
@@ -234,7 +279,7 @@
     <p class="voiceStatus">Use Chrome for fast drafts. For the final voice, use the laptop Flask server directly or generate all Shorts in the Google Colab notebook.</p>
     <label>Local Voice Server <input id="neuralApiUrl" type="url" placeholder="Auto when opened from laptop server"></label>
     <div class="voiceGrid">
-      <label>Kokoro Voice <select id="kokoroVoice"><option value="bm_george">George · British male</option><option value="bm_daniel">Daniel · British male</option><option value="bm_fable">Fable · British storyteller</option><option value="bm_lewis">Lewis · Modern British male</option></select></label>
+      <label>Kokoro Voice <select id="kokoroVoice"><option value="af_heart">Heart · American female</option><option value="af_bella">Bella · American female</option><option value="af_nicole">Nicole · American female</option><option value="af_sky">Sky · American female</option><option value="am_adam">Adam · American male</option><option value="am_michael">Michael · American male</option><option value="bm_george">George · British male</option><option value="bm_daniel">Daniel · British male</option><option value="bm_fable">Fable · British storyteller</option><option value="bm_lewis">Lewis · Modern British male</option></select></label>
       <label>Kokoro Speed <input id="kokoroSpeed" type="range" min=".70" max="1.25" step=".05" value="1"><output id="kokoroSpeedOut">1.00x</output></label>
     </div>
     <div class="voiceActions"><button id="neuralConnect">Test Laptop Server</button><button id="neuralGenerate" class="primary">Generate & Select Final Voice</button><button id="neuralBatch">Download Colab Narration Batch</button></div>
@@ -244,20 +289,20 @@
     <p class="voiceStatus">Setup folders: <a href="https://github.com/novaeriahengine/MEP-Video-Maker/tree/main/desktop-server" target="_blank" rel="noopener">desktop-server</a> · <a href="https://github.com/novaeriahengine/MEP-Video-Maker/tree/main/Google%20Colab" target="_blank" rel="noopener">Google Colab</a></p>
     <h3>Chrome Auto Voice</h3>
     <label>Chrome Voice <select id="chromeVoice"></select></label>
-    <div id="chromeVoiceHint" class="voiceStatus">Detecting the best British male English voice available on this phone…</div>
-    <div class="voiceActions"><button id="autoChromeVoice" class="primary">★ Best British Male Voice</button><button id="speakScene">Speak Scene</button><button id="speakShort">Speak Whole Short</button><button id="stopSpeaking">Stop Voice</button></div>
+    <div id="chromeVoiceHint" class="voiceStatus">Detecting the best available English preview voice on this device…</div>
+    <div class="voiceActions"><button id="autoChromeVoice" class="primary">★ Best British Male</button><button id="autoAmericanFemaleVoice">★ Best US Female</button><button id="speakScene">Speak Scene</button><button id="speakShort">Speak Whole Short</button><button id="stopSpeaking">Stop Voice</button></div>
     <div class="voiceGrid"><label>TTS Rate <input id="ttsRate" type="range" min=".65" max="1.5" step=".05" value=".90"><output id="ttsRateOut">0.90</output></label><label>TTS Pitch <input id="ttsPitch" type="range" min=".5" max="1.6" step=".05" value=".88"><output id="ttsPitchOut">0.88</output></label></div>
     <h3>Saved Voice Profiles</h3>
     <div class="voicePresetManager"><input id="voicePresetName" placeholder="My documentary voice"><select id="voiceSavedPresets"><option value="">Saved profiles…</option></select></div>
     <div class="voiceActions"><button id="saveVoicePreset">Save Current</button><button id="loadVoicePreset">Load</button><button id="deleteVoicePreset" class="danger">Delete</button></div>
     <h3>Speech Continuity</h3>
-    <label class="voiceToggle"><span>Continuous Chrome read</span><input id="voiceContinuousRead" type="checkbox" checked></label><label class="voiceToggle"><span>Extend export to final voice</span><input id="voiceFitExport" type="checkbox" checked></label><button id="fitScenesToVoice" class="wide">Fit Scene Timing to Final Voice</button>
+    <label class="voiceToggle"><span>Continuous Chrome read</span><input id="voiceContinuousRead" type="checkbox" checked></label><label class="voiceToggle"><span>Extend export to final voice</span><input id="voiceFitExport" type="checkbox" checked></label><button id="fitScenesToVoice" class="wide">Sync Scenes + Subtitles to Final Voice</button>
     <div class="voiceGrid"><label>Sentence Gap <input id="voiceSentencePause" type="range" min="0" max="450" step="10" value="70"><output id="voiceSentencePauseOut">70 ms</output></label><label>Tail Trim <input id="voiceTailTrim" type="range" min="0" max="500" step="10" value="100"><output id="voiceTailTrimOut">100 ms</output></label></div>
     <h3>Voice Changer / EQ</h3>
-    <div class="voicePresetRow"><button data-voice-preset="britishDocumentary" class="primary">British Documentary</button><button data-voice-preset="britishDeep">Deep British</button><button data-voice-preset="britishNews">British News</button><button data-voice-preset="natural">Natural</button><button data-voice-preset="radio">Radio</button></div>
+    <div class="voicePresetRow"><button data-voice-preset="americanFemale" class="primary">American Female</button><button data-voice-preset="americanMale">American Male</button><button data-voice-preset="britishDocumentary">British Documentary</button><button data-voice-preset="britishDeep">Deep British</button><button data-voice-preset="britishNews">British News</button><button data-voice-preset="natural">Natural</button><button data-voice-preset="radio">Radio</button></div>
     <div class="voiceGrid"><label>Pitch <input id="voicePitch" type="range" min="-6" max="6" step=".5" value="0"><output id="voicePitchOut">0 st</output></label><label>Speed <input id="voiceSpeed" type="range" min=".8" max="1.2" step=".02" value="1"><output id="voiceSpeedOut">1.00x</output></label></div>
     <div class="voiceGrid"><label>Low Cut <input id="eqLowCut" type="range" min="40" max="140" step="5" value="72"><output id="eqLowCutOut">72 Hz</output></label><label>Warmth <input id="eqWarmth" type="range" min="-12" max="12" step="1" value="2"><output id="eqWarmthOut">+2 dB</output></label><label>Clarity <input id="eqClarity" type="range" min="-12" max="12" step="1" value="2"><output id="eqClarityOut">+2 dB</output></label><label>De-ess <input id="eqDeEss" type="range" min="0" max="12" step="1" value="3"><output id="eqDeEssOut">3 dB</output></label><label>Air <input id="eqAir" type="range" min="-12" max="12" step="1" value="2"><output id="eqAirOut">+2 dB</output></label><label>Limiter <input id="voiceLimiter" type="range" min="0" max="1" step=".05" value=".72"><output id="voiceLimiterOut">72%</output></label></div><div class="voiceGrid"><label>Bass <input id="eqBass" type="range" min="-12" max="12" step="1" value="0"><output id="eqBassOut">0 dB</output></label><label>Mid <input id="eqMid" type="range" min="-12" max="12" step="1" value="0"><output id="eqMidOut">0 dB</output></label><label>Treble <input id="eqTreble" type="range" min="-12" max="12" step="1" value="0"><output id="eqTrebleOut">0 dB</output></label><label>Presence <input id="eqPresence" type="range" min="-12" max="12" step="1" value="2"><output id="eqPresenceOut">2 dB</output></label><label>Compression <input id="voiceCompression" type="range" min="0" max="1" step=".05" value=".35"><output id="voiceCompressionOut">35%</output></label><label>Echo <input id="voiceEcho" type="range" min="0" max=".55" step=".05" value="0"><output id="voiceEchoOut">0%</output></label><label>Texture <input id="voiceGrit" type="range" min="0" max="1" step=".05" value="0"><output id="voiceGritOut">0%</output></label><label>Gain <input id="voiceGain" type="range" min=".5" max="1.8" step=".05" value="1"><output id="voiceGainOut">1.00x</output></label></div>
-    <p class="voiceNote">British male Chrome narration is auto-selected when available. The full EQ chain applies to recorded mic or Kokoro narration used in final WebM export.</p>
+    <p class="voiceNote">Choose American or British, female or male, for local Kokoro narration. Chrome is only the fast preview; the full EQ chain applies to recorded mic or Kokoro narration in the final WebM export.</p>
     <h2>Local GGUF Director</h2>
     <p class="voiceStatus">Optional and separate from voice. Start a local GGUF model for ideas, research notes, and Short scripts; Kokoro keeps working if this model is stopped.</p>
     <div id="localLlmStatus" class="voiceStatus">Checking local GGUF service…</div>
@@ -344,26 +389,29 @@
 
 <dialog id="projectDialog"><div class="dialogShell"><header><div><h2>Projects</h2><p>Recent local projects appear first. Firestore projects appear when cloud access is available.</p></div><button id="closeProjectDialog">Close</button></header><h3>Recent Local</h3><div id="localProjectList" class="cloudProjectList"></div><h3>Firestore</h3><div id="cloudProjectList" class="cloudProjectList"></div><h3>Current Project · Cloud Save History</h3><div id="cloudHistoryList" class="shortHistory"><p>Open a project to see its Firestore save history.</p></div></div></dialog>
 
-<dialog id="aiDialog"><form method="dialog" class="dialogShell aiPanel"><header><div><h2>AI Director</h2><p>Generate a 30–60 second narrated history short plan.</p></div><button>Close</button></header><textarea id="aiPrompt" rows="4" placeholder="Make a 45-second short explaining..."></textarea><div class="buttonGrid"><button type="button" id="aiGenerate" class="primary">Generate</button><button type="button" id="aiShowContext">Show Context</button></div><textarea id="aiJson" rows="12"></textarea><button type="button" id="aiApply">Apply as Project</button><pre id="aiStatus"></pre></form></dialog>
+<dialog id="aiDialog"><form method="dialog" class="dialogShell aiPanel"><header><div><h2>AI Director</h2><p>Prepare a structured Short or continuous long-form video plan. Your future LLM receives this exact brief, then returns scripts, scenes, background instructions, flag references, and research notes.</p></div><button>Close</button></header><div class="buttonGrid"><label>Video type <select id="aiFormat"><option value="short">Short · vertical</option><option value="long-form">Long-form · landscape</option></select></label><label>Target length <select id="aiDuration"><option value="60">1 minute</option><option value="420">7 minutes</option><option value="600">10 minutes</option><option value="900">15 minutes</option></select></label></div><textarea id="aiPrompt" rows="4" placeholder="Topic and context, e.g. compare the design changes of Haitian flags and use only source-checked dates."></textarea><div class="buttonGrid"><button type="button" id="aiGenerate" class="primary">Generate</button><button type="button" id="aiShowContext">Show Context</button></div><textarea id="aiJson" rows="12"></textarea><button type="button" id="aiApply">Apply as Project</button><pre id="aiStatus"></pre></form></dialog>
 
 <nav id="mobileDock" class="mobileDock"><button data-jump="#stageArea">Canvas</button><button data-jump="#scenePanel">Shorts</button><button data-jump="#characterPanel">Flags</button><button data-jump="#scriptPanel">Script</button><button id="mobileVideo">Preview</button></nav>
 
-<script src="js/firebase-config.js?v=20261011-preview-performance-r7"></script>
-<script src="js/history-flags.js?v=20261011-preview-performance-r7"></script>
-<script src="js/historical-maps.js?v=20261011-preview-performance-r7"></script>
-<script src="js/model.js?v=20261011-preview-performance-r7"></script>
-<script src="js/ai-config.js?v=20261011-preview-performance-r7"></script>
-<script src="js/ai-director.js?v=20261011-preview-performance-r7"></script>
-<script src="js/invention-scenes.js?v=20261011-preview-performance-r7"></script>
-<script src="js/flag-series.js?v=20261011-preview-performance-r7"></script>
-<script src="js/renderer.js?v=20261011-preview-performance-r7"></script>
-<script src="js/storage.js?v=20261011-preview-performance-r7"></script>
-<script src="js/voice-backends.js?v=20261011-preview-performance-r7"></script>
+<script src="js/firebase-config.js?v=20261012-repo-sync-r1"></script>
+<script src="js/history-flags.js?v=20261012-repo-sync-r1"></script>
+<script src="js/historical-maps.js?v=20261012-repo-sync-r1"></script>
+<script src="js/model.js?v=20261012-repo-sync-r1"></script>
+<script src="js/visual-director.js?v=20261012-repo-sync-r1"></script>
+<script src="js/ai-config.js?v=20261012-repo-sync-r1"></script>
+<script src="js/ai-director.js?v=20261012-repo-sync-r1"></script>
+<script src="js/invention-scenes.js?v=20261012-repo-sync-r1"></script>
+<script src="js/flag-series.js?v=20261012-repo-sync-r1"></script>
+<script src="js/americas-flags.js?v=20261012-repo-sync-r1"></script>
+<script src="js/renderer.js?v=20261012-repo-sync-r1"></script>
+<script src="js/storage.js?v=20261012-repo-sync-r1"></script>
+<script src="js/voice-backends.js?v=20261012-repo-sync-r1"></script>
+<!-- No automatic replacement of user-saved projects during site startup. -->
+
 <script>window.addEventListener("error",e=>{const el=document.getElementById("bootStatus");if(el){el.className="bootStatus error";const where=e.filename?(" · "+e.filename.split("/").pop()+":"+e.lineno+":"+e.colno):"";el.textContent="MEP error: "+(e.message||"Unknown startup error")+where+" · refresh to load the latest patches";}console.error("MEP uncaught error",e.error||e.message)});</script>
-<script src="js/speech-text.js?v=20261011-preview-performance-r7"></script>
-<script src="js/captions.js?v=20261011-preview-performance-r7"></script>
-<script src="js/app.js?v=20261011-preview-performance-r7"></script>
-<script src="js/tool-assistant.js?v=20261011-preview-performance-r7"></script>
+<script src="js/speech-text.js?v=20261012-repo-sync-r1"></script>
+<script src="js/captions.js?v=20261012-repo-sync-r1"></script>
+<script src="js/app.js?v=20261012-repo-sync-r1"></script>
+<script src="js/tool-assistant.js?v=20261012-repo-sync-r1"></script>
 </body>
 </html>
-
