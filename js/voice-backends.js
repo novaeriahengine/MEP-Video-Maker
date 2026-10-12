@@ -23,37 +23,38 @@ async function apiFetch(base,path,options={}){
 }
 async function health(base){return(await apiFetch(base,"/api/health")).json()}
 async function voices(base){return(await apiFetch(base,"/api/voices")).json()}
-async function synthesize(base,{text,voice="bm_george",speed=.95,pauseMs=70,tailTrimMs=100,title="",shortId="",onProgress=null}={}){
- const payload={text,voice,speed,pauseMs,tailTrimMs,title,shortId};
+async function synthesizeTimed(base,{text,voice="bm_george",speed=.95,pauseMs=70,tailTrimMs=100,title="",shortId="",cues=null,onProgress=null}={}){
+ const payload={text,voice,speed,pauseMs,tailTrimMs,title,shortId,...(Array.isArray(cues)&&cues.length?{cues:cues.map(c=>({id:String(c?.id||""),text:String(c?.text||"")})).filter(c=>c.text.trim())}: {})};
  let started;
  try{started=await apiFetch(base,"/api/tts/jobs",{method:"POST",body:JSON.stringify(payload)})}
  catch(error){
   if(error.status!==404)throw error;
   const r=await apiFetch(base,"/api/tts",{method:"POST",body:JSON.stringify(payload)});
   onProgress?.({state:"complete",stage:"complete",progress:100,message:"Narration ready."});
-  return r.blob();
+  return{blob:await r.blob(),cueTimings:null,duration:Number(r.headers.get("X-MEP-Duration"))||0}
  }
  const job=await started.json();
  if(!job.jobId)throw new Error("Voice server did not return a generation job.");
  onProgress?.(job);
  while(true){
-  await new Promise(resolve=>setTimeout(resolve,900));
-  const status=await (await apiFetch(base,"/api/tts/jobs/"+encodeURIComponent(job.jobId))).json();
+  let status=job;
+  if(job.state!=="complete"){await new Promise(resolve=>setTimeout(resolve,900));status=await (await apiFetch(base,"/api/tts/jobs/"+encodeURIComponent(job.jobId))).json()}
   onProgress?.(status);
   if(status.state==="error")throw new Error(status.error||status.message||"Voice generation failed.");
   if(status.state==="complete"){
    onProgress?.({...status,stage:"downloading",message:"Downloading generated WAV…"});
    const audio=await apiFetch(base,"/api/tts/jobs/"+encodeURIComponent(job.jobId)+"/audio");
    onProgress?.({...status,stage:"downloaded",message:"Generated WAV downloaded."});
-   return audio.blob();
+   return{blob:await audio.blob(),cueTimings:Array.isArray(status.cueTimings)?status.cueTimings:null,duration:Number(status.duration)||0}
   }
  }
 }
+async function synthesize(base,options={}){return(await synthesizeTimed(base,options)).blob}
 function narrationForShort(sh){const text=(sh?.scenes||[]).map(s=>s.script||"").filter(Boolean).join(" ");return window.MEPSpeech?MEPSpeech.normalize(text):text}
 function createColabBatch(project){
  return{schema:"mep-colab-narration-batch-v1",createdAt:new Date().toISOString(),projectId:project.id,projectName:project.name,shorts:(project.shorts||[]).map(sh=>({id:sh.id,title:sh.title,year:sh.year,duration:(sh.scenes||[]).reduce((n,s)=>n+(Number(s.duration)||0),0),voice:sh.voice?.kokoroVoice||"bm_george",speed:Number(sh.voice?.kokoroSpeed||.95),pauseMs:Number(sh.voice?.sentencePauseMs??70),tailTrimMs:Number(sh.voice?.tailTrimMs??100),narration:narrationForShort(sh),scenes:(sh.scenes||[]).map(s=>({id:s.id,name:s.name,duration:s.duration,script:window.MEPSpeech?MEPSpeech.normalize(s.script||""):(s.script||""),caption:s.caption||""}))}))}
 }
 function downloadJson(name,data){const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1500)}
 function blobToDataUrl(blob){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(blob)})}
-return{normalizeUrl,isPrivateHost,defaultServerUrl,setServerUrl,mixedContentRisk,health,voices,synthesize,createColabBatch,downloadJson,blobToDataUrl,narrationForShort,putAudio,getAudio,deleteAudio,assetArrayBuffer};
+return{normalizeUrl,isPrivateHost,defaultServerUrl,setServerUrl,mixedContentRisk,health,voices,synthesize,synthesizeTimed,createColabBatch,downloadJson,blobToDataUrl,narrationForShort,putAudio,getAudio,deleteAudio,assetArrayBuffer};
 })();

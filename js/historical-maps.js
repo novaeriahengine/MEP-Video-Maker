@@ -30,7 +30,10 @@ const SIDE_COLORS={allied:"#6f91b5",axis:"#a6534f",central:"#a55e4f",entente:"#6
 const COUNTRY_COLORS=[
  [/soviet|ussr|russian empire|russia/i,"#b53a3f"],[/german|germany|prussia/i,"#4e555d"],[/france/i,"#4d79bd"],[/britain|united kingdom|england/i,"#315a8c"],[/united states|america/i,"#6c8ebf"],[/japan/i,"#a94a4d"],[/italy/i,"#5d8a61"],[/china/i,"#c7a44d"],[/poland/i,"#b46d86"],[/austria|habsburg/i,"#b99a62"],[/ottoman|turkey/i,"#8d6c55"],[/canada/i,"#a96666"],[/belgium/i,"#806c9d"],[/cuba/i,"#c47b4c"],[/spain/i,"#b98a4d"],[/netherlands/i,"#a97755"],[/serbia/i,"#6f79a6"]
 ];
-const HIGHLIGHT_ALIASES={US:/united states|america/i,GB:/britain|united kingdom|england/i,FR:/france/i,DE:/german|germany|prussia/i,RU:/soviet|ussr|russian empire|russia/i,JP:/japan/i,IT:/italy/i,CN:/china/i,PL:/poland/i,AT:/austria|habsburg/i,CU:/cuba/i,CA:/canada/i,BE:/belgium/i,PRU:/prussia/i};
+const HIGHLIGHT_ALIASES={
+ US:/united states|america/i,GB:/britain|united kingdom|england/i,FR:/france/i,DE:/german|germany|prussia/i,RU:/soviet|ussr|russian empire|russia/i,JP:/japan/i,IT:/italy/i,CN:/china/i,PL:/poland/i,AT:/austria|habsburg/i,BE:/belgium/i,PRU:/prussia/i,
+ AG:/antigua|barbuda/i,AR:/argentina/i,BB:/barbados/i,BO:/bolivia/i,BR:/brazil/i,BS:/bahamas/i,BZ:/belize/i,CA:/canada/i,CL:/chile/i,CO:/colombia/i,CR:/costa rica/i,CU:/cuba/i,DM:/dominica/i,DO:/dominican republic/i,EC:/ecuador/i,GD:/grenada/i,GT:/guatemala/i,GY:/guyana/i,HN:/honduras/i,HT:/haiti/i,JM:/jamaica/i,KN:/saint kitts|st\. kitts|nevis/i,LC:/saint lucia|st\. lucia/i,MX:/mexico/i,NI:/nicaragua/i,PA:/panama/i,PE:/peru/i,PY:/paraguay/i,SR:/suriname/i,SV:/el salvador/i,TT:/trinidad|tobago/i,UY:/uruguay/i,VC:/saint vincent|st\. vincent|grenadines/i,VE:/venezuela/i
+};
 function conflictSide(name,text=""){
  const n=name.toLowerCase(),t=text.toLowerCase();
  if(/world war i|world war 1|wwi|western front|eastern front|trench|tannenberg|brusilov/.test(t)){
@@ -113,6 +116,27 @@ function featureBounds(f,focus){
  const clippedMinX=Math.max(minX,focus.minLon),clippedMaxX=Math.min(maxX,focus.maxLon),clippedMinY=Math.max(minY,focus.minLat),clippedMaxY=Math.min(maxY,focus.maxLat);
  return{minX:clippedMinX,minY:clippedMinY,maxX:clippedMaxX,maxY:clippedMaxY,area:Math.max(0,(clippedMaxX-clippedMinX)*(clippedMaxY-clippedMinY))}
 }
+function rawFeatureBounds(f){
+ let minLon=Infinity,minLat=Infinity,maxLon=-Infinity,maxLat=-Infinity,count=0;
+ for(const ring of ringsOf(f?.geometry))for(const coord of ring){const lon=Number(coord[0]),lat=Number(coord[1]);if(!Number.isFinite(lon)||!Number.isFinite(lat))continue;minLon=Math.min(minLon,lon);maxLon=Math.max(maxLon,lon);minLat=Math.min(minLat,lat);maxLat=Math.max(maxLat,lat);count++}
+ return count?{minLon,maxLon,minLat,maxLat}:null
+}
+function focusForCountry(base,features,code="",zoom=1,time=0,duration=0){
+ const rx=HIGHLIGHT_ALIASES[String(code).toUpperCase()];if(!rx)return base;
+ const feature=(features||[]).find(item=>rx.test(nameOf(item)));const bounds=rawFeatureBounds(feature);if(!bounds)return base;
+ // Canada and the United States include very distant territory in many map
+ // data sets. A continent view gives the viewer a clearer geographic answer.
+ if(["US","CA"].includes(String(code).toUpperCase())&&(bounds.maxLon-bounds.minLon)>70)return{...FOCUS.northAmerica,zoom:Math.max(1,Number(zoom)||1)};
+ const lonSpan=Math.max(12,(bounds.maxLon-bounds.minLon)*2.25),latSpan=Math.max(9,(bounds.maxLat-bounds.minLat)*2.45),centerLon=(bounds.minLon+bounds.maxLon)/2,centerLat=(bounds.minLat+bounds.maxLat)/2;
+ const maxZoom=Math.max(1,Math.min(1.24,Number(zoom)||1.08)),progress=duration>0?Math.max(.45,Math.min(1,Number(time||0)/(Number(duration)*.62))):1;
+ return{minLon:centerLon-lonSpan/2,maxLon:centerLon+lonSpan/2,minLat:Math.max(-62,centerLat-latSpan/2),maxLat:Math.min(82,centerLat+latSpan/2),zoom:1+(maxZoom-1)*progress,fit:"cover",countryCode:String(code).toUpperCase()}
+}
+function drawLocationMarker(ctx,location,project,w,time=0){
+ const lon=Number(location?.longitude),lat=Number(location?.latitude);if(!Number.isFinite(lon)||!Number.isFinite(lat))return;
+ const point=project([lon,lat]);if(!point.inside)return;const pulse=.5+.5*Math.sin(Number(time||0)*4),r=Math.max(11,w*.016)*(1+pulse*.35);
+ ctx.save();ctx.strokeStyle="#ffdb62";ctx.fillStyle="rgba(179,47,41,.90)";ctx.lineWidth=Math.max(3,w*.004);ctx.beginPath();ctx.arc(point.x,point.y,r,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.beginPath();ctx.arc(point.x,point.y,r*1.9,0,Math.PI*2);ctx.strokeStyle="rgba(255,219,98,"+(.32+pulse*.35)+")";ctx.stroke();
+ const label=String(location.label||location.state||"Location").toUpperCase();ctx.font="800 "+Math.max(11,w*.018)+"px system-ui";ctx.textAlign="center";ctx.textBaseline="bottom";ctx.lineWidth=4;ctx.strokeStyle="rgba(26,32,37,.88)";ctx.fillStyle="#fff4ca";ctx.strokeText(label,point.x,point.y-r-10);ctx.fillText(label,point.x,point.y-r-10);ctx.restore()
+}
 function pathFeature(ctx,f,project){
  const geometry=f.geometry;if(!geometry)return false;
  const polygons=geometry.type==="Polygon"?[geometry.coordinates]:geometry.type==="MultiPolygon"?geometry.coordinates:[];
@@ -151,11 +175,13 @@ function drawLegend(ctx,text,w,h){
  else if(/cold war|berlin wall|cuban missile/.test(t))items=[["West",SIDE_COLORS.west],["Soviet bloc",SIDE_COLORS.east]];
  if(!items.length)return;ctx.save();ctx.font="700 "+Math.max(10,w*.017)+"px system-ui";let x=14,y=h-52;for(const [label,color] of items){ctx.fillStyle=color;ctx.fillRect(x,y,14,14);ctx.strokeStyle="#28333a";ctx.strokeRect(x,y,14,14);ctx.fillStyle="#1d2830";ctx.fillText(label,x+20,y+12);x+=ctx.measureText(label).width+58}ctx.restore()
 }
-function draw(ctx,{year=2026,text="",key="worldMap",width=ctx.canvas.width,height=ctx.canvas.height,time=0,showLabels=true,highlights=[]}={}){
- const snap=resolveSnapshot(year,text),focusName=focusFor(key,text),focus=FOCUS[focusName]||FOCUS.world,data=cache.get(snap.year);
+function draw(ctx,{year=2026,text="",key="worldMap",width=ctx.canvas.width,height=ctx.canvas.height,time=0,duration=0,showLabels=true,highlights=[],focusCode="",focusZoom=1,location=null}={}){
+ const snap=resolveSnapshot(year,text),focusName=focusFor(key,text),baseFocus=FOCUS[focusName]||FOCUS.world,data=cache.get(snap.year);
  if(!data){load(snap);return{drawn:false,snapshotYear:snap.year,focus:focusName,loading:true}}
+ const focus=focusCode?focusForCountry(baseFocus,data.features||[],focusCode,focusZoom,time,duration):{...baseFocus,zoom:Math.max(1,Number(focusZoom)||1)};
  const highlightedCountries=(highlights||[]).join("|");
- const identity=[snap.year,focusName,width,height,showLabels?1:0,highlightedCountries,text].join("::");
+ const motionFrame=Math.round((Number(time)||0)*5),locationKey=location?[(location.kind||""),(location.label||""),location.longitude,location.latitude].join("|"):"";
+ const identity=[snap.year,focusName,focusCode,focus.zoom||1,width,height,showLabels?1:0,highlightedCountries,locationKey,motionFrame,text].join("::");
  let layer=paintCache.get(identity);
  if(!layer){
   layer=document.createElement("canvas");layer.width=width;layer.height=height;
@@ -171,6 +197,7 @@ function draw(ctx,{year=2026,text="",key="worldMap",width=ctx.canvas.width,heigh
   for(const f of features){if(!featureBounds(f,focus))continue;const hi=highlighted(nameOf(f),text,highlights);out.fillStyle="rgba(0,0,0,0)";out.strokeStyle=hi?"#ffd45d":"rgba(35,43,48,.82)";out.lineWidth=hi?Math.max(3,width*.0045):Math.max(.9,width*.00135);pathFeature(out,f,project)}
   out.restore();
   if(showLabels)drawLabels(out,features,focus,project,width,height,text,highlights);
+  if(location)drawLocationMarker(out,location,project,width,time);
   drawLegend(out,text,width,height);
   const ph=phase(text),badge=(ph==="before"?"BEFORE":ph==="after"?"AFTER":"HISTORICAL")+" · "+snap.year;
   out.font="800 "+Math.max(12,width*.021)+"px system-ui";const tw=out.measureText(badge).width;

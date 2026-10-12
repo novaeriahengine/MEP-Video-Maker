@@ -117,8 +117,26 @@ function options(year=2026){
 }
 function stripe(ctx,x,y,w,h,colors){const hh=h/colors.length;colors.forEach((c,i)=>{ctx.fillStyle=c;ctx.fillRect(x,y+i*hh,w,hh+1)})}
 function star(ctx,cx,cy,r,fill="#fff"){ctx.fillStyle=fill;ctx.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r*.42:r,px=cx+Math.cos(a)*rr,py=cy+Math.sin(a)*rr;i?ctx.lineTo(px,py):ctx.moveTo(px,py)}ctx.closePath();ctx.fill()}
+// Full modern Americas flags are local SVG files, not system emoji. This keeps
+// every country distinct in exports and works from the offline desktop server.
+const AMERICAS_CODES=new Set("AG AR BB BO BR BS BZ CA CL CO CR CU DM DO EC GD GT GY HN HT JM KN LC MX NI PA PE PY SR SV TT US UY VC VE".split(" "));
+const artwork=new Map();
+function localArtwork(code){
+ const key=String(code||"").toLowerCase();if(!AMERICAS_CODES.has(key.toUpperCase()))return null;
+ let item=artwork.get(key);if(item)return item;
+ const image=new Image();item={image,ready:false,failed:false};artwork.set(key,item);
+ image.onload=()=>{item.ready=true;window.dispatchEvent?.(new Event("mep-flag-art-ready"))};
+ image.onerror=()=>{item.failed=true};image.src="flags/americas/svg/"+key+".svg";return item
+}
+function drawLocalArtwork(ctx,x,y,w,h,code){
+ const item=localArtwork(code);if(!item||!item.ready)return false;ctx.drawImage(item.image,x,y,w,h);return true
+}
+function warmArtwork(codes=[]){return Promise.all([...new Set(codes.map(code=>String(code||"").toUpperCase()).filter(code=>AMERICAS_CODES.has(code)))].map(code=>new Promise(resolve=>{const item=localArtwork(code);if(!item||item.ready||item.failed)return resolve();item.image.addEventListener("load",resolve,{once:true});item.image.addEventListener("error",resolve,{once:true})})))}
 function render(ctx,x,y,w,h,flag){
  const p=flag?.pattern||"emoji";ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();ctx.fillStyle="#eee";ctx.fillRect(x,y,w,h);
+ // Haiti's present-day flag and every other contemporary national flag in the
+ // Americas use the source SVG. Historical Haitian variants stay illustrated.
+ if((p==="emoji"||p==="haiti")&&flag?.id!=="haiti-revolution"&&drawLocalArtwork(ctx,x,y,w,h,flag?.code)){ctx.restore();return}
  if(p==="emoji"){ctx.font=Math.floor(Math.min(w,h)*.72)+"px system-ui";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(flag?.emoji||"🏳️",x+w/2,y+h/2);ctx.restore();return}
  if(p==="florida"){ctx.fillStyle="#fff";ctx.fillRect(x,y,w,h);ctx.strokeStyle="#c8102e";ctx.lineWidth=Math.max(7,Math.min(w,h)*.11);ctx.beginPath();ctx.moveTo(x+w*.08,y+h*.06);ctx.lineTo(x+w*.92,y+h*.94);ctx.moveTo(x+w*.92,y+h*.06);ctx.lineTo(x+w*.08,y+h*.94);ctx.stroke();ctx.fillStyle="#d4af37";ctx.beginPath();ctx.arc(x+w/2,y+h/2,Math.min(w,h)*.19,0,Math.PI*2);ctx.fill();ctx.fillStyle="#fff";ctx.beginPath();ctx.arc(x+w/2,y+h/2,Math.min(w,h)*.145,0,Math.PI*2);ctx.fill();ctx.fillStyle="#2e7d32";ctx.fillRect(x+w*.42,y+h*.51,w*.16,h*.055);ctx.fillStyle="#5aa7d7";ctx.beginPath();ctx.arc(x+w*.5,y+h*.48,Math.min(w,h)*.075,0,Math.PI*2);ctx.fill()}
  else if(p==="france")stripe(ctx,x,y,w,h,["#0055A4","#fff","#EF4135"]);
@@ -159,5 +177,5 @@ function render(ctx,x,y,w,h,flag){
  else{ctx.fillStyle="#ddd";ctx.fillRect(x,y,w,h);ctx.font=Math.floor(Math.min(w,h)*.72)+"px system-ui";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(flag?.emoji||"🏳️",x+w/2,y+h/2)}
  ctx.restore()
 }
-return{ISO_CODES,NAMES,HISTORICAL,name,emoji,resolve,options,render};
+return{ISO_CODES,NAMES,HISTORICAL,name,emoji,resolve,options,render,warmArtwork,AMERICAS_CODES};
 })();
