@@ -18,7 +18,7 @@ window.MEPCaptions=(()=>{
   if(line)lines.push(line);return lines.slice(0,3);
  }
  function draw(ctx,scene,time,sh,viewport={}){
-  const st=style(sh);if(!st.enabled)return false;
+  const st=style(sh);if(!st.enabled||scene?.disableCaptions)return false;
   const cues=segments(scene,sh),cue=cues.find(c=>time>=c.start&&time<c.end)||cues.at(-1);
   if(!cue)return false;
   const w=viewport.width||ctx.canvas.width,h=viewport.height||ctx.canvas.height,dur=cue.end-cue.start,t=clamp(time-cue.start,0,dur),enter=clamp(t/Math.min(.24,dur*.35),0,1),exit=clamp((dur-t)/Math.min(.22,dur*.32),0,1);
